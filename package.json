@@ -1,7 +1,24 @@
 {
-  "name": "webapp",
+  "name": "thicket",
+  "description": "Create GIFs and share them with your friends, without any middlemen",
+  "keywords": [
+    "gif",
+    "vine",
+    "offline first",
+    "progressive web app",
+    "decentralized web"
+  ],
+  "contributors": [
+    "Gorka Ludlow <jorge.ludlow@citrusbyte.com> (http://aquigorka.com/)",
+    "Chad Ostrowski <chad@citrusbyte.com> (https://chadoh.com/)"
+  ],
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/citrusbyte/thicket"
+  },
+  "homepage": "https://thicket.citrusbyte.com",
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
@@ -12,5 +29,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "8.6.0",
+    "npm": "5.4.2"
   }
 }
