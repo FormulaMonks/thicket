@@ -1,59 +1,13 @@
 import React, { Component } from 'react'
 import gifshot from 'gifshot'
-import Spinner from 'react-spinkit'
 import classname from 'classname'
+import ProgressMapper from './ProgressMapper'
 import './styles.css'
 import acceptIcon from './accept.png'
 import againIcon from './again.png'
 import shootIcon from './shoot.png'
 import cancelIcon from './cancel.png'
-
-const GIF_DURATION = 3000
-const GIF_OPTIONS = {
-  // Desired width of the image
-  'gifWidth': 400,
-  // Desired height of the image
-  'gifHeight': 300,
-  // Whether or not the animated GIF text will be resized to fit within the GIF container
-'resizeFont': true,
-  // Note: Each frame is captured every 100 milleseconds of a video and every ms for existing images
-  'numFrames': GIF_DURATION / 100,
-}
-
-const ProgressBar = props => {
-  const myStyles = { transform: `scaleX(${props.percentage})`}
-  return <div className="bar-wrapper">
-    <div className="bar" style={myStyles}></div>
-  </div>
-}
-
-class ProgressMapper extends Component {
-
-  state = { value: 0 }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.status === 'shoot') {
-        const interval = setInterval(() => {
-          const newValue = (this.state.value - 0.1).toFixed(1)
-          this.setState({ value: newValue })
-          if (this.state.value < 0){
-            clearInterval(interval)
-          }
-        }, 100)
-    }
-    this.setState({ value: GIF_DURATION / 1000 })
-  }
-
-  render() {
-    if (this.props.status === 'shoot') {
-      if (this.state.value < 0) {
-        return <Spinner name="ball-pulse-sync" fadeIn="none" className="processing" />
-      }
-      return <ProgressBar percentage={1 - this.state.value / (GIF_DURATION / 1000)} />
-    }
-    return null
-  }
-}
+import { GIF_OPTIONS } from './settings'
 
 class Giffer extends Component {
 
