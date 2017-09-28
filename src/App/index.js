@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import classname from 'classname'
-import Giffer from './giffer'
+import Giffer from './Giffer'
 import './App.css'
 import cameraIcon from './camera.png'
 
 class App extends Component {
-  
+
   state = { status: '' }
 
   render() {
