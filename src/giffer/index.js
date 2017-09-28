@@ -75,12 +75,12 @@ class Giffer extends Component {
       <div className="giffer-content">
         <div className={previewWrapperStyles}>
           <div className="preview">
-            <img alt="" ref="preview" />
+            <img alt="" ref={img => this.preview = img} />
           </div>
         </div>
         <div className={captureWrapperStyles}>
           <div className="input">
-            <video ref="video" className="video" autoPlay></video>
+            <video ref={v => this.video = v} className="video" autoPlay></video>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@ class Giffer extends Component {
 
   startVideo = () => {
     if (this.state.status !== 'capture') {
-      const video = this.refs.video
+      const video = this.video
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
           video.src = window.URL.createObjectURL(stream)
@@ -115,7 +115,7 @@ class Giffer extends Component {
   }
 
   stopVideo = () => {
-    const video = this.refs.video
+    const video = this.video
     video.pause()
     video.src = ''
     this.state.stream.getTracks().forEach(t => t.stop())
@@ -138,7 +138,7 @@ class Giffer extends Component {
   }
 
   removePreview = () => {
-    this.refs.preview.src = ''
+    this.preview.src = ''
   }
 
   capture = () => {
@@ -150,7 +150,7 @@ class Giffer extends Component {
           return
         }
         this.stopVideo()
-        this.refs.preview.src = obj.image
+        this.preview.src = obj.image
         this.setState({ status: 'preview' })
       })
     })
