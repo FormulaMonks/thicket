@@ -70,6 +70,7 @@ class Giffer extends Component {
     const shootBtnStyles = classname('shoot giffer-btns', { 'giffer-btns-active': status === 'capture' })
     const acceptBtnStyles = classname('accept giffer-btns', { 'giffer-btns-active': status === 'preview'})
     const againBtnStyles = classname('again giffer-btns', { 'giffer-btns-active': status === 'preview'})
+    const cancelBtnStyles = classname('cancel giffer-btns', { 'giffer-btns-active': status !== 'shoot'})
     return <div className="wrapper">
       <div className="giffer-content">
         <div className={previewWrapperStyles}>
@@ -81,12 +82,12 @@ class Giffer extends Component {
           <div className="input">
             <video ref="video" className="video" autoPlay></video>
           </div> 
-          <div className="progress-wrapper">
-            <ProgressMapper status={status} />
-          </div>
         </div>
       </div>
       <div className="giffer-controls">
+        <div className="progress-wrapper">
+          <ProgressMapper status={status} />
+        </div>
         <div className={acceptBtnStyles} onClick={this.accept}>
           <img src={acceptIcon} className="accept-icon" />
         </div>
@@ -96,7 +97,7 @@ class Giffer extends Component {
         <div className={shootBtnStyles} onClick={this.capture}>
           <img src={shootIcon} className="shoot-icon" />
         </div>
-        <div className="cancel giffer-btns giffer-btns-active" onClick={this.props.onCancel}>
+        <div className={cancelBtnStyles} onClick={this.props.onCancel}>
           <img src={cancelIcon} className="cancel-icon" />
         </div>
       </div>
