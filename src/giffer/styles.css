@@ -52,13 +52,6 @@
   height: 300px;
 }
 
-.progress-wrapper{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px 0;
-}
-
 .preview-wrapper{
   display: none;
 }

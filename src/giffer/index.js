@@ -85,20 +85,18 @@ class Giffer extends Component {
         </div>
       </div>
       <div className="giffer-controls">
-        <div className="progress-wrapper">
-          <ProgressMapper status={status} />
-        </div>
+        <ProgressMapper status={status} />
         <div className={acceptBtnStyles} onClick={this.accept}>
-          <img src={acceptIcon} className="accept-icon" />
+          <img alt="Accept" src={acceptIcon} className="accept-icon" />
         </div>
         <div className={againBtnStyles} onClick={this.again}>
-          <img src={againIcon} className="again-icon" />
+          <img alt="Again" src={againIcon} className="again-icon" />
         </div>
         <div className={shootBtnStyles} onClick={this.capture}>
-          <img src={shootIcon} className="shoot-icon" />
+          <img alt="Shoot" src={shootIcon} className="shoot-icon" />
         </div>
         <div className={cancelBtnStyles} onClick={this.props.onCancel}>
-          <img src={cancelIcon} className="cancel-icon" />
+          <img alt="Cancel" src={cancelIcon} className="cancel-icon" />
         </div>
       </div>
     </div>
