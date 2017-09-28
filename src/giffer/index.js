@@ -21,7 +21,7 @@ const GIF_OPTIONS = {
 }
 
 const ProgressBar = props => {
-  const myStyles = { transform: `scaleX(${props.percentage})`} 
+  const myStyles = { transform: `scaleX(${props.percentage})`}
   return <div className="bar-wrapper">
     <div className="bar" style={myStyles}></div>
   </div>
@@ -76,12 +76,12 @@ class Giffer extends Component {
         <div className={previewWrapperStyles}>
           <div className="preview">
             <img alt="" ref="preview" />
-          </div>  
+          </div>
         </div>
         <div className={captureWrapperStyles}>
           <div className="input">
             <video ref="video" className="video" autoPlay></video>
-          </div> 
+          </div>
         </div>
       </div>
       <div className="giffer-controls">
@@ -113,7 +113,7 @@ class Giffer extends Component {
         })
     }
   }
-  
+
   stopVideo = () => {
     const video = this.refs.video
     video.pause()
@@ -131,12 +131,12 @@ class Giffer extends Component {
     // anything, but send it to the service workers to save to local storage.
     // Or not and we just do syncrhonous process.
   }
-  
+
   again = () => {
     this.removePreview()
     this.startVideo()
   }
-  
+
   removePreview = () => {
     this.refs.preview.src = ''
   }
