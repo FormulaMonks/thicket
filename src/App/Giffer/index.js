@@ -25,14 +25,13 @@ class Giffer extends Component {
 
   render() {
     const { status } = this.state
-    const { image } = this.props
     const isPreview = status === 'preview'
     const isCapture = status === 'capture'
-    const isShoot = status === 'shoot' 
+    const isShoot = status === 'shoot'
     return <div className="giffer">
       <div className="giffer__content">
         <div className="giffer__preview" style={!isPreview ? { display: 'none' } : {}}>
-          <img alt="" ref={img => this.preview = img} src={image} />
+          <img alt="" ref={img => this.preview = img} />
         </div>
         <div className="giffer__capture" style={isPreview ? { display: 'none' } : {}}>
           <video ref={v => this.video = v} className="video" autoPlay></video>

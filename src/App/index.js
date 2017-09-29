@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   render() {
-    const { image } = db.fetchData()
     return <Router>
       <div className="app">
         <header className="app__header">Thicket</header>
@@ -44,12 +43,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <div>Stream</div>} />
             <Route exact path="/giffer" render={({ history }) =>
-              <Giffer
-                onSave={saveImage}
-                image={image}
-                onCancel={() => history.push('/') }
-              />}
-            />
+              <Giffer onSave={saveImage} onCancel={() => history.push('/') } />
+            }/>
           </Switch>
         </main>
         <Route exact path="/" render={() =>
