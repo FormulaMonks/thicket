@@ -5,16 +5,21 @@ import againPng from './again.png'
 import shootPng from './shoot.png'
 import cancelPng from './cancel.png'
 import './Icons.css'
+import { Link } from 'react-router-dom'
 
 const iconify = png => ({ alt, onClick, ...rest }) =>
   <Icon onClick={onClick} {...rest}>
     <img className="icon__img" src={png} alt={alt} />
   </Icon>
 
-const Icon = ({ style = {}, onClick, children, alt }) =>
-  <div className="icon" onClick={onClick} style={style}>
-    {React.cloneElement(children, { alt })}
-  </div>
+// requires `onClick` xor `to`
+// todo: rename; not an icon, but is a navigational component
+const Icon = ({ style = {}, onClick, to, children, alt }) =>
+  React.createElement(
+    onClick ? 'button' : Link,
+    {onClick, to, style, className: 'icon'},
+    React.cloneElement(children, { alt })
+  )
 
 export default Icon
 export const Camera = iconify(cameraPng)

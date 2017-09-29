@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link
 } from 'react-router-dom'
 import Giffer from './Giffer'
 import { Camera as IconCamera } from './Icons'
@@ -49,9 +48,7 @@ class App extends Component {
         </main>
         <Route exact path="/" render={() =>
           <footer className="app__footer">
-            <Link to="/giffer">
-              <IconCamera alt="New GIF" />
-            </Link>
+            <IconCamera to="/giffer" alt="New GIF" />
           </footer>
         } />
       </div>

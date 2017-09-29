@@ -1,7 +1,10 @@
 .icon{
+  background: none;
+  box-sizing: content-box;
   cursor: pointer;
   height: 60px;
   width: 92px;
+  margin: 0;
   padding: 15px;
   border: 1px solid #CCC;
   display: flex;
