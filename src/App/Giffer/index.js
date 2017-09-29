@@ -19,6 +19,7 @@ class Giffer extends Component {
 
   render() {
     const { status } = this.state
+    const { image } = this.props
     const previewWrapperStyles = classname('preview-wrapper', { 'preview-wrapper-active': status === 'preview'  })
     const captureWrapperStyles = classname('capture-wrapper', { 'capture-wrapper-active': status !== 'preview' })
     const shootBtnStyles = classname('shoot giffer-btns', { 'giffer-btns-active': status === 'capture' })
@@ -29,7 +30,7 @@ class Giffer extends Component {
       <div className="giffer-content">
         <div className={previewWrapperStyles}>
           <div className="preview">
-            <img alt="" ref={img => this.preview = img} />
+            <img alt="" ref={img => this.preview = img} src={image} />
           </div>
         </div>
         <div className={captureWrapperStyles}>
@@ -58,11 +59,10 @@ class Giffer extends Component {
 
   startVideo = () => {
     if (this.state.status !== 'capture') {
-      const video = this.video
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
-          video.src = window.URL.createObjectURL(stream)
-          video.play()
+          this.video.src = window.URL.createObjectURL(stream)
+          this.video.play()
           this.setState({ stream, status: 'capture' })
         })
     }
@@ -76,14 +76,7 @@ class Giffer extends Component {
   }
 
   accept = () => {
-    // todo
-    // I heard this urban legend of how instagram started uploading the user
-    // pics while they presented the user with the filters section, this way
-    // the whole process took less time (asynch upload), maybe we can do
-    // something similar. I mean, while we wait for the user to accept the GIF
-    // we could already be uploading it - although in reality we do not upload
-    // anything, but send it to the service workers to save to local storage.
-    // Or not and we just do syncrhonous process.
+    this.props.onSave(this.preview.src);
   }
 
   again = () => {
