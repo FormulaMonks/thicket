@@ -43,7 +43,7 @@ class App extends Component {
         <main className="app__main">
           <Switch>
             <Route exact path="/" render={() => <div>Stream</div>} />
-            <Route path="/giffer" render={({ history }) =>
+            <Route exact path="/giffer" render={({ history }) =>
               <Giffer
                 onSave={saveImage}
                 image={image}
@@ -52,15 +52,13 @@ class App extends Component {
             />
           </Switch>
         </main>
-        <Switch>
-          <Route exact path="/" render={() =>
-            <footer className="app__footer">
-              <Link to="/giffer">
-                <IconCamera alt="New GIF" />
-              </Link>
-            </footer>
-          } />
-        </Switch>
+        <Route exact path="/" render={() =>
+          <footer className="app__footer">
+            <Link to="/giffer">
+              <IconCamera alt="New GIF" />
+            </Link>
+          </footer>
+        } />
       </div>
     </Router>
   }
