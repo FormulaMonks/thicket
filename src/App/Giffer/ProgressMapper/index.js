@@ -8,11 +8,11 @@ export default class ProgressMapper extends React.Component {
   state = { value: 0 }
 
   componentWillReceiveProps(nextProps) {
+
     if (nextProps.status === 'shoot') {
         const interval = setInterval(() => {
-          const newValue = (this.state.value - 0.1).toFixed(1)
-          this.setState({ value: newValue })
-          if (this.state.value < 0){
+          this.setState({ value: this.state.value - 0.1 })
+          if (this.state.value < 0) {
             clearInterval(interval)
           }
         }, 100)

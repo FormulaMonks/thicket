@@ -1,71 +1,60 @@
 import React, { Component } from 'react'
 import gifshot from 'gifshot'
-import classname from 'classname'
 import ProgressMapper from './ProgressMapper'
-import './styles.css'
-import acceptIcon from './accept.png'
-import againIcon from './again.png'
-import shootIcon from './shoot.png'
-import cancelIcon from './cancel.png'
+import './Giffer.css'
+import {
+  Accept as AcceptIcon,
+  Again as AgainIcon,
+  Shoot as ShootIcon,
+  Cancel as CancelIcon,
+} from '../Icons'
 import { GIF_OPTIONS } from './settings'
 
 class Giffer extends Component {
 
-  state = { stream: null, status: '' }
+  state = { stream: null, status: 'capture' }
 
   componentDidMount() {
     this.startVideo()
   }
 
+  componentWillUnmount() {
+    this.stopVideo()
+    console.log('Video has stopped')
+  }
+
   render() {
     const { status } = this.state
     const { image } = this.props
-    const previewWrapperStyles = classname('preview-wrapper', { 'preview-wrapper-active': status === 'preview'  })
-    const captureWrapperStyles = classname('capture-wrapper', { 'capture-wrapper-active': status !== 'preview' })
-    const shootBtnStyles = classname('shoot giffer-btns', { 'giffer-btns-active': status === 'capture' })
-    const acceptBtnStyles = classname('accept giffer-btns', { 'giffer-btns-active': status === 'preview'})
-    const againBtnStyles = classname('again giffer-btns', { 'giffer-btns-active': status === 'preview'})
-    const cancelBtnStyles = classname('cancel giffer-btns', { 'giffer-btns-active': status !== 'shoot'})
-    return <div className="wrapper">
-      <div className="giffer-content">
-        <div className={previewWrapperStyles}>
-          <div className="preview">
-            <img alt="" ref={img => this.preview = img} src={image} />
-          </div>
+    const isPreview = status === 'preview'
+    const isCapture = status === 'capture'
+    const isShoot = status === 'shoot' 
+    return <div className="giffer">
+      <div className="giffer__content">
+        <div className="giffer__preview" style={!isPreview ? { display: 'none' } : {}}>
+          <img alt="" ref={img => this.preview = img} src={image} />
         </div>
-        <div className={captureWrapperStyles}>
-          <div className="input">
-            <video ref={v => this.video = v} className="video" autoPlay></video>
-          </div>
+        <div className="giffer__capture" style={isPreview ? { display: 'none' } : {}}>
+          <video ref={v => this.video = v} className="video" autoPlay></video>
         </div>
       </div>
-      <div className="giffer-controls">
+      <div className="giffer__controls">
         <ProgressMapper status={status} />
-        <div className={acceptBtnStyles} onClick={this.accept}>
-          <img alt="Accept" src={acceptIcon} className="accept-icon" />
-        </div>
-        <div className={againBtnStyles} onClick={this.again}>
-          <img alt="Again" src={againIcon} className="again-icon" />
-        </div>
-        <div className={shootBtnStyles} onClick={this.capture}>
-          <img alt="Shoot" src={shootIcon} className="shoot-icon" />
-        </div>
-        <div className={cancelBtnStyles} onClick={this.props.onCancel}>
-          <img alt="Cancel" src={cancelIcon} className="cancel-icon" />
-        </div>
+        <AcceptIcon onClick={this.accept} alt="Accept" style={isPreview ? {} : {display: 'none'}} />
+        <AgainIcon onClick={this.again} alt="Again" style={!isPreview ? { display: 'none' } : {}} />
+        <ShootIcon onClick={this.capture} alt="Shoot" style={!isCapture ? { display: 'none'} : {}} />
+        <CancelIcon onClick={this.cancel} alt="Cancel" style={isShoot ? { display: 'none'} : {}} />
       </div>
     </div>
   }
 
   startVideo = () => {
-    if (this.state.status !== 'capture') {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(stream => {
-          this.video.src = window.URL.createObjectURL(stream)
-          this.video.play()
-          this.setState({ stream, status: 'capture' })
-        })
-    }
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        this.video.src = window.URL.createObjectURL(stream)
+        this.video.play()
+        this.setState({ stream, status: 'capture' })
+      })
   }
 
   stopVideo = () => {
@@ -76,16 +65,21 @@ class Giffer extends Component {
   }
 
   accept = () => {
-    this.props.onSave(this.preview.src);
+    this.props.onSave(this.preview.src)
   }
 
   again = () => {
     this.removePreview()
-    this.startVideo()
+    this.setState({ status: 'capture'}, this.capture)
   }
 
   removePreview = () => {
     this.preview.src = ''
+  }
+
+  cancel = () => {
+    this.setState({ status: 'capture' })
+    this.props.onCancel()
   }
 
   capture = () => {
@@ -96,7 +90,6 @@ class Giffer extends Component {
           this.setStatus({ status: 'capture' })
           return
         }
-        this.stopVideo()
         this.preview.src = obj.image
         this.setState({ status: 'preview' })
       })

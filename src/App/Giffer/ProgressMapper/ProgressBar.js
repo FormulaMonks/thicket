@@ -1,9 +1,10 @@
 import React from 'react'
+import './ProgressBar.css'
 
-export default ({percentage}) =>
-  <div className="bar-wrapper">
+export default ({ percentage }) =>
+  <div className="progressbar">
     <div
-      className="bar"
+      className="progressbar__bar"
       style={{transform: `scaleX(${percentage})`}}
     />
   </div>
