@@ -1,4 +1,12 @@
-.header{
+.app{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+}
+
+.app__header{
   background-color: #26A65B;
   color: #FFF;
   font-size: 30px;
@@ -7,19 +15,15 @@
   z-index: 1;
 }
 
-.main{
+.app__main{
   position: relative;
   flex: 1;
 }
 
-.footer{
+.app__footer{
   height: 120px;
   align-items: center;
   justify-content: center;
   display: flex;
   border-top: 1px solid #CCC;
-}
-
-.footer--inactive{
-  display: none;
 }

@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link
+} from 'react-router-dom'
 import Giffer from './Giffer'
 import { Camera as IconCamera } from './Icons'
 import './App.css'
@@ -17,8 +23,6 @@ const saveImage = str => {
 
 class App extends Component {
 
-  state = { shoot: false }
-
   componentDidMount() {
     db.addSaveSuccessListener(this.rerender);
   }
@@ -32,21 +36,33 @@ class App extends Component {
   }
 
   render() {
-    const { shoot } = this.state
     const { image } = db.fetchData()
-    return [
-      <header key="header" className="header">Thicket</header>,
-      <main key="main" className="main">
-        {shoot && <Giffer
-          onSave={saveImage}
-          image={image}
-          onCancel={() => this.setState({ shoot: false })}
-        />}
-      </main>,
-      <footer key="footer" className={`footer${shoot ? ' footer--inactive' : ''}`}>
-        <IconCamera onClick={() => this.setState({ shoot: true })} alt="New GIF" />
-      </footer>
-    ]
+    return <Router>
+      <div className="app">
+        <header className="app__header">Thicket</header>
+        <main className="app__main">
+          <Switch>
+            <Route exact path="/" render={() => <div>Stream</div>} />
+            <Route path="/giffer" render={({ history }) =>
+              <Giffer
+                onSave={saveImage}
+                image={image}
+                onCancel={() => history.push('/') }
+              />}
+            />
+          </Switch>
+        </main>
+        <Switch>
+          <Route exact path="/" render={() =>
+            <footer className="app__footer">
+              <Link to="/giffer">
+                <IconCamera alt="New GIF" />
+              </Link>
+            </footer>
+          } />
+        </Switch>
+      </div>
+    </Router>
   }
 }
 
