@@ -22,7 +22,6 @@ class Giffer extends Component {
 
   componentWillUnmount() {
     this.stopVideo()
-    console.log('Video has stopped')
   }
 
   render() {
