@@ -8,17 +8,7 @@ import Giffer from './Giffer'
 import { Camera as IconCamera } from './Icons'
 import './App.css'
 
-import createDatabase from '../database';
-
-const initialState = {
-  image: '',
-};
-
-const db = createDatabase({initialState});
-
-const saveImage = str => {
-  db.setData({ image: str });
-}
+import db from './syncedDB';
 
 class App extends Component {
 
@@ -41,9 +31,7 @@ class App extends Component {
         <main className="app__main">
           <Switch>
             <Route exact path="/" render={() => <div>Stream</div>} />
-            <Route exact path="/giffer" render={({ history }) =>
-              <Giffer onSave={saveImage} onCancel={() => history.push('/') } />
-            }/>
+            <Route path="/giffer" component={Giffer} />
           </Switch>
         </main>
         <Route exact path="/" render={() =>

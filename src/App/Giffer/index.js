@@ -10,6 +10,8 @@ import {
 } from '../Icons'
 import { GIF_OPTIONS } from './settings'
 
+import { saveImage } from '../syncedDB'
+
 class Giffer extends Component {
 
   state = { stream: null, status: 'capture' }
@@ -42,7 +44,7 @@ class Giffer extends Component {
         <AcceptIcon onClick={this.accept} alt="Accept" style={isPreview ? {} : {display: 'none'}} />
         <AgainIcon onClick={this.again} alt="Again" style={!isPreview ? { display: 'none' } : {}} />
         <ShootIcon onClick={this.capture} alt="Shoot" style={!isCapture ? { display: 'none'} : {}} />
-        <CancelIcon onClick={this.cancel} alt="Cancel" style={isShoot ? { display: 'none'} : {}} />
+        <CancelIcon to="/" alt="Cancel" style={isShoot ? { display: 'none'} : {}} />
       </div>
     </div>
   }
@@ -64,7 +66,7 @@ class Giffer extends Component {
   }
 
   accept = () => {
-    this.props.onSave(this.preview.src)
+    saveImage(this.preview.src)
   }
 
   again = () => {
@@ -74,11 +76,6 @@ class Giffer extends Component {
 
   removePreview = () => {
     this.preview.src = ''
-  }
-
-  cancel = () => {
-    this.setState({ status: 'capture' })
-    this.props.onCancel()
   }
 
   capture = () => {
