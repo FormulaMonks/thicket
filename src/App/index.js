@@ -14,15 +14,22 @@ import db from './syncedDB';
 class App extends Component {
 
   componentDidMount() {
-    db.addSaveSuccessListener(this.rerender);
+    db.addSaveSuccessListener(this.rerender)
+    db.addSaveFailListener(this.handleDatabaseError)
   }
 
   componentWillUnmount() {
-    db.removeSaveSuccessListener(this.rerender);
+    db.removeSaveSuccessListener(this.rerender)
+    db.addSaveFailListener(this.handleDatabaseError)
   }
 
   rerender = () => {
     this.forceUpdate();
+  }
+
+  handleDatabaseError = e => {
+    console.error(e.detail)
+    alert(e.detail.message)
   }
 
   render() {

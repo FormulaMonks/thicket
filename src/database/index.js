@@ -22,7 +22,7 @@ class Database {
       saveState(this.id, newData);
       window.dispatchEvent(new CustomEvent(SAVE_SUCCESS));
     } catch (err) {
-      window.dispatchEvent(new CustomEvent(SAVE_FAIL));
+      window.dispatchEvent(new CustomEvent(SAVE_FAIL, {detail: err}));
     }
   }
 
@@ -34,6 +34,13 @@ class Database {
     window.removeEventListener(SAVE_SUCCESS, func, false);
   }
 
+  addSaveFailListener(func) {
+    window.addEventListener(SAVE_FAIL, func, false);
+  }
+
+  removeSaveFailListener(func) {
+    window.removeEventListener(SAVE_FAIL, func, false);
+  }
 }
 
 export default ({initialState}) => new Database(initialState);
