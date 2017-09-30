@@ -31,14 +31,13 @@ class Giffer extends Component {
 
   render() {
     const { mode } = this.state
-    const isReview = mode === REVIEW
     return <div className="giffer">
       <div className="giffer__content">
-        <div className="giffer__preview" style={!isReview ? { display: 'none' } : {}}>
-          <img alt="" ref={img => this.preview = img} />
-        </div>
-        <div className="giffer__capture" style={isReview ? { display: 'none' } : {}}>
+        <div className="giffer__capture" style={{ display: mode === REVIEW && 'none' }}>
           <video ref={v => this.video = v} className="video" autoPlay></video>
+        </div>
+        <div className="giffer__preview" style={{ display: mode !== REVIEW && 'none' }}>
+          <img alt="" ref={img => this.preview = img} />
         </div>
       </div>
       <div className="giffer__controls">
