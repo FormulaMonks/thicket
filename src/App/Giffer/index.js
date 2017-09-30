@@ -12,9 +12,14 @@ import { GIF_OPTIONS } from './settings'
 
 import { saveImage } from '../syncedDB'
 
+// modes
+const STANDBY = 'awaiting further instruction'
+const SHOOTING = 'capturing and processing video'
+const REVIEW = 'review, possibly save gif'
+
 class Giffer extends Component {
 
-  state = { stream: null, status: 'capture' }
+  state = { stream: null, mode: STANDBY }
 
   componentDidMount() {
     this.startVideo()
@@ -25,25 +30,28 @@ class Giffer extends Component {
   }
 
   render() {
-    const { status } = this.state
-    const isPreview = status === 'preview'
-    const isCapture = status === 'capture'
-    const isShoot = status === 'shoot'
+    const { mode } = this.state
+    const isReview = mode === REVIEW
     return <div className="giffer">
       <div className="giffer__content">
-        <div className="giffer__preview" style={!isPreview ? { display: 'none' } : {}}>
+        <div className="giffer__preview" style={!isReview ? { display: 'none' } : {}}>
           <img alt="" ref={img => this.preview = img} />
         </div>
-        <div className="giffer__capture" style={isPreview ? { display: 'none' } : {}}>
+        <div className="giffer__capture" style={isReview ? { display: 'none' } : {}}>
           <video ref={v => this.video = v} className="video" autoPlay></video>
         </div>
       </div>
       <div className="giffer__controls">
-        <ProgressMapper status={status} />
-        <AcceptIcon onClick={this.accept} alt="Accept" style={isPreview ? {} : {display: 'none'}} />
-        <AgainIcon onClick={this.again} alt="Again" style={!isPreview ? { display: 'none' } : {}} />
-        <ShootIcon onClick={this.capture} alt="Shoot" style={!isCapture ? { display: 'none'} : {}} />
-        <CancelIcon to="/" alt="Cancel" style={isShoot ? { display: 'none'} : {}} />
+        {mode === STANDBY && [
+          <ShootIcon key="shoot" onClick={this.capture} alt="Shoot" />,
+          <CancelIcon key="cancel" to="/" alt="Cancel" />,
+        ]}
+        {mode === SHOOTING && <ProgressMapper />}
+        {mode === REVIEW && [
+          <AcceptIcon key="accept" onClick={this.accept} alt="Accept" />,
+          <AgainIcon key="again" onClick={this.again} alt="Again" />,
+          <CancelIcon key="cancel" to="/" alt="Cancel" />,
+        ]}
       </div>
     </div>
   }
@@ -53,7 +61,7 @@ class Giffer extends Component {
       .then(stream => {
         this.video.src = window.URL.createObjectURL(stream)
         this.video.play()
-        this.setState({ stream, status: 'capture' })
+        this.setState({ stream, mode: STANDBY })
       })
   }
 
@@ -70,7 +78,7 @@ class Giffer extends Component {
 
   again = () => {
     this.removePreview()
-    this.setState({ status: 'capture'}, this.capture)
+    this.setState({ mode: STANDBY}, this.capture)
   }
 
   removePreview = () => {
@@ -78,15 +86,15 @@ class Giffer extends Component {
   }
 
   capture = () => {
-    this.setState({ status: 'shoot' }, () => {
+    this.setState({ mode: SHOOTING }, () => {
       gifshot.createGIF(GIF_OPTIONS, obj => {
         if (obj.error) {
           console.warn('GIFshot error: ', obj.error, obj.errorCode, obj.errorMsg, obj)
-          this.setStatus({ status: 'capture' })
+          this.setState({ mode: STANDBY })
           return
         }
         this.preview.src = obj.image
-        this.setState({ status: 'preview' })
+        this.setState({ mode: REVIEW })
       })
     })
   }
