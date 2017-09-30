@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gifshot from 'gifshot'
 import ProgressMapper from './ProgressMapper'
-import './Giffer.css'
+import './Camera.css'
 import {
   Accept as AcceptIcon,
   Again as AgainIcon,

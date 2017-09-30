@@ -4,7 +4,7 @@ import {
   Route,
   Switch,
 } from 'react-router-dom'
-import Giffer from './Giffer'
+import Camera from './Camera'
 import { Camera as IconCamera } from './Icons'
 import './App.css'
 
@@ -31,12 +31,12 @@ class App extends Component {
         <main className="app__main">
           <Switch>
             <Route exact path="/" render={() => <div>Stream</div>} />
-            <Route path="/giffer" component={Giffer} />
+            <Route path="/camera" component={Camera} />
           </Switch>
         </main>
         <Route exact path="/" render={() =>
           <footer className="app__footer">
-            <IconCamera to="/giffer" alt="New GIF" />
+            <IconCamera to="/camera" alt="New GIF" />
           </footer>
         } />
       </div>
