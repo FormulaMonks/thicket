@@ -5,6 +5,7 @@ import {
   Switch,
 } from 'react-router-dom'
 import Camera from './Camera'
+import Stream from './Stream'
 import { Camera as IconCamera } from './Icons'
 import './App.css'
 
@@ -30,7 +31,7 @@ class App extends Component {
         <header className="app__header">Thicket</header>
         <main className="app__main">
           <Switch>
-            <Route exact path="/" render={() => <div>Stream</div>} />
+            <Route exact path="/" component={Stream} />
             <Route path="/camera" component={Camera} />
           </Switch>
         </main>

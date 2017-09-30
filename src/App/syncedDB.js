@@ -3,9 +3,11 @@
 // such data, if convenient.
 
 import createDatabase from '../database';
+import uuid from 'uuid/v4';
 
 const initialState = {
-  image: '',
+  publications: {},
+  publicationOrder: [],
 }
 
 const db = createDatabase({initialState})
@@ -13,5 +15,15 @@ const db = createDatabase({initialState})
 export default db
 
 export const saveImage = str => {
-  db.setData({ image: str });
+  const data = db.fetchData()
+  const id = uuid()
+
+  db.setData({
+    ...data,
+    publications: {
+      ...data.publications,
+      [id]: { id, src: str },
+    },
+    publicationOrder: [ id, ...data.publicationOrder ],
+  })
 }
