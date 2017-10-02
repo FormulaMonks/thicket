@@ -87,13 +87,16 @@ class Giffer extends Component {
 
   capture = () => {
     this.setState({ mode: SHOOTING }, () => {
-      gifshot.createGIF(GIF_OPTIONS, obj => {
+      gifshot.createGIF({
+        ...GIF_OPTIONS,
+        webcamVideoElement: this.video,
+        cameraStream: this.state.stream,
+      }, obj => {
         if (obj.error) {
           console.warn('GIFshot error: ', obj.error, obj.errorCode, obj.errorMsg, obj)
           this.setState({ mode: STANDBY })
           return
         }
-        obj.cameraStream.getTracks().forEach(t => t.stop())
         this.preview.src = obj.image
         this.setState({ mode: REVIEW })
       })
