@@ -5,6 +5,12 @@
   justify-content: center;
 }
 
+.stream__wrapper{
+  padding: 5px 2px;
+}
+
 .stream__publication {
   width: 33.3%;
+  box-sizing: border-box;
+  padding: 0 2px;
 }
