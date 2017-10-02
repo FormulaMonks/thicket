@@ -14,16 +14,14 @@ class Database {
   }
 
   fetchData() {
-    return loadState(this.id) || this.initialState;
+    return loadState(this.id)
+      .then(res => res || this.initialState)
   }
 
   setData(newData)  {
-    try {
-      saveState(this.id, newData);
-      window.dispatchEvent(new CustomEvent(SAVE_SUCCESS));
-    } catch (err) {
-      window.dispatchEvent(new CustomEvent(SAVE_FAIL, {detail: err}));
-    }
+    saveState(this.id, newData)
+      .then(() => window.dispatchEvent(new CustomEvent(SAVE_SUCCESS)))
+      .catch(err => window.dispatchEvent(new CustomEvent(SAVE_FAIL, { detail: err })))
   }
 
   addSaveSuccessListener(func) {

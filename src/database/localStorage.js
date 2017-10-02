@@ -1,16 +1,15 @@
+import localforage from 'localforage'
+
 export const loadState = (key) => {
-  try {
-    const serializedState = localStorage.getItem(key);
-    if (serializedState === null) {
-      return undefined;
-    }
-    return JSON.parse(serializedState);
-  } catch (err) {
-    return undefined;
-  }
+  return localforage.getItem(`${key}`)
+    .then(res => res || undefined)
+    .catch(err => {
+      console.warn(`There was an error retrieving item (${key}) from localstorage: ${err}`)
+      return undefined
+    })
 }
 
 export const saveState = (key, state) => {
-  const serializedState = JSON.stringify(state);
-  localStorage.setItem(key, serializedState);
+  return localforage.setItem(`${key}`, state)
+    .catch(err => console.warn(`There was an error setting item (${key}) to localstorage ${err}`))
 }

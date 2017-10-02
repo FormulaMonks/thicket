@@ -15,15 +15,16 @@ const db = createDatabase({initialState})
 export default db
 
 export const saveImage = str => {
-  const data = db.fetchData()
   const id = uuid()
 
-  db.setData({
-    ...data,
-    publications: {
-      ...data.publications,
-      [id]: { id, src: str },
-    },
-    publicationOrder: [ id, ...data.publicationOrder ],
-  })
+  return db.fetchData()
+    .then(data =>
+      db.setData({
+        ...data,
+        publications: {
+          ...data.publications,
+          [id]: { id, src: str },
+        },
+        publicationOrder: [ id, ...data.publicationOrder ],
+      }))
 }

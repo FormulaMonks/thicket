@@ -1,18 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
+import Spinner from '../Spinner'
 import db from '../syncedDB'
 import './Stream.css'
 
-export default () => {
-  const {
-    publications: gifs,
-    publicationOrder: order,
-  } = db.fetchData()
+class Stream extends Component {
 
-  if (!order.length) {
-    return <p style={{marginLeft: 15}}>Make a GIF by clicking the camera icon below!</p>
+  state = { publications: {}, publicationOrder: [], loaded: false }
+
+  componentDidMount() {
+    db.fetchData()
+      .then(data => this.setState({ loaded: true, ...data }))
+      .catch(err => console.warn(`Error fetching stream data: ${err}`))
   }
 
-  return order.map(id =>
-    <img key={id} alt="" src={gifs[id].src} className="stream__publication"/>
-  )
+  render() {
+    const {
+      publications: gifs,
+      publicationOrder: order,
+      loaded,
+    } = this.state
+
+    if (!loaded) {
+      return <div className="stream__spinner"><Spinner /></div>
+    }
+
+    if (!order.length) {
+      return <p style={{marginLeft: 15}}>Make a GIF by clicking the camera icon below!</p>
+    }
+
+    return order.map(id =>
+      <img key={id} alt="" src={gifs[id].src} className="stream__publication"/>
+    )
+
+  }
 }
+
+export default Stream
