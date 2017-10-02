@@ -10,7 +10,6 @@ class Stream extends Component {
   componentDidMount() {
     db.fetchData()
       .then(data => this.setState({ loaded: true, ...data }))
-      .catch(err => console.warn(`Error fetching stream data: ${err}`))
   }
 
   render() {

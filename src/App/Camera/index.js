@@ -73,8 +73,8 @@ class Giffer extends Component {
 
   accept = () => {
     saveImage(this.preview.src)
+      .then(() => this.props.history.push('/'))
     this.stopVideo()
-    this.props.history.push('/')
   }
 
   again = () => {
