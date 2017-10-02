@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import Camera from './Camera'
 import Stream from './Stream'
-import { Camera as IconCamera } from './Icons'
+import { Camera as IconCamera } from './NavLinks'
 import './App.css'
 
 import db from './syncedDB';

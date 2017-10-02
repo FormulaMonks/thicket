@@ -7,7 +7,7 @@ import {
   Again as AgainIcon,
   Shoot as ShootIcon,
   Cancel as CancelIcon,
-} from '../Icons'
+} from '../NavLinks'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
 import { saveImage } from '../syncedDB'
