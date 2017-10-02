@@ -8,7 +8,7 @@ import {
   Shoot as ShootIcon,
   Cancel as CancelIcon,
 } from '../Icons'
-import { GIF_OPTIONS } from './settings'
+import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
 import { saveImage } from '../syncedDB'
 
@@ -77,8 +77,9 @@ class Giffer extends Component {
   }
 
   again = () => {
+    this.startVideo()
     this.removePreview()
-    this.setState({ mode: STANDBY}, this.capture)
+    this.setState({ mode: STANDBY})
   }
 
   removePreview = () => {
@@ -86,6 +87,7 @@ class Giffer extends Component {
   }
 
   capture = () => {
+    setTimeout(this.stopVideo, GIF_DURATION);
     this.setState({ mode: SHOOTING }, () => {
       gifshot.createGIF({
         ...GIF_OPTIONS,
