@@ -74,7 +74,6 @@ class Giffer extends Component {
   accept = () => {
     saveImage(this.preview.src)
       .then(() => this.props.history.push('/'))
-    this.stopVideo()
   }
 
   again = () => {
@@ -94,6 +93,7 @@ class Giffer extends Component {
           this.setState({ mode: STANDBY })
           return
         }
+        obj.cameraStream.getTracks().forEach(t => t.stop())
         this.preview.src = obj.image
         this.setState({ mode: REVIEW })
       })
