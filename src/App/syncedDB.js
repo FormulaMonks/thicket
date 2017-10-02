@@ -2,15 +2,15 @@
 // other tech. We can later create a per-client database for UI state & other
 // such data, if convenient.
 
-import createDatabase from '../database';
-import uuid from 'uuid/v4';
+import createDatabase from '../database'
+import uuid from 'uuid/v4'
 
 const initialState = {
   publications: {},
   publicationOrder: [],
 }
 
-const db = createDatabase({initialState})
+const db = createDatabase({name: 'syncedDB', initialState})
 
 export default db
 

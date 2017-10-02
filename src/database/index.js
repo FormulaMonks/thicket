@@ -1,16 +1,13 @@
-import { loadState, saveState } from './localStorage';
+import { loadState, saveState } from './localStorage'
 
-const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent';
-const SAVE_FAIL = 'DatabaseSaveFailEvent';
-
-let id = 0;
+const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
+const SAVE_FAIL = 'DatabaseSaveFailEvent'
 
 class Database {
 
-  constructor(initialState) {
-    this.id = id;
-    id += 1;
-    this.initialState = initialState;
+  constructor(name, initialState) {
+    this.id = name
+    this.initialState = initialState
   }
 
   fetchData() {
@@ -25,20 +22,20 @@ class Database {
   }
 
   addSaveSuccessListener(func) {
-    window.addEventListener(SAVE_SUCCESS, func, false);
+    window.addEventListener(SAVE_SUCCESS, func, false)
   }
 
   removeSaveSuccessListener(func) {
-    window.removeEventListener(SAVE_SUCCESS, func, false);
+    window.removeEventListener(SAVE_SUCCESS, func, false)
   }
 
   addSaveFailListener(func) {
-    window.addEventListener(SAVE_FAIL, func, false);
+    window.addEventListener(SAVE_FAIL, func, false)
   }
 
   removeSaveFailListener(func) {
-    window.removeEventListener(SAVE_FAIL, func, false);
+    window.removeEventListener(SAVE_FAIL, func, false)
   }
 }
 
-export default ({initialState}) => new Database(initialState);
+export default ({name, initialState}) => new Database(name, initialState)
