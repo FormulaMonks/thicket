@@ -17,7 +17,7 @@ const STANDBY = 'awaiting further instruction'
 const SHOOTING = 'capturing and processing video'
 const REVIEW = 'review, possibly save gif'
 
-class Giffer extends Component {
+class Camera extends Component {
 
   state = { stream: null, mode: STANDBY }
 
@@ -31,16 +31,20 @@ class Giffer extends Component {
 
   render() {
     const { mode } = this.state
-    return <div className="giffer">
-      <div className="giffer__content">
-        <div className="giffer__capture" style={{ display: mode === REVIEW && 'none' }}>
-          <video ref={v => this.video = v} className="video" autoPlay></video>
+    return <div className="camera">
+      <div className="camera__content">
+        <div className="camera__capture" style={{ display: mode === REVIEW && 'none' }}>
+          <video
+            ref={v => this.video = v}
+            style={{width: GIF_OPTIONS.gifWidth, height: GIF_OPTIONS.gifHeight}}
+            autoPlay
+          />
         </div>
-        <div className="giffer__preview" style={{ display: mode !== REVIEW && 'none' }}>
+        <div className="camera__preview" style={{ display: mode !== REVIEW && 'none' }}>
           <img alt="" ref={img => this.preview = img} />
         </div>
       </div>
-      <div className="giffer__controls">
+      <div className="camera__controls">
         {mode === STANDBY && [
           <ShootIcon key="shoot" onClick={this.capture} alt="Shoot" />,
           <CancelIcon key="cancel" to="/" alt="Cancel" />,
@@ -106,4 +110,4 @@ class Giffer extends Component {
   }
 }
 
-export default Giffer
+export default Camera

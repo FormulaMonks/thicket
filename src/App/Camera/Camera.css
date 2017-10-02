@@ -1,4 +1,4 @@
-.giffer{
+.camera{
   width: 100%;
   height: 100%;
   display: flex;
@@ -6,22 +6,17 @@
   background: #FFF;
 }
 
-.giffer__content{
+.camera__content{
   flex: 1;
   padding: 15px;
   display: flex;
   justify-content: center;
 }
 
-.giffer__controls{
+.camera__controls{
   height: 120px;
   border-top: 1px solid #CCC;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-}
-
-.video{
-  width: 400px;
-  height: 300px;
 }
