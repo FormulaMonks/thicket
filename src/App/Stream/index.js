@@ -30,7 +30,7 @@ class Stream extends Component {
 
     return <div className="stream__wrapper">
         {order.map(id =>
-          <Link key={id} to={`${this.props.match.path}${id}`}>
+          <Link key={id} to={id}>
             <img alt="" src={gifs[id].src} className="stream__publication"/>
           </Link>
         )}
