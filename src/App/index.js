@@ -11,15 +11,21 @@ import {
   Camera as IconCamera,
   Back as BackNav,
 } from './NavLinks'
+import Spinner from './Spinner'
 import './App.css'
 
-import db from './syncedDB';
+import db, { initialState } from './syncedDB';
 
 class App extends Component {
+
+  state = { ...initialState, loaded: false }
 
   componentDidMount() {
     db.addSaveSuccessListener(this.rerender)
     db.addSaveFailListener(this.handleDatabaseError)
+
+    db.fetchData()
+      .then(data => this.setState({ loaded: true, ...data }))
   }
 
   componentWillUnmount() {
@@ -37,6 +43,8 @@ class App extends Component {
   }
 
   render() {
+    const { loaded, ...data } = this.state
+
     return <Router>
       <div className="app">
         <header className="app__header">
@@ -45,11 +53,18 @@ class App extends Component {
           Thicket
         </header>
         <main className="app__main">
-          <Switch>
-            <Route exact path="/" component={Stream} />
-            <Route exact path="/camera" component={Camera} />
-            <Route path="/:id" component={Publication} />
-          </Switch>
+          {!loaded
+            ? <div className="stream__spinner"><Spinner /></div>
+            : <Switch>
+                <Route exact path="/" render={() =>
+                  <Stream {...data} />
+                }/>
+                <Route exact path="/camera" component={Camera} />
+                <Route path="/:id" render={props =>
+                  <Publication {...props} {...data} />
+                }/>
+              </Switch>
+          }
         </main>
         <Route exact path="/" render={() =>
           <footer className="app__footer">
