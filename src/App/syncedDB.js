@@ -31,14 +31,11 @@ export const saveImage = str => {
 
 export const deleteImage = id =>
   db.fetchData()
-    .then(data =>
+    .then(data => {
+      delete data.publications[id]
       db.setData({
         ...data,
-        publications: Object.keys(data.publications).reduce((p, c) => {
-          if (c !== id) {
-            p[c] = data.publications[c]
-          }
-          return p
-        }, {}),
+        publications: data.publications,
         publicationOrder: data.publicationOrder.filter(i => i !== id)
-      }))
+      })
+    })
