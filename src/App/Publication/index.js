@@ -36,7 +36,7 @@ class Publication extends Component {
 
   delete = id => () => {
     deleteImage(id)
-      .then(() => this.props.history.push('/'))
+      .then(() => this.props.history.replace('/'))
   }
 }
 
