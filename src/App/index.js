@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Camera from './Camera'
 import Stream from './Stream'
+import Publication from './Publication'
 import { Camera as IconCamera } from './NavLinks'
 import './App.css'
 
@@ -39,7 +40,8 @@ class App extends Component {
         <main className="app__main">
           <Switch>
             <Route exact path="/" component={Stream} />
-            <Route path="/camera" component={Camera} />
+            <Route exact path="/camera" component={Camera} />
+            <Route path="/:id" component={Publication} />
           </Switch>
         </main>
         <Route exact path="/" render={() =>

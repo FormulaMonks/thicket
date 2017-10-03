@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Spinner from '../Spinner'
 import db from '../syncedDB'
 import './Stream.css'
@@ -29,7 +30,9 @@ class Stream extends Component {
 
     return <div className="stream__wrapper">
         {order.map(id =>
-          <img key={id} alt="" src={gifs[id].src} className="stream__publication"/>
+          <Link key={id} to={`${this.props.match.path}${id}`}>
+            <img alt="" src={gifs[id].src} className="stream__publication"/>
+          </Link>
         )}
       </div>
   }
