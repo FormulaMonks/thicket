@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { getImage, deleteImage } from '../syncedDB'
-import { Cancel as BackNav, Cancel as DeleteIcon } from '../NavLinks'
+import { Cancel as DeleteIcon } from '../NavLinks'
+import placeholderPng from './placeholder.png'
 import './Publication.css'
 
-const Placeholder = () => <img src="" alt="GIF placehodler" />
+const Placeholder = () => <img className="publication__img" src={placeholderPng} alt="GIF placehodler" />
 
 class Publication extends Component {
 
@@ -16,14 +17,19 @@ class Publication extends Component {
 
   render() {
     const { loaded } = this.state
-    const gif = loaded ? <img src={this.state.gif.src} alt="" /> : <Placeholder />
+    const gif = loaded ?
+      <img
+        className="publication__img"
+        src={this.state.gif.src}
+        alt="" />
+      : <Placeholder />
+
     return <div className="publication">
       <div className="publication__content">
         {gif}
       </div>
       <div className="publication__controls">
         {loaded && <DeleteIcon onClick={this.delete(this.props.match.params.id)} alt="Delete GIF" />}
-        <BackNav to="/" alt="Back" />
       </div>
     </div>
   }

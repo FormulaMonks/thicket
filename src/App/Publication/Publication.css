@@ -10,6 +10,11 @@
   margin-top: 10px;
 }
 
+.publication__img{
+  width: 400px;
+  height: 300px;
+}
+
 .publication__controls{
   height: 120px;
   width: 100%;
