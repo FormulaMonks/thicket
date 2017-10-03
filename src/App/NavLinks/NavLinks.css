@@ -15,3 +15,11 @@
 .icon__img{
   height: 50px;
 }
+
+.icon__back{
+  width: 40px;
+  position: relative;
+  top: 3px;
+  height: 35px;
+  cursor: pointer;
+}

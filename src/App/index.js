@@ -7,7 +7,10 @@ import {
 import Camera from './Camera'
 import Stream from './Stream'
 import Publication from './Publication'
-import { Camera as IconCamera } from './NavLinks'
+import {
+  Camera as IconCamera,
+  Back as BackNav,
+} from './NavLinks'
 import './App.css'
 
 import db from './syncedDB';
@@ -36,7 +39,11 @@ class App extends Component {
   render() {
     return <Router>
       <div className="app">
-        <header className="app__header">Thicket</header>
+        <header className="app__header">
+          <Route path="/:x" render={() =>
+            <BackNav to="/" alt="Back Home" />} />
+          Thicket
+        </header>
         <main className="app__main">
           <Switch>
             <Route exact path="/" component={Stream} />

@@ -13,6 +13,10 @@
   padding: 15px;
   box-shadow: 0 0 10px #000;
   z-index: 1;
+  height: 30px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .app__main{
