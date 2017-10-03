@@ -28,3 +28,21 @@ export const saveImage = str => {
         publicationOrder: [ id, ...data.publicationOrder ],
       }))
 }
+
+export const getImage = id =>
+  db.fetchData()
+    .then(data => data.publications[id])
+
+export const deleteImage = id =>
+  db.fetchData()
+    .then(data =>
+      db.setData({
+        ...data,
+        publications: Object.keys(data.publications).reduce((p, c) => {
+          if (c !== id) {
+            p[c] = data.publications[c]
+          }
+          return p
+        }, {}),
+        publicationOrder: data.publicationOrder.filter(i => i !== id)
+      }))
