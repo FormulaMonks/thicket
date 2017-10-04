@@ -55,15 +55,17 @@ class App extends Component {
         <main className="app__main">
           {!loaded
             ? <div className="stream__spinner"><Spinner /></div>
-            : <Switch>
-                <Route exact path="/" render={() =>
-                  <Stream {...data} />
-                }/>
-                <Route exact path="/camera" component={Camera} />
+            : [
+              <Route key="stream" path="/" render={({ location }) =>
+                <Stream {...data} inactive={location.pathname !== '/'}/>
+              }/>,
+              <Switch key="switch">
+                <Route exact path="/camera" component={Camera} />,
                 <Route path="/:id" render={props =>
                   <Publication {...props} {...data} />
                 }/>
               </Switch>
+            ]
           }
         </main>
         <Route exact path="/" render={() =>
