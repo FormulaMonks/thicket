@@ -33,8 +33,8 @@ class App extends Component {
     db.addSaveFailListener(this.handleDatabaseError)
   }
 
-  rerender = () => {
-    this.forceUpdate();
+  rerender = ev => {
+    this.setState({ ...ev.detail })
   }
 
   handleDatabaseError = e => {

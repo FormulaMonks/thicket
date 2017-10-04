@@ -17,7 +17,7 @@ class Database {
 
   setData(newData)  {
     saveState(this.id, newData)
-      .then(() => window.dispatchEvent(new CustomEvent(SAVE_SUCCESS)))
+      .then(() => window.dispatchEvent(new CustomEvent(SAVE_SUCCESS, { detail: newData} )))
       .catch(err => window.dispatchEvent(new CustomEvent(SAVE_FAIL, { detail: err })))
   }
 
