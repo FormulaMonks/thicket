@@ -6,16 +6,26 @@ import {
 } from 'react-router-dom'
 import Camera from './Camera'
 import Stream from './Stream'
-import { Camera as IconCamera } from './NavLinks'
+import Publication from './Publication'
+import {
+  Camera as IconCamera,
+  Back as BackNav,
+} from './NavLinks'
+import Spinner from './Spinner'
 import './App.css'
 
-import db from './syncedDB';
+import db, { initialState } from './syncedDB';
 
 class App extends Component {
+
+  state = { ...initialState, loaded: false }
 
   componentDidMount() {
     db.addSaveSuccessListener(this.rerender)
     db.addSaveFailListener(this.handleDatabaseError)
+
+    db.fetchData()
+      .then(data => this.setState({ loaded: true, ...data }))
   }
 
   componentWillUnmount() {
@@ -23,8 +33,8 @@ class App extends Component {
     db.addSaveFailListener(this.handleDatabaseError)
   }
 
-  rerender = () => {
-    this.forceUpdate();
+  rerender = ev => {
+    this.setState({ ...ev.detail })
   }
 
   handleDatabaseError = e => {
@@ -33,14 +43,28 @@ class App extends Component {
   }
 
   render() {
+    const { loaded, ...data } = this.state
+
     return <Router>
       <div className="app">
-        <header className="app__header">Thicket</header>
+        <header className="app__header">
+          <Route path="/:x" render={() =>
+            <BackNav to="/" alt="Back Home" />} />
+          Thicket
+        </header>
         <main className="app__main">
-          <Switch>
-            <Route exact path="/" component={Stream} />
-            <Route path="/camera" component={Camera} />
-          </Switch>
+          {!loaded
+            ? <div className="stream__spinner"><Spinner /></div>
+            : <Switch>
+                <Route exact path="/" render={() =>
+                  <Stream {...data} />
+                }/>
+                <Route exact path="/camera" component={Camera} />
+                <Route path="/:id" render={props =>
+                  <Publication {...props} {...data} />
+                }/>
+              </Switch>
+          }
         </main>
         <Route exact path="/" render={() =>
           <footer className="app__footer">

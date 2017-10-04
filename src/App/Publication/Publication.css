@@ -1,0 +1,25 @@
+.publication{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.publication__content{
+  flex: 1;
+  margin-top: 10px;
+}
+
+.publication__img{
+  width: 400px;
+  height: 300px;
+}
+
+.publication__controls{
+  height: 120px;
+  width: 100%;
+  border-top: 1px solid #CCC;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

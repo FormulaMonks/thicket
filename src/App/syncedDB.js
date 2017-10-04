@@ -5,7 +5,7 @@
 import createDatabase from '../database'
 import uuid from 'uuid/v4'
 
-const initialState = {
+export const initialState = {
   publications: {},
   publicationOrder: [],
 }
@@ -28,3 +28,14 @@ export const saveImage = str => {
         publicationOrder: [ id, ...data.publicationOrder ],
       }))
 }
+
+export const deleteImage = id =>
+  db.fetchData()
+    .then(data => {
+      const { [id]: p, ...rest } = data.publications
+      db.setData({
+        ...data,
+        publications: rest,
+        publicationOrder: data.publicationOrder.filter(i => i !== id)
+      })
+    })

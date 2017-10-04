@@ -6,7 +6,6 @@ import {
   Accept as AcceptIcon,
   Again as AgainIcon,
   Shoot as ShootIcon,
-  Cancel as CancelIcon,
 } from '../NavLinks'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
@@ -47,13 +46,11 @@ class Camera extends Component {
       <div className="camera__controls">
         {mode === STANDBY && [
           <ShootIcon key="shoot" onClick={this.capture} alt="Shoot" />,
-          <CancelIcon key="cancel" to="/" alt="Cancel" />,
         ]}
         {mode === SHOOTING && <ProgressMapper />}
         {mode === REVIEW && [
           <AcceptIcon key="accept" onClick={this.accept} alt="Accept" />,
           <AgainIcon key="again" onClick={this.again} alt="Again" />,
-          <CancelIcon key="cancel" to="/" alt="Cancel" />,
         ]}
       </div>
     </div>

@@ -4,6 +4,7 @@ import acceptPng from './accept.png'
 import againPng from './again.png'
 import shootPng from './shoot.png'
 import cancelPng from './cancel.png'
+import leftArrowPng from './left-arrow.png'
 import './NavLinks.css'
 import { Link } from 'react-router-dom'
 
@@ -19,6 +20,10 @@ const NavLink = ({ style = {}, onClick, to, children, alt }) =>
     {onClick, to, style, className: 'icon'},
     React.cloneElement(children, { alt })
   )
+
+export const Back = ({ to, alt }) => <Link to={to}>
+    <img className="icon__back" alt={alt} src={leftArrowPng} />
+  </Link>
 
 export default NavLink
 export const Camera = navLinkify(cameraPng)
