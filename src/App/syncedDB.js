@@ -32,10 +32,10 @@ export const saveImage = str => {
 export const deleteImage = id =>
   db.fetchData()
     .then(data => {
-      delete data.publications[id]
+      const { [id]: p, ...rest } = data.publications
       db.setData({
         ...data,
-        publications: data.publications,
+        publications: rest,
         publicationOrder: data.publicationOrder.filter(i => i !== id)
       })
     })
