@@ -14,7 +14,7 @@ import {
 import Spinner from './Spinner'
 import './App.css'
 
-import db, { init, initialState } from './syncedDB';
+import db, { initialState } from './syncedDB';
 
 class App extends Component {
 
@@ -24,8 +24,8 @@ class App extends Component {
     db.addSaveSuccessListener(this.rerender)
     db.addSaveFailListener(this.handleDatabaseError)
 
-    init(() => db.fetchData()
-      .then(data => this.setState({ loaded: true, ...data })))
+    db.fetchData()
+      .then(data => this.setState({ loaded: true, ...data }))
   }
 
   componentWillUnmount() {
