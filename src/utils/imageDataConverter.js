@@ -4,13 +4,10 @@ export default class ImageDataConverter {
   }
 
   getByteString() {
-    let byteString
     if (this.dataURI.split(',')[0].indexOf('base64') >= 0) {
-      byteString = atob(this.dataURI.split(',')[1])
-    } else {
-      byteString = decodeURI(this.dataURI.split(',')[1])
+      return atob(this.dataURI.split(',')[1])
     }
-    return byteString
+    return decodeURI(this.dataURI.split(',')[1])
   }
 
   getMimeString() {
