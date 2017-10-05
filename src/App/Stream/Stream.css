@@ -10,6 +10,7 @@
 }
 
 .stream__publication {
+  min-height: 100px;
   width: 33.3%;
   box-sizing: border-box;
   padding: 0 2px;
