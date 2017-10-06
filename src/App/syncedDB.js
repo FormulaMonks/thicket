@@ -21,7 +21,7 @@ export const saveImage = str =>
           ...data,
           publications: {
             ...data.publications,
-            [id]: { id, src: str },
+            [id]: { id, src: `https://ipfs.io/ipfs/${id}`},
           },
           publicationOrder: [ id, ...data.publicationOrder ],
         })))
