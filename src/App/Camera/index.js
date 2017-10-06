@@ -88,7 +88,7 @@ class Camera extends Component {
   }
 
   capture = () => {
-    setTimeout(this.stopVideo, GIF_DURATION);
+    setTimeout(this.stopVideo, GIF_DURATION + 500);
     this.setState({ mode: SHOOTING }, () => {
       gifshot.createGIF({
         ...GIF_OPTIONS,
