@@ -1,6 +1,5 @@
 import localforage from 'localforage'
 
-
 export const loadState = (key) =>
   localforage.getItem(`${key}`)
     .then(res => res || undefined)

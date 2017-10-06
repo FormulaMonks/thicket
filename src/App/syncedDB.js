@@ -3,7 +3,6 @@
 // such data, if convenient.
 
 import createDatabase from '../database'
-import uuid from 'uuid/v4'
 
 export const initialState = {
   publications: {},
@@ -14,20 +13,19 @@ const db = createDatabase({name: 'syncedDB', initialState})
 
 export default db
 
-export const saveImage = str => {
-  const id = uuid()
+export const saveImage = str =>
+  db.addBase64File(str)
+    .then(id => db.fetchData()
+      .then(data =>
+        db.setData({
+          ...data,
+          publications: {
+            ...data.publications,
+            [id]: { id, src: `https://ipfs.io/ipfs/${id}`},
+          },
+          publicationOrder: [ id, ...data.publicationOrder ],
+        })))
 
-  return db.fetchData()
-    .then(data =>
-      db.setData({
-        ...data,
-        publications: {
-          ...data.publications,
-          [id]: { id, src: str },
-        },
-        publicationOrder: [ id, ...data.publicationOrder ],
-      }))
-}
 
 export const deleteImage = id =>
   db.fetchData()
