@@ -20,7 +20,6 @@
   },
   "homepage": "https://thicket.citrusbyte.com",
   "dependencies": {
-    "base64-arraybuffer": "^0.1.5",
     "gifshot": "^0.3.2",
     "ipfs": "^0.26.0",
     "localforage": "^1.5.0",
