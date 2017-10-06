@@ -10,10 +10,6 @@ export default class ImageDataConverter {
     return decodeURI(this.dataURI.split(',')[1])
   }
 
-  getMimeString() {
-    return this.dataURI.split(',')[0].split(':')[1].split(';')[0]
-  }
-
   convertToTypedArray() {
     let byteString = this.getByteString()
     let ia = new Uint8Array(byteString.length)
@@ -21,12 +17,6 @@ export default class ImageDataConverter {
       ia[i] = byteString.charCodeAt(i)
     }
     return ia
-  }
-
-  dataURItoBlob() {
-    let mimeString = this.getMimeString()
-    let intArray = this.convertToTypedArray()
-    return new Blob([intArray], {type: mimeString})
   }
 }
 
