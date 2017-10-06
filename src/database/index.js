@@ -1,7 +1,7 @@
 import IPFS from 'ipfs'
 import { Buffer } from 'safe-buffer'
-import ImageDataConverter from '../utils/imageDataConverter'
 import { loadState, saveState } from './localStorage'
+import { decode } from 'base64-arraybuffer'
 
 const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
 const SAVE_FAIL = 'DatabaseSaveFailEvent'
@@ -46,7 +46,7 @@ class Database {
 
   addBase64File = base64 => new Promise((resolve, reject) => {
     this.initIpfsNode().then(node =>
-      node.files.add(Buffer.from(new ImageDataConverter(base64).convertToTypedArray()), (err, res) => {
+      node.files.add(Buffer.from(decode(base64)), (err, res) => {
         if (err) {
           console.error('Error publishing to IPFS: ', err)
           reject(err)
