@@ -1,4 +1,5 @@
 import IPFS from 'ipfs'
+import Room from 'ipfs-pubsub-room'
 import { Buffer } from 'safe-buffer'
 import ImageDataConverter from '../utils/imageDataConverter'
 import { loadState, saveState } from './localStorage'
@@ -28,8 +29,9 @@ class Database {
 
       node.once('ready', () => node.id((err, info) => {
         this.ipfsNode = node
+        this.room = Room(node, 'thicket-pubsub')
 
-        node.pubsub.subscribe('thicket-pubsub', (message) => {
+        this.room.on('message', (message) => {
           if (message.from !== info.id) {
             this.setData(JSON.parse(message.data), false)
           }
@@ -52,7 +54,7 @@ class Database {
 
   setData(newData, _broadcast = true)  {
     if (_broadcast) {
-      this.initIpfsNode().then(({ node }) => node.pubsub.publish('thicket-pubsub', Buffer.from(JSON.stringify(newData))))
+      this.initIpfsNode().then(({room}) => room.broadcast(JSON.stringify(newData)))
     }
 
     saveState(this.id, newData)
@@ -87,7 +89,7 @@ class Database {
     window.removeEventListener(SAVE_FAIL, func, false)
   }
 
-  _nodeInfo = () => ({ node: this.ipfsNode })
+  _nodeInfo = () => ({ node: this.ipfsNode, room: this.room })
 }
 
 export default ({name, initialState}) => new Database(name, initialState)
