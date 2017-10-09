@@ -31,10 +31,15 @@ class Database {
         this.ipfsNode = node
         this.room = Room(node, 'thicket-pubsub')
 
-        this.room.on('message', (message) => {
+        this.room.on('message', message => {
           if (message.from !== info.id) {
             this.setData(JSON.parse(message.data), false)
           }
+        })
+
+        this.room.on('peer joined', peer => {
+          this.fetchData()
+            .then(data => this.room.sendTo(peer, JSON.stringify(data)))
         })
 
         resolve(this.ipfsNode)
