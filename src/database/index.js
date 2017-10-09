@@ -42,7 +42,7 @@ class Database {
             .then(data => this.room.sendTo(peer, JSON.stringify(data)))
         })
 
-        resolve(this.ipfsNode)
+        resolve(this._nodeInfo())
       }))
 
       node.on('error', err => {
