@@ -1,4 +1,5 @@
 import IPFS from 'ipfs'
+import Room from 'ipfs-pubsub-room'
 import { Buffer } from 'safe-buffer'
 import ImageDataConverter from '../utils/imageDataConverter'
 import { loadState, saveState } from './localStorage'
@@ -17,15 +18,33 @@ class Database {
   initIpfsNode = () => {
     return new Promise((resolve, reject) => {
 
-      if (this.ipfsNode) resolve(this.ipfsNode)
+      if (this.ipfsNode) return resolve(this._nodeInfo())
 
-      // todo:
-      // this is where we can room/namespace/channel
-      const node = new IPFS({ repo: 'thicket' })
-      node.on('ready', () => {
-        this.ipfsNode = node
-        resolve(this.ipfsNode)
+      const node = new IPFS({
+        repo: 'thicket',
+        EXPERIMENTAL: {
+          pubsub: true,
+        },
       })
+
+      node.once('ready', () => node.id((err, info) => {
+        this.ipfsNode = node
+        this.room = Room(node, 'thicket-pubsub')
+
+        this.room.on('message', message => {
+          if (message.from !== info.id) {
+            this.setData(JSON.parse(message.data), false)
+          }
+        })
+
+        this.room.on('peer joined', peer => {
+          this.fetchData()
+            .then(data => this.room.sendTo(peer, JSON.stringify(data)))
+        })
+
+        resolve(this._nodeInfo())
+      }))
+
       node.on('error', err => {
         console.error('Error connecting the IPFS node: ', err)
         reject(err)
@@ -38,14 +57,18 @@ class Database {
       .then(res => res || this.initialState)
   }
 
-  setData(newData)  {
+  setData(newData, _broadcast = true)  {
+    if (_broadcast) {
+      this.initIpfsNode().then(({room}) => room.broadcast(JSON.stringify(newData)))
+    }
+
     saveState(this.id, newData)
       .then(() => window.dispatchEvent(new CustomEvent(SAVE_SUCCESS, { detail: newData} )))
       .catch(err => window.dispatchEvent(new CustomEvent(SAVE_FAIL, { detail: err })))
   }
 
   addBase64File = base64 => new Promise((resolve, reject) => {
-    this.initIpfsNode().then(node =>
+    this.initIpfsNode().then(({ node }) =>
       node.files.add(Buffer.from(new ImageDataConverter(base64).convertToTypedArray()), (err, res) => {
         if (err) {
           console.error('Error publishing to IPFS: ', err)
@@ -70,6 +93,8 @@ class Database {
   removeSaveFailListener(func) {
     window.removeEventListener(SAVE_FAIL, func, false)
   }
+
+  _nodeInfo = () => ({ node: this.ipfsNode, room: this.room })
 }
 
 export default ({name, initialState}) => new Database(name, initialState)
