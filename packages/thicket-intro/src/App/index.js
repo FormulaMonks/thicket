@@ -1,6 +1,7 @@
 import React from 'react'
 import { injectGlobal } from 'styled-components'
 //
+import Hero from './Hero'
 
 injectGlobal`
   body {
@@ -14,6 +15,7 @@ injectGlobal`
   }
 `
 
-export default () => (
-  <h1>Welcome Home!</h1>
-)
+export default () => [
+  <Hero key="hero" scrollTo="#thicket" />,
+]
+
