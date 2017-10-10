@@ -8,10 +8,11 @@ import Blog from 'containers/Blog'
 
 injectGlobal`
   body {
-    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
-      'Lucida Grande', sans-serif;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,
+      Arial,sans-serif;
     font-weight: 300;
-    font-size: 16px;
+    font-size: calc(.85em + 1vw);
+    line-height: 1.5em;
     margin: 0;
     padding: 0;
   }
