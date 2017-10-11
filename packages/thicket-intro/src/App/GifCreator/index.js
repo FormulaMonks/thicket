@@ -89,10 +89,11 @@ export default class GifCreator extends React.Component {
   goOffline = () => this.setState({ online: false })
 
   render() {
+    const { id } = this.props
     const { online } = this.state
 
     return (
-      <Wrapper>
+      <Wrapper id={id}>
         <Explanation>
           <img src={noWifi} alt="" style={{ height: '2.5em' }}/>
           <h2>Let's get started. Turn off that WiFi!</h2>

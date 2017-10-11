@@ -24,8 +24,6 @@ injectGlobal`
 
 export default () => [
   <Hero key="hero" scrollTo="#create" />,
-  <div key="create" id="create">
-    <GifCreator />
-  </div>,
+  <GifCreator key="create" id="create" />,
 ]
 
