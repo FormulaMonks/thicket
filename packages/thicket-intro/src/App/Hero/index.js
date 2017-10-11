@@ -18,8 +18,13 @@ const Hero = styled.header`
   justify-content: space-around;
 `
 
-const Welcome = styled.div`
-  color: white;
+const PinToTop = styled.div`
+  position: absolute;
+  top: 0;
+`
+
+// this is vertically centered by virtue of Hero's 'flex'-related properties
+const VerticallyCenter = styled.div`
   margin: 0 auto;
   padding: 0 1em;
   max-width: 30em;
@@ -47,10 +52,10 @@ const Arrow = styled.img`
 
 export default ({ scrollTo }) => (
   <Hero>
-    <div style={{ position: 'absolute', top: 0 }}>
+    <PinToTop>
       <Nav />
-    </div>
-    <Welcome>
+    </PinToTop>
+    <VerticallyCenter>
       <h1>Welcome to Mars!</h1>
       <p>
         Why not make a GIF to share with your Earth friends? We already have
@@ -61,6 +66,6 @@ export default ({ scrollTo }) => (
           <Arrow src={arrow} alt="next" />
         </a>
       </p>
-    </Welcome>
+    </VerticallyCenter>
   </Hero>
 )
