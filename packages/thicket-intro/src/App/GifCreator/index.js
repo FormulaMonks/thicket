@@ -27,7 +27,7 @@ const Button = styled.button`
 	padding: 0.5em 2.5em;
 `
 
-const DisabledButton = styled(Button)`
+const GreyTooltipButton = styled(Button)`
   border: 1px solid darkgrey;
   color: darkgrey;
   position: relative;
@@ -71,6 +71,12 @@ const DisabledButton = styled(Button)`
   }
 `
 
+const DisabledButton = ({ tip, children}) => (
+  <GreyTooltipButton disabled tip={tip}>
+    {children}
+  </GreyTooltipButton>
+)
+
 export default class GifCreator extends React.Component {
 
   state = { online: true }
@@ -103,7 +109,7 @@ export default class GifCreator extends React.Component {
             First. Once you turn off your connection, click the button below.
           </p>
           {online
-            ? <DisabledButton disabled tip="🙅 📶">Create GIF</DisabledButton>
+            ? <DisabledButton tip="🙅 📶">Create GIF</DisabledButton>
             : <Button>Create GIF</Button>
           }
         </Explanation>
