@@ -8,7 +8,6 @@ import arrow from './arrow.svg'
 
 const Hero = styled.header`
   height: 100vh;
-  background-color: #172B42;
   background-image: url(${mars}), url(${earth}), url(${stars});
   background-repeat: no-repeat, no-repeat, no-repeat;
   background-position: center bottom, 75% 75%, 100% 100%;
@@ -26,7 +25,6 @@ const Welcome = styled.div`
   max-width: 30em;
   text-align: center;
   h1 {
-    font-weight: normal;
     margin-top: 0;
   }
 `
