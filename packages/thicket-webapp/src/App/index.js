@@ -11,7 +11,7 @@ import {
   Camera as IconCamera,
   Back as BackNav,
 } from './NavLinks'
-import Spinner from './Spinner'
+import { Spinner } from 'thicket-elements'
 import './App.css'
 
 import db, { initialState } from './syncedDB';
