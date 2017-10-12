@@ -1,5 +1,5 @@
-import Button from './elements/Button'
+import Spinner from './Spinner'
 
 export {
-  Button,
+  Spinner,
 }

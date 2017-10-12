@@ -29,7 +29,8 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "react-spinkit": "^3.0.0",
-    "safe-buffer": "^5.1.1"
+    "safe-buffer": "^5.1.1",
+    "thicket-elements": "^1.x.x"
   },
   "scripts": {
     "start": "react-scripts start",
