@@ -1,15 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
 import Spinner from 'react-spinkit'
+import styled from 'styled-components'
 
 const StyledSpinner = styled(Spinner)`
   color: #26A65B;
 `
 
-export default () => (
+export default () =>
   <StyledSpinner
     name="ball-pulse-sync"
     fadeIn="none"
-    className="spinner"
   />
-)
