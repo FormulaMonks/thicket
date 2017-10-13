@@ -1,6 +1,6 @@
 import React from 'react'
 import { deleteImage } from '../syncedDB'
-import { Cancel as DeleteIcon } from '../NavLinks'
+import { BottomNav as Nav } from 'thicket-elements'
 import './Publication.css'
 import { homepage } from '../../../package.json'
 
@@ -30,7 +30,7 @@ export default ({publications, match, history}) => {
       <a href={`${facebookURL}?u=${url}`} target="_blank">post to facebook</a>
     </div>
     <div className="publication__controls">
-      <DeleteIcon onClick={del(history, id)} alt="Delete GIF" />
+      <Nav.Cancel onClick={del(history, id)} alt="Delete GIF" />
     </div>
   </div>
 }

@@ -6,6 +6,7 @@
   "files": [
     "css",
     "es",
+    "images",
     "lib",
     "umd"
   ],
@@ -18,6 +19,7 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
+    "react-router-dom": "^4.2.2",
     "react-spinkit": "^3.0.0",
     "styled-components": "^2.2.1"
   },

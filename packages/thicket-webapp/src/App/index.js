@@ -7,10 +7,8 @@ import {
 import Camera from './Camera'
 import Stream from './Stream'
 import Publication from './Publication'
-import {
-  Camera as IconCamera,
-  Back as BackNav,
-} from './NavLinks'
+import { BottomNav as Nav } from 'thicket-elements'
+import BackNav from './Back'
 import { Spinner } from 'thicket-elements'
 import './App.css'
 
@@ -68,7 +66,7 @@ class App extends Component {
         </main>
         <Route exact path="/" render={() =>
           <footer className="app__footer">
-            <IconCamera to="/camera" alt="New GIF" />
+            <Nav.Camera to="/camera" alt="New GIF" />
           </footer>
         } />
       </div>
