@@ -21,9 +21,18 @@ class Database {
       if (this.ipfsNode) return resolve(this._nodeInfo())
 
       const node = new IPFS({
-        repo: 'thicket',
+        repo: 'thicket/' + Date.now() + '/' + Math.random(),
         EXPERIMENTAL: {
           pubsub: true,
+        },
+        config: {
+          Addresses: {
+            Swarm: [
+              "/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star"
+            ],
+            API: '',
+            Gateway: ''
+          },
         },
       })
 
