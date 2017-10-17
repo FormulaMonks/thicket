@@ -1,34 +1,42 @@
 # A tale about dragons and Cataluña
 
-Last October a planned independence referrendum was about to take place: Catalonians were going to choose whether or not they would continue to be part of Spain or undertake their own autonomous governance. Spain's central government had other plans; disruption would take over.
+The time: September 2017.
+
+The place: Barcelona, a city I moved to in April.
+
+On 1 October, a planned independence referendum was about to take place: Catalonians were going to choose whether or not they would continue to be part of Spain or undertake their own autonomous governance. Spain's central government had other plans. Disruption would take over.
 
 On the days prior to the event some measures where taken: on Wednesday morning, police entered the offices of the `.cat` internet registry's headquarters in Barcelona and seized all of its computers. They arrested six members of the staff and held four of them for two days. Finally the **CTO** was accused of sedition.
 
-Them, [the Catalan government used IPFS to sidestep Spain's legal block](http://la3.org/~kilburn/blog/catalan-government-bypass-ipfs/).
+Then, [the Catalan government used IPFS to sidestep Spain's legal block](http://la3.org/~kilburn/blog/catalan-government-bypass-ipfs/).
 
 We'll come back to this.
 
 
 ## Our mission
 
-We decided to build a _decentralized app_ where users could shoot _GIFs_ and share them with their peers. A _decentralized app_ meant we aimed at avoiding servers that would hold authority over the generated content and that the users would maintain ownership of their creations.
+Meanwhile this past September, my team at Citrusbyte embarked on a research project.
 
-We found communities, platforms, tools and other resources for such a mission. One of such networks is called [IPFS](https://ipfs.io).
+We wanted to build a _decentralized app_ where users could create _GIFs_ and share them with their peers. A _decentralized app_ meant we aimed to build an app with absolutely no servers&mdash;no servers means that no single entity would hold authority over the generated content. The users would maintain ownership of their own creations. We aimed to build this entirely within the browser; no downloads required.
+
+We found communities, platforms, protocols, and tools for such a mission. One of such protocol is called [IPFS](https://ipfs.io).
 
 From its overview section in the [IPFS](https://github.com/ipfs/ipfs) repo at Github:
 
->IPFS (the InterPlanetary File System) is a new hypermedia distribution protocol, addressed by content and identities. IPFS enables the creation of completely distributed applications. It aims to make the web faster, safer, and more open.
+> IPFS (the InterPlanetary File System) is a new hypermedia distribution protocol, addressed by content and identities. IPFS enables the creation of completely distributed applications. It aims to make the web faster, safer, and more open.
 >
->IPFS is a distributed file system that seeks to connect all computing devices with the same system of files. In some ways, this is similar to the original aims of the Web, but IPFS is actually more similar to a single bittorrent swarm exchanging git objects.
+> IPFS is a distributed file system that seeks to connect all computing devices with the same system of files. In some ways, this is similar to the original aims of the Web, but IPFS is actually more similar to a single bittorrent swarm exchanging git objects.
 
-This seemed like a good place to start out. We would integrate the `js-ipfs` library into our stack. We decided to use `create-react-app` which under the hood uses _React_, _Webpack_ and _Babel_.
+This seemed like a good place to start out. We would integrate the `js-ipfs` library into our stack. To get started with our app quickly, we decided to use `create-react-app`, which under the hood uses _React_, _Webpack_ and _Babel_.
 
 
 ## "Beware of the dragons"
 
-Reads the **project status** section of [IPFS.JS](https://github.com/ipfs/js-ipfs). They declare their software is in _Alpha_ stage with "lots of development happening". Dragons are mythological creatures. I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George) who slayed dragons and my colleague [Chad](https://github.com/chadoh) is interested in "illegal fictions". We were not going to be scared away because of a warning from a couple of rendered bits.
+Thus reads the **project status** section of [IPFS.JS](https://github.com/ipfs/js-ipfs/blob/629d5a7b6f582cab2dc4c6201e8ee73e32673015/README.md#project-status). They declare their software is in _alpha_ stage with "lots of development happening".
 
-Our journey took us to understand one of the main foundations of developing _decentralized apps_: content is not uploaded to a server where it will later on be distributed. Instead, it should be stored and served directly in and from the user's device. This meant we had to store the generated files within the client's browser and then find a way to make them accessible to the rest of the world.
+Dragons are mythological creatures. I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. My colleague [Chad](https://twitter.com/chadoh) says in his Twitter bio that he is "interested in illegal fictions". We were not going to be scared away because of a warning from a couple of rendered bits.
+
+Our journey required us to understand one of the foundational concepts of developing _decentralized apps_: content is not uploaded to a server from where it can be distributed. Instead, it should be stored and served directly in and from the user's device. This meant we had to store the generated files within the client's browser and then find a way to make them accessible to the rest of the world.
 
 `ipfs-js` offers an abstraction layer to interact with the IPFS network. It includes a module (`files`) that exposes an interface to `add/retrive` files to/from the IPFS network. After a file has been successfully added to the network, the library returns a unique _hash_ to the operation. This _hash_ represents the file in the network and can be used to retrieve it from any IPFS gateway:
 
