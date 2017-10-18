@@ -21,20 +21,20 @@ class App extends Component {
   state = { ...initialState, loaded: false }
 
   componentDidMount() {
-    db.addSaveSuccessListener(this.rerender)
+    db.addSaveSuccessListener(this.fetchData)
     db.addSaveFailListener(this.handleDatabaseError)
 
-    db.fetchData()
-      .then(data => this.setState({ loaded: true, ...data }))
+    this.fetchData()
   }
 
   componentWillUnmount() {
-    db.removeSaveSuccessListener(this.rerender)
+    db.removeSaveSuccessListener(this.fetchData)
     db.addSaveFailListener(this.handleDatabaseError)
   }
 
-  rerender = ev => {
-    this.setState({ ...ev.detail })
+  fetchData = () => {
+    db.fetchData()
+      .then(data => this.setState({ loaded: true, ...data }))
   }
 
   handleDatabaseError = e => {
