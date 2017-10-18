@@ -13,27 +13,6 @@ const db = createDatabase({name: 'syncedDB', initialState})
 
 export default db
 
-export const saveImage = str =>
-  db.addBase64File(str)
-    .then(id => db.fetchData()
-      .then(data =>
-        db.setData({
-          ...data,
-          publications: {
-            ...data.publications,
-            [id]: { id, src: `https://ipfs.io/ipfs/${id}`},
-          },
-          publicationOrder: [ id, ...data.publicationOrder ],
-        })))
+export const saveImage = str => db.insert(str)
 
-
-export const deleteImage = id =>
-  db.fetchData()
-    .then(data => {
-      const { [id]: p, ...rest } = data.publications
-      db.setData({
-        ...data,
-        publications: rest,
-        publicationOrder: data.publicationOrder.filter(i => i !== id)
-      })
-    })
+export const deleteImage = id => db.remove(id)

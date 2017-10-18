@@ -21,7 +21,7 @@ export default {
       return (
         <Html>
           <Head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta httpEquiv="Content-Type" content="text/html; charset=UTF-8" />
             <title>{title}</title>
             <meta name="description" content={description} />
             <meta name="og:title" content={title} />
