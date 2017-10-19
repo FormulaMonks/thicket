@@ -6,7 +6,7 @@ The place: Barcelona, a city I moved to in April.
 
 On 1 October, a planned independence referendum was about to take place: Catalonians were going to choose whether or not they would continue to be part of Spain or undertake their own autonomous governance. Spain's central government had other plans. Disruption would take over.
 
-On the days prior to the event some measures where taken: on Wednesday morning, police entered the offices of the `.cat` internet registry's headquarters in Barcelona and seized all of its computers. They arrested six members of the staff and held four of them for two days. Finally the **CTO** was accused of sedition.
+On the days prior to the event some measures where taken: on Wednesday morning, [police entered the offices of the `.cat` internet registry's headquarters](https://overcast.fm/+I0hxSIOgs) in Barcelona and seized all of its computers. They arrested six members of the staff and held four of them for two days. Finally the CTO was accused of sedition.
 
 Then, [the Catalan government used IPFS to sidestep Spain's legal block](http://la3.org/~kilburn/blog/catalan-government-bypass-ipfs/).
 
@@ -17,36 +17,53 @@ We'll come back to this.
 
 Meanwhile this past September, my team at Citrusbyte embarked on a research project.
 
-We wanted to build a _decentralized app_ where users could create _GIFs_ and share them with their peers. A _decentralized app_ meant we aimed to build an app with absolutely no servers&mdash;no servers means that no single entity would hold authority over the generated content. The users would maintain ownership of their own creations. We aimed to build this entirely within the browser; no downloads required.
+We wanted to build a _decentralized app_ where users could create GIFs and share them with friends. Decentralized Apps are can also called _Distributed_ Apps, which people refer to as "Dapps."
 
-We found communities, platforms, protocols, and tools for such a mission. One of such protocol is called [IPFS](https://ipfs.io).
+What is a Dapp?
 
-From its overview section in the [IPFS](https://github.com/ipfs/ipfs) repo at Github:
+As explained in [my coworker Chad's talk](https://www.youtube.com/watch?v=FXhPBiv4Roo&list=PLe9psSNJBf743rgLMRVKytyQkDUolnZnY&index=24), a decentralized is an app that works in the most extreme network conditions. Apps built in this way would even work on a future Mars colony!
 
-> IPFS (the InterPlanetary File System) is a new hypermedia distribution protocol, addressed by content and identities. IPFS enables the creation of completely distributed applications. It aims to make the web faster, safer, and more open.
->
-> IPFS is a distributed file system that seeks to connect all computing devices with the same system of files. In some ways, this is similar to the original aims of the Web, but IPFS is actually more similar to a single bittorrent swarm exchanging git objects.
+What exactly is decentralized about them? Two things: _Data_ and _Compute_.
 
-This seemed like a good place to start out. We would integrate the `js-ipfs` library into our stack. To get started with our app quickly, we decided to use `create-react-app`, which under the hood uses _React_, _Webpack_ and _Babel_.
+* **Data**: Rather than storing all of your data on one company's servers, and always fetching all of that data from said company, Dapps allow you to store your own data, or to fetch it from whoever already has it nearby.
+* **Compute**: Rather than using one company's "cloud" for doing data processing, transactional logic, and other computation, Dapps make use of emerging new networks that don't rely on the goodwill and stability of any single actor, but instead leverage the computing resources of the entire network.
+
+For our GIF-based research, we planned mostly to explore the _Data_ side of building a Dapp. We especially wanted to explore that protocol mentioned above, _IPFS_&mdash;the _InterPlanetary File System_.
+
+Our design goals:
+
+1. Build an app that runs in the browser, and requires no downloads
+2. Store all data locally, on users' individual machines
+3. Broadcast data directly from one user to another, with no servers intermediating
+
+The second design goal clearly marks this project as _research_&mdash;we expect the data used by our website to grow too quickly for this storage strategy to be practical for a consumer app. Long-term, there are ways to work around this problem&mdash;we could offer users the opportunity to back up their own data on a device plugged into their home router, or we could allow them to pay other people to store their data on the IPFS network using Filecoin. But those sorts of long-term solutions aren't ready yet, and are outside the scope of our research.
 
 
 ## "Beware of the dragons"
 
-Thus reads the **project status** section of [IPFS.JS](https://github.com/ipfs/js-ipfs/blob/629d5a7b6f582cab2dc4c6201e8ee73e32673015/README.md#project-status). They declare their software is in _alpha_ stage with "lots of development happening".
+What is IPFS, anyway?
 
-Dragons are mythological creatures. I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. My colleague [Chad](https://twitter.com/chadoh) says in his Twitter bio that he is "interested in illegal fictions". We were not going to be scared away because of a warning from a couple of rendered bits.
+There's a lot to say, and [they'll tell you about it better than we can](https://ipfs.io/). But to start out, it's important to understand that IPFS is a new _protocol_. A protocol is not a library; it is not a single tool. Instead, the protocol can be implemented in any language you care to write it in.
 
-Our journey required us to understand one of the foundational concepts of developing _decentralized apps_: content is not uploaded to a server from where it can be distributed. Instead, it should be stored and served directly in and from the user's device. This meant we had to store the generated files within the client's browser and then find a way to make them accessible to the rest of the world.
+The IPFS team's primary implementation is written in Go, a language that would work well on servers or on a desktop via a downloaded app. But per our design goals, we need the whole thing to work in a browser, no downloads required. To this end, we can use `js-ipfs`, a JavaScript implementation of the IPFS protocol which works in Node or in the browser.
 
-`ipfs-js` offers an abstraction layer to interact with the IPFS network. It includes a module (`files`) that exposes an interface to `add/retrive` files to/from the IPFS network. After a file has been successfully added to the network, the library returns a unique _hash_ to the operation. This _hash_ represents the file in the network and can be used to retrieve it from any IPFS gateway:
+IPFS as a whole is still in _alpha_, with known bugs and missing features. And though it is also built and maintained by the core IPFS team, the JS implementation is even less mature than the Go implementation. On [the Project Status section of their README](https://github.com/ipfs/js-ipfs/blob/629d5a7b6f582cab2dc4c6201e8ee73e32673015/README.md#project-status), they say explicitly that there's "lots of development happening" and to "beware of the dragons."
 
-```
-https://ipfs.io/ipfs/HASH
-```
+Well! I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. Bring 'em on!
 
-We coded our process into adding our files into the IPFS network, received unique _ids_ for the files and started rendering the images into our Webapp. We felt very happy, our code was working and we thought we were ready to continue building new features but then we discovered a problem: our build script was failing.
 
-This is the ouput we received:
+## Our first dragon: the build process
+
+We sprinted out the gate.
+
+* Created a new React app with [`create-react-app`](https://github.com/facebookincubator/create-react-app)
+* GIF creation with [`gifshot`](https://github.com/yahoo/gifshot)
+* Storing GIF data locally with `js-ipfs`
+* Broadcasting GIF data to others using the app with [`ipfs-pubsub-room`](https://github.com/ipfs-shipyard/ipfs-pubsub-room)
+
+It was working on our local machines and looking great.
+
+And then: we tried to deploy it.
 
 ```sh
 $ yarn build
@@ -65,67 +82,133 @@ error Command failed with exit code 1.
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 ```
 
+The shortened bit.ly url redirected us to [a section of the `create-react-app` README](https://github.com/facebookincubator/create-react-app/blob/1a3017b71774bfe271ac6974f8111fc0390271fb/packages/react-scripts/template/README.md#npm-run-build-fails-to-minify) with the following:
 
-## Our dragon: the build process
-
-The shortened url redirected us to:[ npm-run-build-fails-to-minify](http://bit.ly/2tRViJ9) with the following:
-
->You may occasionally find a package you depend on needs compiled or ships code for a non-browser environment. This is considered poor practice in the ecosystem and does not have an escape hatch in Create React App.
+> ## `npm run build` fails to minify
 >
->To resolve this:
+> You may occasionally find a package you depend on needs compiled or ships code for a non-browser environment. This is considered poor practice in the ecosystem and does not have an escape hatch in Create React App.
 >
->Open an issue on the dependency's issue tracker and ask that the package be published pre-compiled (retaining ES6 Modules). Fork the package and publish a corrected version yourself. If the dependency is small enough, copy it to your src/ folder and treat it as application code.
+> To resolve this:
+>
+> Open an issue on the dependency's issue tracker and ask that the package be published pre-compiled (retaining ES6 Modules). Fork the package and publish a corrected version yourself. If the dependency is small enough, copy it to your src/ folder and treat it as application code.
 
-Apparently we were using a dependency that wasn't browser friendly.
+Apparently we were using a dependency that didn't play nicely with `create-react-app`'s `minify` logic.
 
-It wasn't clear to us how to proceed but in order to continue with our project we had to make sense of what was going on. We looked up the error and found a Github [issue](https://github.com/ipld/js-cid/issues/38)) that pointed us in the right direction. The issue referenced the following error:
+<!--
+We didn't know what to do with this right away.
+
+We googled the error text and found a ) discussing an error that seemed somewhat unrelated:
 
 ```
 Webpack bundle failing at CID: Unexpected token: name (CID)
 ```
 
-This error was different to ours (we would find this same error later on) but reading the whole comment thread on the issue, we found a couple of ideas that would kickstart our search for a solution.
+Reading the whole comment thread on the issue, we found a couple of ideas that would kickstart our search for a solution.
+-->
 
 
 ## How to slay a dragon
 
-Our stack included `create-react-app` which provided the `build` process for us. The `build` script uses _webpack_ and one of the steps in the `build` process in the setup _minifies_ the source code. The library used to _minify_ is `Uglify version 2`. This library does not _minify_ code written in `es6` syntax.
+As `create-react-app` runs its `build` script to prepare code for a production environment, one of the things it does is use [`UglifyJS2`](https://github.com/mishoo/UglifyJS2) to minify the code&mdash;that is, to make it all as small as possible. The version of `UglifyJS2` that it uses does not understand JavaScript code written in newer `es6` syntax. Only `es5` syntax and older.
 
-The first error we had encountered was happening because our dependency's source code was written in `es6` syntax and the _minify_ library wasn't able to work with such code.
+Indeed, when we investigated where exactly our build script was failing, it failed on keywords like `class` and `let`&mdash;keywords that only exist in newer versions of JavaScript.
 
-We used a script to _transpile_ the dependencies that had their source code written in `es6` syntax and this helped our `build` process to succeed. We then tested our app and found another error (the one referenced at the github issue: `Webpack bundle failing at CID: Unexpected token: name (CID)`. Further research led us to understand that some IPFS libraries implement a check against an object's `class` name. `Class` names get overwritten in `minify` processes thus such checks would fail.
+We tried to solve this in two different ways:
 
-In order to solve this we had to `eject` the `create-react-app` tool. The `eject` process removes the tool itself and provides suitable fallbacks for the development scripts (we were interested in the `build` script). Once we _ejected_ the tool, we had to tweak the _webpack_ configuration file and remove the `minify` step.
+1. Transpile all dependencies to ES5 syntax ourselves
+2. Remove minification altogether :grimacing:
 
-Removing the `minify` step from the `build` process worked but itt came with a major drawback: our built bundle doubled in size. Yet, the app works.
+### Strategy 1: Transpile all dependencies to ES5 syntax ourselves
 
-We also tried to use the latest version of the _minify_ tool (`Uglify 3 version`) before removing the step itself but it made no difference. The `class` name was being overwritten too and the check mentioned before failed.
+I thought "Hey, it's probably just one or two libraries that are behaving poorly like this. How long could it take to manually add each one to a script that transpiles each to an older version of JavaScript?"
+
+And I started adding them.
+
+And each time, I'd get a little further. The build process would fail at a different spot. But with the same error.
+
+One add-next-dependency-to-my-list-and-rerun-build-script at a time&mdash;sure each time that this next one would be the last&mdash;I [built up a list](https://github.com/citrusbyte/thicket/pull/36/commits/c010aaeaa36bb9da70076e7d93ad14e9f5d7f854) of 225 files that aren't transpiled correctly! From 52 different dependencies. That's a lot of poor actors in the JavaScript ecosystem! What gives?
+
+We didn't exhaustively investigate all of them, but most of these problem libraries are part of the IPFS ecosystem. It appears that most of these use a tool called [`AEgir`](https://github.com/ipfs/aegir)&mdash;also built by the IPFS team&mdash;for their build process. This would explain why so many of our dependencies fail.
+
+I persevered. 225 problem files later, I got our build script to get past that problem...
+
+...And onto a new one.
+
+```sh
+Webpack bundle failing at CID: Unexpected token: name (CID)
+```
+
+We had actually come across [a Github issue](https://github.com/ipld/js-cid/issues/38) about this one before, when researching our initial problem. But now we could finally make sense of it.
+
+It turns out that transpiling our dependencies to ES5 wasn't enough. The minification step also removes constructor names, which causes the problems [explained here](https://github.com/libp2p/js-libp2p/issues/65).
+
+So then. Strategy 2.
+
+### Strategy 2: Remove minification altogether :grimacing:
+
+In order to solve this we had to `eject` the `create-react-app` tool.
+
+`create-react-app` wraps up various complex logic related to `webpack`, `babel`, and other tools. It's great. When you run `create-react-app eject`, it stops hiding all that logic. It dumps giant, complex Webpack and Babel configuration files into your codebase.
+
+Hooray.
+
+This gave us the flexibility we needed to remove minification altogether.
+
+As you might expect, this increased the size of our built bundle by quite a bit. In fact, from xMB to yMB.
+
+But... it worked? Like, we can at least _deploy our app_ now?
+
+Ugh.
+
+We didn't like this solution. We tried to avoid it. We tried to use the latest version of the _minify_ tool (`UglifyJS2` version _3_, which, yes, is a confusing naming scheme). But it still wouldn't get us around the `constructor` name problem.
+
+We decided to cut our losses, and move on with an unminified build. Research! We can circle back later, after we spend our precious weeks tackling cooler problems.
 
 
 ## The two headed dragon
 
-During our whole research and struggle with the beast something came our way, another error had been appearing in our consoles:
+Perhaps we're being generous with ourselves. Maybe what we just described wasn't so much _slaying_ a dragon, but merely running away from it. Well, we _felt_ like we had slain a dragon!
+
+But just when we thought we were past it, another error appeared in our consoles:
 
 ```
 Mixed Content: The page at 'PUBLIC_URL' was loaded over HTTPS, but attempted to connect to the insecure WebSocket endpoint 'ws://star-signal.cloud.ipfs.team/socket.io/?EIO=3&transport=websocket'. This request has been blocked; this endpoint must be available over WSS.
 ```
 
-We found out we were dealing with a two headed monster! We tried some quick hacking but nothing. We had wounded the creature but it had resurrected. There were whispers of dragons being able to heal themselves, even of being able to grow a new head when one is cut.
+So, something to do with our app connecting to an insecure WebSocket (`WS`) instead of a secure one (`WSS`).
 
-We started to feel our app wasn't working as before. We felt it was slow. Our content would take more time to show up, took more time to show up in our peers's devices. Then we found this: https://github.com/ipfs/js-ipfs/issues/1029#issuecomment-331873395.
+We found out we were dealing with a two headed monster! We tried some quick hacking, but nothing. We had wounded the creature, but it had resurrected. There were whispers of dragons being able to heal themselves, even of being able to grow a new head when one is cut.
 
-We applied the suggested solution and the beast finally surrendered. Maybe this is what happens when you deal with the unknown.
+In addition to this error, our app felt slower than it used to! After creating a new GIF and clicking "save", it would take half a minute before it showed up in the list. It would take half a minute to show up on our friend's devices. Why was it so slow? Did it have something to do with this WSS error? _[How was it working at all, at this point, if the WebSocket wouldn't connect?]_
+
+Then we found this: https://github.com/ipfs/js-ipfs/issues/1029#issuecomment-331873395. _[Explain what this is, and how it's related to the WSS problem.]_
+
+We applied the suggested solution and the beast finally surrendered. Our beleaguered app was working again. We could share GIFs with each other, with no servers in between us.
+
+But it was still slower than it used to be...
 
 
-### Epilogue
+## Epilogue
 
-The second error we encountered did not cause the app to stop working. We felt it was not working because the IPFS network became almost unresponsive and the error kept showing in our consoles. It was odd, and it became even stranger when we felt the same sluggish sensation trying out code from a previous working version.
+Even when we used an older version of our codebase, from before removing the minification step, it was still sluggish. But... we hadn't changed anything. Why did the app performance change, even with the same codebase?
 
-This was all happening at the same time as the Cataluñan government was about to go through with their independence referendum and their internet registry's office had been shut down. This is when the Cataluñan government started using the IPFS network. But the network was not ready for a spike in nodes (reference [here](https://discuss.ipfs.io/t/ipfs-daemon-is-eating-up-all-the-resources-on-my-computer-what-is-happening/1241/2)).
+Back to Cataluña.
+
+Remember at the beginning of this post, when I promised we'd come back to Cataluña? Here we are.
+
+It turns out, the way the Catalan government used IPFS to skirt Spanish censorship had attracted some attention. The IPFS network grew quickly from having about 1000 nodes to having about 6000.
+
+But neither the Go implementation nor the JS implementation are built to deal with this increased scale. At least not yet. [That's coming!](https://discuss.ipfs.io/t/ipfs-daemon-is-eating-up-all-the-resources-on-my-computer-what-is-happening/1241/2)
 
 
-### IPFS, their network and tools are a work in progress.
+## IPFS, their network, and tools are a work in progress.
 
->Performance improvements are being actively developed, but these things take time.
+As mentioned in the above-linked forum post:
 
-We were very happy to see how these tools can help in real situations happening right now in the world but there is more work to be done. We hope our tales of the journey through the difficult `build` process with the `js-ipfs` library, `create-react-app`, `webpack` and `uglify` encourages others to try out this new technologies.
+> Performance improvements are being actively developed, but these things take time.
+
+We were very happy to see how these tools can help in real situations happening, like the Cataluña referendum. But there is more work to be done.
+
+We hope our tale of the journey through the difficult `build` process&mdash;the `js-ipfs` library, `create-react-app`, `webpack`, `uglify`, and the rest&mdash;can help other people experimenting with these technologies. We also hope it might spur library owners to make their tools play more nicely with others in the wider ecosystem.
+
+We encourage others to try out these new technologies. Let us know what dragons you find!
