@@ -1674,6 +1674,14 @@ cids@^0.5.0, cids@^0.5.1, cids@~0.5.0, cids@~0.5.1:
     multicodec "~0.1.7"
     multihashes "~0.4.5"
 
+cids@^0.5.2:
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/cids/-/cids-0.5.2.tgz#c1baf306f8165baaabfb5134b5c20a50450548a6"
+  dependencies:
+    multibase "~0.3.4"
+    multicodec "~0.2.3"
+    multihashes "~0.4.9"
+
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/cipher-base/-/cipher-base-1.0.4.tgz#8760e4ecc272f4c363532f926d874aae2c1397de"
@@ -6151,6 +6159,12 @@ multicast-dns@^6.0.1, multicast-dns@^6.1.1:
 multicodec@~0.1.7, multicodec@~0.1.9:
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/multicodec/-/multicodec-0.1.9.tgz#1f6b3829d89b9a48adf761a6be9e204f5772e55f"
+  dependencies:
+    varint "^5.0.0"
+
+multicodec@~0.2.3:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/multicodec/-/multicodec-0.2.5.tgz#80fe6f2d04a8de73f012a7a19a06aab14b034412"
   dependencies:
     varint "^5.0.0"
 
