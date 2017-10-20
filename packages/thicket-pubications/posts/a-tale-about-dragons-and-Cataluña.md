@@ -17,11 +17,11 @@ We'll come back to this.
 
 Meanwhile this past September, my team at Citrusbyte embarked on a research project.
 
-We wanted to build a _decentralized app_ where users could create GIFs and share them with friends. Decentralized Apps are can also called _Distributed_ Apps, which people refer to as "Dapps."
+We wanted to build a _decentralized app_ where users could create GIFs and share them with friends. Decentralized Apps can also be called _Distributed_ Apps, which people refer to as "Dapps."
 
 What is a Dapp?
 
-As explained in [my coworker Chad's talk](https://www.youtube.com/watch?v=FXhPBiv4Roo&list=PLe9psSNJBf743rgLMRVKytyQkDUolnZnY&index=24), a decentralized is an app that works in the most extreme network conditions. Apps built in this way would even work on a future Mars colony!
+As explained in [my coworker Chad's talk](https://www.youtube.com/watch?v=FXhPBiv4Roo&list=PLe9psSNJBf743rgLMRVKytyQkDUolnZnY&index=24), a Dapp is an app that works in the most extreme network conditions. Apps built in this way would even work on a future Mars colony!
 
 What exactly is decentralized about them? Two things: _Data_ and _Compute_.
 
@@ -60,6 +60,7 @@ We sprinted out the gate.
 * GIF creation with [`gifshot`](https://github.com/yahoo/gifshot)
 * Storing GIF data locally with `js-ipfs`
 * Broadcasting GIF data to others using the app with [`ipfs-pubsub-room`](https://github.com/ipfs-shipyard/ipfs-pubsub-room)
+* Merge real-time interactions and solve potential conflicts using the library [YJS](https://github.com/y-js/yjs)
 
 It was working on our local machines and looking great.
 
@@ -94,17 +95,13 @@ The shortened bit.ly url redirected us to [a section of the `create-react-app` R
 
 Apparently we were using a dependency that didn't play nicely with `create-react-app`'s `minify` logic.
 
-<!--
-We didn't know what to do with this right away.
-
-We googled the error text and found a ) discussing an error that seemed somewhat unrelated:
+We didn't know what to do with this right away. We googled the error text and found a Github [issue](https://github.com/ipld/js-cid/issues/38) discussing an error that seemed somewhat unrelated:
 
 ```
 Webpack bundle failing at CID: Unexpected token: name (CID)
 ```
 
 Reading the whole comment thread on the issue, we found a couple of ideas that would kickstart our search for a solution.
--->
 
 
 ## How to slay a dragon
@@ -126,7 +123,7 @@ And I started adding them.
 
 And each time, I'd get a little further. The build process would fail at a different spot. But with the same error.
 
-One add-next-dependency-to-my-list-and-rerun-build-script at a time&mdash;sure each time that this next one would be the last&mdash;I [built up a list](https://github.com/citrusbyte/thicket/pull/36/commits/c010aaeaa36bb9da70076e7d93ad14e9f5d7f854) of 225 files that aren't transpiled correctly! From 52 different dependencies. That's a lot of poor actors in the JavaScript ecosystem! What gives?
+One add-next-dependency-to-my-list-and-rerun-build-script at a time&mdash;sure each time that this next one would be the last&mdash;I [built up a list](https://github.com/citrusbyte/thicket/pull/36/commits/c010aaeaa36bb9da70076e7d93ad14e9f5d7f854) of 225 files that aren't transpiled correctly! From 52 different dependencies.
 
 We didn't exhaustively investigate all of them, but most of these problem libraries are part of the IPFS ecosystem. It appears that most of these use a tool called [`AEgir`](https://github.com/ipfs/aegir)&mdash;also built by the IPFS team&mdash;for their build process. This would explain why so many of our dependencies fail.
 
@@ -138,7 +135,7 @@ I persevered. 225 problem files later, I got our build script to get past that p
 Webpack bundle failing at CID: Unexpected token: name (CID)
 ```
 
-We had actually come across [a Github issue](https://github.com/ipld/js-cid/issues/38) about this one before, when researching our initial problem. But now we could finally make sense of it.
+We had actually come across this one before, when researching our initial problem. Now we could finally make sense of it.
 
 It turns out that transpiling our dependencies to ES5 wasn't enough. The minification step also removes constructor names, which causes the problems [explained here](https://github.com/libp2p/js-libp2p/issues/65).
 
@@ -148,21 +145,17 @@ So then. Strategy 2.
 
 In order to solve this we had to `eject` the `create-react-app` tool.
 
-`create-react-app` wraps up various complex logic related to `webpack`, `babel`, and other tools. It's great. When you run `create-react-app eject`, it stops hiding all that logic. It dumps giant, complex Webpack and Babel configuration files into your codebase.
-
-Hooray.
+`create-react-app` wraps up various complex logic related to `webpack`, `babel`, and other tools. It's great. When you run `create-react-app eject`, it stops hiding all that logic. It dumps Webpack and Babel configuration files into your codebase.
 
 This gave us the flexibility we needed to remove minification altogether.
 
-As you might expect, this increased the size of our built bundle by quite a bit. In fact, from xMB to yMB.
+As you might expect, this increased the size of our built bundle by quite a bit. In fact, from 1.5MB to 3.8MB.
 
-But... it worked? Like, we can at least _deploy our app_ now?
+But it worked. We can at least _deploy our app_ now.
 
-Ugh.
+We didn't like this solution. We tried to avoid it. We tried to use the latest version of the _minify_ tool (`UglifyJS2` version _3_). It would get us around the `constructor` name problem but another one would show up.
 
-We didn't like this solution. We tried to avoid it. We tried to use the latest version of the _minify_ tool (`UglifyJS2` version _3_, which, yes, is a confusing naming scheme). But it still wouldn't get us around the `constructor` name problem.
-
-We decided to cut our losses, and move on with an unminified build. Research! We can circle back later, after we spend our precious weeks tackling cooler problems.
+We decided to cut our losses, and move on with an unminified build.
 
 
 ## The two headed dragon
@@ -179,9 +172,9 @@ So, something to do with our app connecting to an insecure WebSocket (`WS`) inst
 
 We found out we were dealing with a two headed monster! We tried some quick hacking, but nothing. We had wounded the creature, but it had resurrected. There were whispers of dragons being able to heal themselves, even of being able to grow a new head when one is cut.
 
-In addition to this error, our app felt slower than it used to! After creating a new GIF and clicking "save", it would take half a minute before it showed up in the list. It would take half a minute to show up on our friend's devices. Why was it so slow? Did it have something to do with this WSS error? _[How was it working at all, at this point, if the WebSocket wouldn't connect?]_
+In addition to this error, our app felt slower than it used to! After creating a new GIF and clicking "save", it would take half a minute before it showed up in the list. It would take half a minute to show up on our friend's devices. Why was it so slow? Did it have something to do with this WSS error?
 
-Then we found this: https://github.com/ipfs/js-ipfs/issues/1029#issuecomment-331873395. _[Explain what this is, and how it's related to the WSS problem.]_
+Then we found this: https://github.com/ipfs/js-ipfs/issues/1029#issuecomment-331873395. The team at IPFS are constantly updating their code, we probably had _cached_ our IPFS repo settings from an old codebase and that caused the error to appear.
 
 We applied the suggested solution and the beast finally surrendered. Our beleaguered app was working again. We could share GIFs with each other, with no servers in between us.
 
