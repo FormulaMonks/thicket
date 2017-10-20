@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import gifshot from 'gifshot'
 import ProgressMapper from './ProgressMapper'
 import './Camera.css'
-import {
-  Accept as AcceptIcon,
-  Again as AgainIcon,
-  Shoot as ShootIcon,
-} from '../NavLinks'
+import { BottomNav as Nav } from 'thicket-elements'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
 import { saveImage } from '../syncedDB'
@@ -45,12 +41,12 @@ class Camera extends Component {
       </div>
       <div className="camera__controls">
         {mode === STANDBY && [
-          <ShootIcon key="shoot" onClick={this.capture} alt="Shoot" />,
+          <Nav.Shoot key="shoot" onClick={this.capture} alt="Shoot" />,
         ]}
         {mode === SHOOTING && <ProgressMapper />}
         {mode === REVIEW && [
-          <AcceptIcon key="accept" onClick={this.accept} alt="Accept" />,
-          <AgainIcon key="again" onClick={this.again} alt="Again" />,
+          <Nav.Accept key="accept" onClick={this.accept} alt="Accept" />,
+          <Nav.Again key="again" onClick={this.again} alt="Again" />,
         ]}
       </div>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import Spinner from '../../Spinner'
+import { Spinner } from 'thicket-elements'
 import ProgressBar from './ProgressBar'
 import { GIF_DURATION } from '../settings'
 
