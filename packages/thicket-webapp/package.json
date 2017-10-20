@@ -61,6 +61,7 @@
     "safe-buffer": "^5.1.1",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
+    "thicket-camera": "1.x.x",
     "thicket-elements": "1.x.x",
     "url-loader": "0.5.9",
     "webpack": "3.5.1",

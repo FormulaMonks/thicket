@@ -1,12 +1,12 @@
 {
-  "name": "thicket-elements",
+  "name": "thicket-camera",
   "version": "1.0.0",
-  "description": "Elements library for Thicket apps",
+  "description": "A Camera component for React, used by Thicket",
   "main": "lib/index.js",
+  "module": "es/index.js",
   "files": [
     "css",
     "es",
-    "images",
     "lib",
     "umd"
   ],
@@ -19,12 +19,12 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "react-router-dom": "^4.2.2",
-    "react-spinkit": "^3.0.0",
-    "styled-components": "^2.2.1"
+    "gifshot": "^0.3.2",
+    "styled-components": "^2.2.1",
+    "thicket-elements": "1.x.x"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "16.x"
   },
   "devDependencies": {
     "nwb": "0.19.x",
@@ -39,6 +39,7 @@
   "license": "MIT",
   "repository": "https://github.com/citrusbyte/thicket",
   "keywords": [
-    "react-component"
+    "react-component",
+    "camera"
   ]
 }
