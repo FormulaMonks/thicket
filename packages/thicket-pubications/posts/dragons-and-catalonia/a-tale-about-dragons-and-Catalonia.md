@@ -6,7 +6,7 @@ The place: Barcelona, a city I moved to in April.
 
 On 1 October, a planned independence referendum was about to take place: Catalonians were going to choose whether or not they would continue to be part of Spain or undertake their own autonomous governance. Spain's central government had other plans. Disruption would take over.
 
-<img src="https://raw.githubusercontent.com/citrusbyte/thicket/master/packages/thicket-publications/posts/dragons-and-catalonia/police-censorship-during-the-catalonian-referendum.jpeg" alt="Police censorship during the Catalonian referendum" height="400px" />
+<img src="./police-censorship-during-the-catalonian-referendum.jpeg" alt="Police censorship during the Catalonian referendum" height="400px" />
 
 On the days prior to the event some measures where taken: on Wednesday morning, [police entered the offices of the `.cat` internet registry's headquarters](https://overcast.fm/+I0hxSIOgs) in Barcelona and seized all of its computers. They arrested six members of the staff and held four of them for two days. Finally the CTO was accused of sedition.
 
@@ -23,7 +23,7 @@ We wanted to build a _decentralized app_ where users could create GIFs and share
 
 What is a Dapp?
 
-<img src="https://raw.githubusercontent.com/citrusbyte/thicket/master/packages/thicket-publications/posts/dragons-and-catalonia/centralized-decentralized-distributed.jpg" alt="Centralized, decentralized and distributed" height="400px" />
+<img src="./centralized-decentralized-distributed.jpg" alt="Centralized, decentralized and distributed" height="400px" />
 
 As explained in [my coworker Chad's talk](https://www.youtube.com/watch?v=FXhPBiv4Roo&list=PLe9psSNJBf743rgLMRVKytyQkDUolnZnY&index=24), a Dapp is an app that works in the most extreme network conditions. Apps built in this way would even work on a future Mars colony!
 
@@ -55,7 +55,7 @@ IPFS as a whole is still in _alpha_, with known bugs and missing features. And t
 
 Well! I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. Bring 'em on!
 
-<img src="https://raw.githubusercontent.com/citrusbyte/thicket/master/packages/thicket-publications/posts/dragons-and-catalonia/saint-george.jpeg" alt="Saint George" height="400px" />
+<img src="./saint-george.jpeg" alt="Saint George" height="400px" />
 
 ## Our first dragon: the build process
 
@@ -157,7 +157,7 @@ We decided to cut our losses, and move on with an unminified build.
 
 ## The two headed dragon
 
-<img src="https://raw.githubusercontent.com/citrusbyte/thicket/master/packages/thicket-publications/posts/dragons-and-catalonia/angry-dragon-meme.jpeg" alt="Angry Dragon Meme" />
+<img src="./angry-dragon-meme.jpeg" alt="Angry Dragon Meme" />
 
 Perhaps we're being generous with ourselves. Maybe what we just described wasn't so much _slaying_ a dragon, but merely running away from it. Well, we _felt_ like we had slain a dragon!
 
@@ -195,8 +195,7 @@ But neither the Go implementation nor the JS implementation are built to deal wi
 
 ## IPFS, their network, and tools are a work in progress.
 
-<img src="https://raw.githubusercontent.com/citrusbyte/thicket/master/packages/thicket-publications/posts/dragons-and-catalonia/developer-wip.png" alt="Developer WIP" />
-<img src="http://www.newbiepal.com/wp-content/uploads/2016/12/Work_In_Progress-300x269.png" alt="WIP" />
+<img src="./developer-wip.png" alt="Developer WIP" />
 
 As mentioned in the above-linked forum post:
 
