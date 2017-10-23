@@ -1,5 +1,6 @@
 {
-  "name": "thicket",
+  "name": "thicket-webapp",
+  "private": true,
   "description": "Create GIFs and share them with your friends, without any middlemen",
   "keywords": [
     "gif",

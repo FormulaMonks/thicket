@@ -1,6 +1,16 @@
 {
+  "name": "thicket",
+  "description": "Thicket is a Dapp for sharing GIFs. This repo contains it and all of its supporting libraries.",
+  "private": true,
+  "contributors": [
+    "Chad Ostrowski <chad@citrusbyte.com> (https://chadoh.com)",
+    "Gorka Ludlow <gorka@citrusbyte.com> (http://aquigorka.com/)"
+  ],
   "devDependencies": {
     "lerna": "^2.4.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "intro": "lerna run --scope thicket-intro start"
+  }
 }
