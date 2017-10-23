@@ -55,7 +55,7 @@ IPFS as a whole is still in _alpha_, with known bugs and missing features. And t
 
 Well! I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. Bring 'em on!
 
-<img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/04/23/09/St-George-8.jpg" alt="Saint George" height="400px" />
+<img src="http://www.progressmme.com/stgeorge/wp-content/uploads/2010/01/stgeorge-portrait.jpg" alt="Saint George" height="400px" />
 
 
 ## Our first dragon: the build process
