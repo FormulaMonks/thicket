@@ -1,6 +1,6 @@
 {
   "name": "thicket-elements",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Elements library for Thicket apps",
   "main": "lib/index.js",
   "files": [
