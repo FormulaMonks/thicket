@@ -45,8 +45,6 @@ The second design goal clearly marks this project as _research_&mdash;we expect 
 
 ## "Beware of the dragons"
 
-<img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/04/23/09/St-George-8.jpg" alt="Saint George" height="400px" />
-
 What is IPFS, anyway?
 
 There's a lot to say, and [they'll tell you about it better than we can](https://ipfs.io/). But to start out, it's important to understand that IPFS is a new _protocol_. A protocol is not a library; it is not a single tool. Instead, the protocol can be implemented in any language you care to write it in.
@@ -56,6 +54,8 @@ The IPFS team's primary implementation is written in Go, a language that would w
 IPFS as a whole is still in _alpha_, with known bugs and missing features. And though it is also built and maintained by the core IPFS team, the JS implementation is even less mature than the Go implementation. On [the Project Status section of their README](https://github.com/ipfs/js-ipfs/blob/629d5a7b6f582cab2dc4c6201e8ee73e32673015/README.md#project-status), they say explicitly that there's "lots of development happening" and to "beware of the dragons."
 
 Well! I was named after [Saint George](https://en.wikipedia.org/wiki/Saint_George), slayer of dragons. Bring 'em on!
+
+<img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/04/23/09/St-George-8.jpg" alt="Saint George" height="400px" />
 
 
 ## Our first dragon: the build process
