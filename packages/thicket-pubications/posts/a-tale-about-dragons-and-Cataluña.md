@@ -6,6 +6,8 @@ The place: Barcelona, a city I moved to in April.
 
 On 1 October, a planned independence referendum was about to take place: Catalonians were going to choose whether or not they would continue to be part of Spain or undertake their own autonomous governance. Spain's central government had other plans. Disruption would take over.
 
+<img src="https://images.jacobinmag.com/2017/10/10105608/GettyImages-856129632.jpg" alt="Police censorship during the Catalonian referendum" height="400px" />
+
 On the days prior to the event some measures where taken: on Wednesday morning, [police entered the offices of the `.cat` internet registry's headquarters](https://overcast.fm/+I0hxSIOgs) in Barcelona and seized all of its computers. They arrested six members of the staff and held four of them for two days. Finally the CTO was accused of sedition.
 
 Then, [the Catalan government used IPFS to sidestep Spain's legal block](http://la3.org/~kilburn/blog/catalan-government-bypass-ipfs/).
@@ -20,6 +22,8 @@ Meanwhile this past September, my team at Citrusbyte embarked on a research proj
 We wanted to build a _decentralized app_ where users could create GIFs and share them with friends. Decentralized Apps can also be called _Distributed_ Apps, which people refer to as "Dapps."
 
 What is a Dapp?
+
+<img src="https://i1.wp.com/intothedialectic.com/wp-content/uploads/distributed-networks.jpg" alt="Centralized, decentralized and distributed" height="400px" />
 
 As explained in [my coworker Chad's talk](https://www.youtube.com/watch?v=FXhPBiv4Roo&list=PLe9psSNJBf743rgLMRVKytyQkDUolnZnY&index=24), a Dapp is an app that works in the most extreme network conditions. Apps built in this way would even work on a future Mars colony!
 
@@ -40,6 +44,8 @@ The second design goal clearly marks this project as _research_&mdash;we expect 
 
 
 ## "Beware of the dragons"
+
+<img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2015/04/23/09/St-George-8.jpg" alt="Saint George" height="400px" />
 
 What is IPFS, anyway?
 
@@ -152,6 +158,8 @@ We decided to cut our losses, and move on with an unminified build.
 
 ## The two headed dragon
 
+<img src="https://i.imgflip.com/wjuua.jpg" alt="Angry Dragon Meme" />
+
 Perhaps we're being generous with ourselves. Maybe what we just described wasn't so much _slaying_ a dragon, but merely running away from it. Well, we _felt_ like we had slain a dragon!
 
 But just when we thought we were past it, another error appeared in our consoles:
@@ -187,6 +195,8 @@ But neither the Go implementation nor the JS implementation are built to deal wi
 
 
 ## IPFS, their network, and tools are a work in progress.
+
+<img src="http://www.newbiepal.com/wp-content/uploads/2016/12/Work_In_Progress-300x269.png" alt="WIP" />
 
 As mentioned in the above-linked forum post:
 
