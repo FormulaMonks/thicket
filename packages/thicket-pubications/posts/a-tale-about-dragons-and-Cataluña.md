@@ -1,4 +1,4 @@
-# A tale about dragons and Cataluña
+# A tale about dragons and Catalonia
 
 The time: September 2017.
 
@@ -177,9 +177,9 @@ But it was still slower than it used to be...
 
 Even when we used an older version of our codebase, from before removing the minification step, it was still sluggish. But... we hadn't changed anything. Why did the app performance change, even with the same codebase?
 
-Back to Cataluña.
+Back to Catalonia.
 
-Remember at the beginning of this post, when I promised we'd come back to Cataluña? Here we are.
+Remember at the beginning of this post, when I promised we'd come back to Catalonia? Here we are.
 
 It turns out, the way the Catalan government used IPFS to skirt Spanish censorship had attracted some attention. The IPFS network grew quickly from having about 1000 nodes to having about 6000.
 
@@ -192,7 +192,7 @@ As mentioned in the above-linked forum post:
 
 > Performance improvements are being actively developed, but these things take time.
 
-We were very happy to see how these tools can help in real situations happening, like the Cataluña referendum. But there is more work to be done.
+We were very happy to see how these tools can help in real situations happening, like the Catalonia referendum. But there is more work to be done.
 
 We hope our tale of the journey through the difficult `build` process&mdash;the `js-ipfs` library, `create-react-app`, `webpack`, `uglify`, and the rest&mdash;can help other people experimenting with these technologies. We also hope it might spur library owners to make their tools play more nicely with others in the wider ecosystem.
 
