@@ -60,7 +60,7 @@ We sprinted out the gate.
 * GIF creation with [`gifshot`](https://github.com/yahoo/gifshot)
 * Storing GIF data locally with `js-ipfs`
 * Broadcasting GIF data to others using the app with [`ipfs-pubsub-room`](https://github.com/ipfs-shipyard/ipfs-pubsub-room)
-* Merge real-time interactions and solve potential conflicts using the library [YJS](https://github.com/y-js/yjs)
+* Merge real-time interactions and solve potential conflicts using the library [`YJS`](https://github.com/y-js/yjs)
 
 It was working on our local machines and looking great.
 
@@ -85,7 +85,7 @@ info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this comm
 
 The shortened bit.ly url redirected us to [a section of the `create-react-app` README](https://github.com/facebookincubator/create-react-app/blob/1a3017b71774bfe271ac6974f8111fc0390271fb/packages/react-scripts/template/README.md#npm-run-build-fails-to-minify) with the following:
 
-> ## `npm run build` fails to minify
+> `npm run build` fails to minify
 >
 > You may occasionally find a package you depend on needs compiled or ships code for a non-browser environment. This is considered poor practice in the ecosystem and does not have an escape hatch in Create React App.
 >
@@ -94,14 +94,6 @@ The shortened bit.ly url redirected us to [a section of the `create-react-app` R
 > Open an issue on the dependency's issue tracker and ask that the package be published pre-compiled (retaining ES6 Modules). Fork the package and publish a corrected version yourself. If the dependency is small enough, copy it to your src/ folder and treat it as application code.
 
 Apparently we were using a dependency that didn't play nicely with `create-react-app`'s `minify` logic.
-
-We didn't know what to do with this right away. We googled the error text and found a Github [issue](https://github.com/ipld/js-cid/issues/38) discussing an error that seemed somewhat unrelated:
-
-```
-Webpack bundle failing at CID: Unexpected token: name (CID)
-```
-
-Reading the whole comment thread on the issue, we found a couple of ideas that would kickstart our search for a solution.
 
 
 ## How to slay a dragon
@@ -135,7 +127,7 @@ I persevered. 225 problem files later, I got our build script to get past that p
 Webpack bundle failing at CID: Unexpected token: name (CID)
 ```
 
-We had actually come across this one before, when researching our initial problem. Now we could finally make sense of it.
+We had actually come across [a Github issue](https://github.com/ipld/js-cid/issues/38) about this one before, when researching our initial problem. Now we could finally make sense of it.
 
 It turns out that transpiling our dependencies to ES5 wasn't enough. The minification step also removes constructor names, which causes the problems [explained here](https://github.com/libp2p/js-libp2p/issues/65).
 
@@ -172,7 +164,7 @@ So, something to do with our app connecting to an insecure WebSocket (`WS`) inst
 
 We found out we were dealing with a two headed monster! We tried some quick hacking, but nothing. We had wounded the creature, but it had resurrected. There were whispers of dragons being able to heal themselves, even of being able to grow a new head when one is cut.
 
-In addition to this error, our app felt slower than it used to! After creating a new GIF and clicking "save", it would take half a minute before it showed up in the list. It would take half a minute to show up on our friend's devices. Why was it so slow? Did it have something to do with this WSS error?
+In addition to this error, our app felt slower than it used to! After creating a new GIF and clicking "save", it would take half a minute before it showed up in the list. It would take half a minute to show up on our friend's devices. Why was it so slow? Did it have something to do with this `WSS` error?
 
 Then we found this: https://github.com/ipfs/js-ipfs/issues/1029#issuecomment-331873395. The team at IPFS are constantly updating their code, we probably had _cached_ our IPFS repo settings from an old codebase and that caused the error to appear.
 
