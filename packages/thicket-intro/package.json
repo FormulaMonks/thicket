@@ -1,6 +1,6 @@
 {
   "name": "react-static-starter",
-  "version": "1.0.0",
+  "version": "1.0.1-0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
@@ -27,7 +27,6 @@
     "Gorka Ludlow <gorka@citrusbyte.com> (http://aquigorka.com/)"
   ],
   "homepage": "https://github.com/citrusbyte/thicket",
-  "license": "MIT",
   "repository": "https://github.com/citrusbyte/thicket",
   "keywords": [
     "react-static"

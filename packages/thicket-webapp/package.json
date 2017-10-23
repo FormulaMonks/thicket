@@ -13,7 +13,7 @@
     "Gorka Ludlow <gorka@citrusbyte.com> (http://aquigorka.com/)",
     "Chad Ostrowski <chad@citrusbyte.com> (https://chadoh.com/)"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -62,8 +62,8 @@
     "safe-buffer": "^5.1.1",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
-    "thicket-camera": "1.x.x",
-    "thicket-elements": "1.x.x",
+    "thicket-camera": "^1.0.1",
+    "thicket-elements": "^1.0.1",
     "url-loader": "0.5.9",
     "webpack": "3.5.1",
     "webpack-dev-server": "2.8.2",
