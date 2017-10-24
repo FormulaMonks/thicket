@@ -1,6 +1,6 @@
 {
   "name": "thicket-camera",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Camera component for React, used by Thicket",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "prepublish": "yarn build",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
@@ -21,7 +22,7 @@
   "dependencies": {
     "gifshot": "^0.3.2",
     "styled-components": "^2.2.1",
-    "thicket-elements": "1.x.x"
+    "thicket-elements": "^1.0.1"
   },
   "peerDependencies": {
     "react": "16.x"

@@ -1,6 +1,6 @@
 {
   "name": "thicket-elements",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Elements library for Thicket apps",
   "main": "lib/index.js",
   "files": [
@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "build": "nwb build-react-component",
+    "prepublish": "yarn build",
     "clean": "nwb clean-module && nwb clean-demo",
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
