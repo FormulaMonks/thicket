@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Camera from './Camera'
 
 import TurnOffWifi from './TurnOffWifi'
 import WifiOffExplanation from './WifiOffExplanation'
@@ -19,7 +20,7 @@ const Explanation = styled.div`
 
 export default class GifCreator extends React.Component {
 
-  state = { online: true }
+  state = { online: true, creating: false }
 
   componentDidMount() {
     window.addEventListener('online', this.goOnline, false)
@@ -31,19 +32,21 @@ export default class GifCreator extends React.Component {
     window.removeEventListener('offline', this.goOffline, false)
   }
 
-  goOnline = () => this.setState({ online: true })
+  goOnline = () => this.setState({ online: true, creating: false })
   goOffline = () => this.setState({ online: false })
 
   render() {
     const { id } = this.props
-    const { online } = this.state
+    const { online, creating } = this.state
 
     return (
       <Wrapper id={id}>
         <Explanation>
           {online
             ? <TurnOffWifi />
-            : <WifiOffExplanation />
+            : creating
+              ? <Camera />
+              : <WifiOffExplanation onActivate={() => this.setState({creating: true})} />
           }
         </Explanation>
       </Wrapper>

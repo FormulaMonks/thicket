@@ -4,7 +4,7 @@ import Image from '../Image'
 import { Button } from '../Buttons'
 import mars from './mars.svg'
 
-export default () => [
+export default ({ onActivate }) => [
   <Image key="img" src={mars} alt="" />,
   <h2 key="h2">Being on Mars means being offline. Forever.</h2>,
   <p key="p">
@@ -13,5 +13,5 @@ export default () => [
     one to the other. Thicket is a new kind of app that works around such
     problems.
   </p>,
-  <Button key="button">Create GIF</Button>,
+  <Button key="button" onClick={onActivate}>Create GIF</Button>,
 ]
