@@ -1,22 +1,10 @@
 import React from 'react'
-import styled from 'styled-components'
 import Camera from './Camera'
 
 import TurnOffWifi from './TurnOffWifi'
 import WifiOffExplanation from './WifiOffExplanation'
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`
-const Explanation = styled.div`
-  margin: 0 auto;
-  padding 1em;
-  max-width: 30em;
-`
+import './GifCreator.css'
 
 export default class GifCreator extends React.Component {
 
@@ -40,16 +28,16 @@ export default class GifCreator extends React.Component {
     const { online, creating } = this.state
 
     return (
-      <Wrapper id={id}>
-        <Explanation>
+      <div className="GifCreator" id={id}>
+        <div className="GifCreator--Explanation">
           {online
             ? <TurnOffWifi />
             : creating
               ? <Camera />
               : <WifiOffExplanation onActivate={() => this.setState({creating: true})} />
           }
-        </Explanation>
-      </Wrapper>
+        </div>
+      </div>
     )
   }
 }
