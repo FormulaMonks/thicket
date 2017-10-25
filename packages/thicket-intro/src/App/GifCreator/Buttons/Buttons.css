@@ -3,6 +3,7 @@
   border: 1px solid white;
   border-radius: 0;
   color: white;
+  cursor: pointer;
   font-size: 1em;
   margin: 1em;
   padding: 0.5em 2.5em;
@@ -11,6 +12,7 @@
 .Button--disabled {
   border: 1px solid darkgrey;
   color: darkgrey;
+  cursor: default;
   position: relative;
   z-index: 2;
 }
