@@ -1,0 +1,85 @@
+.GifToEarthProgress {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3em 0;
+}
+
+.GifToEarthProgress .mars {
+  height: 1.358em; /* Mars' diameter is 6790km, this is 2x that */
+}
+
+.GifToEarthProgress .earth {
+  height: 2.55em; /* Earth's diameter is 12750km, this is 2x that */
+}
+
+.GifToEarthProgress--progressBars {
+  flex: 1;
+  position: relative;
+}
+
+.GifToEarthProgress--progressBars progress {
+  /* Reset the default appearance */
+  appearance: none;
+
+  height: 0.2em;
+  width: 100%;
+  vertical-align: middle;
+}
+.GifToEarthProgress--progressBars progress.fromEarth {
+  transform: rotateY(180deg);
+}
+.GifToEarthProgress--progressBars progress::-webkit-progress-bar {
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 2px;
+}
+.GifToEarthProgress--progressBars progress::-webkit-progress-value {
+  border-radius: 2px;
+}
+.GifToEarthProgress--progressBars progress.fromMars::-webkit-progress-value {
+  background-color: #e75252;
+}
+.GifToEarthProgress--progressBars progress.fromEarth::-webkit-progress-value {
+  background-color: #00A9E0;
+}
+
+.GifToEarthProgress .gif {
+  line-height: 0;
+  position: absolute;
+  width: 44px;
+}
+.GifToEarthProgress .gif.martian {
+  background-color: #e75252;
+  margin-left: -22px;
+  top: 100%;
+}
+.GifToEarthProgress .gif.terran {
+  background-color: #00A9E0;
+  bottom: 100%;
+  height: 34px;
+  line-height: 34px;
+  margin-right: -22px;
+}
+.GifToEarthProgress .gif img {
+  width: 40px;
+  margin: 2px;
+}
+.GifToEarthProgress .gif:after {
+  position: absolute;
+  left: 0;
+  border-left: 22px solid transparent;
+  border-right: 22px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+.GifToEarthProgress .gif.martian:after {
+  bottom: 100%;
+  border-bottom: 11px solid #e75252;
+}
+.GifToEarthProgress .gif.terran:after {
+  top: 100%;
+  border-top: 11px solid #00A9E0;
+}
