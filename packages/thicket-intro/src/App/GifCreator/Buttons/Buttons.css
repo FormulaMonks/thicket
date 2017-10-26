@@ -1,0 +1,53 @@
+.Button {
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.5em 2.5em;
+}
+
+.Button--disabled {
+  border: 1px solid darkgrey;
+  color: darkgrey;
+  cursor: default;
+  position: relative;
+  z-index: 2;
+}
+.Button--disabled:before, .Button--disabled:after {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.Button--disabled:before {
+  position: absolute;
+  padding: 0.5em 0;
+  width: 100%;
+  background-color: #172B42;
+  border: 1px solid white;
+  content: attr(data-tip);
+  color: white;
+
+  margin-top: 10px;
+  top: 100%;
+  left: 0;
+}
+.Button--disabled:after {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  width: 0;
+  border-bottom: 10px solid white;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  content: " ";
+  font-size: 0;
+  line-height: 0;
+}
+.Button--disabled:hover:before, .Button--disabled:hover:after {
+  visibility: visible;
+  opacity: 1;
+}
