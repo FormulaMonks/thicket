@@ -1,25 +1,19 @@
 import React from 'react'
-import styled from 'styled-components'
+import Camera from 'thicket-camera'
 
 import TurnOffWifi from './TurnOffWifi'
 import WifiOffExplanation from './WifiOffExplanation'
+import NiceGif from './NiceGif'
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-`
-const Explanation = styled.div`
-  margin: 0 auto;
-  padding 1em;
-  max-width: 30em;
-`
+import './GifCreator.css'
 
 export default class GifCreator extends React.Component {
 
-  state = { online: true }
+  state = {
+    online: true,
+    creating: false,
+    gif: null,
+  }
 
   componentDidMount() {
     window.addEventListener('online', this.goOnline, false)
@@ -31,22 +25,28 @@ export default class GifCreator extends React.Component {
     window.removeEventListener('offline', this.goOffline, false)
   }
 
-  goOnline = () => this.setState({ online: true })
+  goOnline = () => this.setState({ online: true, creating: false })
   goOffline = () => this.setState({ online: false })
+
+  startCreating = () => this.setState({creating: true})
 
   render() {
     const { id } = this.props
-    const { online } = this.state
+    const { gif, online, creating } = this.state
 
     return (
-      <Wrapper id={id}>
-        <Explanation>
-          {online
-            ? <TurnOffWifi />
-            : <WifiOffExplanation />
-          }
-        </Explanation>
-      </Wrapper>
+      <div className="GifCreator" id={id}>
+        <div className="GifCreator--Explanation">
+          {gif
+            ? <NiceGif gif={gif} />
+            : online
+              ? <TurnOffWifi />
+              : creating
+                ? <Camera onSave={gif => this.setState({ gif, creating: false })}/>
+                : <WifiOffExplanation onActivate={this.startCreating} />
+        }
+        </div>
+      </div>
     )
   }
 }
