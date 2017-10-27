@@ -104,7 +104,7 @@ class Database extends EventEmitter {
     )
   }
 
-  insert(str) {
+  insert(str, tags) {
     return new Promise((resolve, reject) => {
       this.addBase64File(str).then(id => {
         this.initIpfsNode().then(({ y }) => {
@@ -112,7 +112,7 @@ class Database extends EventEmitter {
             {
               id,
               createdAt: Date.now(),
-              tags: ['cats']
+              tags,
             },
           ])
 

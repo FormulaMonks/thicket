@@ -12,16 +12,15 @@ const del = (history, id) => () => {
     .then(() => history.replace('/'))
 }
 
-export default ({publications, match, history}) => {
+export default ({ match, history }) => {
   const id = match.params.id
-  const gif = publications[id]
-  const url = `${homepage}/${id}`
+  const url = `${homepage}/gif/${id}`
 
   return <div className="publication">
     <div className="publication__content">
       <img
         className="publication__img"
-        src={gif && gif.src}
+        src={`https://ipfs.io/ipfs/${id}`}
         alt=""
       />
     </div>
