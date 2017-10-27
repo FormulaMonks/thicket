@@ -17,33 +17,14 @@ import db, { initialState } from './syncedDB';
 
 class App extends Component {
 
-  state = { ...initialState, loaded: false, communities: [] }
+  state = { communities: [], loaded: false }
 
   componentDidMount() {
-    db.addSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-
-    get('communities').then(data => this.setState({ communities: data || [] }))
-    this.fetchData()
-  }
-
-  componentWillUnmount() {
-    db.removeSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-  }
-
-  fetchData = () => {
-    db.fetchData()
-      .then(data => this.setState({ loaded: true, ...data }))
-  }
-
-  handleDatabaseError = e => {
-    console.error(e.detail)
-    alert(e.detail.message)
+    get('communities').then(data => this.setState({ loaded: true, communities: data || [] }))
   }
 
   render() {
-    const { loaded, ...data } = this.state
+    const { loaded, communities } = this.state
 
     return <Router>
       <div className="app">
@@ -60,24 +41,23 @@ class App extends Component {
                     return [
                       <div key="mine">My GIFs?</div>,
                       <div key="commis">My Communities?</div>,
-                      <Stream key="stream" {...data} />
                     ]
                   }
                 }/>
                 <Route exact path="/camera" component={Camera} />
                 <Route exact path="/gif/:id" render={props =>
-                  <Publication {...props} {...data} />
+                  <Publication {...props}/>
                 }/>
                 <Route exact path="/c/:c" render={props =>
-                  <Community {...data} {...props}/>
+                  <Community {...props} communities={communities}/>
                 }/>
                 <Route exact path="/invite/:code" render={props =>
-                  <Invite {...props} communities={this.state.communities}/>
+                  <Invite {...props} communities={communities}/>
                 }/>
               </Switch>
           }
         </main>
-        <Route exact path="/" render={() =>
+        <Route exact path="/c/:c" render={() =>
           <footer className="app__footer">
             <Nav.Camera to="/camera" alt="New GIF" />
           </footer>
@@ -107,27 +87,44 @@ const Invite = props => {
   return <div>This code is not valid</div>
 }
 
-const Community = props => {
-  const c = props.match.params.c
-  const { publications } = props
-  if (c.indexOf('public-') === 0 || props.communities.includes(c)) {
-    const filtered = Object.keys(publications)
-      .filter(x => publications[x].tags && publications[x].tags.includes(c))
-      .map(x => publications[x])
-    const pubs = filtered.reduce((p, c) => {
-        p[c.id] = c
-        return p
-      }, {})
-    const order = filtered.sort((a, b) => a.createdAt - a.createdAt)
-      .map(x => x.id)
+const LOADING = 'fetching the data'
+const NOT_ALLOWED = 'user has not been invited to the community and it is not public'
+const LOADED = 'data has been loaded, updates will be received'
 
-    return <div>
-      <Stream publications={pubs} publicationOrder={order} />
-    </div>
+class Community extends Component {
+
+  state = { mode: LOADING, data: initialState }
+
+  componentDidMount() {
+    db.on('update', this.fetchData)
+    this.fetchData()
   }
 
-  setImmediate(() => props.history.push('/'))
-  return null
+  componentWillUnmount() {
+    db.off('update', this.fetchData)
+  }
+
+  fetchData = () => {
+    const c = this.props.match.params.c
+    if (c.indexOf('public-') === 0 || this.props.communities.includes(c)) {
+      db.fetchData(c)
+        .then(data => this.setState({ mode: LOADED, data }))
+    } else {
+      this.setState({ mode: NOT_ALLOWED })
+    }
+  }
+
+  render() {
+    if(this.state.mode === LOADING) {
+      return <div>Spinner</div>
+    }
+
+    if (this.state.mode === NOT_ALLOWED) {
+      return <div>Not Allowed</div>
+    }
+
+    return <Stream {...this.state.data}/>
+  }
 }
 
 const generateCode = (c) => {

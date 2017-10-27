@@ -8,14 +8,16 @@ import yArray from 'y-array'
 import yIpfsConnector from 'y-ipfs-connector'
 import CID from 'cids'
 import pull from 'pull-stream'
+import EventEmitter from 'eventemitter3'
 
 const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
 const SAVE_FAIL = 'DatabaseSaveFailEvent'
 
 Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
 
-class Database {
+class Database extends EventEmitter {
   constructor(name, initialState) {
+    super()
     this.id = name
     this.initialState = initialState
     this.initIpfsNode()
@@ -64,11 +66,9 @@ class Database {
             this._y = y
 
             // new events local and/or peers
-            y.share.publications.observe(event => {
-              window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
-            })
+            y.share.publications.observe(() => this.emit('update'))
             // initial sync from local storage and/or other peers
-            window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
+            this.emit('update')
 
             resolve(this._nodeInfo())
           })
@@ -98,9 +98,9 @@ class Database {
     }
   }
 
-  fetchData() {
+  fetchData(tag) {
     return this.initIpfsNode().then(({ y }) =>
-      this.mapData(y.share.publications.toArray()),
+      this.mapData(y.share.publications.toArray().filter(p => p.tags && p.tags.includes(tag))),
     )
   }
 
@@ -168,22 +168,6 @@ class Database {
         ),
       )
     })
-
-  addSaveSuccessListener(func) {
-    window.addEventListener(SAVE_SUCCESS, func, false)
-  }
-
-  removeSaveSuccessListener(func) {
-    window.removeEventListener(SAVE_SUCCESS, func, false)
-  }
-
-  addSaveFailListener(func) {
-    window.addEventListener(SAVE_FAIL, func, false)
-  }
-
-  removeSaveFailListener(func) {
-    window.removeEventListener(SAVE_FAIL, func, false)
-  }
 
   _nodeInfo = () => ({ node: this._node, y: this._y })
 }
