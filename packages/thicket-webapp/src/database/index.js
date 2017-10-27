@@ -8,6 +8,8 @@ import yArray from 'y-array'
 import yIpfsConnector from 'y-ipfs-connector'
 import CID from 'cids'
 import pull from 'pull-stream'
+import concat from 'concat-stream'
+import pullPromise from 'pull-promise'
 
 const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
 const SAVE_FAIL = 'DatabaseSaveFailEvent'
@@ -65,9 +67,12 @@ class Database {
 
             // new events local and/or peers
             y.share.publications.observe(event => {
+              // todo: if delete remove local files
+              // todo: if insert add to local files
               window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
             })
             // initial sync from local storage and/or other peers
+            // todo: review how events behave if the users has been disconnected for a while
             window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
 
             resolve(this._nodeInfo())
@@ -86,10 +91,7 @@ class Database {
   mapData(data) {
     return {
       publications: data.reduce((p, c) => {
-        p[c.id] = {
-          id: c.id,
-          src: `https://ipfs.io/ipfs/${c.id}`,
-        }
+        p[c.id] = c
         return p
       }, {}),
       publicationOrder: data
@@ -98,10 +100,22 @@ class Database {
     }
   }
 
+  toBase64(src) {
+    return `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
+  }
+
   fetchData() {
-    return this.initIpfsNode().then(({ y }) =>
-      this.mapData(y.share.publications.toArray()),
-    )
+    return new Promise((resolve, reject) => {
+      this.initIpfsNode().then(({ node, y }) => {
+        pull(
+          pull.values(y.share.publications.toArray()),
+          pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
+          pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
+          pull.map(obj => ({ ...obj, src: this.toBase64(obj.src) })),
+          pull.collect((err, res) => resolve(this.mapData(res))),
+        )
+      })
+    })
   }
 
   insert(str) {
