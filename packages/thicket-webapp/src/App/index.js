@@ -70,7 +70,6 @@ class App extends Component {
 const Invite = props => {
   const { communities } = props
   let i = ''
-  let redirect = '/'
   try {
     i = atob(props.match.params.code)
   } catch(e) {

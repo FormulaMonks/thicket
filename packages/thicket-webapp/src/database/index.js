@@ -10,9 +10,6 @@ import CID from 'cids'
 import pull from 'pull-stream'
 import EventEmitter from 'eventemitter3'
 
-const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
-const SAVE_FAIL = 'DatabaseSaveFailEvent'
-
 Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
 
 class Database extends EventEmitter {
