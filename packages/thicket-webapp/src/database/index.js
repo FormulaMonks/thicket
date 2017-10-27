@@ -87,7 +87,7 @@ class Database {
     return {
       publications: data.reduce((p, c) => {
         p[c.id] = {
-          id: c.id,
+          ...c,
           src: `https://ipfs.io/ipfs/${c.id}`,
         }
         return p
@@ -112,6 +112,7 @@ class Database {
             {
               id,
               createdAt: Date.now(),
+              tags: ['cats']
             },
           ])
 
