@@ -3,7 +3,7 @@ import Nav from './Nav'
 import stars from './stars.svg'
 import earth from './earth.svg'
 import mars from './mars.svg'
-import arrow from './arrow.svg'
+import Arrow from '../Arrow'
 import './Hero.css'
 
 export default ({ scrollTo }) => (
@@ -22,11 +22,7 @@ export default ({ scrollTo }) => (
         Why not make a GIF to share with your Earth friends? We already have
         the <strong>Thicket</strong> app here on the Mars server for you.
       </p>
-      <p>
-        <a href={scrollTo}>
-          <img className="Hero--Arrow" src={arrow} alt="next" />
-        </a>
-      </p>
+      <Arrow scrollTo={scrollTo} />
     </div>
   </header>
 )

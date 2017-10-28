@@ -7,8 +7,8 @@ import './App.css'
 
 export default () => [
   <Hero key="hero" scrollTo="#create" />,
-  <GifCreator key="create" id="create" />,
-  <Filler key="1" title="Motivation &amp; Why We Built It" />,
+  <GifCreator key="create" id="create" scrollTo="#motivation" />,
+  <Filler key="1" title="Motivation &amp; Why We Built It" id="motivation" />,
   <Filler key="2" title="How’s Thicket work?" />,
   <Filler key="3" title="Open Source &amp; More Info" />,
   // <ShareYourGif key="share" />,

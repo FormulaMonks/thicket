@@ -22,20 +22,3 @@
 .Hero--VerticallyCenter h1 {
   margin-top: 0;
 }
-
-@keyframes bounce {
-  0%, 62%, 70%, 82%, 100% {
-    transform: translateY(0em);
-  }
-  66% {
-    transform: translateY(1em);
-  }
-  74% {
-    transform: translateY(0.5em);
-  }
-}
-
-.Hero--Arrow {
-  height: 1em;
-  animation: bounce 4s infinite;
-}
