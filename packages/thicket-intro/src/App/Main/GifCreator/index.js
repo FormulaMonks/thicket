@@ -9,15 +9,10 @@ import './GifCreator.css'
 
 export default class GifCreator extends React.Component {
 
-  state = (() => {
-    const gifCreated = window.localStorage.getItem('gifCreated')
-    return {
-      online: true,
-      creating: false,
-      gif: window.localStorage.getItem('gif'),
-      gifCreated: gifCreated && new Date(Number(gifCreated)),
-    }
-  })()
+  state = {
+    online: true,
+    creating: false,
+  }
 
   componentDidMount() {
     window.addEventListener('online', this.goOnline, false)
@@ -35,22 +30,22 @@ export default class GifCreator extends React.Component {
   startCreating = () => this.setState({creating: true})
 
   setGif = gif => {
-    window.localStorage.setItem('gif', gif)
-    const gifCreated = new Date()
-    window.localStorage.setItem('gifCreated', gifCreated.getTime())
-    this.setState({ gif, gifCreated, creating: false })
+    this.setState(
+      { creating: false },
+      () => this.props.setGif(gif)
+    )
   }
 
   render() {
-    const { id } = this.props
-    const { gif, gifCreated, online, creating } = this.state
+    const { gif } = this.props
+    const { online, creating } = this.state
 
     return (
-      <div className="GifCreator" id={id}>
+      <div className="GifCreator">
         <div className="GifCreator--Explanation">
           {gif
-            ? <NiceGif gif={gif} gifCreated={gifCreated} />
-            : online
+            ? <NiceGif />
+            : !online
               ? <TurnOffWifi />
               : creating
                 ? <Camera onSave={this.setGif}/>
