@@ -1,11 +1,14 @@
 import React from 'react'
 //
 import Hero from './Hero'
-import GifCreator from './GifCreator'
+import Main from './Main'
 import './App.css'
 
 export default () => [
-  <Hero key="hero" scrollTo="#create" />,
-  <GifCreator key="create" id="create" />,
+  <Hero key="hero" scrollTo="#main" />,
+  <Main key="main" id="main" />,
+  // <ShareYourGif key="share" />,
+  // <VisitThicket key="thicket" />,
+  // <Footer key="footer" />,
 ]
 

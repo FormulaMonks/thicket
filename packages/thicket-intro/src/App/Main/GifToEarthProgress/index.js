@@ -1,6 +1,6 @@
 import React from 'react'
-import mars from '../../WifiOffExplanation/mars.svg'
-import earth from '../../../Hero/earth.svg'
+import mars from '../GifCreator/WifiOffExplanation/mars.svg'
+import earth from '../../Hero/earth.svg'
 import './GifToEarthProgress.css'
 
 const MILLISECONDS_TO_MARS = 3 * 60 * 1000
@@ -13,7 +13,16 @@ const getProgress = start => {
 export default class GifToEarthProgress extends React.Component {
 
   componentDidMount() {
-    var progress = getProgress(this.props.gifCreated);
+    const { gifCreated } = this.props
+    if (gifCreated) this.initProgress()
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.gifCreated && !this.props.gifCreated) this.initProgress()
+  }
+
+  initProgress = () => {
+    var progress = getProgress(this.props.gifCreated)
     document.documentElement.style.setProperty(
       '--progress',
       progress * 100 + '%'
@@ -25,7 +34,11 @@ export default class GifToEarthProgress extends React.Component {
   }
 
   render() {
-    const { gif } = this.props
+    const { gif, gifCreated } = this.props
+
+    if (!gifCreated || !gif) return null
+
+    console.log({gif, gifCreated})
 
     return (
       <div className="GifToEarthProgress">

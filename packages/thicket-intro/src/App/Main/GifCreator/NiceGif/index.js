@@ -1,8 +1,6 @@
 import React from 'react'
-import GifToEarthProgress from './GifToEarthProgress'
 
 export default ({ gif, gifCreated }) => [
-  <GifToEarthProgress key="img" gif={gif} gifCreated={gifCreated} />,
   <h2 key="h2">Nice GIF! We here on Mars love it.</h2>,
   <p key="p">
     With traditional apps, your fellow Martians would have to wait until it
