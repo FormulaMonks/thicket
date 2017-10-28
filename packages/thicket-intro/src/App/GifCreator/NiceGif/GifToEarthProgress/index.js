@@ -10,6 +10,9 @@ const getProgress = start => {
   return Math.min((now - start) / MILLISECONDS_TO_MARS, 1)
 }
 
+let lastKnownScrollPosition = 0
+let ticking = false
+
 export default class GifToEarthProgress extends React.Component {
 
   componentDidMount() {
@@ -22,25 +25,59 @@ export default class GifToEarthProgress extends React.Component {
       '--timeToComplete',
       (1 - progress) * 180 + 's'
     )
+
+    this.offset = this.wrap.parentElement.offsetTop
+    window.addEventListener('scroll', this.optimize(this.maybeStick))
+    window.addEventListener('resize', this.optimize(this.adjustOffset))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.optimize(this.maybeStick))
+    window.removeEventListener('resize', this.optimize(this.adjustOffset))
+  }
+
+  optimize = func => () => {
+    lastKnownScrollPosition = window.scrollY
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        func(lastKnownScrollPosition)
+        ticking = false
+      })
+    }
+    ticking = true
+  }
+
+  maybeStick = scrollPosition => {
+    if (scrollPosition > this.offset) {
+      this.wrap.className = "GifToEarthProgress sticky"
+    } else {
+      this.wrap.className = "GifToEarthProgress"
+    }
+  }
+
+  adjustOffset = () => {
+    this.offset = this.wrap.parentElement.offsetTop
   }
 
   render() {
     const { gif } = this.props
 
     return (
-      <div className="GifToEarthProgress">
-        <img src={mars} alt="mars" className="mars" />
-        <div className="GifToEarthProgress--progressBars">
-          <div className="gif terran">
-            ?
+      <div ref={div => this.wrap = div} className="GifToEarthProgress">
+        <div>
+          <img src={mars} alt="mars" className="mars" />
+          <div className="GifToEarthProgress--progressBars">
+            <div className="gif terran">
+              ?
+            </div>
+            <div className="progress fromEarth"><div /></div>
+            <div className="progress fromMars"><div /></div>
+            <div className="gif martian">
+              <img src={gif} alt="your GIF" />
+            </div>
           </div>
-          <div className="progress fromEarth"><div /></div>
-          <div className="progress fromMars"><div /></div>
-          <div className="gif martian">
-            <img src={gif} alt="your GIF" />
-          </div>
+          <img src={earth} alt="earth" className="earth"  />
         </div>
-        <img src={earth} alt="earth" className="earth"  />
       </div>
     )
   }
