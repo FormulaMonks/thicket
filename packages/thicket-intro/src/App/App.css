@@ -13,3 +13,9 @@ body {
 h1, h2 {
   font-weight: 300;
 }
+
+a { color: #E75252 }
+a:focus, a:hover { color: #00A9E0 }
+a:active { color: #06AC4B }
+
+img { max-width: 100% }

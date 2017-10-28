@@ -21,11 +21,21 @@
   justify-content: space-between;
   align-items: center;
 }
+.GifToEarthProgress > div.arrived {
+  text-align: center;
+}
+.GifToEarthProgress > div.arrived > span {
+  flex: 1;
+}
 .GifToEarthProgress.sticky {
   position: fixed;
 }
 .GifToEarthProgress + * {
   margin-top: 115px; /* 2 x 32px padding + 51px height of earth */
+}
+.GifToEarthProgress {
+  /* add height so that the "it arrived" message has the right height */
+  height: 115px;
 }
 
 .GifToEarthProgress .mars {

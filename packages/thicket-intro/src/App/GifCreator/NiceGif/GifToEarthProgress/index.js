@@ -13,6 +13,31 @@ const getProgress = start => {
 let lastKnownScrollPosition = 0
 let ticking = false
 
+const Sending = ({ gif }) => (
+  <div>
+    <img src={mars} alt="mars" className="mars" />
+    <div className="GifToEarthProgress--progressBars">
+      <div className="gif terran">
+        ?
+      </div>
+      <div className="progress fromEarth"><div /></div>
+      <div className="progress fromMars"><div /></div>
+      <div className="gif martian">
+        <img src={gif} alt="your GIF" />
+      </div>
+    </div>
+    <img src={earth} alt="earth" className="earth"  />
+  </div>
+)
+
+const Arrived = ({ scrollTo }) => (
+  <div className="arrived">
+    <span>
+      Interplanetary GIFs unlocked! <a href={scrollTo}>Check it out!</a> 🎉🎉
+    </span>
+  </div>
+)
+
 export default class GifToEarthProgress extends React.Component {
 
   componentDidMount() {
@@ -26,7 +51,10 @@ export default class GifToEarthProgress extends React.Component {
       (1 - progress) * 180 + 's'
     )
 
-    this.offset = this.wrap.parentElement.offsetTop
+    this.adjustOffset()
+
+    setTimeout(this.setArrived, (1 - progress) * 180 * 1000)
+
     window.addEventListener('scroll', this.optimize(this.maybeStick))
     window.addEventListener('resize', this.optimize(this.adjustOffset))
   }
@@ -59,25 +87,20 @@ export default class GifToEarthProgress extends React.Component {
     this.offset = this.wrap.parentElement.offsetTop
   }
 
+  setArrived = () => {
+    this.props.setArrived()
+    setTimeout(
+      this.adjustOffset,
+      500 // wait for image to load; TODO: come up with a better way to do this
+    )
+  }
+
   render() {
-    const { gif } = this.props
+    const { id, gif, arrived } = this.props
 
     return (
       <div ref={div => this.wrap = div} className="GifToEarthProgress">
-        <div>
-          <img src={mars} alt="mars" className="mars" />
-          <div className="GifToEarthProgress--progressBars">
-            <div className="gif terran">
-              ?
-            </div>
-            <div className="progress fromEarth"><div /></div>
-            <div className="progress fromMars"><div /></div>
-            <div className="gif martian">
-              <img src={gif} alt="your GIF" />
-            </div>
-          </div>
-          <img src={earth} alt="earth" className="earth"  />
-        </div>
+        {arrived ? <Arrived scrollTo={`#${id}`} /> : <Sending gif={gif} />}
       </div>
     )
   }

@@ -49,7 +49,7 @@ export default class GifCreator extends React.Component {
       <div className="GifCreator" id={id}>
         <div className="GifCreator--Explanation">
           {gif
-            ? <NiceGif gif={gif} gifCreated={gifCreated} scrollTo={scrollTo} />
+            ? <NiceGif id={id} gif={gif} gifCreated={gifCreated} scrollTo={scrollTo} />
             : online
               ? <TurnOffWifi />
               : creating
