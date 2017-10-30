@@ -18,4 +18,9 @@ a { color: #E75252 }
 a:focus, a:hover { color: #00A9E0 }
 a:active { color: #06AC4B }
 
+a.muted { color: white; text-decoration: none; }
+a.muted .highlight { color: #E75252; text-decoration: underline }
+a.muted:focus .highlight, a.muted:hover .highlight { color: #00A9E0 }
+a.muted:active .highlight { color: #06AC4B }
+
 img { max-width: 100% }
