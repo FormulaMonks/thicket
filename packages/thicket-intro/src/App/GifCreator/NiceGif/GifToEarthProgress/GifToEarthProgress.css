@@ -1,10 +1,17 @@
+:root {
+  --progress: 0%;
+  --timeToComplete: 180s;
+}
+
 .GifToEarthProgress {
+  background: #172B42;
+  background: linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%);
   position: sticky;
-  top: 0;
+  top: -2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 3em 0;
+  padding: 32px 0;
 }
 
 .GifToEarthProgress .mars {
@@ -20,29 +27,30 @@
   position: relative;
 }
 
-.GifToEarthProgress--progressBars progress {
-  /* Reset the default appearance */
-  appearance: none;
-
-  height: 0.2em;
+.GifToEarthProgress--progressBars .progress {
+  height: 3px;
   width: 100%;
-  vertical-align: middle;
 }
-.GifToEarthProgress--progressBars progress.fromEarth {
-  transform: rotateY(180deg);
+.GifToEarthProgress--progressBars .progress div {
+  height: 3px;
 }
-.GifToEarthProgress--progressBars progress::-webkit-progress-bar {
+.GifToEarthProgress--progressBars .progress {
   background-color: rgba(255,255,255,0.1);
   border-radius: 2px;
 }
-.GifToEarthProgress--progressBars progress::-webkit-progress-value {
-  border-radius: 2px;
+.GifToEarthProgress--progressBars .progress.fromEarth {
+  margin-bottom: 3px;
 }
-.GifToEarthProgress--progressBars progress.fromMars::-webkit-progress-value {
+.GifToEarthProgress--progressBars .progress div {
+  border-radius: 2px;
+  animation: loadingBar var(--timeToComplete) linear forwards;
+}
+.GifToEarthProgress--progressBars .progress.fromMars div {
   background-color: #e75252;
 }
-.GifToEarthProgress--progressBars progress.fromEarth::-webkit-progress-value {
+.GifToEarthProgress--progressBars .progress.fromEarth div {
   background-color: #00A9E0;
+  float: right;
 }
 
 .GifToEarthProgress .gif {
@@ -53,14 +61,17 @@
 .GifToEarthProgress .gif.martian {
   background-color: #e75252;
   margin-left: -22px;
-  top: 100%;
+  top: calc(100% + 11px);
+  animation: gifFromMars var(--timeToComplete) linear forwards;
 }
 .GifToEarthProgress .gif.terran {
   background-color: #00A9E0;
-  bottom: 100%;
+  bottom: calc(100% + 11px);
   height: 34px;
+  font-size: 20px;
   line-height: 34px;
   margin-right: -22px;
+  animation: gifFromEarth var(--timeToComplete) linear forwards;
 }
 .GifToEarthProgress .gif img {
   width: 40px;
@@ -82,4 +93,17 @@
 .GifToEarthProgress .gif.terran:after {
   top: 100%;
   border-top: 11px solid #00A9E0;
+}
+
+@keyframes loadingBar {
+  0% { width: var(--progress) }
+  100% { width: 100% }
+}
+@keyframes gifFromMars {
+  0% { left: var(--progress) }
+  100% { left: 100% }
+}
+@keyframes gifFromEarth {
+  0% { right: var(--progress) }
+  100% { right: 100% }
 }

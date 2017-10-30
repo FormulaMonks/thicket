@@ -11,43 +11,34 @@ const getProgress = start => {
 }
 
 export default class GifToEarthProgress extends React.Component {
-  state = { progress: null }
 
   componentDidMount() {
-    const { gifCreated } = this.props
-    const gifArrivesAtEarth = new Date(gifCreated.getTime() + 3000 * 60)
-    const now = new Date()
-
-    this.setState({ progress: getProgress(gifCreated) })
-
-    if (gifArrivesAtEarth > now) {
-      const interval = window.setInterval(
-        () => {
-          const progress = getProgress(gifCreated)
-          this.setState({ progress })
-          if (progress === 1) window.clearInterval(interval)
-        },
-        200
-      )
-    }
+    var progress = getProgress(this.props.gifCreated);
+    document.documentElement.style.setProperty(
+      '--progress',
+      progress * 100 + '%'
+    )
+    document.documentElement.style.setProperty(
+      '--timeToComplete',
+      (1 - progress) * 180 + 's'
+    )
   }
 
   render() {
     const { gif } = this.props
-    const { progress } = this.state
 
     return (
       <div className="GifToEarthProgress">
         <img src={mars} alt="mars" className="mars" />
         <div className="GifToEarthProgress--progressBars">
-          <div className="gif martian" style={{ left: `${progress * 100}%` }}>
-            <img src={gif} alt="your GIF" />
-          </div>
-          <div className="gif terran" style={{ right: `${progress * 100}%` }}>
+          <div className="gif terran">
             ?
           </div>
-          <progress value={progress} className="fromEarth" />
-          <progress value={progress} className="fromMars" />
+          <div className="progress fromEarth"><div /></div>
+          <div className="progress fromMars"><div /></div>
+          <div className="gif martian">
+            <img src={gif} alt="your GIF" />
+          </div>
         </div>
         <img src={earth} alt="earth" className="earth"  />
       </div>
