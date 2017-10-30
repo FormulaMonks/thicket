@@ -6,20 +6,33 @@
 .GifToEarthProgress {
   background: #172B42;
   background: linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%);
-  position: sticky;
-  top: -2px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+}
+.GifToEarthProgress > div {
+  margin: 0 auto;
+  padding: 32px 0;
+  width: calc(100% - 2em);
+  max-width: 30em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 32px 0;
+}
+.GifToEarthProgress.sticky {
+  position: fixed;
+}
+.GifToEarthProgress + * {
+  margin-top: 115px; /* 2 x 32px padding + 51px height of earth */
 }
 
 .GifToEarthProgress .mars {
-  height: 1.358em; /* Mars' diameter is 6790km, this is 2x that */
+  height: 27.16px; /* Mars' diameter is 6790km, this is 4x that */
 }
 
 .GifToEarthProgress .earth {
-  height: 2.55em; /* Earth's diameter is 12750km, this is 2x that */
+  height: 51px; /* Earth's diameter is 12750km, this is 4x that */
 }
 
 .GifToEarthProgress--progressBars {
