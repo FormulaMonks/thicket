@@ -8,14 +8,13 @@ import yArray from 'y-array'
 import yIpfsConnector from 'y-ipfs-connector'
 import CID from 'cids'
 import pull from 'pull-stream'
-
-const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
-const SAVE_FAIL = 'DatabaseSaveFailEvent'
+import EventEmitter from 'eventemitter3'
 
 Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
 
-class Database {
+class Database extends EventEmitter {
   constructor(name, initialState) {
+    super()
     this.id = name
     this.initialState = initialState
     this.initIpfsNode()
@@ -64,11 +63,9 @@ class Database {
             this._y = y
 
             // new events local and/or peers
-            y.share.publications.observe(event => {
-              window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
-            })
+            y.share.publications.observe(() => this.emit('update'))
             // initial sync from local storage and/or other peers
-            window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
+            this.emit('update')
 
             resolve(this._nodeInfo())
           })
@@ -87,7 +84,7 @@ class Database {
     return {
       publications: data.reduce((p, c) => {
         p[c.id] = {
-          id: c.id,
+          ...c,
           src: `https://ipfs.io/ipfs/${c.id}`,
         }
         return p
@@ -98,13 +95,13 @@ class Database {
     }
   }
 
-  fetchData() {
+  fetchData(tag) {
     return this.initIpfsNode().then(({ y }) =>
-      this.mapData(y.share.publications.toArray()),
+      this.mapData(y.share.publications.toArray().filter(p => p.tags && p.tags.includes(tag))),
     )
   }
 
-  insert(str) {
+  insert(str, tags) {
     return new Promise((resolve, reject) => {
       this.addBase64File(str).then(id => {
         this.initIpfsNode().then(({ y }) => {
@@ -112,6 +109,7 @@ class Database {
             {
               id,
               createdAt: Date.now(),
+              tags,
             },
           ])
 
@@ -167,22 +165,6 @@ class Database {
         ),
       )
     })
-
-  addSaveSuccessListener(func) {
-    window.addEventListener(SAVE_SUCCESS, func, false)
-  }
-
-  removeSaveSuccessListener(func) {
-    window.removeEventListener(SAVE_SUCCESS, func, false)
-  }
-
-  addSaveFailListener(func) {
-    window.addEventListener(SAVE_FAIL, func, false)
-  }
-
-  removeSaveFailListener(func) {
-    window.removeEventListener(SAVE_FAIL, func, false)
-  }
 
   _nodeInfo = () => ({ node: this._node, y: this._y })
 }

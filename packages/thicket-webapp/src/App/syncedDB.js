@@ -13,6 +13,6 @@ const db = createDatabase({name: 'syncedDB', initialState})
 
 export default db
 
-export const saveImage = str => db.insert(str)
+export const saveImage = db.insert
 
-export const deleteImage = id => db.remove(id)
+export const deleteImage = db.remove

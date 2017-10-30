@@ -9,7 +9,7 @@ export default ({publications: gifs, publicationOrder: order}) => {
 
   return <div className="stream__wrapper">
     {order.map(id =>
-      <Link key={id} to={id}>
+      <Link key={id} to={`/gif/${id}`}>
         <img alt="" src={gifs[id].src} className="stream__publication"/>
       </Link>
     )}
