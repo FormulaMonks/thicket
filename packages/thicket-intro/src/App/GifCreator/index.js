@@ -42,14 +42,14 @@ export default class GifCreator extends React.Component {
   }
 
   render() {
-    const { id } = this.props
+    const { id, scrollTo } = this.props
     const { gif, gifCreated, online, creating } = this.state
 
     return (
       <div className="GifCreator" id={id}>
         <div className="GifCreator--Explanation">
           {gif
-            ? <NiceGif gif={gif} gifCreated={gifCreated} />
+            ? <NiceGif gif={gif} gifCreated={gifCreated} scrollTo={scrollTo} />
             : online
               ? <TurnOffWifi />
               : creating

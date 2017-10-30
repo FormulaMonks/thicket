@@ -1,7 +1,8 @@
 import React from 'react'
 import GifToEarthProgress from './GifToEarthProgress'
+import Arrow from '../../Arrow'
 
-export default ({ gif, gifCreated }) => [
+export default ({ gif, gifCreated, scrollTo }) => [
   <GifToEarthProgress key="img" gif={gif} gifCreated={gifCreated} />,
   <h2 key="h2">Nice GIF! We here on Mars love it.</h2>,
   <p key="p">
@@ -14,4 +15,5 @@ export default ({ gif, gifCreated }) => [
     {' '}<em>Maybe</em> if you stick around for three minutes, you'll find out
     what it is!
   </p>,
+  <Arrow key="p3" scrollTo={scrollTo} />,
 ]

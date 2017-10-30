@@ -1,8 +1,8 @@
 import React from 'react'
 import './Filler.css'
 
-export default ({ title }) => (
-  <section className="Filler">
+export default ({ title, id }) => (
+  <section className="Filler" id={id}>
     <div className="inner">
       <h2>{title}</h2>
       <p>
