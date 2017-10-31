@@ -50,7 +50,7 @@ export default class Camera extends Component {
       {mode === SHOOTING && <Progress key="progress" />}
       {mode === LOADING && <Loading key="loading" />}
       {mode === REVIEW && <Review key="review" src={this.state.gif} redo={this.again} approve={() => this.setState({ mode: CUSTOMIZE })} />}
-      {mode === CUSTOMIZE && <Customize key="customize" onCancel={this.again} onSubmit={this.props.onSave} src={this.state.gif} />}
+      {mode === CUSTOMIZE && <Customize key="customize" nickname={this.props.nickname} onCancel={this.again} onSubmit={this.props.onSave} src={this.state.gif} />}
     </Wrap>
   }
 

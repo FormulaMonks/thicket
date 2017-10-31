@@ -64,7 +64,7 @@ const Submit = Button.extend`
   width: 150px;
 `
 
-const randomNickname = `Guest${Math.floor((Math.random * 1000) + 1)}`
+const randomNickname = `Guest${Math.floor((Math.random() * 1000) + 1)}`
 
 class Customize extends Component {
 
