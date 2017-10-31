@@ -3,74 +3,55 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Link,
+  Redirect,
 } from 'react-router-dom'
-import Camera from './Camera'
-import Stream from './Stream'
-import Publication from './Publication'
-import { BottomNav as Nav } from 'thicket-elements'
-import BackNav from './Back'
-import { Spinner } from 'thicket-elements'
 import './App.css'
 
-import db, { initialState } from './syncedDB';
+import Welcome from './Welcome'
+import Communities from './Communities'
+import Community from './Community'
+import Gif from './Gif'
+
+const PROFILE = 'show user profile'
+const TOS = 'show tos'
+const FAQ = 'show faq'
 
 class App extends Component {
 
-  state = { ...initialState, loaded: false }
-
-  componentDidMount() {
-    db.addSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-
-    this.fetchData()
-  }
-
-  componentWillUnmount() {
-    db.removeSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-  }
-
-  fetchData = () => {
-    db.fetchData()
-      .then(data => this.setState({ loaded: true, ...data }))
-  }
-
-  handleDatabaseError = e => {
-    console.error(e.detail)
-    alert(e.detail.message)
-  }
+  state = { mode: '' }
 
   render() {
-    const { loaded, ...data } = this.state
-
+    const { mode } = this.state
     return <Router>
-      <div className="app">
-        <header className="app__header">
-          <Route path="/:x" render={() =>
-            <BackNav to="/" alt="Back Home" />} />
-          Thicket
+      <main className="app">
+        <header>
+          <Link to="/">Thicket</Link>
+          <div onClick={() => this.setState({ mode: PROFILE })}>Username</div>
         </header>
-        <main className="app__main">
-          {!loaded
-            ? <div className="stream__spinner"><Spinner /></div>
-            : <Switch>
-                <Route exact path="/" render={() =>
-                  <Stream {...data} />
-                }/>
-                <Route exact path="/camera" component={Camera} />
-                <Route path="/:id" render={props =>
-                  <Publication {...props} {...data} />
-                }/>
-              </Switch>
-          }
-        </main>
-        <Route exact path="/" render={() =>
-          <footer className="app__footer">
-            <Nav.Camera to="/camera" alt="New GIF" />
-          </footer>
-        } />
-      </div>
+        <Switch>
+          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/communities" component={Communities} />
+          <Route exact path="/c/:c" render={props => <Community {...props} />} />
+          <Route exact path="/gif/:g" render={props => <Gif {...props}/>} />
+          <Route exact path="/" render={() => this.newUser() ? <Redirect to="/welcome" /> : <Redirect to="/communities" />} />
+        </Switch>
+        {[
+          mode === PROFILE && <div key="pofile" onClick={() => this.setState({ mode: '' })}>Close User profile</div>,
+          mode === TOS && <div key="tos" onClick={() => this.setState({ mode: '' })}>Close TOS</div>,
+          mode === FAQ && <div key="faq" onClick={() => this.setState({ mode: '' })}>Close FAQ</div>,
+        ]}
+        <footer>
+          <div onClick={() => this.setState({ mode: FAQ })}>FAQ</div>
+          <div onClick={() => this.setState({ mode: TOS })}>TOS</div>
+          <div>Created by CitrusLabs</div>
+        </footer>
+      </main>
     </Router>
+  }
+
+  newUser = () => {
+    return true
   }
 }
 
