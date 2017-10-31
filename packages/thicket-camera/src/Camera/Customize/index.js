@@ -64,9 +64,17 @@ const Submit = Button.extend`
   width: 150px;
 `
 
+const randomNickname = `Guest${Math.floor((Math.random * 1000) + 1)}`
+
 class Customize extends Component {
 
-  state = { caption: '', nickname: `Guest${Math.floor((Math.random() * 1000) + 1)}` }
+  constructor(props) {
+    super(props)
+    this.state = {
+      caption: '',
+      nickname: props.nickname || randomNickname
+    }
+  }
 
   render() {
     return <Wrap>
