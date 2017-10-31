@@ -20,10 +20,7 @@ const FAQ = 'show faq'
 
 class App extends Component {
 
-  state = { modal: null }
-
   render() {
-    const { modal } = this.state
     return <Router>
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
@@ -36,11 +33,6 @@ class App extends Component {
           <Route exact path="/gif/:g" render={props => <Gif {...props}/>} />
           <Route exact path="/" render={() => this.newUser() ? <Redirect to="/welcome" /> : <Redirect to="/communities" />} />
         </Switch>
-        {[
-          modal === PROFILE && <div key="pofile" onClick={() => this.setState({ modal: null })}>Close User profile</div>,
-          modal === TOS && <div key="tos" onClick={() => this.setState({ modal: null })}>Close TOS</div>,
-          modal === FAQ && <div key="faq" onClick={() => this.setState({ modal: null })}>Close FAQ</div>,
-        ]}
         <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
       </main>
     </Router>
