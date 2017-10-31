@@ -28,7 +28,6 @@ class App extends Component {
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
         <Link className="app__profile" to="/profile">Username</Link> 
-        <div onClick={() => this.setState({ modal: PROFILE })}>Username</div>
         <Switch>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/welcome" component={Welcome} />
