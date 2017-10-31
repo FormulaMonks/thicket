@@ -37,7 +37,9 @@ export default class Camera extends Component {
   }
 
   componentWillUnmount() {
-    this.stopVideo()
+    if (this.state.mode === STANDBY || SHOOTING) {
+      this.stopVideo()
+    }
   }
 
   render() {
