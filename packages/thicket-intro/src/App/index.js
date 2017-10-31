@@ -5,7 +5,6 @@ import GifCreator from './GifCreator'
 import Why from './Why'
 import What from './What'
 import How from './How'
-import Filler from './Filler'
 import './App.css'
 
 export default () => [
