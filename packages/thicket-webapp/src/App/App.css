@@ -6,29 +6,23 @@
   flex-direction: column;
 }
 
-.app__header{
-  background-color: #26A65B;
-  color: #FFF;
-  font-size: 30px;
-  padding: 15px;
-  box-shadow: 0 0 10px #000;
+.app__home{
+  position: absolute;
   z-index: 1;
-  height: 30px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
+  top: 15px;
+  left: 15px;
 }
 
-.app__main{
-  position: relative;
-  flex: 1;
-  overflow: auto;
+.app__profile{
+  position: absolute;
+  z-index: 1;
+  top: 15px;
+  right: 15px;
 }
 
-.app__footer{
-  height: 120px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  border-top: 1px solid #CCC;
+.app__citruslabs{
+  position: absolute;
+  z-index: 1;
+  bottom: 15px;
+  right: 15px;
 }

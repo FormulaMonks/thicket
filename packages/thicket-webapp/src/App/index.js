@@ -8,6 +8,7 @@ import {
 } from 'react-router-dom'
 import './App.css'
 
+import Profile from './Profile'
 import Welcome from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
@@ -19,17 +20,17 @@ const FAQ = 'show faq'
 
 class App extends Component {
 
-  state = { mode: '' }
+  state = { modal: null }
 
   render() {
-    const { mode } = this.state
+    const { modal } = this.state
     return <Router>
       <main className="app">
-        <header>
-          <Link to="/">Thicket</Link>
-          <div onClick={() => this.setState({ mode: PROFILE })}>Username</div>
-        </header>
+        <Link className="app__home" to="/">Thicket</Link>
+        <Link className="app__profile" to="/profile">Username</Link> 
+        <div onClick={() => this.setState({ modal: PROFILE })}>Username</div>
         <Switch>
+          <Route exact path="/profile" component={Profile} />
           <Route exact path="/welcome" component={Welcome} />
           <Route exact path="/communities" component={Communities} />
           <Route exact path="/c/:c" render={props => <Community {...props} />} />
@@ -37,15 +38,11 @@ class App extends Component {
           <Route exact path="/" render={() => this.newUser() ? <Redirect to="/welcome" /> : <Redirect to="/communities" />} />
         </Switch>
         {[
-          mode === PROFILE && <div key="pofile" onClick={() => this.setState({ mode: '' })}>Close User profile</div>,
-          mode === TOS && <div key="tos" onClick={() => this.setState({ mode: '' })}>Close TOS</div>,
-          mode === FAQ && <div key="faq" onClick={() => this.setState({ mode: '' })}>Close FAQ</div>,
+          modal === PROFILE && <div key="pofile" onClick={() => this.setState({ modal: null })}>Close User profile</div>,
+          modal === TOS && <div key="tos" onClick={() => this.setState({ modal: null })}>Close TOS</div>,
+          modal === FAQ && <div key="faq" onClick={() => this.setState({ modal: null })}>Close FAQ</div>,
         ]}
-        <footer>
-          <div onClick={() => this.setState({ mode: FAQ })}>FAQ</div>
-          <div onClick={() => this.setState({ mode: TOS })}>TOS</div>
-          <div>Created by CitrusLabs</div>
-        </footer>
+        <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
       </main>
     </Router>
   }
