@@ -2,19 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrap = styled.div`
-  width: 400px;
-  height: 20px;
-  border-left: 2px solid #CCC;
-  border-right: 2px solid #CCC;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 `
 
 const Bar = styled.div`
+  margin-bottom: 50px;
   width: 100%;
-  height: 10px;
-  background-color: #4DAF7C;
-  border-radius: 2px;
+  height: 50px;
+  background-color: #777;
   transform-origin: left;
 `
 
