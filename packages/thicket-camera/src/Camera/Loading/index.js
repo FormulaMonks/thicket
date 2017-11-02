@@ -30,7 +30,7 @@ const Spinner = styled.div`
 const Loading = () => <Wrap>
   <Spinner />
   <H2>Just a moment</H2>
-  <P>we're putting your GIF together</P>
+  <P>we’re putting your GIF together</P>
 </Wrap>
 
 export default Loading
