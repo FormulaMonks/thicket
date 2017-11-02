@@ -5,7 +5,6 @@ import Controls from './Controls'
 import Progress from './Progress'
 import Loading from './Loading'
 import Review from './Review'
-import Customize from './Customize'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
 const Wrap = styled.div`
@@ -26,7 +25,6 @@ const STANDBY = 'awaiting further instruction'
 const SHOOTING = 'capturing video'
 const LOADING = 'processing gif'
 const REVIEW = 'review, possibly save gif'
-const CUSTOMIZE = 'add label & author nickname to gif'
 
 export default class Camera extends Component {
 
@@ -51,8 +49,7 @@ export default class Camera extends Component {
       {mode === STANDBY && <Controls key="controls" onClick={this.capture} />}
       {mode === SHOOTING && <Progress key="progress" />}
       {mode === LOADING && <Loading key="loading" />}
-      {mode === REVIEW && <Review key="review" src={this.state.gif} redo={this.again} approve={() => this.setState({ mode: CUSTOMIZE })} />}
-      {mode === CUSTOMIZE && <Customize key="customize" nickname={this.props.nickname} onCancel={this.again} onSubmit={this.props.onSave} src={this.state.gif} />}
+      {mode === REVIEW && <Review key="review" src={this.state.gif} redo={this.again} approve={this.props.onSave} />}
     </Wrap>
   }
 
