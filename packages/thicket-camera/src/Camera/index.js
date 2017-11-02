@@ -62,7 +62,7 @@ export default class Camera extends Component {
     setTimeout(() => {
       this.stopVideo()
       this.setState({ mode: LOADING })
-    }, GIF_DURATION + 200);
+    }, GIF_DURATION + 500);
     this.setState({ mode: SHOOTING }, () => {
       gifshot.createGIF({
         ...GIF_OPTIONS,
