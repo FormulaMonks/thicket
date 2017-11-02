@@ -10,12 +10,6 @@ const Wrap = styled.div`
   flex-direction: column;
   color: #777
 `
-const H2 = styled.h2`
-  margin: 20px 0 0 0;
-`
-const P = styled.p`
-  margin: 10px 0 0 0;
-`
 const spin = keyframes`
   to {transform: rotate(360deg);}
 `
@@ -29,8 +23,8 @@ const Spinner = styled.div`
 `
 const Loading = () => <Wrap>
   <Spinner />
-  <H2>Just a moment</H2>
-  <P>we’re putting your GIF together</P>
+  <h2>Just a moment</h2>
+  <p>we’re putting your GIF together</p>
 </Wrap>
 
 export default Loading
