@@ -43,7 +43,7 @@ export default class Camera extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.mode === STANDBY || SHOOTING) {
+    if (this.state.mode === STANDBY || this.state.mode === SHOOTING) {
       this.stopVideo()
     }
   }
@@ -61,7 +61,7 @@ export default class Camera extends Component {
       {mode === STANDBY && <Controls classNames={classes} key="controls" onClick={this.capture} />}
       {mode === SHOOTING && <Progress classNames={classes} key="progress" />}
       {mode === LOADING && <Loading classNames={classes} key="loading" />}
-      {mode === REVIEW && <Review classNames={classes} key="review" src={this.state.gif} redo={this.again} approve={this.props.onSave} />}
+      {mode === REVIEW && <Review classNames={classes} key="review" src={this.state.gif} redo={this.again} approve={() => this.props.onSave(this.state.gif)} />}
     </Wrap>
   }
 
@@ -102,8 +102,10 @@ export default class Camera extends Component {
 
   stopVideo = () => {
     const video = this.video
-    video.pause()
-    video.src = ''
+    if (video) {
+      video.pause()
+      video.src = ''
+    }
     this.state.stream.getTracks().forEach(t => t.stop())
   }
 
