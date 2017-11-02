@@ -5,7 +5,6 @@ const Preview = styled.img`
   flex: 1;
   width: 100%;
   object-fit: cover;
-  background-color: #C4C4C4;
   overflow: hidden;
 `
 const Controls = styled.div`
@@ -15,30 +14,27 @@ const Controls = styled.div`
 `
 const Button = styled.button`
   cursor: pointer;
-  border: 1px solid #777;
+  border: 1px solid #000;
   padding: 20px;
-  background: transparent;
-  color: #777;
+  background: #FFF;
+  color: #000;
+  width: 50%;
+  
   &:hover{
-    background: #777;
+    background: #000;
     color: #FFF;
   }
 `
-const Redo = Button.extend`
-  min-width: 30%;
-  margin-right: 5px;
-`
-const Approve = Button.extend`
-  flex: 1;
-  margin-left: 5px;
-`
 
-const Review = props => [
-  <Preview key="preview" src={props.src} />,
-  <Controls key="controls">
-    <Redo onClick={props.redo}>Redo</Redo>
-    <Approve onClick={props.approve}>Approve</Approve>
-  </Controls>,
-]
+const Review = props => {
+  const { reviewButton, reviewPreview, reviewControlsWrap, reviewRedo, reviewApprove } = props.classNames
+  return [
+    <Preview className={reviewPreview} key="preview" src={props.src} />,
+    <Controls className={reviewControlsWrap}  key="controls">
+      <Button className={`${reviewButton} ${reviewRedo}`} onClick={props.redo}>Redo</Button>
+      <Button className={`${reviewButton} ${reviewApprove}`} onClick={props.approve}>Approve</Button>
+    </Controls>,
+  ]
+}
 
 export default Review

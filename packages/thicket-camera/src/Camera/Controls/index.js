@@ -10,20 +10,14 @@ const Wrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #333;
-`
-const H2 = styled.h2`
-  text-shadow: 1px 1px 10px #FFF;
+  box-sizing: border-box;
 `
 const Button = styled.button`
   text-indent: -9999em;
   height: 32px;
-  color: rgba(0,0,0,0);
   cursor: pointer;
-  background: rgba(255,255,255,0.6);
-  border: 10px solid #333;
+  border: 10px solid rgba(0, 0, 0, 0.8);
   border-radius: 50%;
-  box-shadow: 0 0 20px #FFF;
   position: relative;
   /* half of the added paddigs */
   margin-top: 14px;
@@ -32,10 +26,9 @@ const Button = styled.button`
     position: absolute;
     top: -300%;
     left: -300%;
-    border: 6px solid rgba(119,119,119,.5);
+    border: 6px solid rgba(0, 0, 0,.5);
     padding: 36px;
     border-radius: 50%;
-    box-shadow: 0 0 20px #FFF;
     content: ''
   }
   
@@ -43,17 +36,19 @@ const Button = styled.button`
     position: absolute;
     top: -200%;
     left: -200%;
-    border: 6px solid rgba(119, 119, 119, .3);
+    border: 6px solid rgba(0, 0, 0, .3);
     padding: 24px;
     border-radius: 50%;
-    box-shadow: 0 0 20px #FFF;
     content: ''
   }
 `
 
-const Controls = props => <Wrap>
-  <H2>Create a GIF</H2>
-  <Button onClick={props.onClick}>Shoot</Button>
-</Wrap>
+const Controls = props => {
+  const { controlsWrap, controlsTitle, controlsButton } = props.classNames 
+  return <Wrap className={controlsWrap}>
+    <h2 className={controlsTitle}>Create a GIF</h2>
+    <Button className={controlsButton} onClick={props.onClick}>Shoot</Button>
+  </Wrap>
+}
 
 export default Controls

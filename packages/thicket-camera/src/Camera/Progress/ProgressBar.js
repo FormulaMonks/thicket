@@ -8,17 +8,16 @@ const Wrap = styled.div`
   display: flex;
   align-items: flex-end;
 `
-
 const Bar = styled.div`
   margin-bottom: 50px;
   width: 100%;
   height: 50px;
-  background-color: #777;
+  background-color: #000;
   transform-origin: left;
 `
 
-export default ({ percentage }) =>
-  <Wrap>
-    <Bar style={{transform: `scaleX(${percentage})`}} />
+export default ({ percentage, classNames }) =>
+  <Wrap className={classNames.progressBarWrap}>
+    <Bar className={classNames.progressBarBar} style={{transform: `scaleX(${percentage})`}} />
   </Wrap>
 

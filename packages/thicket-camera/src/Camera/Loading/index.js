@@ -8,14 +8,17 @@ const Spinner = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border-top: 3px solid #777;
+  border-top: 3px solid #000;
   border-right: 2px solid transparent;
   animation: ${spin} 1s linear infinite;
 `
-const Loading = () => [
-  <Spinner key="spinner" />,
-  <h2 key="title">Just a moment</h2>,
-  <p key="message">we’re putting your GIF together</p>,
-]
+const Loading = props => {
+  const { loadingSpinner, loadingTitle, loadingMessage } = props.classNames
+  return [
+    <Spinner className={loadingSpinner} key="spinner" />,
+    <h2 className={loadingTitle} key="title">Just a moment</h2>,
+    <p className={loadingMessage} key="message">we’re putting your GIF together</p>,
+  ]
+}
 
 export default Loading

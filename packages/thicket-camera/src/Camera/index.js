@@ -17,6 +17,11 @@ const Wrap = styled.div`
   justify-content: center;
   align-items: center;
 `
+const Vid = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
 const videoStyles = {
   width: '100%',
   height: '100%',
@@ -45,14 +50,17 @@ export default class Camera extends Component {
 
   render() {
     const { mode } = this.state
-    return <Wrap>
+    const { cameraWrap, videoWrap, ...classes } = this.props.classNames
+    return <Wrap className={cameraWrap}>
       {(mode === STANDBY || mode === SHOOTING) && 
-        <video key="video" ref={v => this.video = v} autoPlay style={videoStyles} />
+        <Vid key="video" className={videoWrap}>
+          <video ref={v => this.video = v} autoPlay style={videoStyles} />
+        </Vid>
       }
-      {mode === STANDBY && <Controls key="controls" onClick={this.capture} />}
-      {mode === SHOOTING && <Progress key="progress" />}
-      {mode === LOADING && <Loading key="loading" />}
-      {mode === REVIEW && <Review key="review" src={this.state.gif} redo={this.again} approve={this.props.onSave} />}
+      {mode === STANDBY && <Controls classNames={classes} key="controls" onClick={this.capture} />}
+      {mode === SHOOTING && <Progress classNames={classes} key="progress" />}
+      {mode === LOADING && <Loading classNames={classes} key="loading" />}
+      {mode === REVIEW && <Review classNames={classes} key="review" src={this.state.gif} redo={this.again} approve={this.props.onSave} />}
     </Wrap>
   }
 

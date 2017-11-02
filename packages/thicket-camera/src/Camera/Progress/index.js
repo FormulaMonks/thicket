@@ -15,7 +15,6 @@ const Label = styled.div`
   bottom: 50px;
   width: 100%;
   height: 50px;
-  color: #FFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,9 +35,10 @@ export default class Progress extends Component {
 
   render() {
     const value = Math.max(0, this.state.value)
+    const { progressLabel, ...classes } = this.props.classNames
     return [
-      <ProgressBar key="progress" percentage={ 1 - value / GIF_DURATION } />,
-      <Label key="label">Recording GIF</Label>,
+      <ProgressBar classNames={classes} key="progress" percentage={ 1 - value / GIF_DURATION } />,
+      <Label className={progressLabel} key="label">Recording GIF</Label>,
     ]
   }
 }
