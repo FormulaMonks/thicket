@@ -18,6 +18,7 @@ const Label = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #FFF;
 `
 
 export default class Progress extends Component {

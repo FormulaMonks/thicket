@@ -50,7 +50,8 @@ export default class Camera extends Component {
 
   render() {
     const { mode } = this.state
-    const { cameraWrap, videoWrap, ...classes } = this.props.classNames
+    const { classNames = {} } = this.props
+    const { cameraWrap = null, videoWrap = null, ...classes = {} } = classNames
     return <Wrap className={cameraWrap}>
       {(mode === STANDBY || mode === SHOOTING) && 
         <Vid key="video" className={videoWrap}>
