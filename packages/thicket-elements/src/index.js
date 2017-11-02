@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 
+import Button from './Button'
 import Spinner from './Spinner'
 import * as BottomNav from './BottomNav'
 
@@ -17,10 +18,13 @@ export default () => (
     <BottomNav.Shoot onClick={() => alert('shoot!')} />
     <h2>BottomNav.Cancel</h2>
     <BottomNav.Cancel onClick={() => alert('cancel!')} />
+    <h2>Button</h2>
+    <Button onClick={() => alert('button!')}>Click Me</Button>
   </div>
 )
 
 export {
   Spinner,
   BottomNav,
+  Button,
 }
