@@ -7,8 +7,8 @@ import './styles.css'
 class Demo extends Component {
   render() {
     return [
-      <h1>thicket-camera Demo</h1>,
-      <Camera onSave={() => alert('saving yr gif!')}/>
+      <h1 key="title">thicket-camera Demo</h1>,
+      <Camera key="camera" onSave={() => alert('saving yr gif!')}/>
     ]
   }
 }
