@@ -13,46 +13,47 @@ const Wrap = styled.div`
   color: #333;
 `
 const H2 = styled.h2`
-  font-size: 40px;
   text-shadow: 1px 1px 10px #FFF;
 `
 const Button = styled.button`
+  text-indent: -9999em;
+  height: 32px;
   color: rgba(0,0,0,0);
   cursor: pointer;
   background: rgba(255,255,255,0.6);
   border: 10px solid #333;
-  border-radius: 20px;
+  border-radius: 50%;
   box-shadow: 0 0 20px #FFF;
   position: relative;
+  /* half of the added paddigs */
+  margin-top: 14px;
+  
   &: after{
-    color: red;
     position: absolute;
-    top: -37px;
-    left: -37px;
-    border: 5px solid rgba(119,119,119,.5);
-    padding: 40px;
-    border-radius: 60px;
+    top: -300%;
+    left: -300%;
+    border: 6px solid rgba(119,119,119,.5);
+    padding: 36px;
+    border-radius: 50%;
     box-shadow: 0 0 20px #FFF;
-    display: block;
     content: ''
   }
+  
   &: before{
-    color: blue;
     position: absolute;
-    top: -24px;
-    left: -24px;
-    border: 7px solid rgba(119, 119, 119, .3);
-    padding: 25px;
-    border-radius: 50px;
+    top: -200%;
+    left: -200%;
+    border: 6px solid rgba(119, 119, 119, .3);
+    padding: 24px;
+    border-radius: 50%;
     box-shadow: 0 0 20px #FFF;
-    display: block;
     content: ''
   }
 `
 
 const Controls = props => <Wrap>
   <H2>Create a GIF</H2>
-  <Button onClick={props.onClick}>·</Button>
+  <Button onClick={props.onClick}>Shoot</Button>
 </Wrap>
 
 export default Controls
