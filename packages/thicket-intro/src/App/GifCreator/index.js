@@ -12,7 +12,7 @@ export default class GifCreator extends React.Component {
   state = (() => {
     const gifCreated = window.localStorage.getItem('gifCreated')
     return {
-      online: false,
+      online: true,
       creating: false,
       gif: window.localStorage.getItem('gif'),
       gifCreated: gifCreated && new Date(Number(gifCreated)),
