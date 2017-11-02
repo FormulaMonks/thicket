@@ -3,13 +3,22 @@ import styled from 'styled-components'
 import ProgressBar from './ProgressBar'
 import { GIF_DURATION } from '../settings'
 
+const Wrap = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: relative;
+`
 const Label = styled.div`
   text-transform: uppercase;
   position: absolute;
-  bottom: 65px;
+  bottom: 50px;
   width: 100%;
-  text-align: center;
+  height: 50px;
   color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 export default class Progress extends Component {

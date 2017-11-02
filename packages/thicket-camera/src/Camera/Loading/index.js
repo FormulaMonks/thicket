@@ -1,15 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
-const Wrap = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #777
-`
 const spin = keyframes`
   to {transform: rotate(360deg);}
 `
@@ -21,10 +12,10 @@ const Spinner = styled.div`
   border-right: 2px solid transparent;
   animation: ${spin} 1s linear infinite;
 `
-const Loading = () => <Wrap>
-  <Spinner />
-  <h2>Just a moment</h2>
-  <p>we’re putting your GIF together</p>
-</Wrap>
+const Loading = () => [
+  <Spinner key="spinner" />,
+  <h2 key="title">Just a moment</h2>,
+  <p key="message">we’re putting your GIF together</p>,
+]
 
 export default Loading

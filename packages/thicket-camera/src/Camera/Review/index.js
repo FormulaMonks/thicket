@@ -1,14 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Wrap = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-`
 const Preview = styled.img`
   flex: 1;
   width: 100%;
@@ -41,12 +33,12 @@ const Approve = Button.extend`
   margin-left: 5px;
 `
 
-const Review = props => <Wrap>
-  <Preview src={props.src} />
-  <Controls>
+const Review = props => [
+  <Preview key="preview" src={props.src} />,
+  <Controls key="controls">
     <Redo onClick={props.redo}>Redo</Redo>
     <Approve onClick={props.approve}>Approve</Approve>
-  </Controls>
-</Wrap>
+  </Controls>,
+]
 
 export default Review
