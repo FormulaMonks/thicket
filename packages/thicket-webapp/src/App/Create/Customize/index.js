@@ -13,7 +13,7 @@ class Customize extends Component {
     return <div className="customize">
       <h2 key="title">Save your GIF</h2>
       <div className="customize__preview" key="preview">
-        <img className="customize__img" src={this.props.gif} alt={this.state.caption} />
+        <img className="customize__img" src={this.props.src} alt={this.state.caption} />
         <div className="customize__inputs">
           <label className="customize__label">
             Use a different nickname? <span className="customize__span">(Optional)</span>

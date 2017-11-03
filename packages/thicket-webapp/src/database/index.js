@@ -5,6 +5,7 @@ import yMemory from 'y-memory'
 import yIndexeddb from 'y-indexeddb'
 import yArray from 'y-array'
 import yIpfsConnector from 'y-ipfs-connector'
+import EventEmitter from 'eventemitter3'
 
 const config = {
   repo: 'thicket',
@@ -29,8 +30,9 @@ const config = {
   },
 }
 
-class Database {
+class Database extends EventEmitter {
   constructor() {
+    super()
     this.ipfs = null
     this.communities = new Map()
     
@@ -57,34 +59,37 @@ class Database {
       db: { name: 'indexeddb' },
       connector: {
         name: 'ipfs',
-        room: community,
+        room: `thicket/${community}`,
         ipfs: this.ipfs
       },
       share: { publications: 'Array' }
     }).then(y => {
       this.communities.set(community, y)
-      // new events local and/or peers
-      //y.share.publications.observe(() => this.emit('update')
-      //this.emit('update')
+      y.share.publications.observe(() => this.emit('update'))
+      this.emit('update')
       return y
     })
   }
 
-  push = ({ src, label, caption, community }) =>
-    this.initIPFS().then(ipfs =>
+  push = ({ src, nickname, caption, community }) => {
+    return this.initIPFS().then(ipfs =>
       ipfs.files
         .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
         .then(res =>
-          this.initCommunity().then(y =>
-            y.share.publications.push({
+          this.initCommunity(community).then(y =>
+            y.share.publications.push([{
               id: res[0].hash,
               createdAt: Date.now(),
-            })
+              nickname,
+              caption,
+            }])
           )
         )
       )
+  }
 }
 
+Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
 const db = new Database()
 
 export default { push: db.push }
