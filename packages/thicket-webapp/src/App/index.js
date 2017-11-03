@@ -6,19 +6,20 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom'
-import './App.css'
+import localForage from 'localforage'
 import Profile from './Profile'
 import Welcome from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
+import './App.css'
 
 class App extends Component {
 
   state = { nickname: `Guest${Math.floor(1 + (Math.random() * 1000))}` }
 
   componentDidMount() {
-    // nickname from lf 
+    localForage.getItem('nickname').then(v => this.setState({ nickname: v || this.state.nickname }))
   }
 
   render() {
