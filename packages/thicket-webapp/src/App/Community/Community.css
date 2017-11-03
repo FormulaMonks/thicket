@@ -9,13 +9,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60px;
+  min-height: 100px;
 }
 
 .community__header{
   display: flex;
   width: 100%;
   align-items: center;
+  box-sizing: border-box;
+  padding: 10px 20px;
 }
 
 .community__controls{

@@ -8,15 +8,19 @@
 .app__home{
   position: absolute;
   z-index: 1;
-  top: 15px;
   left: 15px;
+  height: 100px;
+  display: flex;
+  align-items: center;
 }
 
 .app__profile{
   position: absolute;
   z-index: 1;
-  top: 15px;
+  height: 100px;
   right: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .app__citruslabs{

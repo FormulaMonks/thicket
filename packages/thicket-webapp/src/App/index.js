@@ -13,6 +13,7 @@ import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import './App.css'
+import user from './user.svg'
 
 class App extends Component {
 
@@ -26,7 +27,7 @@ class App extends Component {
     return <Router>
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
-        <Link className="app__profile" to="/profile">{this.state.nickname}</Link>
+        <Link className="app__profile" to="/profile">{this.state.nickname}<img src={user} alt={this.state.nickname}/></Link>
         <Switch>
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/welcome" render={props => <Welcome nickname={this.state.nickname} {...props} />} />
