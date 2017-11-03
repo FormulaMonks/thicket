@@ -8,6 +8,8 @@ import db from '../../database'
 import './Community.css'
 import add from './add.svg'
 import link from './link.svg'
+import settings from './settings.svg'
+import user from './user.svg'
 
 const FIRST_GIF = 'show the user info from their first gif'
 const ONBOARD = 'show the user how to get things done around here'
@@ -58,6 +60,14 @@ class Community extends Component {
     return [
       <div className="community" key="community">
         <div className="community__breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {title}</div>
+        <div className="community__header">
+          <h2 className="community__title">{this.state.title}</h2>
+          <div className="community__controls">
+            <img src={link} alt="Invite link" />
+            <img src={settings} alt="Settings" />
+            <img src={user} alt="User" />
+          </div>
+        </div>
         <div className="community__body">
           {!!data.length && <Grid data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />}
           {!data.length && <NoContent onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>}

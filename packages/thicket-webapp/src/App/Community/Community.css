@@ -9,7 +9,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  min-height: 60px;
+}
+
+.community__header{
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.community__controls{
+  display: flex;
+}
+
+.community__title{
+  flex: 1;
 }
 
 .community__body{
