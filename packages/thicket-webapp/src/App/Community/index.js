@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import localForage from 'localforage'
+import FirstGIF from './FirstGIF'
 import Create from '../Create'
+import db from '../../database'
 
-const ONBOARDING = 'show the user how to get things done around here'
-const CREATING = 'user is creating a gif'
-const INVITING = 'user is presented with a link to invite other to this community'
+const FIRST_GIF = 'show the user info from their first gif'
+const ONBOARD = 'show the user how to get things done around here'
+const CREATE = 'user is creating a gif'
+const INVITE = 'user is presented with a link to invite other to this community'
 
 const Grid = props => {
   return <ul>
@@ -24,18 +28,15 @@ const NoContent = props => <div>
 class Community extends Component {
 
   state = {
-    mode: (() => {
-      if (true) {
-        return ONBOARDING
-      }
-      return ''
-    })(),
+    mode: '',
     data: [],
     selectedGIF: null,
   }
 
   componentDidMount() {
-    // fetch data for this community
+    this.setMode()
+    db.publications.get(this.props.match.params.c)
+      .then(data => this.setState({ data }))
   }
 
   render() {
@@ -43,13 +44,20 @@ class Community extends Component {
     const { c } = this.props.match.params
     return [
       <div key="breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {c}</div>,
-      !!data.length && <Grid key="grid" data={data} onNew={() => this.setState({ mode: CREATING })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
-      !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATING })} onInvite={() => this.setState({ mode: INVITING })}/>,
+      !!data.length && <Grid key="grid" data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
+      !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
-      mode === ONBOARDING && <div key="onboarding" onClick={() => this.setState({ mode: '' })}>Close community onboarding</div>,
-      mode === CREATING && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
-      mode === INVITING && <div key="invite" onClick={() => this.setState({ mode: '' })}>Close invite</div>,
+      mode === CREATE && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
+      mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: '' })}>Close invite</div>,
+      mode === ONBOARD && <div key="onboard" onClick={() => this.setState({ mode: '' })}>Close community onboarding</div>,
+      mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} />,
     ]
+  }
+
+  setMode() {
+    localForage.getItem('hasDoneFirstGIF').then(f =>
+      localForage.getItem('communityOnboarding').then(o =>
+        this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : '' })))
   }
 }
 

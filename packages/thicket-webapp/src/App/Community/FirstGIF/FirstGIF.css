@@ -1,0 +1,35 @@
+.firstgif{
+  position: absolute;
+  height: 100%;
+  widht: 100%;
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstgif__wrap{
+  height: 70%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.firstgif__close{
+  margin-left: auto;
+}
+
+.firstgif__modal{
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: #FFF;
+}
+
+.firstgif__header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #CCC;
+}
+

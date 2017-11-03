@@ -4,6 +4,7 @@ import Y from 'yjs'
 import yMemory from 'y-memory'
 import yIndexeddb from 'y-indexeddb'
 import yArray from 'y-array'
+import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
 
@@ -35,61 +36,91 @@ class Database extends EventEmitter {
     super()
     this.ipfs = null
     this.communities = new Map()
-    
     this.initIPFS()
   }
 
   initIPFS() {
-    if (this.ipfs) {
-      return Promise.resolve(this.ipfs)
+    if (!this.ipfs) {
+      this.ipfs = new Promise((resolve, reject) => {
+        const node = new IPFS(config)
+        node.once('ready', () => resolve(node))
+      })
     }
-
-    return new Promise((resolve, reject) => {
-      this.ipfs = new IPFS(config)
-      this.ipfs.once('ready', () => resolve(this.ipfs))
-    })
+    return this.ipfs
   }
 
   initCommunity(community) {
-    if (this.communities.has(community)) {
-      return this.communities.get(community)
+    if (!this.communities.has(community)) {
+      this.communities.set(community, this.initIPFS().then(node =>
+        Y({
+          db: { name: 'indexeddb' },
+          connector: {
+            name: 'ipfs',
+            room: `thicket/${community}`,
+            ipfs: node,
+          },
+          share: {
+            publications: 'Array',
+            metadata: 'Map'
+          }
+        }).then(y => {
+          this.communities.set(community, y)
+          y.share.metadata.observe(() => this.emit('update'))
+          y.share.publications.observe(() => this.emit('update'))
+          return y
+        })
+      ))
     }
-    
-    return Y({
-      db: { name: 'indexeddb' },
-      connector: {
-        name: 'ipfs',
-        room: `thicket/${community}`,
-        ipfs: this.ipfs
-      },
-      share: { publications: 'Array' }
-    }).then(y => {
-      this.communities.set(community, y)
-      y.share.publications.observe(() => this.emit('update'))
-      this.emit('update')
-      return y
-    })
+    return this.communities.get(community)
   }
 
-  push = ({ src, nickname, caption, community }) => {
-    return this.initIPFS().then(ipfs =>
-      ipfs.files
+  publicationsPost = (community, { src, ...data }) =>
+    this.initIPFS().then(node =>
+      node.files
         .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
         .then(res =>
           this.initCommunity(community).then(y =>
             y.share.publications.push([{
+              ...data,
               id: res[0].hash,
               createdAt: Date.now(),
-              nickname,
-              caption,
             }])
           )
         )
       )
+
+  publicationsGet = community =>
+    this.initCommunity(community).then(y => y.share.publications.toArray())
+
+  metadataPost = (community, data) =>
+    this.initCommunity(community).then(y => y.share.metadata.set(community, data))
+
+  metadataGet = community =>
+    this.initCommunity(community).then(y => y.share.metadata.get(community))
+}
+
+Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
+
+class DBInterface extends EventEmitter {
+  constructor() {
+    super()
+    this.db = new Database()
+    this.db.on('update', () => this.emit('update'))
+  }
+
+  get publications() {
+    return {
+      post: this.db.publicationsPost,
+      get: this.db.publicationsGet,
+    }
+  }
+
+  get metadata() {
+    return {
+      post: this.db.metadataPost,
+      get: this.db.metadataGet,
+    }
   }
 }
 
-Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
-const db = new Database()
-
-export default { push: db.push }
+export default new DBInterface()

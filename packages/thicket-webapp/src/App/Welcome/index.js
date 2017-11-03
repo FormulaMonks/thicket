@@ -15,6 +15,7 @@ const TOS = 'the user must abide by our rules'
 const CAMERA_ACCESS = 'we need to be able to access the camera'
 const CREATE = 'user is shooting first gif'
 const NEW_COMMUNITY = 'Amazing GIFs'
+const NEW_COMMUNITY_ID = `amazing-gifs-${Date.now()}-${Math.random()}`
 
 const Arrived = props => {
   return <div className="welcome__arrived">
@@ -46,9 +47,10 @@ class Welcome extends Component{
     localForage.setItem('onboarding', mode).then(() => this.setState({ mode }))
   }
 
-  onSave = obj => {
-    db.push({ ...obj, community: NEW_COMMUNITY })
-      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY}`))
+  onSave = data => {
+    db.publications.post(NEW_COMMUNITY_ID, data)
+      .then(() => db.metadata.post(NEW_COMMUNITY_ID, { title: NEW_COMMUNITY }))
+      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
   }
 }
 
