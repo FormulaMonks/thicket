@@ -1,0 +1,57 @@
+.customize{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.customize__preview{
+  flex: 1;
+  display: flex;
+}
+
+.customize__img{
+  width: 50%;
+  object-fit: cover;
+}
+
+.customize__inputs{
+  width: 50%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.customize__label{
+  margin: 10px 0;
+  max-width: 100%;
+  font-weight: bold;
+  width: 100%;
+}
+
+.customize__span{
+  font-weight: normal;
+}
+
+.customize__input{
+  box-sizing: border-box;
+  margin: 10px 0;
+  padding: 15px;
+  width: 100%;
+}
+
+.customize__controls{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.customize__cancel{
+  width: 150px;
+}
+
+.customize__submit{
+  width: 250px;
+}

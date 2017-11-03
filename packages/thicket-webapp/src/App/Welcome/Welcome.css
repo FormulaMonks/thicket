@@ -1,0 +1,22 @@
+.welcome{
+  height: 100%;
+  widht: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome__arrived{
+  text-align: center;
+}
+
+.welcome__start--disabled{
+  border: 1px solid #CCC;
+  color: #CCC;
+}
+
+.welcome__start--disabled:hover{
+  background: none;
+  color: #CCC;
+}

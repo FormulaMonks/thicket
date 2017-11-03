@@ -1,0 +1,27 @@
+.tos{
+  text-align: right;
+}
+
+.tos__header{
+  text-align: center;
+}
+
+.tos__terms{
+  text-align: justify;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.tos__check{
+  display: block;
+  text-align: center;
+}
+
+.tos__accept--disabled{
+  border: 1px solid #CCC;
+  color: #CCC;
+}
+.tos__accept--disabled:hover{
+  background: none;
+  color: #CCC;
+}

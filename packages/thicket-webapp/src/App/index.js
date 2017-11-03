@@ -7,18 +7,19 @@ import {
   Redirect,
 } from 'react-router-dom'
 import './App.css'
-
 import Profile from './Profile'
 import Welcome from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 
-const PROFILE = 'show user profile'
-const TOS = 'show tos'
-const FAQ = 'show faq'
-
 class App extends Component {
+
+  state = { nickname: `Guest${Math.floor(1 + (Math.random() * 1000))}` }
+
+  componentDidMount() {
+    // nickname from lf 
+  }
 
   render() {
     return <Router>
@@ -27,7 +28,7 @@ class App extends Component {
         <Link className="app__profile" to="/profile">Username</Link> 
         <Switch>
           <Route exact path="/profile" component={Profile} />
-          <Route exact path="/welcome" component={Welcome} />
+          <Route exact path="/welcome" render={() => <Welcome nickname={this.state.nickname}/>} />
           <Route exact path="/communities" component={Communities} />
           <Route exact path="/c/:c" render={props => <Community {...props} />} />
           <Route exact path="/gif/:g" render={props => <Gif {...props}/>} />
