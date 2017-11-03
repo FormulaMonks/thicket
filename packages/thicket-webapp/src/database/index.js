@@ -53,7 +53,9 @@ class Database extends EventEmitter {
     if (!this.communities.has(community)) {
       this.communities.set(community, this.initIPFS().then(node =>
         Y({
-          db: { name: 'indexeddb' },
+          db: {
+            name: 'indexeddb'
+          },
           connector: {
             name: 'ipfs',
             room: `thicket/${community}`,
@@ -64,7 +66,6 @@ class Database extends EventEmitter {
             metadata: 'Map'
           }
         }).then(y => {
-          this.communities.set(community, y)
           y.share.metadata.observe(() => this.emit('update'))
           y.share.publications.observe(() => this.emit('update'))
           return y

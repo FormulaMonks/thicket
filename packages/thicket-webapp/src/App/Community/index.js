@@ -31,30 +31,48 @@ class Community extends Component {
     mode: '',
     data: [],
     selectedGIF: null,
+    title: '',
   }
 
   componentDidMount() {
+    this.fetchPublications()
+    this.fetchMetadata()
+    db.on('update', this.fetchPublications)
+    db.on('update', this.fetchMetadata)
     this.setMode()
-    db.publications.get(this.props.match.params.c)
-      .then(data => this.setState({ data }))
+  }
+
+  componentWillUnmount() {
+    db.off('update', this.fetchPublications)
+    db.off('update', this.fetchMetadata)
   }
 
   render() {
-    const { data, selectedGIF, mode } = this.state
+    const { data, selectedGIF, mode, title } = this.state
     const { c } = this.props.match.params
     return [
-      <div key="breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {c}</div>,
+      <div key="breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {title}</div>,
       !!data.length && <Grid key="grid" data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
       !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
       mode === CREATE && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
       mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: '' })}>Close invite</div>,
       mode === ONBOARD && <div key="onboard" onClick={() => this.setState({ mode: '' })}>Close community onboarding</div>,
-      mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} />,
+      mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,
     ]
   }
 
-  setMode() {
+  fetchPublications = c => {
+    db.publications.get(this.props.match.params.c)
+      .then(data => this.setState({ data }))
+  }
+
+  fetchMetadata = c => {
+    db.metadata.get(this.props.match.params.c)
+      .then(({ title }) => this.setState({ title }))
+  }
+
+  setMode = () => {
     localForage.getItem('hasDoneFirstGIF').then(f =>
       localForage.getItem('communityOnboarding').then(o =>
         this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : '' })))

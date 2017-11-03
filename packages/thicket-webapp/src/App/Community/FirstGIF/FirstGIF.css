@@ -1,7 +1,7 @@
 .firstgif{
   position: absolute;
   height: 100%;
-  widht: 100%;
+  width: 100%;
   background: rgba(0,0,0,0.3);
   display: flex;
   align-items: center;
@@ -9,7 +9,7 @@
 }
 
 .firstgif__wrap{
-  height: 70%;
+  height: 80%;
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -24,6 +24,8 @@
   height: 100%;
   border-radius: 3px;
   background: #FFF;
+  display: flex;
+  flex-direction: column;
 }
 
 .firstgif__header{
@@ -33,3 +35,32 @@
   border-bottom: 1px solid #CCC;
 }
 
+.firstgif__main{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.firstgif__message{
+  text-align: center;
+}
+
+.firstgif__body{
+  flex: 1;
+  padding: 20px 40px;
+}
+
+.firstgif__label{
+  display: block;
+  font-weight: bold;
+  padding: 20px 0;
+}
+
+.firstgif__footer{
+  background: #EEE;
+  padding: 15px;
+}
