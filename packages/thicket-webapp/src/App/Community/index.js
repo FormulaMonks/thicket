@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'thicket-elements'
 import localForage from 'localforage'
 import FirstGIF from './FirstGIF'
 import Create from '../Create'
 import db from '../../database'
+import './Community.css'
+import add from './add.svg'
+import link from './link.svg'
 
 const FIRST_GIF = 'show the user info from their first gif'
 const ONBOARD = 'show the user how to get things done around here'
@@ -19,10 +23,11 @@ const Grid = props => {
   </ul>
 }
 
-const NoContent = props => <div>
-  <div>Your community doesn't have content</div>
-  <div onClick={props.onNew}>Create new GIF</div>
-  <div onClick={props.onInvite}>Invite Link</div>
+const NoContent = props => <div className="nocontent">
+  <h2 key="title">Your Community doesn’t have content yet!</h2>
+  <p key="message">Create new GIFs or invite someone to the Community to create and contribute their own GIFs.</p>
+  <Button key="new" onClick={props.onNew}><img src={add} alt="Create NEW GIF" />Create new GIF</Button>
+  <Button key="invite" onClick={props.onInvite}><img src={link} alt="Invite Link" />Invite Link</Button>
 </div>
 
 class Community extends Component {
@@ -35,11 +40,11 @@ class Community extends Component {
   }
 
   componentDidMount() {
-    this.fetchPublications()
+    //this.fetchPublications()
     this.fetchMetadata()
     db.on('update', this.fetchPublications)
     db.on('update', this.fetchMetadata)
-    this.setMode()
+    //this.setMode()
   }
 
   componentWillUnmount() {
@@ -51,9 +56,13 @@ class Community extends Component {
     const { data, selectedGIF, mode, title } = this.state
     const { c } = this.props.match.params
     return [
-      <div key="breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {title}</div>,
-      !!data.length && <Grid key="grid" data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
-      !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>,
+      <div className="community" key="community">
+        <div className="community__breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {title}</div>
+        <div className="community__body">
+          {!!data.length && <Grid data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />}
+          {!data.length && <NoContent onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>}
+        </div>
+      </div>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
       mode === CREATE && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
       mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: '' })}>Close invite</div>,
