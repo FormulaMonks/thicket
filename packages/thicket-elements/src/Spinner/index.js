@@ -1,10 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
-import Spinner from 'react-spinkit'
+import styled, { keyframes } from 'styled-components'
 
-const StyledSpinner = styled(Spinner)`
-  color: #26A65B;
+const spin = keyframes`
+  to {transform: rotate(360deg);}
+`
+const Spinner = styled.div`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-top: 3px solid #000;
+  border-right: 2px solid transparent;
+  animation: ${spin} 1s linear infinite;
 `
 
-export default () =>
-  <StyledSpinner name="ball-pulse-sync" fadeIn="none" />
+export default Spinner
