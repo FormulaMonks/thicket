@@ -84,8 +84,8 @@ class Database extends EventEmitter {
   publicationsGet = community =>
     this.initCommunity(community)
 			.then(y => y.share.publications.toArray())
-			.then(data => data.sort((a, b) => b.createdAt - a.createtAt))
 			.then(this.publicationsMap)
+			.then(data => data.sort((a, b) => b.createdAt - a.createdAt))
 
   publicationsPost = (community, { src, ...data }) =>
     this.initIPFS().then(node =>
