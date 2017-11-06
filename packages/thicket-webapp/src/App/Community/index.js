@@ -43,7 +43,7 @@ class Community extends Component {
   }
 
   componentDidMount() {
-    //this.fetchPublications()
+    this.fetchPublications()
     this.fetchMetadata()
     db.on('update', this.fetchPublications)
     db.on('update', this.fetchMetadata)
@@ -58,6 +58,7 @@ class Community extends Component {
   render() {
     const { data, selectedGIF, mode, title } = this.state
     const { c } = this.props.match.params
+
     return [
       <div className="community" key="community">
         <div className="community__breadcrumbs"><Link to="/communities">Your communities</Link> ≫ {title}</div>
@@ -75,7 +76,13 @@ class Community extends Component {
         </div>
       </div>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
-      mode === CREATE && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
+      mode === CREATE &&
+				<div key="create" className="community__wrap_create">
+					<Create key="create" community={c} nickname={this.props.nickname} onSave={data => {
+							db.publications.post(c, data)
+								.then(() => this.setState({ mode: null }))
+						}} />
+				</div>,
       mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: null })}>Close invite</div>,
       mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
       mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,

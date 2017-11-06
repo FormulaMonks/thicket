@@ -42,3 +42,11 @@
   box-sizing: border-box;
   padding: 0 50px;
 }
+
+.community__wrap_create{
+	background: #FFF;
+  height: 100%;
+  width: 100%;
+	position: absolute;
+	z-index: 2;
+}
