@@ -117,7 +117,15 @@ class Database extends EventEmitter {
   }
 
   metadataGet = community =>
-    this.initCommunity(community).then(y => y.share.metadata.get(community))
+    this.initCommunity(community)
+			.then(y => y.share.metadata.get(community))
+			.then(data => { return { id: community, ...data }})
+			.then(this.metadataMap)
+
+	metadataMap = (data = {}) => {
+		const { id, title = id, ...rest } = data
+		return { id, title, ...rest }
+	}
 
   metadataPost = (community, data) =>
     this.initCommunity(community).then(y => y.share.metadata.set(community, data))
