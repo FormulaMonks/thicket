@@ -53,7 +53,7 @@ export default class Camera extends Component {
     const { classNames = {} } = this.props
     const { cameraWrap = null, videoWrap = null, ...classes = {} } = classNames
     return <Wrap className={cameraWrap}>
-      {(mode === STANDBY || mode === SHOOTING) && 
+      {(mode === STANDBY || mode === SHOOTING) &&
         <Vid key="video" className={videoWrap}>
           <video ref={v => this.video = v} autoPlay style={videoStyles} />
         </Vid>
@@ -69,7 +69,7 @@ export default class Camera extends Component {
     this.startVideo()
     this.setState({ mode: STANDBY })
   }
-  
+
   capture = () => {
     setTimeout(() => {
       this.stopVideo()
