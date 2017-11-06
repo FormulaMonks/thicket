@@ -50,7 +50,7 @@ class Community extends Component {
   }
 
   render() {
-    const { data, selectedGIF, mode, title, loading } = this.state
+    const { data, mode, title, loading } = this.state
     const { c } = this.props.match.params
 
     return [
@@ -66,12 +66,12 @@ class Community extends Component {
         </div>
         <div className="community__body">
 					{loading ? <Spinner /> : [
-						!!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
+						!!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} />,
 						!data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
 					]}
         </div>
       </div>,
-			<Route exact path="/c/:c/:id" render={() => <Publication />} />,
+			<Route key="publication" exact path="/c/:c/:id" render={() => <Publication />} />,
       mode === CREATE &&
 				<div key="create" className="community__wrap_create">
 					<Create key="create" community={c} nickname={this.props.nickname} onSave={data => {
