@@ -7,6 +7,9 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
+import pull from 'pull-stream'
+import concat from 'concat-stream'
+import pullPromise from 'pull-promise'
 
 const config = {
   repo: 'thicket',
@@ -30,6 +33,9 @@ const config = {
     ],
   },
 }
+
+const toBase64 = src =>
+	`data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
 class Database extends EventEmitter {
   constructor() {
@@ -75,6 +81,12 @@ class Database extends EventEmitter {
     return this.communities.get(community)
   }
 
+  publicationsGet = community =>
+    this.initCommunity(community)
+			.then(y => y.share.publications.toArray())
+			.then(data => data.sort((a, b) => b.createdAt - a.createtAt))
+			.then(this.publicationsMap)
+
   publicationsPost = (community, { src, ...data }) =>
     this.initIPFS().then(node =>
       node.files
@@ -90,14 +102,25 @@ class Database extends EventEmitter {
         )
       )
 
-  publicationsGet = community =>
-    this.initCommunity(community).then(y => y.share.publications.toArray())
-
-  metadataPost = (community, data) =>
-    this.initCommunity(community).then(y => y.share.metadata.set(community, data))
+	publicationsMap = data => {
+    return new Promise((resolve, reject) => {
+			this.initIPFS().then(node => {
+				pull(
+					pull.values(data),
+					pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
+					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
+					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
+					pull.collect((err, res) => resolve(res)),
+				)
+			})
+    })
+  }
 
   metadataGet = community =>
     this.initCommunity(community).then(y => y.share.metadata.get(community))
+
+  metadataPost = (community, data) =>
+    this.initCommunity(community).then(y => y.share.metadata.set(community, data))
 }
 
 Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'thicket-elements'
 import localForage from 'localforage'
+import { Spinner } from 'thicket-elements'
 import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
 import Create from '../Create'
@@ -28,7 +29,8 @@ const NoContent = props => <div className="nocontent">
 class Community extends Component {
 
   state = {
-    mode: '',
+    mode: null,
+    loading: true,
     data: [],
     selectedGIF: null,
     title: '',
@@ -48,7 +50,7 @@ class Community extends Component {
   }
 
   render() {
-    const { data, selectedGIF, mode, title } = this.state
+    const { data, selectedGIF, mode, title, loading } = this.state
     const { c } = this.props.match.params
 
     return [
@@ -63,8 +65,10 @@ class Community extends Component {
           </div>
         </div>
         <div className="community__body">
-          {!!data.length && <Grid path={this.props.location.pathname} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />}
-          {!data.length && <NoContent onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>}
+					{loading ? <Spinner /> : [
+						!!data.length && <Grid key="grid" path={this.props.location.pathname} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
+						!data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
+					]}
         </div>
       </div>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
@@ -83,7 +87,7 @@ class Community extends Component {
 
   fetchPublications = c => {
     db.publications.get(this.props.match.params.c)
-      .then(data => this.setState({ data }))
+      .then(data => this.setState({ data, loading: false }))
   }
 
   fetchMetadata = c => {
@@ -94,7 +98,7 @@ class Community extends Component {
   setMode = () => {
     localForage.getItem('hasDoneFirstGIF').then(f =>
       localForage.getItem('hasDoneCommunityOnboarding').then(o =>
-        this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : '' })))
+        this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : this.state.mode })))
   }
 }
 

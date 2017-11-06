@@ -15,7 +15,7 @@ const Grid = props => {
     {props.data.map((item, index) =>
       <li key={item.id} className="communityGrid__element">
 				<Link to={`${props.path}/${item.id}`} className="communityGrid__link">
-					<img src={item.src || `https://ipfs.io/ipfs/${item.id}`} alt={item.caption} className="communityGrid__img" />
+					<img src={item.src} alt={item.caption} className="communityGrid__img" />
 				</Link>
 			</li>
     )}
