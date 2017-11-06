@@ -19,9 +19,9 @@ const Button = styled.button`
   border: 10px solid rgba(0, 0, 0, 0.8);
   border-radius: 50%;
   position: relative;
-  /* half of the added paddigs */
+  /* half of the added paddings */
   margin-top: 14px;
-  
+
   &: after{
     position: absolute;
     top: -300%;
@@ -31,7 +31,7 @@ const Button = styled.button`
     border-radius: 50%;
     content: ''
   }
-  
+
   &: before{
     position: absolute;
     top: -200%;
@@ -44,7 +44,7 @@ const Button = styled.button`
 `
 
 const Controls = props => {
-  const { controlsWrap, controlsTitle, controlsButton } = props.classNames 
+  const { controlsWrap, controlsTitle, controlsButton } = props.classNames
   return <Wrap className={controlsWrap}>
     <h2 className={controlsTitle}>Create a GIF</h2>
     <Button className={controlsButton} onClick={props.onClick}>Shoot</Button>
