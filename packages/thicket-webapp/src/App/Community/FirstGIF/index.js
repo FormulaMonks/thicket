@@ -5,9 +5,8 @@ import localForage from 'localforage'
 import db from '../../../database'
 import './FirstGIF.css'
 
-const close = cb => {
+const close = cb =>
   localForage.setItem('hasDoneFirstGIF', true).then(cb)
-}
 
 class Title extends Component {
   constructor(props) {
@@ -26,13 +25,14 @@ class Title extends Component {
     ]
   }
 
-  update = () => {
+  update = () =>
     db.metadata.post(this.props.community, { title: this.state.title })
-  }
+
 }
 
 const FirstGIF = props => {
   const { title } = props
+
   return <div className="firstgif">
     <div className="firstgif__wrap">
       <div className="firstgif__close">

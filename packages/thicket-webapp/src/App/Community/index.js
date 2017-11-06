@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from 'thicket-elements'
 import localForage from 'localforage'
 import FirstGIF from './FirstGIF'
+import Onboarding from './Onboarding'
 import Create from '../Create'
 import db from '../../database'
 import './Community.css'
@@ -46,7 +47,7 @@ class Community extends Component {
     this.fetchMetadata()
     db.on('update', this.fetchPublications)
     db.on('update', this.fetchMetadata)
-    //this.setMode()
+    this.setMode()
   }
 
   componentWillUnmount() {
@@ -75,8 +76,8 @@ class Community extends Component {
       </div>,
       selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
       mode === CREATE && <Create key="create" community={c} onSave={() => this.setState({ mode: '', data: data.concat(data.length + 1) })} />,
-      mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: '' })}>Close invite</div>,
-      mode === ONBOARD && <div key="onboard" onClick={() => this.setState({ mode: '' })}>Close community onboarding</div>,
+      mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: null })}>Close invite</div>,
+      mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
       mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,
     ]
   }
@@ -93,7 +94,7 @@ class Community extends Component {
 
   setMode = () => {
     localForage.getItem('hasDoneFirstGIF').then(f =>
-      localForage.getItem('communityOnboarding').then(o =>
+      localForage.getItem('hasDoneCommunityOnboarding').then(o =>
         this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : '' })))
   }
 }
