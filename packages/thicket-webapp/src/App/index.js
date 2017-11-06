@@ -34,7 +34,7 @@ class App extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
           <Route exact path="/communities" component={Communities} />
-          <Route exact path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
+          <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
           <Route exact path="/gif/:g" render={props => <Gif {...props} />} />
           <Route exact path="/" render={() => this.newUser() ? <Redirect to="/welcome" /> : <Redirect to="/communities" />} />
         </Switch>

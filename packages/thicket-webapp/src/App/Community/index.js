@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import { Button } from 'thicket-elements'
 import localForage from 'localforage'
 import { Spinner } from 'thicket-elements'
@@ -7,6 +7,7 @@ import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
 import Create from '../Create'
 import Grid from './Grid'
+import Publication from '../../components/Publication'
 import db from '../../database'
 import './Community.css'
 import add from './add.svg'
@@ -32,7 +33,6 @@ class Community extends Component {
     mode: null,
     loading: true,
     data: [],
-    selectedGIF: null,
     title: '',
   }
 
@@ -66,12 +66,12 @@ class Community extends Component {
         </div>
         <div className="community__body">
 					{loading ? <Spinner /> : [
-						!!data.length && <Grid key="grid" path={this.props.location.pathname} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
+						!!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />,
 						!data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
 					]}
         </div>
       </div>,
-      selectedGIF && <div key="gif" onClick={() => this.setState({ selectedGIF: null })}>Close GIF</div>,
+			<Route exact path="/c/:c/:id" render={() => <Publication />} />,
       mode === CREATE &&
 				<div key="create" className="community__wrap_create">
 					<Create key="create" community={c} nickname={this.props.nickname} onSave={data => {

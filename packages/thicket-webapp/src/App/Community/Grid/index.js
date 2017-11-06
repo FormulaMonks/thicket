@@ -14,7 +14,7 @@ const Grid = props => {
 		</li>
     {props.data.map((item, index) =>
       <li key={item.id} className="communityGrid__element">
-				<Link to={`${props.path}/${item.id}`} className="communityGrid__link">
+				<Link to={`/c/${props.community}/${item.id}`} className="communityGrid__link">
 					<img src={item.src} alt={item.caption} className="communityGrid__img" />
 				</Link>
 			</li>
