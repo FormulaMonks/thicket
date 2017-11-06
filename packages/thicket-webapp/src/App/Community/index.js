@@ -5,6 +5,7 @@ import localForage from 'localforage'
 import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
 import Create from '../Create'
+import Grid from './Grid'
 import db from '../../database'
 import './Community.css'
 import add from './add.svg'
@@ -16,15 +17,6 @@ const FIRST_GIF = 'show the user info from their first gif'
 const ONBOARD = 'show the user how to get things done around here'
 const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
-
-const Grid = props => {
-  return <ul>
-    <li key="new" onClick={props.onNew}>New Gif</li>
-    {props.data.map((item, index) =>
-      <li onClick={() => props.onSelect(item)} key={index}>Gif #{index+1} </li>
-    )}
-  </ul>
-}
 
 const NoContent = props => <div className="nocontent">
   <h2 key="title">Your Community doesn’t have content yet!</h2>
@@ -71,7 +63,7 @@ class Community extends Component {
           </div>
         </div>
         <div className="community__body">
-          {!!data.length && <Grid data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />}
+          {!!data.length && <Grid path={this.props.location.pathname} data={data} onNew={() => this.setState({ mode: CREATE })} onSelect={selectedGIF => this.setState({ selectedGIF })} />}
           {!data.length && <NoContent onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>}
         </div>
       </div>,
