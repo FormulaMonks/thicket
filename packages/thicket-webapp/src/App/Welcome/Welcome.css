@@ -20,3 +20,11 @@
   background: none;
   color: #CCC;
 }
+
+.welcome__create{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	position: absolute;
+	z-index: 2;
+}

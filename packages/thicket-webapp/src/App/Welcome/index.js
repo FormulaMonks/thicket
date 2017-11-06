@@ -39,7 +39,7 @@ class Welcome extends Component{
       {mode === ONBOARD && <Onboarding onContinue={() => this.continue(TOS)} />}
       {mode === TOS && <Tos onContinue={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
-      {mode === CREATE && <Create nickname={this.props.nickname} onSave={this.onSave} />}
+      {mode === CREATE && <div className="welcome__create"><Create nickname={this.props.nickname} onSave={this.onSave} /></div>}
     </div>
   }
 

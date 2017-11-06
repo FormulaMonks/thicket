@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Publication.css'
 
 const LOADING = 'fetching gif data'
 
@@ -11,7 +12,7 @@ class Publication extends Component {
 	}
 
 	render() {
-		return null
+		return <div className="publication"></div>
 	}
 }
 
