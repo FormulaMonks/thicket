@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
+import Tos from './Tos'
 import db from '../../database'
 import localForage from 'localforage'
-import Create from '../Create'
+import Create from '../../components/Create'
 import Onboarding from '../../components/Onboarding'
-import Tos from './Tos'
 import CameraAccess from '../../components/CameraAccess'
 import './Welcome.css'
 

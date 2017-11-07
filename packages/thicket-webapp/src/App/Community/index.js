@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Button } from 'thicket-elements'
+import { Button, Spinner } from 'thicket-elements'
 import localForage from 'localforage'
-import { Spinner } from 'thicket-elements'
+import Grid from './Grid'
 import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
-import Create from '../Create'
-import Grid from './Grid'
+import Create from '../../components/Create'
 import Publication from '../../components/Publication'
 import db from '../../database'
 import './Community.css'
@@ -71,7 +70,7 @@ class Community extends Component {
 					]}
         </div>
       </div>,
-			<Route key="publication" exact path="/c/:c/:id" render={() => <Publication />} />,
+			<Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
       mode === CREATE &&
 				<div key="create" className="community__wrap_create">
 					<Create key="create" community={c} nickname={this.props.nickname} onSave={data => {

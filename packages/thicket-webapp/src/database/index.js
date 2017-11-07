@@ -87,6 +87,33 @@ class Database extends EventEmitter {
 			.then(this.publicationsMap)
 			.then(data => data.sort((a, b) => b.createdAt - a.createdAt))
 
+	publicationsMap = data => {
+    return new Promise((resolve, reject) => {
+			this.initIPFS().then(node => {
+				pull(
+					pull.values(data),
+					pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
+					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
+					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
+					pull.collect((err, res) => resolve(res)),
+				)
+			})
+    })
+  }
+
+	publicationsGetById = id => {
+    return new Promise((resolve, reject) => {
+			this.initIPFS().then(node => {
+				pull(
+					pullPromise.through(p => node.files.cat(id).then(stream => { return { ...p, stream }})),
+					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
+					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
+					pull.collect((err, res) => resolve(res)),
+				)
+			})
+    })
+	}
+
   publicationsPost = (community, { src, ...data }) =>
     this.initIPFS().then(node =>
       node.files
@@ -101,20 +128,6 @@ class Database extends EventEmitter {
           )
         )
       )
-
-	publicationsMap = data => {
-    return new Promise((resolve, reject) => {
-			this.initIPFS().then(node => {
-				pull(
-					pull.values(data),
-					pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
-					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
-					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
-					pull.collect((err, res) => resolve(res)),
-				)
-			})
-    })
-  }
 
   metadataGet = community =>
     this.initCommunity(community)
@@ -144,6 +157,7 @@ class DBInterface extends EventEmitter {
     return {
       post: this.db.publicationsPost,
       get: this.db.publicationsGet,
+			getById: this.db.publicationsGetById,
     }
   }
 
