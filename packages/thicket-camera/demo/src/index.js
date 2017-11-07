@@ -12,22 +12,22 @@ class Demo extends Component {
         key="camera"
         onSave={() => alert('saving yr gif!')}
         classNames={{
-          cameraWrap: 'cameraWrap',
-          videoWrap: 'videoWrap',
-          controlsWrap: 'controlsWrap',
-          controlsTitle: 'controlsTitle',
-          controlsButton: 'controlsButton',
-          progressLabel: 'progressLabel',
-          progressBarWrap: 'progressBarWrap',
-          progressBarBar: 'progressBarBar',
-          loadingSpinner: 'loadingSpinner',
-          loadingTitle: 'loadingTitle',
-          loadingMessage: 'loadingMessage',
-          reviewPreview: 'reviewPreview',
-          reviewControlsWrap: 'reviewControlsWrap',
-          reviewButton: 'reviewButton',
-          reviewRedo: 'reviewRedo',
-          reviewApprove: 'reviewApprove',
+          cameraWrap: '',
+          videoWrap: '',
+          controlsWrap: '',
+          controlsTitle: '',
+          controlsButton: '',
+          progressLabel: '',
+          progressBarWrap: '',
+          progressBarBar: '',
+          loadingSpinner: '',
+          loadingTitle: '',
+          loadingMessage: '',
+          reviewPreview: '',
+          reviewControlsWrap: '',
+          reviewButton: '',
+          reviewRedo: '',
+          reviewApprove: '',
         }} 
       />
     ]
