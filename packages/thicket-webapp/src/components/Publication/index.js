@@ -9,8 +9,9 @@ import share from './share.svg'
 import facebook from './facebook.svg'
 import twitter from './twitter.svg'
 
+const GIF = 'show GIF'
 const DOWNLOAD = 'show options for downloading'
-const LINKS = 'show options for link sharing'
+const SHARE = 'show options for link sharing'
 const DELETE = 'show confirm box for gif deletion'
 
 const Header = () =>
@@ -23,18 +24,39 @@ const Footer = props => <footer className="publication__footer">
 
 class Main extends Component {
 
-  state = { mode: null }
+  state = { mode: GIF }
 
   render() {
     if (!this.props.gif) {
       return <div className="publication__main"><Spinner /></div>
     }
 
+		const { mode } = this.state
     const { gif, onChange } = this.props
-    const { src, nickname, caption } = gif
+    const { src, nickname, caption, id } = gif
 
     return <div className="publication__main">
-      <img src={src} alt={caption} />
+      {mode === GIF && <img src={src} alt={caption} />}
+      {mode === DOWNLOAD && <div>
+        <div>
+          <div>Download</div>
+          <div><Button onClick={() => this.setState({ mode: GIF })}>x</Button></div>
+        </div>
+        <div>
+          <input type="text" value={`https://ipfs.io/ipfs/${id}`} />
+          <Button>Download</Button>
+        </div>
+      </div>}
+      {mode === SHARE && <div>
+        <div>
+          <div>Share</div>
+          <div><Button onClick={() => this.setState({ mode: GIF })}>x</Button></div>
+        </div>
+        <div>IPFS</div>
+         <input type="text" value={`https://ipfs.io/ipfs/${id}`} readOnly />
+        <div>This link</div>
+         <input type="text" value={`${window.location.href}`} readOnly />
+      </div>}
       <div>
         <div>Created by:</div>
         <Editable value={nickname} onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })} />
@@ -42,8 +64,8 @@ class Main extends Component {
         <Editable value={caption} onChange={e => onChange({ ...gif, caption: e.currentTarget.value })} />
         <div>Share GIF</div>
         <div>
-          <img src={download} alt="Download" />
-          <img src={share} alt="Links" />
+          <img src={download} alt="Download" onClick={() => this.setState({ mode: DOWNLOAD })} />
+          <img src={share} alt="Links" onClick={() => this.setState({ mode: SHARE })} />
           <img src={facebook} alt="Facebook" />
           <img src={twitter} alt="Twitter" />
         </div>
