@@ -66,8 +66,8 @@ class Main extends Component {
         <div>
           <img src={download} alt="Download" onClick={() => this.setState({ mode: DOWNLOAD })} />
           <img src={share} alt="Links" onClick={() => this.setState({ mode: SHARE })} />
-          <img src={facebook} alt="Facebook" />
-          <img src={twitter} alt="Twitter" />
+          <a href={`https://www.facebook.com/sharer.php?u=${window.location.href}`} target="_blank"><img src={facebook} alt="Facebook" /></a>
+          <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank"><img src={twitter} alt="Twitter" /></a>
         </div>
       </div>
     </div>
