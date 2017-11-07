@@ -10,46 +10,97 @@ const getProgress = start => {
   return Math.min((now - start) / MILLISECONDS_TO_MARS, 1)
 }
 
+let lastKnownScrollPosition = 0
+let ticking = false
+
+const Sending = ({ gif }) => (
+  <div>
+    <img src={mars} alt="mars" className="mars" />
+    <div className="GifToEarthProgress--progressBars">
+      <div className="gif terran">
+        ?
+      </div>
+      <div className="progress fromEarth"><div /></div>
+      <div className="progress fromMars"><div /></div>
+      <div className="gif martian">
+        <img src={gif} alt="your GIF" />
+      </div>
+    </div>
+    <img src={earth} alt="earth" className="earth"  />
+  </div>
+)
+
+const Arrived = ({ scrollTo }) => (
+  <div className="arrived">
+    <span>
+      Interplanetary GIFs unlocked! <a href={scrollTo}>Check it out!</a> 🎉🎉
+    </span>
+  </div>
+)
+
 export default class GifToEarthProgress extends React.Component {
-  state = { progress: null }
 
   componentDidMount() {
-    const { gifCreated } = this.props
-    const gifArrivesAtEarth = new Date(gifCreated.getTime() + 3000 * 60)
-    const now = new Date()
+    var progress = getProgress(this.props.gifCreated);
+    document.documentElement.style.setProperty(
+      '--progress',
+      progress * 100 + '%'
+    )
+    document.documentElement.style.setProperty(
+      '--timeToComplete',
+      (1 - progress) * 180 + 's'
+    )
 
-    this.setState({ progress: getProgress(gifCreated) })
+    this.adjustOffset()
 
-    if (gifArrivesAtEarth > now) {
-      const interval = window.setInterval(
-        () => {
-          const progress = getProgress(gifCreated)
-          this.setState({ progress })
-          if (progress === 1) window.clearInterval(interval)
-        },
-        200
-      )
+    setTimeout(this.setArrived, (1 - progress) * 180 * 1000)
+
+    window.addEventListener('scroll', this.optimize(this.maybeStick))
+    window.addEventListener('resize', this.optimize(this.adjustOffset))
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.optimize(this.maybeStick))
+    window.removeEventListener('resize', this.optimize(this.adjustOffset))
+  }
+
+  optimize = func => () => {
+    lastKnownScrollPosition = window.scrollY
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        func(lastKnownScrollPosition)
+        ticking = false
+      })
+    }
+    ticking = true
+  }
+
+  maybeStick = scrollPosition => {
+    if (scrollPosition > this.offset) {
+      this.wrap.className = "GifToEarthProgress sticky"
+    } else {
+      this.wrap.className = "GifToEarthProgress"
     }
   }
 
+  adjustOffset = () => {
+    this.offset = this.wrap.parentElement.offsetTop
+  }
+
+  setArrived = () => {
+    this.props.setArrived()
+    setTimeout(
+      this.adjustOffset,
+      500 // wait for image to load; TODO: come up with a better way to do this
+    )
+  }
+
   render() {
-    const { gif } = this.props
-    const { progress } = this.state
+    const { id, gif, arrived } = this.props
 
     return (
-      <div className="GifToEarthProgress">
-        <img src={mars} alt="mars" className="mars" />
-        <div className="GifToEarthProgress--progressBars">
-          <div className="gif martian" style={{ left: `${progress * 100}%` }}>
-            <img src={gif} alt="your GIF" />
-          </div>
-          <div className="gif terran" style={{ right: `${progress * 100}%` }}>
-            ?
-          </div>
-          <progress value={progress} className="fromEarth" />
-          <progress value={progress} className="fromMars" />
-        </div>
-        <img src={earth} alt="earth" className="earth"  />
+      <div ref={div => this.wrap = div} className="GifToEarthProgress">
+        {arrived ? <Arrived scrollTo={`#${id}`} /> : <Sending gif={gif} />}
       </div>
     )
   }

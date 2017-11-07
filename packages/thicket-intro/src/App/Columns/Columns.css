@@ -1,0 +1,13 @@
+.Columns {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1em;
+}
+
+.Columns > * {
+  flex: 1 1 5em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: 1em;
+}

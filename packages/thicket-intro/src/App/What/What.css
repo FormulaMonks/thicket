@@ -1,4 +1,4 @@
-.GifCreator {
+.What.wrap {
   min-height: 100vh;
   text-align: center;
   display: flex;
@@ -6,9 +6,8 @@
   justify-content: space-around;
 }
 
-.GifCreator--Explanation {
+.What.inner {
   margin: 0 auto;
   padding: 1em;
   max-width: 30em;
-  position: relative;
 }
