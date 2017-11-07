@@ -1,4 +1,5 @@
 import IPFS from 'ipfs'
+import CID from 'cids'
 import ImageDataConverter from '../utils/imageDataConverter'
 import Y from 'yjs'
 import yMemory from 'y-memory'
@@ -81,6 +82,31 @@ class Database extends EventEmitter {
     return this.communities.get(community)
   }
 
+	unlink = (hash, cb = () => {}) =>
+		// unlink from local storage
+		this.initIPFS().then(node =>
+			// all blocks from this hash
+			node.dag.get(new CID(hash), (err, res) =>
+				pull(
+					pull.values(res.value.links),
+					pull.map(i => new CID(i.multihash)),
+					pull.drain(
+						i => node._ipldResolver.bs.delete(i),
+						// then the actual block for id
+						() => node._ipldResolver.bs.delete(new CID(hash), cb)
+					)
+				)
+			)
+		)
+
+	publicationsDelete = (community, id) => {
+		return new Promise((resolve, reject) =>
+			this.initCommunity(community).then(y => {
+				y.share.publications.delete(y.share.publications.toArray().findIndex(p => p.id === id))
+				this.unlink(id, resolve)
+			})
+		)}
+
   publicationsGet = (community, ids = []) =>
     this.initCommunity(community)
 			.then(y => y.share.publications.toArray())
@@ -143,16 +169,16 @@ class DBInterface extends EventEmitter {
 
   get publications() {
     return {
-      post: this.db.publicationsPost,
+			delete: this.db.publicationsDelete,
       get: this.db.publicationsGet,
-			getById: this.db.publicationsGetById,
+      post: this.db.publicationsPost,
     }
   }
 
   get metadata() {
     return {
-      post: this.db.metadataPost,
       get: this.db.metadataGet,
+      post: this.db.metadataPost,
     }
   }
 }

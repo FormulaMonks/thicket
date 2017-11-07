@@ -11,13 +11,14 @@ import twitter from './twitter.svg'
 
 const DOWNLOAD = 'show options for downloading'
 const LINKS = 'show options for link sharing'
+const DELETE = 'show confirm box for gif deletion'
 
 const Header = () =>
 	<header className="publication__header">View / Edit your GIF</header>
 
 const Footer = props => <footer className="publication__footer">
-	<Button>Delete GIF</Button>
-	<Button>Save Changes</Button>
+	<Button onClick={props.onDelete}>Delete GIF</Button>
+	<Button onClick={props.onSave}>Save Changes</Button>
 </footer>
 
 class Main extends Component {
@@ -52,7 +53,7 @@ class Main extends Component {
 
 class Publication extends Component {
 
-	state = { gif: null }
+	state = { gif: null, mode: null }
 
 	componentDidMount() {
 		const { c, id } = this.props.match.params
@@ -62,17 +63,41 @@ class Publication extends Component {
 	}
 
 	render() {
+		const { mode } = this.state
+
+		if (mode === DELETE) {
+			return <Modal
+				header={<div>Confirm Delete GIF</div>}
+				main={<div>
+						<div>Are you sure you want to delete this GIF:</div>
+						<div>{this.state.gif.nickname}</div>
+						<div>NOTE: this action cannot be undone</div>
+					</div>}
+				footer={<div>
+						<Button onClick={() => this.setState({ mode: null })}>Cancel</Button>
+						<Button onClick={this.onDelete}>Confirm</Button>
+					</div>}
+				onClose={() => this.setState({ mode: null })}
+			/>
+		}
+
 		return <Modal
 			header={<Header />}
 			main={<Main gif={this.state.gif} />}
-			footer={<Footer onSave={this.onSave} onDelete={this.onDelete} />}
-			onClose={() => this.props.history.push(`/c/${this.props.match.params.c}`)}
+			footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ mode: DELETE })} />}
+			onClose={this.close}
 		/>
 	}
 
-	onDelete = () => {}
+	close = () => this.props.history.push(`$/c/${this.props.match.params.c}`)
+
+	onDelete = () => {
+		const { c, id } = this.props.match.params
+		db.publications.delete(c, id).then(this.close)
+	}
 
 	onSave = () => {}
+
 }
 
 export default Publication
