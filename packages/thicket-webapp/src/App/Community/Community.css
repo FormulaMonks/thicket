@@ -50,9 +50,9 @@
 }
 
 .community__wrap_create{
-	background: #FFF;
+  background: #FFF;
   height: 100%;
   width: 100%;
-	position: absolute;
-	z-index: 2;
+  position: absolute;
+  z-index: 2;
 }

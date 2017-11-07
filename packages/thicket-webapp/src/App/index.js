@@ -24,7 +24,7 @@ class App extends Component {
   }
 
   render() {
-		const { nickname } = this.state
+    const { nickname } = this.state
 
     return <Router>
       <main className="app">

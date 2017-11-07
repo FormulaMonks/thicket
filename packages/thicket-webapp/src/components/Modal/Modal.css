@@ -1,6 +1,6 @@
 .modal{
   position: absolute;
-	z-index: 2;
+  z-index: 2;
   height: 100%;
   width: 100%;
   background: rgba(0,0,0,0.3);
@@ -18,7 +18,7 @@
 
 .modal__close{
   margin-left: auto;
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .modal__inner{

@@ -64,20 +64,20 @@ class Community extends Component {
           </div>
         </div>
         <div className="community__body">
-					{loading ? <Spinner /> : [
-						!!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} />,
-						!data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
-					]}
+          {loading ? <Spinner /> : [
+            !!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} />,
+            !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
+          ]}
         </div>
       </div>,
-			<Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
+      <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
       mode === CREATE &&
-				<div key="create" className="community__wrap_create">
-					<Create key="create" community={c} nickname={this.props.nickname} onSave={data => {
-							db.publications.post(c, data)
-								.then(() => this.setState({ mode: null }))
-						}} />
-				</div>,
+        <div key="create" className="community__wrap_create">
+          <Create key="create" community={c} nickname={this.props.nickname} onSave={data => {
+              db.publications.post(c, data)
+                .then(() => this.setState({ mode: null }))
+            }} />
+        </div>,
       mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: null })}>Close invite</div>,
       mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
       mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,

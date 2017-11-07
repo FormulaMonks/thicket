@@ -36,7 +36,7 @@ const config = {
 }
 
 const toBase64 = src =>
-	`data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
+  `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
 class Database extends EventEmitter {
   constructor() {
@@ -82,49 +82,49 @@ class Database extends EventEmitter {
     return this.communities.get(community)
   }
 
-	unlink = (hash, cb = () => {}) =>
-		// unlink from local storage
-		this.initIPFS().then(node =>
-			// all blocks from this hash
-			node.dag.get(new CID(hash), (err, res) =>
-				pull(
-					pull.values(res.value.links),
-					pull.map(i => new CID(i.multihash)),
-					pull.drain(
-						i => node._ipldResolver.bs.delete(i),
-						// then the actual block for id
-						() => node._ipldResolver.bs.delete(new CID(hash), cb)
-					)
-				)
-			)
-		)
+  unlink = (hash, cb = () => {}) =>
+    // unlink from local storage
+    this.initIPFS().then(node =>
+      // all blocks from this hash
+      node.dag.get(new CID(hash), (err, res) =>
+        pull(
+          pull.values(res.value.links),
+          pull.map(i => new CID(i.multihash)),
+          pull.drain(
+            i => node._ipldResolver.bs.delete(i),
+            // then the actual block for id
+            () => node._ipldResolver.bs.delete(new CID(hash), cb)
+          )
+        )
+      )
+    )
 
-	publicationsDelete = (community, id) => {
-		return new Promise((resolve, reject) =>
-			this.initCommunity(community).then(y => {
-				y.share.publications.delete(y.share.publications.toArray().findIndex(p => p.id === id))
-				this.unlink(id, resolve)
-			})
-		)}
+  publicationsDelete = (community, id) => {
+    return new Promise((resolve, reject) =>
+      this.initCommunity(community).then(y => {
+        y.share.publications.delete(y.share.publications.toArray().findIndex(p => p.id === id))
+        this.unlink(id, resolve)
+      })
+    )}
 
   publicationsGet = (community, ids = []) =>
     this.initCommunity(community)
-			.then(y => y.share.publications.toArray())
-			.then(data => data.filter(p => !ids.length || ids.includes(p.id)))
-			.then(this.publicationsMap)
-			.then(data => data.sort((a, b) => b.createdAt - a.createdAt))
+      .then(y => y.share.publications.toArray())
+      .then(data => data.filter(p => !ids.length || ids.includes(p.id)))
+      .then(this.publicationsMap)
+      .then(data => data.sort((a, b) => b.createdAt - a.createdAt))
 
-	publicationsMap = data => {
+  publicationsMap = data => {
     return new Promise((resolve, reject) => {
-			this.initIPFS().then(node => {
-				pull(
-					pull.values(data),
-					pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
-					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
-					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
-					pull.collect((err, res) => resolve(res)),
-				)
-			})
+      this.initIPFS().then(node => {
+        pull(
+          pull.values(data),
+          pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
+          pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
+          pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
+          pull.collect((err, res) => resolve(res)),
+        )
+      })
     })
   }
 
@@ -145,14 +145,14 @@ class Database extends EventEmitter {
 
   metadataGet = community =>
     this.initCommunity(community)
-			.then(y => y.share.metadata.get(community))
-			.then(data => { return { id: community, ...data }})
-			.then(this.metadataMap)
+      .then(y => y.share.metadata.get(community))
+      .then(data => { return { id: community, ...data }})
+      .then(this.metadataMap)
 
-	metadataMap = (data = {}) => {
-		const { id, title = id, ...rest } = data
-		return { id, title, ...rest }
-	}
+  metadataMap = (data = {}) => {
+    const { id, title = id, ...rest } = data
+    return { id, title, ...rest }
+  }
 
   metadataPost = (community, data) =>
     this.initCommunity(community).then(y => y.share.metadata.set(community, data))
@@ -169,7 +169,7 @@ class DBInterface extends EventEmitter {
 
   get publications() {
     return {
-			delete: this.db.publicationsDelete,
+      delete: this.db.publicationsDelete,
       get: this.db.publicationsGet,
       post: this.db.publicationsPost,
     }
