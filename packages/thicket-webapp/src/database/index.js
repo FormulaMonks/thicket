@@ -143,6 +143,13 @@ class Database extends EventEmitter {
         )
       )
 
+  // not implemented in YJS
+  // thus, put implies delete & insert
+  // https://github.com/y-js/yjs/issues/16
+  publicationsPut = (c, id, data) =>
+    this.publicationsDelete(c, id)
+      .then(() => this.publicationsPost(c, data))
+
   metadataGet = community =>
     this.initCommunity(community)
       .then(y => y.share.metadata.get(community))
@@ -172,6 +179,7 @@ class DBInterface extends EventEmitter {
       delete: this.db.publicationsDelete,
       get: this.db.publicationsGet,
       post: this.db.publicationsPost,
+      put: this.db.publicationsPut,
     }
   }
 

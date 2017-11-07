@@ -9,7 +9,7 @@ class Editable extends Component {
   render() {
     const { value, onChange } = this.props
 
-    if (this.state.read) {
+    if (this.state.edit) {
       return <input type="text" onChange={onChange} value={value} />
     }
 

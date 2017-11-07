@@ -30,15 +30,16 @@ class Main extends Component {
       return <div className="publication__main"><Spinner /></div>
     }
 
-    const { src, nickname, caption } = this.props.gif
+    const { gif, onChange } = this.props
+    const { src, nickname, caption } = gif
 
     return <div className="publication__main">
       <img src={src} alt={caption} />
       <div>
         <div>Created by:</div>
-        <Editable value={nickname} onChange={() => {}} />
+        <Editable value={nickname} onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })} />
         <div>GIF caption:</div>
-        <Editable value={caption} onChange={() => {}} />
+        <Editable value={caption} onChange={e => onChange({ ...gif, caption: e.currentTarget.value })} />
         <div>Share GIF</div>
         <div>
           <img src={download} alt="Download" />
@@ -53,7 +54,7 @@ class Main extends Component {
 
 class Publication extends Component {
 
-  state = { gif: null, mode: null }
+  state = { gif: null, mode: null, modified: false }
 
   componentDidMount() {
     const { c, id } = this.props.match.params
@@ -83,7 +84,7 @@ class Publication extends Component {
 
     return <Modal
       header={<Header />}
-      main={<Main gif={this.state.gif} />}
+      main={<Main gif={this.state.gif} onChange={gif => this.setState({ gif, modified: true })} />}
       footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ mode: DELETE })} />}
       onClose={this.close}
     />
@@ -96,7 +97,15 @@ class Publication extends Component {
     db.publications.delete(c, id).then(this.close)
   }
 
-  onSave = () => {}
+  onSave = () => {
+    if (!this.state.modified) {
+      this.close()
+      return
+    }
+
+    const { c, id } = this.props.match.params
+    db.publications.put(c, id, this.state.gif).then(this.close)
+  }
 
 }
 
