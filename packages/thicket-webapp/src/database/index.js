@@ -81,9 +81,10 @@ class Database extends EventEmitter {
     return this.communities.get(community)
   }
 
-  publicationsGet = community =>
+  publicationsGet = (community, ids = []) =>
     this.initCommunity(community)
 			.then(y => y.share.publications.toArray())
+			.then(data => data.filter(p => !ids.length || ids.includes(p.id)))
 			.then(this.publicationsMap)
 			.then(data => data.sort((a, b) => b.createdAt - a.createdAt))
 
@@ -100,19 +101,6 @@ class Database extends EventEmitter {
 			})
     })
   }
-
-	publicationsGetById = id => {
-    return new Promise((resolve, reject) => {
-			this.initIPFS().then(node => {
-				pull(
-					pullPromise.through(p => node.files.cat(id).then(stream => { return { ...p, stream }})),
-					pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
-					pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
-					pull.collect((err, res) => resolve(res)),
-				)
-			})
-    })
-	}
 
   publicationsPost = (community, { src, ...data }) =>
     this.initIPFS().then(node =>

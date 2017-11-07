@@ -10,7 +10,7 @@ const LINKS = 'show options for link sharing'
 const Header = () =>
 	<header className="publication__header">View / Edit your GIF</header>
 
-const Footer = props => <footer>
+const Footer = props => <footer className="publication__footer">
 	<Button>Delete GIF</Button>
 	<Button>Save Changes</Button>
 </footer>
@@ -21,14 +21,18 @@ class Main extends Component {
 
 	render() {
 		if (!this.props.gif) {
-			return <Spinner />
+			return <div className="publication__main"><Spinner /></div>
 		}
 
-		return <div>
-			<div>preview</div>	
-			<div>nickname</div>	
-			<div>caption</div>	
-			<div>actions</div>
+		const { src, nickname, caption } = this.props.gif
+
+		return <div className="publication__main">
+			<img src={src} alt={caption} />
+			<div>
+				<div>Created by: {nickname}</div>
+				<div>GIF caption: {caption}</div>
+				<div>Download, Links, FB, TW</div>
+			</div>
 		</div>
 	}
 }
@@ -38,7 +42,10 @@ class Publication extends Component {
 	state = { gif: null }
 
 	componentDidMount() {
-		db.publications.getById(this.props.match.params.id).then(gif => this.setState({ gif }))
+		const { c, id } = this.props.match.params
+		db.publications.get(c, [id])
+			.then(arr => arr[0])
+			.then(gif => this.setState({ gif }))
 	}
 
 	render() {
