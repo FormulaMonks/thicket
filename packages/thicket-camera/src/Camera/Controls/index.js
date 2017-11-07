@@ -12,7 +12,7 @@ const Wrap = styled.div`
   justify-content: center;
   box-sizing: border-box;
 `
-const Button = styled.button`
+const ShootBtn = styled.button`
   text-indent: -9999em;
   height: 32px;
   cursor: pointer;
@@ -47,7 +47,7 @@ const Controls = props => {
   const { controlsWrap, controlsTitle, controlsButton } = props.classNames
   return <Wrap className={controlsWrap}>
     <h2 className={controlsTitle}>Create a GIF</h2>
-    <Button className={controlsButton} onClick={props.onClick}>Shoot</Button>
+    <ShootBtn className={controlsButton} onClick={props.onClick}>Shoot</ShootBtn>
   </Wrap>
 }
 
