@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import Modal from '../Modal'
 import { Button, Spinner } from 'thicket-elements'
 import db from '../../database'
+import Editable from './Editable'
 import './Publication.css'
+import download from './download.svg'
+import share from './share.svg'
+import facebook from './facebook.svg'
+import twitter from './twitter.svg'
 
 const DOWNLOAD = 'show options for downloading'
 const LINKS = 'show options for link sharing'
@@ -29,16 +34,24 @@ class Main extends Component {
 		return <div className="publication__main">
 			<img src={src} alt={caption} />
 			<div>
-				<div>Created by: {nickname}</div>
-				<div>GIF caption: {caption}</div>
-				<div>Download, Links, FB, TW</div>
+				<div>Created by:</div>
+				<Editable value={nickname} onChange={() => {}} />
+				<div>GIF caption:</div>
+				<Editable value={caption} onChange={() => {}} />
+				<div>Share GIF</div>
+				<div>
+					<img src={download} alt="Download" />
+					<img src={share} alt="Links" />
+					<img src={facebook} alt="Facebook" />
+					<img src={twitter} alt="Twitter" />
+				</div>
 			</div>
 		</div>
 	}
 }
 
 class Publication extends Component {
-	
+
 	state = { gif: null }
 
 	componentDidMount() {
@@ -58,7 +71,7 @@ class Publication extends Component {
 	}
 
 	onDelete = () => {}
-	
+
 	onSave = () => {}
 }
 
