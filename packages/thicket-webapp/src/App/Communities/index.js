@@ -1,11 +1,34 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import localForage from 'localforage'
+import uuid from 'uuid'
+import Modal from '../../components/Modal'
+import { Button } from 'thicket-elements'
+import db from '../../database'
 import './Communities.css'
 import placeholder from './placeholder.png'
 import add from './add.svg'
 
 const CREATE = 'user is creating a community'
+
+class New extends Component {
+
+  state = { title: '' }
+
+  render() {
+    return <Modal
+      header={<div>Create New Community</div>}
+      main={[
+        <div key="title">Give your new Community a title:</div>,
+        <input key="value" type="text" onChange={e => this.setState({ title: e.currentTarget.value })} />
+      ]}
+      footer={[
+        <Button key="cancel" onClick={this.props.onCancel}>Cancel</Button>,
+        <Button key="save" onClick={() => this.props.onSave(this.state.title)}>Save</Button>
+      ]}
+    />
+  }
+}
 
 class Communities extends Component {
 
@@ -35,8 +58,17 @@ class Communities extends Component {
           </li>)}
         </ul>
       </div>,
-      mode === CREATE && <div className="communities__create" key="create">CREATE</div>,
+      mode === CREATE && <div className="communities__create" key="create">
+        <New onCancel={() => this.setState({ mode: null })} onSave={this.onSave} />
+      </div>,
     ]
+  }
+
+  onSave = title => {
+    const newId = uuid()
+    db.metadata.post(newId, { title })
+      .then(() => localForage.setItem('communities', this.state.data.concat(newId)))
+      .then(() => this.setState({ mode: null, data: this.state.data.concat(newId) }))
   }
 }
 
