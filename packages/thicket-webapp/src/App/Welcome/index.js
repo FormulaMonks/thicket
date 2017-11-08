@@ -36,22 +36,26 @@ class Welcome extends Component{
   
   render() {
     const { mode } = this.state
+    const { nickname } = this.props
+
     return <div className="welcome">
       {mode === ARRIVED && <Arrived onContinue={() => this.continue(ONBOARD)} mode={mode} />}
       {mode === ONBOARD && <Onboarding onContinue={() => this.continue(TOS)} />}
       {mode === TOS && <Tos onContinue={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
-      {mode === CREATE && <div className="welcome__create"><Create nickname={this.props.nickname} onSave={this.onSave} /></div>}
+      {mode === CREATE && <div className="welcome__create">
+          <Create nickname={nickname} onSave={this.onSave} />
+      </div>}
     </div>
   }
 
-  continue = mode => {
+  continue = mode =>
     localForage.setItem('onboarding', mode).then(() => this.setState({ mode }))
-  }
 
   onSave = data =>
-    db.metadata.post(NEW_COMMUNITY_ID, { title: NEW_COMMUNITY })
-      .then(() => db.publications.post(NEW_COMMUNITY_ID, data))
+    db.community(NEW_COMMUNITY_ID)
+      .post({ title: NEW_COMMUNITY, createdBy: data.nickname })
+      .then(() => db.community(NEW_COMMUNITY_ID).publications.post(data))
       .then(() => localForage.setItem('communities', [NEW_COMMUNITY_ID]))
       .then(() => localForage.setItem('onboarding', FINISHED))
       .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))

@@ -7,6 +7,7 @@ import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
 import Create from '../../components/Create'
 import Publication from '../../components/Publication'
+import Settings from './Settings'
 import db from '../../database'
 import './Community.css'
 import add from './add.svg'
@@ -18,6 +19,7 @@ const FIRST_GIF = 'show the user info from their first gif'
 const ONBOARD = 'show the user how to get things done around here'
 const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
+const SETTINGS = 'user can modify the community title and/or leave the community'
 
 const NoContent = props => <div className="nocontent">
   <h2 key="title">Your Community doesn’t have content yet!</h2>
@@ -59,7 +61,7 @@ class Community extends Component {
           <h2 className="community__title">{this.state.title}</h2>
           <div className="community__controls">
             <img src={link} alt="Invite link" />
-            <img src={settings} alt="Settings" />
+            <img src={settings} alt="Settings" onClick={() => this.setState({ mode: SETTINGS })} onClose={() => this.setState({ mode: null })} />
             <img src={user} alt="User" />
           </div>
         </div>
@@ -74,7 +76,7 @@ class Community extends Component {
       mode === CREATE &&
         <div key="create" className="community__create">
           <Create community={c} nickname={this.props.nickname} onSave={data => {
-              db.publications.post(c, data)
+              db.community(c).publications.post(data)
                 .then(() => this.setState({ mode: null }))
             }} />
         </div>,
@@ -85,12 +87,12 @@ class Community extends Component {
   }
 
   fetchPublications = c => {
-    db.publications.get(this.props.match.params.c)
+    db.community(this.props.match.params.c).publications.getAll()
       .then(data => this.setState({ data, loading: false }))
   }
 
   fetchMetadata = c => {
-    db.metadata.get(this.props.match.params.c)
+    db.community(this.props.match.params.c).get()
       .then(({ title }) => this.setState({ title }))
   }
 

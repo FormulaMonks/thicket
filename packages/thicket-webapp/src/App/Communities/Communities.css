@@ -35,8 +35,8 @@
 
 .communities__element{
   overflow: hidden;
-  height: 50%;
-  width: 33%;
+  height: 33.3333333%;
+  width: 33.3333333%;
   box-sizing: border-box;
   padding: 10px;
 }

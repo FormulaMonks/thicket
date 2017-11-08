@@ -80,8 +80,7 @@ class Publication extends Component {
 
   componentDidMount() {
     const { c, id } = this.props.match.params
-    db.publications.get(c, [id])
-      .then(arr => arr[0])
+    db.community(c).publications.get(id)
       .then(gif => this.setState({ gif }))
   }
 
@@ -116,7 +115,7 @@ class Publication extends Component {
 
   onDelete = () => {
     const { c, id } = this.props.match.params
-    db.publications.delete(c, id).then(this.close)
+    db.community(c).publications.delete(id).then(this.close)
   }
 
   onSave = () => {
@@ -126,7 +125,7 @@ class Publication extends Component {
     }
 
     const { c, id } = this.props.match.params
-    db.publications.put(c, id, this.state.gif).then(this.close)
+    db.community(c).publications.put(id, this.state.gif).then(this.close)
   }
 
 }

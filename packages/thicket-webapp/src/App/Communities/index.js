@@ -66,7 +66,7 @@ class Communities extends Component {
 
   onSave = title => {
     const newId = uuid()
-    db.metadata.post(newId, { title })
+    db.community(newId).post({ title, createdBy: this.props.nickname })
       .then(() => localForage.setItem('communities', this.state.data.concat(newId)))
       .then(() => this.setState({ mode: null, data: this.state.data.concat(newId) }))
   }

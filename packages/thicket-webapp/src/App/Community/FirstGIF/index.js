@@ -26,7 +26,7 @@ class Title extends Component {
   }
 
   update = () =>
-    db.metadata.post(this.props.community, { title: this.state.title })
+    db.community(this.props.community).put({ title: this.state.title })
 
 }
 

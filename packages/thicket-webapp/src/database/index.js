@@ -56,30 +56,33 @@ class Database extends EventEmitter {
     return this.ipfs
   }
 
-  initCommunity(community) {
-    if (!this.communities.has(community)) {
-      this.communities.set(community, this.initIPFS().then(node =>
+  initCommunity(communityId) {
+    if (!this.communities.has(communityId)) {
+      this.communities.set(communityId, this.initIPFS().then(node =>
         Y({
           db: {
             name: 'indexeddb'
           },
           connector: {
             name: 'ipfs',
-            room: `thicket/${community}`,
+            room: `thicket/${communityId}`,
             ipfs: node,
           },
           share: {
             publications: 'Array',
+            publicationsMetadata: 'Map',
             metadata: 'Map'
           }
         }).then(y => {
           y.share.metadata.observe(() => this.emit('update'))
           y.share.publications.observe(() => this.emit('update'))
+          y.share.publicationsMetadata.observe(() => this.emit('update'))
+
           return y
         })
       ))
     }
-    return this.communities.get(community)
+    return this.communities.get(communityId)
   }
 
   unlink = (hash, cb = () => {}) =>
@@ -99,70 +102,73 @@ class Database extends EventEmitter {
       )
     )
 
-  publicationsDelete = (community, id) => {
+  publicationsDelete = (communityId, id) => {
     return new Promise((resolve, reject) =>
-      this.initCommunity(community).then(y => {
-        y.share.publications.delete(y.share.publications.toArray().findIndex(p => p.id === id))
+      this.initCommunity(communityId).then(y => {
+        y.share.publications.delete(y.share.publications.toArray().findIndex(id => id === id))
         this.unlink(id, resolve)
       })
     )}
 
-  publicationsGet = (community, ids = []) =>
-    this.initCommunity(community)
-      .then(y => y.share.publications.toArray())
-      .then(data => data.filter(p => !ids.length || ids.includes(p.id)))
-      .then(this.publicationsMap)
-      .then(data => data.sort((a, b) => b.createdAt - a.createdAt))
-
-  publicationsMap = data => {
+  publicationsMap = (communityId, data) => {
     return new Promise((resolve, reject) => {
-      this.initIPFS().then(node => {
-        pull(
-          pull.values(data),
-          pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
-          pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
-          pull.map(obj => ({ ...obj, src: toBase64(obj.src) })),
-          pull.collect((err, res) => resolve(res)),
-        )
+      this.initCommunity(communityId).then(y => {
+        this.initIPFS().then(node => {
+          pull(
+            pull.values(data),
+            pullPromise.through(hash => node.files.cat(hash).then(stream => ({ hash, stream }))),
+            pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src }))))),
+            pull.map(({ hash, src }) => ({ id: hash, src: toBase64(src), ...y.share.publicationsMetadata.get(hash) })),
+            pull.collect((err, res) => resolve(res)),
+          )
+        })
       })
     })
   }
 
-  publicationsPost = (community, { src, ...data }) =>
+  publicationsGet = (communityId, id) =>
+    this.publicationsGetAll(communityId, [id]).then(res => res[0])
+
+  publicationsGetAll = (communityId, ids = []) =>
+    this.initCommunity(communityId)
+      .then(y => y.share.publications.toArray())
+      .then(data => data.filter(id => !ids.length || ids.includes(id)))
+      .then(data => this.publicationsMap(communityId, data))
+      .then(data => data.sort((a, b) => b.createdAt - a.createdAt))
+
+  publicationsPost = (communityId, { src, ...data }) =>
     this.initIPFS().then(node =>
       node.files
         .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
         .then(res =>
-          this.initCommunity(community).then(y =>
-            y.share.publications.push([{
-              ...data,
-              id: res[0].hash,
-              createdAt: Date.now(),
-            }])
-          )
+          this.initCommunity(communityId).then(y => {
+            const id = res[0].hash
+            y.share.publications.push([id])
+            y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
+          })
         )
       )
 
-  // not implemented in YJS
-  // thus, put implies delete & insert
-  // https://github.com/y-js/yjs/issues/16
-  publicationsPut = (c, id, data) =>
-    this.publicationsDelete(c, id)
-      .then(() => this.publicationsPost(c, data))
+  publicationsPut = (communityId, id, data) =>
+    this.initCommunity(communityId).then(y =>
+      y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
 
-  metadataGet = community =>
-    this.initCommunity(community)
-      .then(y => y.share.metadata.get(community))
-      .then(data => { return { id: community, ...data }})
-      .then(this.metadataMap)
-
-  metadataMap = (data = {}) => {
-    const { id, title = id, ...rest } = data
-    return { id, title, ...rest }
+  communityDelete = id => {
+    // TODO
+    // remove all local publications
+    // leave room
   }
 
-  metadataPost = (community, data) =>
-    this.initCommunity(community).then(y => y.share.metadata.set(community, data))
+  communityGet = communityId =>
+    this.initCommunity(communityId)
+      .then(y => y.share.metadata.get(communityId))
+      .then(data => { return { id: communityId, title: '', ...data }})
+
+  communityPost = (communityId, data) =>
+    this.initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...data, createdAt: Date.now() }))
+
+  communityPut = (communityId, data) =>
+    this.initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data }))
 }
 
 Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
@@ -174,19 +180,27 @@ class DBInterface extends EventEmitter {
     this.db.on('update', () => this.emit('update'))
   }
 
-  get publications() {
-    return {
-      delete: this.db.publicationsDelete,
-      get: this.db.publicationsGet,
-      post: this.db.publicationsPost,
-      put: this.db.publicationsPut,
+  community(communityId) {
+    if (!communityId) {
+      throw new Error('Please provide a Community Id')
     }
-  }
-
-  get metadata() {
+    const { db } = this
     return {
-      get: this.db.metadataGet,
-      post: this.db.metadataPost,
+      // community
+      delete: () => db.communityDelete(communityId),
+      get: () => db.communityGet(communityId),
+      post: data => db.communityPost(communityId, data),
+      put: data => db.communityPut(communityId, data),
+      // publications
+      get publications() {
+        return {
+          delete: id => db.publicationsDelete(communityId, id),
+          get: id => db.publicationsGet(communityId, id),
+          getAll: id => db.publicationsGetAll(communityId, id),
+          post: data => db.publicationsPost(communityId, data),
+          put: (id, data) => db.publicationsPut(communityId, id, data),
+        }
+      }
     }
   }
 }
