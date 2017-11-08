@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="41px" viewBox="0 0 38 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feMorphology radius="1" in="SourceAlpha" operator="dilate" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0520720109 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" filter="url(#filter-1)">
+        <path d="M37,18 C37,27.941 28.941,36 19,36 C9.059,36 1,27.941 1,18 C1,8.059 9.059,0 19,0 C28.941,0 37,8.059 37,18 L37,18 Z M27.302,13.212 C26.734,13.464 26.124,13.634 25.483,13.711 C26.137,13.319 26.64,12.698 26.876,11.958 C26.264,12.321 25.586,12.585 24.865,12.727 C24.287,12.111 23.464,11.727 22.553,11.727 C20.803,11.727 19.385,13.145 19.385,14.894 C19.385,15.142 19.413,15.384 19.467,15.616 C16.835,15.484 14.501,14.223 12.939,12.307 C12.667,12.774 12.51,13.318 12.51,13.899 C12.51,14.998 13.069,15.967 13.919,16.535 C13.4,16.519 12.912,16.376 12.485,16.139 C12.484,16.152 12.484,16.165 12.484,16.179 C12.484,17.713 13.576,18.994 15.025,19.284 C14.759,19.357 14.479,19.396 14.191,19.396 C13.986,19.396 13.788,19.376 13.595,19.339 C13.998,20.597 15.167,21.513 16.553,21.538 C15.469,22.388 14.104,22.894 12.62,22.894 C12.364,22.894 12.112,22.879 11.864,22.85 C13.266,23.748 14.931,24.273 16.72,24.273 C22.545,24.273 25.731,19.447 25.731,15.261 C25.731,15.124 25.728,14.987 25.722,14.851 C26.341,14.405 26.878,13.847 27.302,13.212 L27.302,13.212 Z" id="Twitter-Copy" fill="#FFFFFF"></path>
+    </g>
+</svg>

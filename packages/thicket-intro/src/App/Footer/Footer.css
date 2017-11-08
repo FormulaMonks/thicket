@@ -1,0 +1,74 @@
+.Footer {
+  background: #071127;
+  padding: 1.5em 1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.Footer > * {
+  font-size: 0.7em;
+}
+
+.Footer--columns {
+  margin-top: -1.5em;
+}
+.Footer--columns > * {
+  margin-top: 1.5em;
+}
+
+@media(min-width: 500px) {
+  .Footer {
+    text-align: left;
+  }
+  .Footer--columns {
+    display: flex;
+    justify-content: space-between;
+    max-width: 60em;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .Footer--columns > * {
+    flex: 1 1 10em;
+    margin-left: 1em;
+  }
+  .Footer--columns > *:first-child {
+    margin-left: 0;
+  }
+}
+
+.Footer--logoLink {
+  display: block;
+  color: white;
+  text-decoration: none;
+}
+.Footer--logo {
+  width: 4em;
+}
+
+.Footer--linkList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.Footer--linkList + .Footer--linkList {
+  margin-top: 1.5em;
+}
+
+.Footer--copyright {
+  text-align: center;
+  margin: 2em 0 0;
+}
+
+.Footer--socialList {
+  margin-left: -1em;
+}
+.Footer--socialList li {
+  display: inline-block;
+  margin-left: 1em;
+}
+.Footer--socialIcon {
+  width: 2em;
+  display: block;
+}
+.Footer--socialIcon:focus, .Footer--socialIcon:hover {
+  transform: scale(1.2);
+}
