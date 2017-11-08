@@ -29,9 +29,9 @@ class App extends Component {
     return <Router>
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
-        <Link className="app__profile" to="/profile">{this.state.nickname}<img src={user} alt={this.state.nickname}/></Link>
+        <Link className="app__profile" to="/profile">{nickname}<img src={user} alt={nickname}/></Link>
         <Switch>
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
           <Route exact path="/communities" component={Communities} />
           <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
