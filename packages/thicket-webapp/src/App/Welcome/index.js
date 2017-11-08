@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
+import uuid from 'uuid'
 import Tos from './Tos'
 import db from '../../database'
 import localForage from 'localforage'
@@ -14,9 +15,9 @@ const ONBOARD = 'quick presentation of what thicket is'
 const TOS = 'the user must abide by our rules'
 const CAMERA_ACCESS = 'we need to be able to access the camera'
 const CREATE = 'user is shooting first gif'
-const NEW_COMMUNITY = 'Amazing GIFs'
-const NEW_COMMUNITY_ID = `amazing-gifs-${Date.now()}-${Math.random()}`
 const FINISHED = 'user has finished onboarding'
+const NEW_COMMUNITY = 'Amazing GIFs'
+const NEW_COMMUNITY_ID = uuid()
 
 const Arrived = props => {
   return <div className="welcome__arrived">
@@ -48,12 +49,13 @@ class Welcome extends Component{
     localForage.setItem('onboarding', mode).then(() => this.setState({ mode }))
   }
 
-  onSave = data => {
-    db.publications.post(NEW_COMMUNITY_ID, data)
+  onSave = data =>
+    db.metadata.post(NEW_COMMUNITY_ID, { title: NEW_COMMUNITY })
+      .then(() => db.publications.post(NEW_COMMUNITY_ID, data))
+      .then(() => localForage.setItem('communities', [NEW_COMMUNITY_ID]))
       .then(() => localForage.setItem('onboarding', FINISHED))
-      .then(() => db.metadata.post(NEW_COMMUNITY_ID, { title: NEW_COMMUNITY }))
       .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
-  }
+
 }
 
 export default Welcome

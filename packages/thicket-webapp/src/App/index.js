@@ -47,7 +47,7 @@ class App extends Component {
 const Index = props => {
   const { history } = props
   localForage.getItem('onboarding')
-    .then(v => v === FINISHED ? history.replace('/communitues') : history.replace('/welcome'))
+    .then(v => v === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
 
   return <div className="index"><Spinner /></div>
 }

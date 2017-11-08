@@ -4,7 +4,7 @@ import add from './add.svg'
 import './Grid.css'
 
 const Grid = props => <ul className="communityGrid">
-  <li key="new" className="communityGrid__element communityGrid__new">
+  <li key="new" className="communityGrid__element">
     <button onClick={props.onNew} className="communityGrid__btnNew">
       <img src={add} alt="Create New GIF" />
       Create New GIF
