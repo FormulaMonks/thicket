@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
 import { Button } from 'thicket-elements'
-import Close from '../../../components/Close'
 import localForage from 'localforage'
 import db from '../../../database'
 import './FirstGIF.css'

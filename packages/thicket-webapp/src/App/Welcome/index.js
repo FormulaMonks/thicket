@@ -16,6 +16,7 @@ const CAMERA_ACCESS = 'we need to be able to access the camera'
 const CREATE = 'user is shooting first gif'
 const NEW_COMMUNITY = 'Amazing GIFs'
 const NEW_COMMUNITY_ID = `amazing-gifs-${Date.now()}-${Math.random()}`
+const FINISHED = 'user has finished onboarding'
 
 const Arrived = props => {
   return <div className="welcome__arrived">
@@ -49,9 +50,11 @@ class Welcome extends Component{
 
   onSave = data => {
     db.publications.post(NEW_COMMUNITY_ID, data)
+      .then(() => localForage.setItem('onboarding', FINISHED))
       .then(() => db.metadata.post(NEW_COMMUNITY_ID, { title: NEW_COMMUNITY }))
       .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
   }
 }
 
 export default Welcome
+export { FINISHED }
