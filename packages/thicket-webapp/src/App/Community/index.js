@@ -72,8 +72,8 @@ class Community extends Component {
       </div>,
       <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
       mode === CREATE &&
-        <div key="create" className="community__wrap_create">
-          <Create key="create" community={c} nickname={this.props.nickname} onSave={data => {
+        <div key="create" className="community__create">
+          <Create community={c} nickname={this.props.nickname} onSave={data => {
               db.publications.post(c, data)
                 .then(() => this.setState({ mode: null }))
             }} />

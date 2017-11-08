@@ -1,0 +1,33 @@
+.communities{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.communities__header{
+  display: flex;
+  width: 100%;
+  height: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+.communities__grid{
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: auto;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.communities__create{
+  background: #FFF;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+}
