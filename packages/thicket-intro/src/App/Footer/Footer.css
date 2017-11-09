@@ -1,10 +1,8 @@
 .Footer {
   background: #071127;
-  padding: 1.5em 1em;
+  padding: 1.5rem 1rem;
   text-transform: uppercase;
   text-align: center;
-}
-.Footer > * {
   font-size: 0.7em;
 }
 
