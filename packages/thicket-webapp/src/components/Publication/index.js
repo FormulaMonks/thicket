@@ -111,7 +111,7 @@ class Publication extends Component {
     />
   }
 
-  close = () => this.props.history.push(`$/c/${this.props.match.params.c}`)
+  close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
 
   onDelete = () => {
     const { c, id } = this.props.match.params
