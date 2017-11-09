@@ -12,14 +12,14 @@ export default class Footer extends React.Component {
     return (
       <footer className="Footer">
         <div className="Footer--columns">
-          <div>
+          <div className="Footer--column">
             <a className="Footer--logoLink" href="https://citrusbyte.com/">
               <img className="Footer--logo" alt="Citrusbyte" src={logo} />
               <p><strong>Build Better</strong>&trade;</p>
             </a>
           </div>
 
-          <div>
+          <div className="Footer--column">
             <strong>Company</strong>
             <ul className="Footer--linkList">
               <li><a href="https://citrusbyte.com/portfolio">Work</a></li>
@@ -35,7 +35,7 @@ export default class Footer extends React.Component {
             </ul>
           </div>
 
-          <div>
+          <div className="Footer--column">
             <strong>Products</strong>
             <ul className="Footer--linkList">
               <li><a href="http://www.overwatchsec.com/" target="_blank" rel="noopener noreferrer">Overwatch</a></li>
@@ -44,7 +44,7 @@ export default class Footer extends React.Component {
             </ul>
           </div>
 
-          <div>
+          <div className="Footer--column">
             <strong>We’re also on</strong>
             <ul className="Footer--linkList Footer--socialList">
               <li><a className="Footer--socialIcon"

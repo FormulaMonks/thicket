@@ -9,7 +9,7 @@
 .Footer--columns {
   margin-top: -1.5em;
 }
-.Footer--columns > * {
+.Footer--column {
   margin-top: 1.5em;
 }
 
@@ -24,11 +24,11 @@
     margin-left: auto;
     margin-right: auto;
   }
-  .Footer--columns > * {
+  .Footer--column {
     flex: 1 1 10em;
     margin-left: 1em;
   }
-  .Footer--columns > *:first-child {
+  .Footer--column:first-child {
     margin-left: 0;
   }
 }
