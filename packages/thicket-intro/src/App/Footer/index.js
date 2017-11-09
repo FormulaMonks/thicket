@@ -12,27 +12,33 @@ export default class Footer extends React.Component {
     return (
       <footer className="Footer">
         <div className="Footer--columns">
-          <div className="Footer--column">
+          <div className="Footer--column" style={{textAlign: 'center'}}>
             <a className="Footer--logoLink" href="https://citrusbyte.com/">
               <img className="Footer--logo" alt="Citrusbyte" src={logo} />
               <p><strong>Build Better</strong>&trade;</p>
             </a>
           </div>
 
-          <div className="Footer--column">
+          <div className="Footer--column" style={{flex: 1.8}}>
             <strong>Company</strong>
-            <ul className="Footer--linkList">
-              <li><a href="https://citrusbyte.com/portfolio">Work</a></li>
-              <li><a href="https://citrusbyte.com/our-approach">What We Do</a></li>
-              <li><a href="https://citrusbyte.com/about-us">Who We Are</a></li>
-              <li><a href="https://citrusbyte.com/contact-us">Contact</a></li>
-            </ul>
-            <ul className="Footer--linkList">
-              <li><a href="https://citrusbyte.com/careers">Careers</a></li>
-              <li><a href="https://citrusbyte.com/training">Training</a></li>
-              <li><a href="https://citrusbyte.com/enterprise-modernization">Enterprise Modernization</a></li>
-              <li><a href="http://citrusven.com/" target="_blank" rel="noopener noreferrer">Citrus Ventures</a></li>
-            </ul>
+            <div className="Footer--smallColumns">
+              <div className="Footer--smallColumn">
+                <ul className="Footer--linkList">
+                  <li><a href="https://citrusbyte.com/portfolio">Work</a></li>
+                  <li><a href="https://citrusbyte.com/our-approach">What We Do</a></li>
+                  <li><a href="https://citrusbyte.com/about-us">Who We Are</a></li>
+                  <li><a href="https://citrusbyte.com/contact-us">Contact</a></li>
+                </ul>
+              </div>
+              <div className="Footer--smallColumn">
+                <ul className="Footer--linkList">
+                  <li><a href="https://citrusbyte.com/careers">Careers</a></li>
+                  <li><a href="https://citrusbyte.com/training">Training</a></li>
+                  <li><a href="https://citrusbyte.com/enterprise-modernization">Enterprise Modernization</a></li>
+                  <li><a href="http://citrusven.com/" target="_blank" rel="noopener noreferrer">Citrus Ventures</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
 
           <div className="Footer--column">

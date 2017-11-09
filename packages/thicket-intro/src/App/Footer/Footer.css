@@ -1,9 +1,10 @@
 .Footer {
   background: #071127;
+  color: #646f89;
   padding: 1.5rem 1rem;
   text-transform: uppercase;
   text-align: center;
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .Footer--columns {
@@ -13,47 +14,53 @@
   margin-top: 1.5em;
 }
 
-@media(min-width: 500px) {
+.Footer--smallColumns {
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: -1em;
+}
+.Footer--smallColumn {
+  flex: 1;
+  margin-left: 1em;
+}
+
+@media(min-width: 550px) {
   .Footer {
     text-align: left;
   }
   .Footer--columns {
     display: flex;
     justify-content: space-between;
-    max-width: 60em;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: -1em;
   }
   .Footer--column {
-    flex: 1 1 10em;
+    flex: 1;
     margin-left: 1em;
   }
-  .Footer--column:first-child {
-    margin-left: 0;
+  .Footer--smallColumn {
+    flex: 0;
   }
 }
 
 .Footer--logoLink {
+  color: inherit;
   display: block;
-  color: white;
+  font-size: 0.7em;
   text-decoration: none;
 }
 .Footer--logo {
-  width: 4em;
+  width: 3.5rem;
 }
 
 .Footer--linkList {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  white-space: nowrap;
 }
-.Footer--linkList + .Footer--linkList {
-  margin-top: 1.5em;
-}
-
-.Footer--copyright {
-  text-align: center;
-  margin: 2em 0 0;
+.Footer--linkList a {
+  display: block;
 }
 
 .Footer--socialList {
@@ -69,4 +76,10 @@
 }
 .Footer--socialIcon:focus, .Footer--socialIcon:hover {
   transform: scale(1.2);
+}
+
+.Footer--copyright {
+  font-size: 0.7em;
+  margin: 2em 0 0;
+  text-align: center;
 }
