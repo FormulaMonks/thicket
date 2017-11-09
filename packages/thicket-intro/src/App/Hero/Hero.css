@@ -6,10 +6,12 @@
   justify-content: space-around;
 }
 
-.Hero--PinToTop {
-  position: absolute;
-  top: 0;
-  width: 100%;
+@media(min-height: 400px) {
+  .Hero--PinToTop {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
 }
 
 /* this is vertically centered by virtue of .Hero's 'flex'-related properties */
