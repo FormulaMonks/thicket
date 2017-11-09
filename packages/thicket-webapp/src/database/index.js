@@ -105,7 +105,7 @@ class Database extends EventEmitter {
   publicationsDelete = (communityId, id) => {
     return new Promise((resolve, reject) =>
       this.initCommunity(communityId).then(y => {
-        y.share.publications.delete(y.share.publications.toArray().findIndex(id => id === id))
+        y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
         this.unlink(id, resolve)
       })
     )}
@@ -154,9 +154,12 @@ class Database extends EventEmitter {
       y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
 
   communityDelete = id => {
-    // TODO
-    // remove all local publications
-    // leave room
+    return this.initCommunity(id).then(y => {
+      // async remove all local publications
+      y.share.publications.toArray().forEach(hash => this.unlink(hash))
+      // leave room
+      return y.destroy()
+    })
   }
 
   communityGet = communityId =>

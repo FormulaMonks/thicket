@@ -26,6 +26,7 @@ class New extends Component {
         <Button key="cancel" onClick={this.props.onCancel}>Cancel</Button>,
         <Button key="save" onClick={() => this.props.onSave(this.state.title)}>Save</Button>
       ]}
+      onClose={this.props.onCancel}
     />
   }
 }

@@ -61,7 +61,7 @@ class Community extends Component {
           <h2 className="community__title">{this.state.title}</h2>
           <div className="community__controls">
             <img src={link} alt="Invite link" />
-            <img src={settings} alt="Settings" onClick={() => this.setState({ mode: SETTINGS })} onClose={() => this.setState({ mode: null })} />
+            <img src={settings} alt="Settings" onClick={() => this.setState({ mode: SETTINGS })} />
             <img src={user} alt="User" />
           </div>
         </div>
@@ -80,27 +80,33 @@ class Community extends Component {
                 .then(() => this.setState({ mode: null }))
             }} />
         </div>,
+      mode === SETTINGS &&
+        <Settings
+          key="settings"
+          onClose={() => this.setState({ mode: null })}
+          title={title}
+          communityId={c}
+          history={this.props.history}
+          />,
       mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: null })}>Close invite</div>,
       mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
       mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,
     ]
   }
 
-  fetchPublications = c => {
+  fetchPublications = c =>
     db.community(this.props.match.params.c).publications.getAll()
       .then(data => this.setState({ data, loading: false }))
-  }
 
-  fetchMetadata = c => {
+  fetchMetadata = c =>
     db.community(this.props.match.params.c).get()
       .then(({ title }) => this.setState({ title }))
-  }
 
-  setMode = () => {
+  setMode = () =>
     localForage.getItem('hasDoneFirstGIF').then(f =>
       localForage.getItem('hasDoneCommunityOnboarding').then(o =>
         this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : this.state.mode })))
-  }
+
 }
 
 export default Community
