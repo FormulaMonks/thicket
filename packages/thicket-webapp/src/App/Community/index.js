@@ -96,11 +96,11 @@ class Community extends Component {
     ]
   }
 
-  fetchPublications = c =>
+  fetchPublications = () =>
     db.community(this.props.match.params.c).publications.getAll()
       .then(data => this.setState({ data, loading: false }))
 
-  fetchMetadata = c =>
+  fetchMetadata = () =>
     db.community(this.props.match.params.c).get()
       .then(({ title }) => this.setState({ title }))
 
