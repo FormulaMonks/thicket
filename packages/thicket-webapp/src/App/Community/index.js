@@ -8,6 +8,7 @@ import Onboarding from './Onboarding'
 import Create from '../../components/Create'
 import Publication from '../../components/Publication'
 import Settings from './Settings'
+import Invite from './Invite'
 import db from '../../database'
 import './Community.css'
 import add from './add.svg'
@@ -60,7 +61,7 @@ class Community extends Component {
         <div className="community__header">
           <h2 className="community__title">{this.state.title}</h2>
           <div className="community__controls">
-            <img src={link} alt="Invite link" />
+            <img src={link} alt="Invite link" onClick={() => this.setState({ mode: INVITE })} />
             <img src={settings} alt="Settings" onClick={() => this.setState({ mode: SETTINGS })} />
             <img src={user} alt="User" />
           </div>
@@ -75,10 +76,11 @@ class Community extends Component {
       <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
       mode === CREATE &&
         <div key="create" className="community__create">
-          <Create community={c} nickname={this.props.nickname} onSave={data => {
-              db.community(c).publications.post(data)
-                .then(() => this.setState({ mode: null }))
-            }} />
+          <Create
+            community={c}
+            nickname={this.props.nickname}
+            onSave={data => db.community(c).publications.post(data).then(() => this.setState({ mode: null }))}
+            />
         </div>,
       mode === SETTINGS &&
         <Settings
@@ -88,7 +90,7 @@ class Community extends Component {
           communityId={c}
           history={this.props.history}
           />,
-      mode === INVITE && <div key="invite" onClick={() => this.setState({ mode: null })}>Close invite</div>,
+      mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} />,
       mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
       mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,
     ]
