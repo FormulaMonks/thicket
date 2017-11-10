@@ -38,6 +38,26 @@ const config = {
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
+const timedPromiseConcatStream = ({ hash, stream }) => {
+  return new Promise((resolve, reject) => {
+    let returned = false
+    // timed fallback
+    setTimeout(() => {
+      if (!returned) {
+        returned = true
+        resolve({ hash, src: `https://ipfs.io/ipfs/${hash}` })
+      }
+    }, 1000)
+    // or
+    stream.pipe(concat(src => {
+      if (!returned) {
+        returned = true
+        resolve({ hash, src: toBase64(src) })
+      }
+    }))
+  })
+}
+
 class Database extends EventEmitter {
   constructor() {
     super()
@@ -117,8 +137,9 @@ class Database extends EventEmitter {
           pull(
             pull.values(data),
             pullPromise.through(hash => node.files.cat(hash).then(stream => ({ hash, stream }))),
-            pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src }))))),
-            pull.map(({ hash, src }) => ({ id: hash, src: toBase64(src), ...y.share.publicationsMetadata.get(hash) })),
+            //pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src: toBase64(src) }))))),
+            pullPromise.through(timedPromiseConcatStream),
+            pull.map(({ hash, src }) => ({ id: hash, src, ...y.share.publicationsMetadata.get(hash) })),
             pull.collect((err, res) => resolve(res)),
           )
         })
