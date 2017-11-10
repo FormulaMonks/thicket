@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Wrap = styled.div`
+  background-color: rgba(255, 255, 255, 0.4);
   position: absolute;
   z-index: 1;
   height: 100%;
@@ -12,6 +13,11 @@ const Wrap = styled.div`
   justify-content: center;
   box-sizing: border-box;
 `
+
+const Title = styled.p`
+  font-size: 2em;
+`
+
 const ShootBtn = styled.button`
   text-indent: -9999em;
   height: 32px;
@@ -24,8 +30,8 @@ const ShootBtn = styled.button`
 
   &: after{
     position: absolute;
-    top: -300%;
-    left: -300%;
+    top: -36px;
+    left: -36px;
     border: 6px solid rgba(0, 0, 0,.5);
     padding: 36px;
     border-radius: 50%;
@@ -34,8 +40,8 @@ const ShootBtn = styled.button`
 
   &: before{
     position: absolute;
-    top: -200%;
-    left: -200%;
+    top: -24px;
+    left: -24px;
     border: 6px solid rgba(0, 0, 0, .3);
     padding: 24px;
     border-radius: 50%;
@@ -46,7 +52,7 @@ const ShootBtn = styled.button`
 const Controls = props => {
   const { controlsWrap, controlsTitle, controlsButton } = props.classNames
   return <Wrap className={controlsWrap}>
-    <h2 className={controlsTitle}>Create a GIF</h2>
+    <Title className={controlsTitle}>Create a GIF</Title>
     <ShootBtn className={controlsButton} onClick={props.onClick}>Shoot</ShootBtn>
   </Wrap>
 }

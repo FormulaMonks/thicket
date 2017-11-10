@@ -14,7 +14,7 @@ const Controls = styled.div`
   margin: 10px 0 0 0;
 `
 
-const Review = props => {
+export default props => {
   const { reviewButton, reviewPreview, reviewControlsWrap, reviewRedo, reviewApprove } = props.classNames
   return [
     <Preview className={reviewPreview} key="preview" src={props.src} />,
@@ -24,5 +24,3 @@ const Review = props => {
     </Controls>,
   ]
 }
-
-export default Review
