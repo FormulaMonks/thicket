@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="41px" viewBox="0 0 38 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feMorphology radius="1" in="SourceAlpha" operator="dilate" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.0520720109 0" in="shadowBlurOuter1" type="matrix" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" filter="url(#filter-1)">
+        <path d="M37,18 C37,27.941 28.941,36 19,36 C9.059,36 1,27.941 1,18 C1,8.059 9.059,0 19,0 C28.941,0 37,8.059 37,18 L37,18 Z M20.083,18 L22.024,18 L22.282,15.575 L20.083,15.575 L20.086,14.362 C20.086,13.73 20.146,13.391 21.055,13.391 L22.268,13.391 L22.268,10.966 L20.326,10.966 C17.994,10.966 17.172,12.143 17.172,14.12 L17.172,15.575 L15.718,15.575 L15.718,18 L17.172,18 L17.172,25.034 L20.083,25.034 L20.083,18 L20.083,18 Z" id="Facebook-Copy" fill="#FFFFFF"></path>
+    </g>
+</svg>

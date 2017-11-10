@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="41px" viewBox="0 0 38 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M1340,91 C1340,100.941 1331.941,109 1322,109 C1312.059,109 1304,100.941 1304,91 C1304,81.059 1312.059,73 1322,73 C1331.941,73 1340,81.059 1340,91 L1340,91 Z M1320.31489,98.7338166 L1323.6312,98.7338166 L1323.6312,93.2661187 C1323.6312,92.973496 1323.65304,92.6814528 1323.74044,92.472271 C1323.98019,91.8876052 1324.52582,91.2823688 1325.44199,91.2823688 C1326.64221,91.2823688 1327.122,92.1802278 1327.122,93.4958709 L1327.122,98.7338166 L1330.4383,98.7338166 L1330.4383,93.1198073 C1330.4383,90.1127473 1328.80229,88.7130839 1326.62006,88.7130839 C1324.83111,88.7130839 1324.04573,89.6949633 1323.60935,90.3627804 L1323.6312,90.3627804 L1323.6312,88.9431259 L1320.31489,88.9431259 C1320.35829,89.8618451 1320.31489,98.7338166 1320.31489,98.7338166 M1316.8545,87.7506161 C1318.01102,87.7506161 1318.73085,86.9984889 1318.73085,86.05833 C1318.70929,85.09818 1318.01102,84.3672028 1316.87665,84.3672028 C1315.74198,84.3672028 1315.0003,85.09818 1315.0003,86.05833 C1315.0003,86.9984889 1315.71984,87.7506161 1316.83295,87.7506161 L1316.8545,87.7506161 Z M1315.29556,98.7935 L1318.61186,98.7935 L1318.61186,89.0028093 L1315.29556,89.0028093 L1315.29556,98.7935 Z" id="linked-footer-path"></path>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="linked-footer-filter">
+            <feMorphology radius="0.5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.074388587 0" type="matrix" in="shadowOffsetOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FOOTER" transform="translate(-1303.000000, -73.000000)">
+            <g id="linkedin">
+                <g>
+                    <use fill="black" fill-opacity="1" filter="url(#linked-footer-filter)" xlink:href="#linked-footer-path"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#linked-footer-path"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
