@@ -12,7 +12,13 @@ class Demo extends Component {
         only the part inside the dashed border.
       </p>
       <div style={{ width: 500, height: 400, border: '3px dashed' }}>
-        <Camera onSave={() => alert('saving yr gif!')} />
+        <Camera
+          onSave={dataUrl => {
+            const myImage = new Image()
+            myImage.src = dataUrl
+            document.body.appendChild(myImage)
+          }}
+        />
       </div>
     </div>
   }

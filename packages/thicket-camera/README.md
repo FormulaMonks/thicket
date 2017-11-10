@@ -17,7 +17,7 @@ var Camera = require('thicket-camera')
 ``` jsx
 <Camera
   onSave={dataUrl => {
-    myImage = new Image()
+    const myImage = new Image()
     myImage.src = dataUrl
     document.body.appendChild(myImage)
   }
