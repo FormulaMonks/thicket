@@ -21,6 +21,7 @@ const ONBOARD = 'show the user how to get things done around here'
 const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
 const SETTINGS = 'user can modify the community title and/or leave the community'
+const UNINVITED = 'user has not been invited to the community'
 
 const NoContent = props => <div className="nocontent">
   <h2 key="title">Your Community doesn’t have content yet!</h2>
@@ -39,11 +40,17 @@ class Community extends Component {
   }
 
   componentDidMount() {
-    this.fetchPublications()
-    this.fetchMetadata()
-    db.on('update', this.fetchPublications)
-    db.on('update', this.fetchMetadata)
-    this.setMode()
+    localForage.getItem('communities').then(data => {
+      if(!data || !data.includes(this.props.match.params.c)) {
+        this.setState({ mode: UNINVITED })
+        return
+      }
+      this.fetchPublications()
+      this.fetchMetadata()
+      db.on('update', this.fetchPublications)
+      db.on('update', this.fetchMetadata)
+      this.setMode()
+    })
   }
 
   componentWillUnmount() {
@@ -54,6 +61,11 @@ class Community extends Component {
   render() {
     const { data, mode, title, loading } = this.state
     const { c } = this.props.match.params
+
+    if (mode === UNINVITED) {
+      this.props.history.replace('/communities')
+      return <div>404</div>
+    }
 
     return [
       <div className="community" key="community">
