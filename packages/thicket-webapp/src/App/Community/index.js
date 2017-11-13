@@ -24,10 +24,10 @@ const SETTINGS = 'user can modify the community title and/or leave the community
 const UNINVITED = 'user has not been invited to the community'
 
 const NoContent = props => <div className="nocontent">
-  <h2 key="title">Your Community doesn’t have content yet!</h2>
-  <p key="message">Create new GIFs or invite someone to the Community to create and contribute their own GIFs.</p>
-  <Button key="new" onClick={props.onNew}><img src={add} alt="Create NEW GIF" />Create new GIF</Button>
-  <Button key="invite" onClick={props.onInvite}><img src={link} alt="Invite Link" />Invite Link</Button>
+  <h2>Your Community doesn’t have content yet!</h2>
+  <p>Create new GIFs or invite someone to the Community to create and contribute their own GIFs.</p>
+  <Button onClick={props.onNew}><img src={add} alt="Create NEW GIF" />Create new GIF</Button>
+  <Button onClick={props.onInvite}><img src={link} alt="Invite Link" />Invite Link</Button>
 </div>
 
 class Community extends Component {
