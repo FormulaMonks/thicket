@@ -2,7 +2,7 @@ import React from 'react'
 import Close from '../Close'
 import './Modal.css'
 
-const Modal = ({ header, main, footer, onClose }) => <div className="modal">
+const Modal = ({ header, children, footer, onClose }) => <div className="modal">
   <div className="modal__wrap">
     <div className="modal__close">
       <Close onClick={onClose} />
@@ -10,7 +10,7 @@ const Modal = ({ header, main, footer, onClose }) => <div className="modal">
     <div className="modal__inner">
       {header}
       <main className="modal__main">
-        {main}
+        {children}
       </main>
       {footer}
     </div>

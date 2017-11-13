@@ -18,16 +18,14 @@ class New extends Component {
   render() {
     return <Modal
       header={<div>Create New Community</div>}
-      main={[
-        <div key="title">Give your new Community a title:</div>,
-        <input key="value" type="text" onChange={e => this.setState({ title: e.currentTarget.value })} />
-      ]}
       footer={[
         <Button key="cancel" onClick={this.props.onCancel}>Cancel</Button>,
         <Button key="save" onClick={() => this.props.onSave(this.state.title)}>Save</Button>
       ]}
-      onClose={this.props.onCancel}
-    />
+      onClose={this.props.onCancel}>
+      <div>Give your new Community a title:</div>
+      <input type="text" onChange={e => this.setState({ title: e.currentTarget.value })} />
+    </Modal>
   }
 }
 

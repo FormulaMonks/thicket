@@ -64,9 +64,9 @@ const Footer = props => <footer className="firstgif__footer">
 
 const FirstGIF = props => <Modal
   header={<Header />}
-  main={<Main {...props} />}
   footer={<Footer onClose={() => close(props.onClose)} />}
-  onClose={() => close(props.onClose)}
-/>
+  onClose={() => close(props.onClose)}>
+    <Main {...props} />
+  </Modal>
 
 export default FirstGIF

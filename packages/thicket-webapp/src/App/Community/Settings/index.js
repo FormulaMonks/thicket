@@ -13,13 +13,11 @@ class Settings extends Component {
   render() {
     return <Modal
       header={<div>Community Settings</div>}
-      main={[
-        <input key="input" onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />,
-        <Button key="save" onClick={this.onSave}>Save</Button>,
-        <Button key="leave" onClick={this.onLeave}>Leave Community</Button>,
-      ]}
-      footer={<Button onClick={this.props.onClose}>Close</Button>}
-    />
+      footer={<Button onClick={this.props.onClose}>Close</Button>}>
+      <input onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />
+      <Button onClick={this.onSave}>Save</Button>
+      <Button onClick={this.onLeave}>Leave Community</Button>
+    </Modal>
   }
 
   onLeave = () => {
