@@ -33,6 +33,7 @@ class CameraAccess extends Component {
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(this.props.onGranted)
       .catch(() => this.setState({ rejected: true }))
+
 }
 
 export default CameraAccess

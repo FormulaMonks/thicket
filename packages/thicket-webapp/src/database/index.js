@@ -11,8 +11,9 @@ import EventEmitter from 'eventemitter3'
 import pull from 'pull-stream'
 import concat from 'concat-stream'
 import pullPromise from 'pull-promise'
+import pullSort from 'pull-sort'
 
-const config = {
+const ipfsConfig = {
   repo: 'thicket',
   EXPERIMENTAL: {
     pubsub: true,
@@ -34,6 +35,22 @@ const config = {
     ],
   },
 }
+
+const yConfig = (node, id) => ({
+  db: {
+    name: 'indexeddb'
+  },
+  connector: {
+    name: 'ipfs',
+    room: `thicket/${id}`,
+    ipfs: node,
+  },
+  share: {
+    publications: 'Array',
+    publicationsMetadata: 'Map',
+    metadata: 'Map'
+  }
+})
 
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
@@ -61,53 +78,44 @@ const timedPromiseConcatStream = ({ hash, stream }) => {
 class Database extends EventEmitter {
   constructor() {
     super()
-    this.ipfs = null
-    this.communities = new Map()
-    this.initIPFS()
+    this._ipfs = null
+    this._communities = new Map()
+    this._initIPFS()
   }
 
-  initIPFS() {
+  _initIPFS() {
     if (!this.ipfs) {
-      this.ipfs = new Promise((resolve, reject) => {
-        const node = new IPFS(config)
+      this._ipfs = new Promise((resolve, reject) => {
+        const node = new IPFS(ipfsConfig)
         node.once('ready', () => resolve(node))
       })
     }
-    return this.ipfs
+    return this._ipfs
   }
 
-  initCommunity(communityId) {
-    if (!this.communities.has(communityId)) {
-      this.communities.set(communityId, this.initIPFS().then(node =>
-        Y({
-          db: {
-            name: 'indexeddb'
-          },
-          connector: {
-            name: 'ipfs',
-            room: `thicket/${communityId}`,
-            ipfs: node,
-          },
-          share: {
-            publications: 'Array',
-            publicationsMetadata: 'Map',
-            metadata: 'Map'
-          }
-        }).then(y => {
-          y.share.metadata.observe(() => this.emit('update'))
-          y.share.publications.observe(() => this.emit('update'))
-          y.share.publicationsMetadata.observe(() => this.emit('update'))
+  _initCommunity(communityId) {
+    if (!communityId) {
+      throw new Error('Please provide a Community Id')
+    }
+    if (!this._communities.has(communityId)) {
+      this._communities.set(communityId, this._initIPFS().then(node =>
+        Y(yConfig(node, communityId)).then(y => {
+          y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
+          y.share.publications.observe(() =>
+            this._publicationsMap(communityId, y.share.publications.toArray()).then(data =>
+              this.emit(`update-${communityId}-publications`, data)))
+          y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
 
           return y
         })
       ))
     }
-    return this.communities.get(communityId)
+    return this._communities.get(communityId)
   }
 
-  unlink = (hash, cb = () => {}) =>
+  _unlink = (hash, cb = () => {}) =>
     // unlink from local storage
-    this.initIPFS().then(node =>
+    this._initIPFS().then(node =>
       // all blocks from this hash
       node.dag.get(new CID(hash), (err, res) =>
         pull(
@@ -124,22 +132,23 @@ class Database extends EventEmitter {
 
   publicationsDelete = (communityId, id) => {
     return new Promise((resolve, reject) =>
-      this.initCommunity(communityId).then(y => {
+      this._initCommunity(communityId).then(y => {
         y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
-        this.unlink(id, resolve)
+        this._unlink(id, resolve)
       })
     )}
 
-  publicationsMap = (communityId, data) => {
+  _publicationsMap = (communityId, data) => {
     return new Promise((resolve, reject) => {
-      this.initCommunity(communityId).then(y => {
-        this.initIPFS().then(node => {
+      this._initCommunity(communityId).then(y => {
+        this._initIPFS().then(node => {
           pull(
             pull.values(data),
             pullPromise.through(hash => node.files.cat(hash).then(stream => ({ hash, stream }))),
             //pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src: toBase64(src) }))))),
             pullPromise.through(timedPromiseConcatStream),
             pull.map(({ hash, src }) => ({ id: hash, src, ...y.share.publicationsMetadata.get(hash) })),
+            pullSort((a, b) => b.createdAt - a.createdAt),
             pull.collect((err, res) => resolve(res)),
           )
         })
@@ -151,18 +160,17 @@ class Database extends EventEmitter {
     this.publicationsGetAll(communityId, [id]).then(res => res[0])
 
   publicationsGetAll = (communityId, ids = []) =>
-    this.initCommunity(communityId)
+    this._initCommunity(communityId)
       .then(y => y.share.publications.toArray())
       .then(data => data.filter(id => !ids.length || ids.includes(id)))
-      .then(data => this.publicationsMap(communityId, data))
-      .then(data => data.sort((a, b) => b.createdAt - a.createdAt))
+      .then(data => this._publicationsMap(communityId, data))
 
   publicationsPost = (communityId, { src, ...data }) =>
-    this.initIPFS().then(node =>
+    this._initIPFS().then(node =>
       node.files
         .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
         .then(res =>
-          this.initCommunity(communityId).then(y => {
+          this._initCommunity(communityId).then(y => {
             const id = res[0].hash
             y.share.publications.push([id])
             y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
@@ -171,62 +179,29 @@ class Database extends EventEmitter {
       )
 
   publicationsPut = (communityId, id, data) =>
-    this.initCommunity(communityId).then(y =>
+    this._initCommunity(communityId).then(y =>
       y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
 
-  communityDelete = id => {
-    return this.initCommunity(id).then(y => {
+  communityDelete = communityId =>
+    this._initCommunity(communityId).then(y => {
       // async remove all local publications
-      y.share.publications.toArray().forEach(hash => this.unlink(hash))
+      y.share.publications.toArray().forEach(hash => this._unlink(hash))
       // leave room
       return y.destroy()
     })
-  }
 
   communityGet = communityId =>
-    this.initCommunity(communityId)
+    this._initCommunity(communityId)
       .then(y => y.share.metadata.get(communityId))
-      .then(data => { return { id: communityId, title: '', ...data }})
+      .then(data => ({ id: communityId, title: '', ...data }))
 
   communityPost = (communityId, data) =>
-    this.initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...data, createdAt: Date.now() }))
+    this._initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...data, createdAt: Date.now() }))
 
   communityPut = (communityId, data) =>
-    this.initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data }))
+    this._initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data }))
 }
 
 Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
 
-class DBInterface extends EventEmitter {
-  constructor() {
-    super()
-    this.db = new Database()
-    this.db.on('update', () => this.emit('update'))
-  }
-
-  community(communityId) {
-    if (!communityId) {
-      throw new Error('Please provide a Community Id')
-    }
-    const { db } = this
-    return {
-      // community
-      delete: () => db.communityDelete(communityId),
-      get: () => db.communityGet(communityId),
-      post: data => db.communityPost(communityId, data),
-      put: data => db.communityPut(communityId, data),
-      // publications
-      get publications() {
-        return {
-          delete: id => db.publicationsDelete(communityId, id),
-          get: id => db.publicationsGet(communityId, id),
-          getAll: id => db.publicationsGetAll(communityId, id),
-          post: data => db.publicationsPost(communityId, data),
-          put: (id, data) => db.publicationsPut(communityId, id, data),
-        }
-      }
-    }
-  }
-}
-
-export default new DBInterface()
+export default new Database()

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { Button, Spinner } from 'thicket-elements'
-import localForage from 'localforage'
 import Grid from './Grid'
 import FirstGIF from './FirstGIF'
 import Onboarding from './Onboarding'
@@ -9,19 +8,20 @@ import Create from '../../components/Create'
 import Publication from '../../components/Publication'
 import Settings from './Settings'
 import Invite from './Invite'
-import db from '../../database'
 import './Community.css'
 import add from './add.svg'
 import link from './link.svg'
 import settings from './settings.svg'
-import user from './user.svg'
+import usersvg from './user.svg'
+import store from '../../database/store'
+const { user, communities } = store
 
 const FIRST_GIF = 'show the user info from their first gif'
 const ONBOARD = 'show the user how to get things done around here'
 const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
 const SETTINGS = 'user can modify the community title and/or leave the community'
-const UNINVITED = 'user has not been invited to the community'
+const UNINVITED = 'user has not been invited to the community or the community does not exist'
 
 const NoContent = props => <div className="nocontent">
   <h2>Your Community doesn’t have content yet!</h2>
@@ -40,22 +40,28 @@ class Community extends Component {
   }
 
   componentDidMount() {
-    localForage.getItem('communities').then(data => {
-      if(!data || !data.includes(this.props.match.params.c)) {
-        this.setState({ mode: UNINVITED })
-        return
-      }
-      this.fetchPublications()
-      this.fetchMetadata()
-      db.on('update', this.fetchPublications)
-      db.on('update', this.fetchMetadata)
-      this.setMode()
-    })
+    const { c } = this.props.match.params
+    communities.has(c)
+      .then(v => {
+        if (!v) {
+          this.setState({ mode: UNINVITED })
+          return
+        }
+
+        this.fetchPublications()
+        communities.get(c).then(({ publications }) => publications.on('update', this.fetchPublications))
+        this.fetchMetadata()
+        communities.get(c).then(community => community.on('update', this.fetchMetadata))
+        this.setMode()
+      })
   }
 
   componentWillUnmount() {
-    db.off('update', this.fetchPublications)
-    db.off('update', this.fetchMetadata)
+    if (this.state.mode !== UNINVITED) {
+      const { c } = this.props.match.params
+      communities.get(c).then(({ publications }) => publications.off('update', this.fetchPublications))
+      communities.get(c).then(community => community.off('update', this.fetchMetadata))
+    }
   }
 
   render() {
@@ -63,7 +69,6 @@ class Community extends Component {
     const { c } = this.props.match.params
 
     if (mode === UNINVITED) {
-      this.props.history.replace('/communities')
       return <div>404</div>
     }
 
@@ -75,7 +80,7 @@ class Community extends Component {
           <div className="community__controls">
             <img src={link} alt="Invite link" onClick={() => this.setState({ mode: INVITE })} />
             <img src={settings} alt="Settings" onClick={() => this.setState({ mode: SETTINGS })} />
-            <img src={user} alt="User" />
+            <img src={usersvg} alt="User" />
           </div>
         </div>
         <div className="community__body">
@@ -91,7 +96,10 @@ class Community extends Component {
           <Create
             community={c}
             nickname={this.props.nickname}
-            onSave={data => db.community(c).publications.post(data).then(() => this.setState({ mode: null }))}
+            onSave={data => communities.get(c).then(({ publications }) =>
+              publications.post(data)
+                .then(() => user.put({ nickname: data.nickname }))
+                .then(() => this.setState({ mode: null })))}
             />
         </div>,
       mode === SETTINGS &&
@@ -109,17 +117,18 @@ class Community extends Component {
   }
 
   fetchPublications = () =>
-    db.community(this.props.match.params.c).publications.getAll()
-      .then(data => this.setState({ data, loading: false }))
+    communities.get(this.props.match.params.c)
+      .then(({ publications }) => publications.getAll()
+        .then(data => this.setState({ data, loading: false })))
 
   fetchMetadata = () =>
-    db.community(this.props.match.params.c).get()
+    communities.get(this.props.match.params.c)
+      .then(community => community.get())
       .then(({ title }) => this.setState({ title }))
 
   setMode = () =>
-    localForage.getItem('hasDoneFirstGIF').then(f =>
-      localForage.getItem('hasDoneCommunityOnboarding').then(o =>
-        this.setState({ mode: !f ? FIRST_GIF : !o ? ONBOARD : this.state.mode })))
+   user.get(({ hasDoneFirstGIF, hasDoneCommunityOnboarding }) =>
+      this.setState({ mode: !hasDoneFirstGIF ? FIRST_GIF : !hasDoneCommunityOnboarding ? ONBOARD : this.state.mode }))
 
 }
 

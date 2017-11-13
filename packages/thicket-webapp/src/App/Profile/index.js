@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import localForage from 'localforage'
+import store from '../../database/store'
 import { Button } from 'thicket-elements'
 import './Profile.css'
 
@@ -28,7 +28,7 @@ class Profile extends Component {
 
   close = () => this.props.history.goBack() || this.props.history.push('/')
 
-  onSave = () => localForage.setItem('nickname', this.state.nickname).then(this.close)
+  onSave = () => store.user.put({ nickname: this.state.nickname }).then(this.close)
 
 }
 

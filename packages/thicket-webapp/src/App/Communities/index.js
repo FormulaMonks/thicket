@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import localForage from 'localforage'
 import uuid from 'uuid'
 import Modal from '../../components/Modal'
 import { Button } from 'thicket-elements'
-import db from '../../database'
 import './Communities.css'
 import placeholder from './placeholder.png'
 import add from './add.svg'
+import store from '../../database/store'
 
+const { communities } = store
 const CREATE = 'user is creating a community'
 
 class New extends Component {
@@ -34,7 +34,12 @@ class Communities extends Component {
   state = { data: [], mode: null }
 
   componentDidMount() {
-    localForage.getItem('communities').then(data => this.setState({ data: data || [] }))
+    this.fetch()
+    communities.on('update', this.fetch)
+  }
+
+  componentWillUnmount() {
+    communities.off('update', this.fetch)
   }
 
   render() {
@@ -63,11 +68,16 @@ class Communities extends Component {
     ]
   }
 
+  fetch = () => {
+    communities.getAll().then(data => this.setState({ data }))
+  }
+
   onSave = title => {
     const newId = uuid()
-    db.community(newId).post({ title, createdBy: this.props.nickname })
-      .then(() => localForage.setItem('communities', this.state.data.concat(newId)))
-      .then(() => this.setState({ mode: null, data: this.state.data.concat(newId) }))
+    communities.post(newId)
+      .then(() => communities.get(newId)
+        .then(community => community.post({ title, createdBy: this.props.nickname })))
+      .then(() => this.setState({ mode: null }))
   }
 }
 
