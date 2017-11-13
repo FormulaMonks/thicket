@@ -56,11 +56,11 @@ class Publications extends EventEmitter {
   
   getAll = () => {
     if (this._fetchedAll) {
-      this._fetchedAll = true
       return Promise.resolve(this.data)
     }
     return db.publicationsGetAll(this.communityId)
       .then(data => {
+        this._fetchedAll = true
         this.data = data
         return data
       })
