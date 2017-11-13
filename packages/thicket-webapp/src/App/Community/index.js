@@ -127,7 +127,7 @@ class Community extends Component {
       .then(({ title }) => this.setState({ title }))
 
   setMode = () =>
-   user.get(({ hasDoneFirstGIF, hasDoneCommunityOnboarding }) =>
+   user.get().then(({ hasDoneFirstGIF, hasDoneCommunityOnboarding }) =>
       this.setState({ mode: !hasDoneFirstGIF ? FIRST_GIF : !hasDoneCommunityOnboarding ? ONBOARD : this.state.mode }))
 
 }
