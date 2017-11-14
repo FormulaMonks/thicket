@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
 import uuid from 'uuid'
-import Tos from './Tos'
 import db from '../../database'
 import localForage from 'localforage'
 import Create from '../../components/Create'
@@ -40,8 +39,7 @@ class Welcome extends Component{
 
     return <div className="welcome">
       {mode === ARRIVED && <Arrived onContinue={() => this.continue(ONBOARD)} mode={mode} />}
-      {mode === ONBOARD && <Onboarding onContinue={() => this.continue(TOS)} />}
-      {mode === TOS && <Tos onContinue={() => this.continue(CAMERA_ACCESS)} />}
+      {mode === ONBOARD && <Onboarding onContinue={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
       {mode === CREATE && <div className="welcome__create">
           <Create nickname={nickname} onSave={this.onSave} />
