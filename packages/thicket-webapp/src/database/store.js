@@ -27,15 +27,15 @@ class Publications extends EventEmitter {
     
     super()
     this.communityId = communityId
-    this.data = []
+    this.list = []
 
     // updates from db
-    db.on(`update-${communityId}-publications`, data => {
-      this.data = data
+    db.on(`update-${communityId}-publications`, list => {
+      this.list = list
       this.emit('update')
     })
     db.on(`update-${communityId}-publicationsMetadata`, data => {
-      this.data = this.data.map(p => p.id !== data.id ? p : data)
+      this.list = this.list.map(p => p.id !== data.id ? p : data)
       this.emit('update')
     })
   }
@@ -43,38 +43,31 @@ class Publications extends EventEmitter {
   delete = id => db.publicationsDelete(this.communityId, id)
   
   get = id => {
-    const cached = this.data.find(p => p.id === id)
+    const cached = this.list.find(p => p.id === id)
     if (cached) {
       return Promise.resolve(cached)
     }
     return db.publicationsGet(this.communityId, id)
       .then(data => {
-        this.data.push(data)
+        this.list.push(data)
         return data
       })
   }
   
-  getAll = () => {
-    if (this._fetchedAll) {
-      return Promise.resolve(this.data)
-    }
-    return db.publicationsGetAll(this.communityId)
-      .then(data => {
-        this._fetchedAll = true
-        this.data = data
-        return data
-      })
-  }
+  getAll = () => this._fetchedAll
+    ? Promise.resolve(this.list)
+    : db.publicationsGetAll(this.communityId)
+        .then(list => {
+          this._fetchedAll = true
+          this.list = list
+          return list
+        })
   
   post = data => db.publicationsPost(this.communityId, data)
   
   put = (id, data) => db.publicationsPut(this.communityId, id, data)
-    .then(() => this.data = this.data.map(p => {
-      if (p.id) {
-        return { id, ...data }
-      }
-      return p
-    }))
+    .then(() => this.list = this.list.map(p => p.id === id ? { id, ...data } : p))
+
 }
 
 /*
