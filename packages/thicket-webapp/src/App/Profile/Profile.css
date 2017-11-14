@@ -1,7 +1,6 @@
 .profile{
   display: flex;
   height: 100%;
-  widht: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
