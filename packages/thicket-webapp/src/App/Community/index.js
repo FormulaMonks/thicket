@@ -57,11 +57,9 @@ class Community extends Component {
   }
 
   componentWillUnmount() {
-    if (this.state.mode !== UNINVITED) {
-      const { c } = this.props.match.params
-      communities.get(c).then(({ publications }) => publications.off('update', this.fetchPublications))
-      communities.get(c).then(community => community.off('update', this.fetchMetadata))
-    }
+    const { c } = this.props.match.params
+    communities.get(c).then(({ publications }) => publications.off('update', this.fetchPublications))
+    communities.get(c).then(community => community.off('update', this.fetchMetadata))
   }
 
   render() {
