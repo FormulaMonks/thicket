@@ -115,24 +115,24 @@ class EventEmitterCommunities extends EventEmitter {
     super()
 
     // user communities
-    this.delete = id => ctx.initCommunities()
+    this.delete = id => ctx._initCommunities()
       .then(() => this.get(id).then(community => community.delete()))
       .then(() => state.userCommunities.delete(id))
       .then(() => localForage.setItem('userCommunities', [...state.userCommunities]))
       .then(() => this.emit('update', [...state.userCommunities]))
 
-    this.getAll = () => ctx.initCommunities().then(() => [...state.userCommunities])
+    this.getAll = () => ctx._initCommunities().then(() => [...state.userCommunities])
 
-    this.has = id => ctx.initCommunities().then(() => state.userCommunities.has(id))
+    this.has = id => ctx._initCommunities().then(() => state.userCommunities.has(id))
 
-    this.post = id => ctx.initCommunities()
+    this.post = id => ctx._initCommunities()
       .then(() => state.userCommunities.add(id))
       .then(() => state.communities.set(id, new Community(id)))
       .then(() => localForage.setItem('userCommunities', [...state.userCommunities]))
       .then(() => this.emit('update', [...state.userCommunities]))
 
     // communities
-    this.get = id => ctx.initCommunities()
+    this.get = id => ctx._initCommunities()
       .then(() => { if (!state.communities.has(id)) state.communities.set(id, new Community(id)) })
       .then(() => state.communities.get(id))
   }
@@ -141,27 +141,28 @@ class EventEmitterCommunities extends EventEmitter {
 class User extends EventEmitter {
   constructor() {
     super()
-    this.initUser()
-    this.initCommunities()
+    this._initUser()
+    this._initCommunities()
+    this._subscribe()
   }
 
   // user
-  initUser() {
+  _initUser() {
     if (!this.user) {
       this.user = localForage.getItem('user').then(v => state.user = v || state.user)
     }
     return this.user
   }
 
-  get = () => this.initUser().then(() => state.user)
+  get = () => this._initUser().then(() => state.user)
   
-  put = data => this.initUser()
+  put = data => this._initUser()
     .then(() => state.user = { ...state.user, ...data })
     .then(() => localForage.setItem('user', state.user))
     .then(() => this.emit('update'))
   
   // user communities & communities
-  initCommunities() {
+  _initCommunities() {
     if (!this.userCommunities) {
       this.userCommunities = localForage.getItem('userCommunities').then(v => state.userCommunities = new Set(v || []))
     }
@@ -174,6 +175,26 @@ class User extends EventEmitter {
     }
     return this._communities
   }
+
+  // subscribe to all communities
+  // this helps redistribute content and data without need for the UI
+  // to visit the related sections
+  _subscribe() {
+    this._initCommunities().then(() => {
+      for (const communityId of state.userCommunities) {
+        // the next line will subscribe to the communities's rooms
+        // thus becoming part of the mesh and redistributing the data
+        // for the Array and Map y-elements
+        this.communities.get(communityId)
+          // this is potentially terribly expensive
+          // as it would get all publications for all communities
+          // and one by one would store all the files locally
+          // and in memory (state cache keeps the data source for gifs)
+          .then(({ publications }) => publications.getAll())
+      }
+    })
+  }
+
 }
 
 const user = new User()
