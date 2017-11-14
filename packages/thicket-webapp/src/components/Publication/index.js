@@ -90,25 +90,23 @@ class Publication extends Component {
     if (mode === DELETE) {
       return <Modal
         header={<div>Confirm Delete GIF</div>}
-        main={<div>
-            <div>Are you sure you want to delete this GIF:</div>
-            <div>{this.state.gif.nickname}</div>
-            <div>NOTE: this action cannot be undone</div>
-          </div>}
         footer={<div>
             <Button onClick={() => this.setState({ mode: null })}>Cancel</Button>
             <Button onClick={this.onDelete}>Confirm</Button>
           </div>}
-        onClose={() => this.setState({ mode: null })}
-      />
+        onClose={() => this.setState({ mode: null })}>
+        <div>Are you sure you want to delete this GIF:</div>
+        <div>{this.state.gif.caption}</div>
+        <div>NOTE: this action cannot be undone</div>
+      </Modal>
     }
 
     return <Modal
       header={<Header />}
-      main={<Main gif={this.state.gif} onChange={gif => this.setState({ gif, modified: true })} />}
       footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ mode: DELETE })} />}
-      onClose={this.close}
-    />
+      onClose={this.close}>
+      <Main gif={this.state.gif} onChange={gif => this.setState({ gif, modified: true })} />
+    </Modal>
   }
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
