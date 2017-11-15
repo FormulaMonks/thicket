@@ -10,7 +10,7 @@ const Grid = props => <ul className="communityGrid">
       Create New GIF
     </button>
   </li>
-  {props.data.map((item, index) =>
+  {props.list.map((item, index) =>
     <li key={item.id} className="communityGrid__element">
       <Link to={`/c/${props.community}/${item.id}`} className="communityGrid__link">
         <img src={item.src} alt={item.caption} className="communityGrid__img" />
