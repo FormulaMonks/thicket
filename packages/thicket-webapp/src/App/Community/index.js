@@ -35,35 +35,37 @@ class Community extends Component {
   state = {
     mode: null,
     loading: true,
-    data: [],
+    list: [],
     title: '',
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const { c } = this.props.match.params
-    communities.has(c)
-      .then(v => {
-        if (!v) {
-          this.setState({ mode: UNINVITED })
-          return
-        }
+    const invited = await communities.has(c)
+    if (!invited) {
+      this.setState({ mode: UNINVITED })
+      return
+    }
+    this.fetchMetadata()
+    this.fetchPublications()
+    this.setMode()
 
-        this.fetchPublications()
-        communities.get(c).then(({ publications }) => publications.on('update', this.fetchPublications))
-        this.fetchMetadata()
-        communities.get(c).then(community => community.on('update', this.fetchMetadata))
-        this.setMode()
-      })
+    const community = await communities.get(c)
+    const { publications } = community
+    community.on('update', this.fetchMetadata)
+    publications.on('update', this.fetchPublications)
   }
 
-  componentWillUnmount() {
+  async componentWillUnmount() {
     const { c } = this.props.match.params
-    communities.get(c).then(({ publications }) => publications.off('update', this.fetchPublications))
-    communities.get(c).then(community => community.off('update', this.fetchMetadata))
+    const community = await communities.get(c)
+    const { publications } = community
+    community.off('update', this.fetchMetadata)
+    publications.off('update', this.fetchPublications)
   }
 
   render() {
-    const { data, mode, title, loading } = this.state
+    const { list, mode, title, loading } = this.state
     const { c } = this.props.match.params
 
     if (mode === UNINVITED) {
@@ -83,22 +85,15 @@ class Community extends Component {
         </div>
         <div className="community__body">
           {loading ? <Spinner /> : [
-            !!data.length && <Grid key="grid" community={c} data={data} onNew={() => this.setState({ mode: CREATE })} />,
-            !data.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
+            !!list.length && <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />,
+            !list.length && <NoContent key="nocontent" onNew={() => this.setState({ mode: CREATE })} onInvite={() => this.setState({ mode: INVITE })}/>
           ]}
         </div>
       </div>,
       <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
       mode === CREATE &&
         <div key="create" className="community__create">
-          <Create
-            community={c}
-            nickname={this.props.nickname}
-            onSave={data => communities.get(c).then(({ publications }) =>
-              publications.post(data)
-                .then(() => user.put({ nickname: data.nickname }))
-                .then(() => this.setState({ mode: null })))}
-            />
+          <Create community={c} nickname={this.props.nickname} onSave={this.onSave} />
         </div>,
       mode === SETTINGS &&
         <Settings
@@ -114,19 +109,29 @@ class Community extends Component {
     ]
   }
 
-  fetchPublications = () =>
-    communities.get(this.props.match.params.c)
-      .then(({ publications }) => publications.getAll()
-        .then(data => this.setState({ data, loading: false })))
+  fetchPublications = async () => {
+    const { publications } = await communities.get(this.props.match.params.c)
+    const list = await publications.getAll()
+    this.setState({ list, loading: false })
+  }
 
-  fetchMetadata = () =>
-    communities.get(this.props.match.params.c)
-      .then(community => community.get())
-      .then(({ title }) => this.setState({ title }))
+  fetchMetadata = async () => {
+    const community = await communities.get(this.props.match.params.c)
+    const { title } = await community.get()
+    this.setState({ title })
+  }
 
-  setMode = () =>
-   user.get().then(({ hasDoneFirstGIF, hasDoneCommunityOnboarding }) =>
-      this.setState({ mode: !hasDoneFirstGIF ? FIRST_GIF : !hasDoneCommunityOnboarding ? ONBOARD : this.state.mode }))
+  onSave = async data => {
+    const { publications } = await communities.get(this.props.match.params.c)
+    await publications.post(data)
+    await user.put({ nickname: data.nickname })
+    this.setState({ mode: null })
+  }
+
+  setMode = async () => {
+    const { hasDoneFirstGIF, hasDoneCommunityOnboarding } = await user.get()
+    this.setState({ mode: !hasDoneFirstGIF ? FIRST_GIF : !hasDoneCommunityOnboarding ? ONBOARD : this.state.mode })
+  }
 
 }
 
