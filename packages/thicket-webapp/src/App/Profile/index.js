@@ -26,7 +26,13 @@ class Profile extends Component {
     </div>
   }
 
-  close = () => this.props.history.goBack() || this.props.history.push('/')
+  close = () => {
+    const { history } = this.props
+    if (history.length > 2) {
+      history.goBack()
+    }
+    history.push('/')
+  }
 
   onSave = () => store.user.put({ nickname: this.state.nickname }).then(this.close)
 
