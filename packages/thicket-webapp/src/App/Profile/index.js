@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import store from '../../database/store'
+import { updateNickname } from '../../database/localDB'
 import { Button } from 'thicket-elements'
 import './Profile.css'
 
@@ -34,7 +34,10 @@ class Profile extends Component {
     history.push('/')
   }
 
-  onSave = () => store.user.put({ nickname: this.state.nickname }).then(this.close)
+  onSave = async () => {
+    await updateNickname(this.state.nickname)
+    this.close()
+  }
 
 }
 

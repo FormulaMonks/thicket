@@ -6,32 +6,34 @@ import {
   Link,
 } from 'react-router-dom'
 import Profile from './Profile'
-import Welcome, { FINISHED } from './Welcome'
+import Welcome from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
-import store from '../database/store'
+import localDB, { COMPLETE } from '../database/localDB'
 import './App.css'
 import usersvg from './user.svg'
 
-const { user } = store
-
 class App extends Component {
 
-  state = { nickname: '' }
+  state = { loading: true }
 
   componentDidMount() {
-    this.fetchNickname()
-    user.on('update', this.fetchNickname)
+    this.getState()
+    localDB.on('update', this.getState)
   }
 
   componentWillUnmount() {
-    user.off('update', this.fetchNickname)
+    localDB.off('update', this.getState)
   }
 
   render() {
-    const { nickname } = this.state
+    if (this.state.loading) {
+      return <div className="index"><Spinner /></div>
+    }
+
+    const { nickname, onboarding } = this.state
 
     return <Router>
       <main className="app">
@@ -39,25 +41,30 @@ class App extends Component {
         <Link className="app__profile" to="/profile">{nickname}<img src={usersvg} alt={nickname}/></Link>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-          <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
+          <Route exact path="/welcome" render={props =>
+            <Welcome history={props.history} nickname={nickname} mode={onboarding} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
           <Route exact path="/gif/:g" render={props => <Gif {...props} />} />
-          <Route exact path="/" render={props => <Index {...props} />} />
+          <Route exact path="/" render={props => <Index history={props.history} onboarding={onboarding} />} />
         </Switch>
         <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
       </main>
     </Router>
   }
 
-  fetchNickname = () =>
-    user.get().then(({ nickname }) => this.setState({ nickname }))
+  getState = async () => {
+    const state = await localDB.get()
+    this.setState({ ...state, loading: false })
+  }
 
 }
 
-const Index = props => {
-  const { history } = props
-  user.get().then(({ onboarding }) => onboarding === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
+const Index = ({ history, onboarding }) => {
+  if (onboarding === COMPLETE) {
+    history.replace('/communities')
+  }
+  history.replace('/welcome')
 
   return <div className="index"><Spinner /></div>
 }

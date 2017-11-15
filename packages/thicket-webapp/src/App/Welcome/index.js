@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
-import uuid from 'uuid'
-import store from '../../database/store'
 import Create from '../../components/Create'
 import Onboarding from '../../components/Onboarding'
 import CameraAccess from '../../components/CameraAccess'
 import './Welcome.css'
+import {
+  ARRIVED,
+  ONBOARD,
+  CAMERA_ACCESS,
+  CREATE,
+  COMPLETE,
+  updateOnboarding,
+  addCommunity,
+} from '../../database/localDB'
+import { updateCommunity, addPublication } from '../../database/syncedDB'
 
-const { user, communities } = store
-const LOADING = 'checking if the user has been here before'
-const ARRIVED = 'first time user'
-const ONBOARD = 'quick presentation of what thicket is'
-const CAMERA_ACCESS = 'we need to be able to access the camera'
-const CREATE = 'user is shooting first gif'
-const FINISHED = 'user has finished onboarding'
 const NEW_COMMUNITY = 'Amazing GIFs'
-const NEW_COMMUNITY_ID = uuid()
 
 const Arrived = props => {
   return <div className="welcome__arrived">
@@ -24,45 +24,34 @@ const Arrived = props => {
   </div>
 }
 
-class Welcome extends Component{
-  
-  state = { mode: LOADING }
+class Welcome extends Component {
 
-  componentDidMount() {
-    user.get()
-      .then(({ onboarding }) => {
-        if (onboarding === FINISHED) {
-          this.props.history.replace('/communities')
-        }
-        this.setState({ mode: onboarding || ARRIVED })
-      })
+  componentWillReceiveProps({ mode, history }) {
+    if (mode === COMPLETE) {
+      history.replace('/communities')
+    }
   }
-  
+
   render() {
-    const { mode } = this.state
-    const { nickname } = this.props
+    const { nickname, mode } = this.props
 
     return <div className="welcome">
-      {mode === ARRIVED && <Arrived onContinue={() => this.continue(ONBOARD)} mode={mode} />}
-      {mode === ONBOARD && <Onboarding onContinue={() => this.continue(CAMERA_ACCESS)} />}
-      {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
+      {mode === ARRIVED && <Arrived onContinue={() => updateOnboarding(ONBOARD)} mode={mode} />}
+      {mode === ONBOARD && <Onboarding onContinue={() => updateOnboarding(CAMERA_ACCESS)} />}
+      {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => updateOnboarding(CREATE)} />}
       {mode === CREATE && <div className="welcome__create">
           <Create nickname={nickname} onSave={this.onSave} />
       </div>}
     </div>
   }
 
-  continue = mode =>
-    user.put({ onboarding: mode }).then(() => this.setState({ mode }))
-
-  onSave = data =>
-    user.put({ onboarding: FINISHED, nickname: data.nickname })
-      .then(() => communities.post(NEW_COMMUNITY_ID))
-      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })))
-      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.publications.post(data)))
-      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
-
+  onSave = async data => {
+    await updateOnboarding(COMPLETE)
+    const communityId = await addCommunity()
+    await updateCommunity(communityId, { title: NEW_COMMUNITY, createdBy: data.nickname })
+    await addPublication(communityId, data)
+    this.props.history.push(`/c/${communityId}`)
+  }
 }
 
 export default Welcome
-export { FINISHED }
