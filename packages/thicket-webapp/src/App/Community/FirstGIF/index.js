@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
 import { Button } from 'thicket-elements'
-import localForage from 'localforage'
-import db from '../../../database'
+import store from '../../../database/store'
 import './FirstGIF.css'
 
+const { user, communities } = store
+
 const close = cb =>
-  localForage.setItem('hasDoneFirstGIF', true).then(cb)
+  user.put({ hasDoneFirstGIF: true }).then(cb)
 
 class Title extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Title extends Component {
   }
 
   update = () =>
-    db.community(this.props.community).put({ title: this.state.title })
+    communities.get(this.props.community).then(community => community.put({ title: this.state.title }))
 
 }
 

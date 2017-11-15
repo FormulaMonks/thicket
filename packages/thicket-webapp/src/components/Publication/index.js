@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from '../Modal'
 import { Button, Spinner } from 'thicket-elements'
-import db from '../../database'
+import store from '../../database/store'
 import Editable from './Editable'
 import './Publication.css'
 import download from './download.svg'
@@ -9,6 +9,7 @@ import share from './share.svg'
 import facebook from './facebook.svg'
 import twitter from './twitter.svg'
 
+const { user, communities } = store
 const GIF = 'show GIF'
 const DOWNLOAD = 'show options for downloading'
 const SHARE = 'show options for link sharing'
@@ -31,7 +32,7 @@ class Main extends Component {
       return <div className="publication__main"><Spinner /></div>
     }
 
-		const { mode } = this.state
+    const { mode } = this.state
     const { gif, onChange } = this.props
     const { src, nickname, caption, id } = gif
 
@@ -79,9 +80,14 @@ class Publication extends Component {
   state = { gif: null, mode: null, modified: false }
 
   componentDidMount() {
-    const { c, id } = this.props.match.params
-    db.community(c).publications.get(id)
-      .then(gif => this.setState({ gif }))
+    communities.get(this.props.match.params.c).then(({ publications }) =>
+      publications.on('update', this.fetch))
+    this.fetch()
+  }
+
+  componentWillUnmount() {
+    communities.get(this.props.match.params.c).then(({ publications }) =>
+      publications.off('update', this.fetch))
   }
 
   render() {
@@ -111,9 +117,15 @@ class Publication extends Component {
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
 
+  fetch = () => {
+    const { c, id } = this.props.match.params
+    communities.get(c).then(({ publications }) => publications.get(id)
+        .then(gif => this.setState({ gif })))
+  }
+
   onDelete = () => {
     const { c, id } = this.props.match.params
-    db.community(c).publications.delete(id).then(this.close)
+    communities.get(c).then(({ publications }) => publications.delete(id).then(this.close))
   }
 
   onSave = () => {
@@ -123,7 +135,10 @@ class Publication extends Component {
     }
 
     const { c, id } = this.props.match.params
-    db.community(c).publications.put(id, this.state.gif).then(this.close)
+    communities.get(c).then(community =>
+      community.publications.put(id, this.state.gif)
+        .then(() => user.put({ nickname: this.state.gif.nickname }))
+        .then(this.close))
   }
 
 }

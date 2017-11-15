@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
 import uuid from 'uuid'
-import db from '../../database'
-import localForage from 'localforage'
+import store from '../../database/store'
 import Create from '../../components/Create'
 import Onboarding from '../../components/Onboarding'
 import CameraAccess from '../../components/CameraAccess'
 import './Welcome.css'
 
+const { user, communities } = store
 const LOADING = 'checking if the user has been here before'
 const ARRIVED = 'first time user'
 const ONBOARD = 'quick presentation of what thicket is'
@@ -29,7 +29,13 @@ class Welcome extends Component{
   state = { mode: LOADING }
 
   componentDidMount() {
-    localForage.getItem('onboarding').then(val => this.setState({ mode: val || ARRIVED }))
+    user.get()
+      .then(({ onboarding }) => {
+        if (onboarding === FINISHED) {
+          this.props.history.replace('/communities')
+        }
+        this.setState({ mode: onboarding || ARRIVED })
+      })
   }
   
   render() {
@@ -47,14 +53,13 @@ class Welcome extends Component{
   }
 
   continue = mode =>
-    localForage.setItem('onboarding', mode).then(() => this.setState({ mode }))
+    user.put({ onboarding: mode }).then(() => this.setState({ mode }))
 
   onSave = data =>
-    db.community(NEW_COMMUNITY_ID)
-      .post({ title: NEW_COMMUNITY, createdBy: data.nickname })
-      .then(() => db.community(NEW_COMMUNITY_ID).publications.post(data))
-      .then(() => localForage.setItem('communities', [NEW_COMMUNITY_ID]))
-      .then(() => localForage.setItem('onboarding', FINISHED))
+    user.put({ onboarding: FINISHED, nickname: data.nickname })
+      .then(() => communities.post(NEW_COMMUNITY_ID))
+      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })))
+      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.publications.post(data)))
       .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
 
 }

@@ -5,22 +5,29 @@ import {
   Switch,
   Link,
 } from 'react-router-dom'
-import localForage from 'localforage'
 import Profile from './Profile'
 import Welcome, { FINISHED } from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
+import store from '../database/store'
 import './App.css'
-import user from './user.svg'
+import usersvg from './user.svg'
+
+const { user } = store
 
 class App extends Component {
 
-  state = { nickname: `Guest${Math.floor(1 + (Math.random() * 1000))}` }
+  state = { nickname: '' }
 
   componentDidMount() {
-    localForage.getItem('nickname').then(v => this.setState({ nickname: v || this.state.nickname }))
+    this.fetchNickname()
+    user.on('update', this.fetchNickname)
+  }
+
+  componentWillUnmount() {
+    user.off('update', this.fetchNickname)
   }
 
   render() {
@@ -29,7 +36,7 @@ class App extends Component {
     return <Router>
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
-        <Link className="app__profile" to="/profile">{nickname}<img src={user} alt={nickname}/></Link>
+        <Link className="app__profile" to="/profile">{nickname}<img src={usersvg} alt={nickname}/></Link>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
@@ -42,12 +49,15 @@ class App extends Component {
       </main>
     </Router>
   }
+
+  fetchNickname = () =>
+    user.get().then(({ nickname }) => this.setState({ nickname }))
+
 }
 
 const Index = props => {
   const { history } = props
-  localForage.getItem('onboarding')
-    .then(v => v === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
+  user.get().then(({ onboarding }) => onboarding === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
 
   return <div className="index"><Spinner /></div>
 }
