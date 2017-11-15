@@ -143,12 +143,17 @@ class User extends EventEmitter {
     return this.user
   }
 
-  get = () => this._initUser().then(() => state.user)
+  get = async () => {
+    await this._initUser()
+    return state.user
+  }
   
-  put = data => this._initUser()
-    .then(() => state.user = { ...state.user, ...data })
-    .then(() => localForage.setItem('user', state.user))
-    .then(() => this.emit('update'))
+  put = async data => {
+    await this._initUser()
+    state.user = { ...state.user, ...data }
+    await localForage.setItem('user', state.user)
+    this.emit('update')
+  }
   
   // user communities & communities
   _initCommunities() {
