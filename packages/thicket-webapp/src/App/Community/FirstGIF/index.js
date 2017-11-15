@@ -36,7 +36,8 @@ const Header = () => <header className="firstgif__header">
 </header>
 
 const Main = props => {
-  const { title } = props
+  const { title, community } = props
+  const link = window.location.origin + '/c/' + community + '?token=' + btoa(community)
   return <div className="firstgif__main">
     <h4 className="firstgif__message">
       Awesome, you shot your first GIF! We automatically added it to a new Community called "{title}".
@@ -50,7 +51,7 @@ const Main = props => {
       </label>
       <label className="firstgif__label">
         <div>Or copy the Community Invite Link below and share with friends so they can create and add content:</div>
-        <input type="text" value="tbd" readOnly />
+        <input type="text" value={link} readOnly />
       </label>
       <aside>
         NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically.
