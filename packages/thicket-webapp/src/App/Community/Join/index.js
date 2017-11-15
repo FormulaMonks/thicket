@@ -3,14 +3,22 @@ import Onboarding from '../../../components/Onboarding'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
 import './Join.css'
+import { FINISHED } from '../../Welcome'
 
-const { communities } = store
+const { user, communities } = store
 const ONBOARD = 'show the user how to get things done around here'
 const JOIN = 'present the user options to accept/decline the invitation to join the community'
 
 class Join extends Component {
 
   state = { mode: ONBOARD }
+
+  async componentDidMount() {
+    const { onboarding } = await user.get()
+    if (onboarding === FINISHED) {
+      this.setState({ mode: JOIN })
+    }
+  }
 
   render() {
     const { mode } = this.state
