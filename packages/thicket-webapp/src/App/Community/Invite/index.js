@@ -4,7 +4,7 @@ import { Button } from 'thicket-elements'
 import copy from 'copy-to-clipboard'
 
 const Invite = props => {
-  const link = ''
+  const link = document.location.origin + document.location.pathname + '?token=' + btoa(props.community)
   return <Modal
     header={<div>Copy Community Invite Link</div>}
     footer={[
