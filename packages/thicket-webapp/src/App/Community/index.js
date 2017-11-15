@@ -73,7 +73,8 @@ class Community extends Component {
 
   render() {
     const { list, mode, title, loading } = this.state
-    const { c } = this.props.match.params
+    const { nickname, match, history } = this.props
+    const { c } = match.params
 
     if (mode === UNINVITED) {
       return <div>404</div>
@@ -98,11 +99,11 @@ class Community extends Component {
         </div>
       </div>,
       <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
-      <Route key="first_gif" exact path="/c/:c/first-gif" render={({ history }) =>
+      <Route key="first_gif" exact path="/c/:c/first-gif" render={() =>
         <FirstGIF onClose={() => history.replace(`/c/${c}`)} title={title} community={c} />} />,
       mode === CREATE &&
         <div key="create" className="community__create">
-          <Create community={c} nickname={this.props.nickname} onSave={this.onSave} />
+          <Create community={c} nickname={nickname} onSave={this.onSave} />
         </div>,
       mode === SETTINGS &&
         <Settings
@@ -110,10 +111,10 @@ class Community extends Component {
           onClose={() => this.setState({ mode: null })}
           title={title}
           communityId={c}
-          history={this.props.history}
+          history={history}
           />,
       mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} community={c} />,
-      mode === JOIN && <Join key="join" onClose={() => this.setState({ mode: null })} />
+      mode === JOIN && <Join key="join" community={c} history={history} nickname={nickname} onClose={() => this.setState({ mode: null })} />
     ]
   }
 

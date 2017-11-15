@@ -6,7 +6,7 @@ class Onboarding extends Component {
   state = { step: 1 }
 
   render() {
-    const { onContinue } = this.props
+    const { onComplete } = this.props
     const { step } = this.state
 
     return <div className="onboarding">
@@ -16,10 +16,10 @@ class Onboarding extends Component {
       {step === 3 && <div onClick={() => this.setState({ step: 4 })} className="onboarding__step3">All done.</div>}
       <div className="onboarding__controls">
         {step !== 3 && [
-          <Button onClick={onContinue} key="skip">Skip Onboarding</Button>,
+          <Button onClick={onComplete} key="skip">Skip Onboarding</Button>,
           <Button onClick={() => this.setState({ step: this.state.step + 1 })} key="next">Next</Button>
         ]}
-        {step === 3 && <Button onClick={onContinue}>Finish</Button>}
+        {step === 3 && <Button onClick={onComplete}>Finish</Button>}
       </div>
     </div>
   }
