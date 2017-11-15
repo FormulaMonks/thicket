@@ -1,110 +1,80 @@
 import React, { Component } from 'react'
 import gifshot from 'gifshot'
 import styled from 'styled-components'
-import ProgressMapper from './ProgressMapper'
-import { BottomNav as Nav } from 'thicket-elements'
+import Controls from './Controls'
+import Progress from './Progress'
+import Loading from './Loading'
+import Review from './Review'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
 
 const Wrap = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  position: relative;
+  overflow: hidden;
   flex-direction: column;
-  background: #FFF;
-`
-
-const Content = styled.div`
-  flex: 1;
-  padding: 15px;
-  display: flex;
   justify-content: center;
-`
-
-const Controls = styled.div`
-  height: 120px;
-  border-top: 1px solid #CCC;
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
 `
+const Vid = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`
+const videoStyles = {
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+}
 
 // modes
 const STANDBY = 'awaiting further instruction'
-const SHOOTING = 'capturing and processing video'
+const SHOOTING = 'capturing video'
+const LOADING = 'processing gif'
 const REVIEW = 'review, possibly save gif'
 
 export default class Camera extends Component {
 
-  state = { stream: null, mode: STANDBY }
+  state = { stream: null, mode: STANDBY, gif: null }
 
   componentDidMount() {
     this.startVideo()
   }
 
   componentWillUnmount() {
-    this.stopVideo()
+    if (this.state.mode === STANDBY || this.state.mode === SHOOTING) {
+      this.stopVideo()
+    }
   }
 
   render() {
     const { mode } = this.state
-    return <Wrap>
-      <Content>
-        <div style={{ display: mode === REVIEW && 'none' }}>
-          <video
-            ref={v => this.video = v}
-            style={{width: GIF_OPTIONS.gifWidth, height: GIF_OPTIONS.gifHeight}}
-            autoPlay
-          />
-        </div>
-        <div style={{ display: mode !== REVIEW && 'none' }}>
-          <img alt="" ref={img => this.preview = img} />
-        </div>
-      </Content>
-      <Controls>
-        {mode === STANDBY && [
-          <Nav.Shoot key="shoot" onClick={this.capture} alt="Shoot" />,
-        ]}
-        {mode === SHOOTING && <ProgressMapper />}
-        {mode === REVIEW && [
-          <Nav.Accept key="accept" onClick={this.accept} alt="Accept" />,
-          <Nav.Again key="again" onClick={this.again} alt="Again" />,
-        ]}
-      </Controls>
+    const { classNames = {} } = this.props
+    const { cameraWrap = null, videoWrap = null, ...classes = {} } = classNames
+    return <Wrap className={cameraWrap}>
+      {(mode === STANDBY || mode === SHOOTING) &&
+        <Vid key="video" className={videoWrap}>
+          <video ref={v => this.video = v} autoPlay style={videoStyles} />
+        </Vid>
+      }
+      {mode === STANDBY && <Controls classNames={classes} key="controls" onClick={this.capture} />}
+      {mode === SHOOTING && <Progress classNames={classes} key="progress" />}
+      {mode === LOADING && <Loading classNames={classes} key="loading" />}
+      {mode === REVIEW && <Review classNames={classes} key="review" src={this.state.gif} redo={this.again} approve={() => this.props.onSave(this.state.gif)} />}
     </Wrap>
-  }
-
-  startVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
-        this.video.src = window.URL.createObjectURL(stream)
-        this.video.play()
-        this.setState({ stream, mode: STANDBY })
-      })
-  }
-
-  stopVideo = () => {
-    const video = this.video
-    video.pause()
-    video.src = ''
-    this.state.stream.getTracks().forEach(t => t.stop())
-  }
-
-  accept = () => {
-    this.props.onSave(this.preview.src)
   }
 
   again = () => {
     this.startVideo()
-    this.removePreview()
-    this.setState({ mode: STANDBY})
-  }
-
-  removePreview = () => {
-    this.preview.src = ''
+    this.setState({ mode: STANDBY })
   }
 
   capture = () => {
-    setTimeout(this.stopVideo, GIF_DURATION + 500);
+    setTimeout(() => {
+      this.stopVideo()
+      this.setState({ mode: LOADING })
+    }, GIF_DURATION + 500);
     this.setState({ mode: SHOOTING }, () => {
       gifshot.createGIF({
         ...GIF_OPTIONS,
@@ -116,9 +86,27 @@ export default class Camera extends Component {
           this.setState({ mode: STANDBY })
           return
         }
-        this.preview.src = obj.image
-        this.setState({ mode: REVIEW })
+        this.setState({ mode: REVIEW, gif: obj.image })
       })
     })
   }
+
+  startVideo = () => {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        this.video.src = window.URL.createObjectURL(stream)
+        this.video.play()
+        this.setState({ stream  })
+      })
+  }
+
+  stopVideo = () => {
+    const video = this.video
+    if (video) {
+      video.pause()
+      video.src = ''
+    }
+    this.state.stream.getTracks().forEach(t => t.stop())
+  }
+
 }
