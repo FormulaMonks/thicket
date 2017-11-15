@@ -48,10 +48,7 @@ class Publications extends EventEmitter {
       return Promise.resolve(cached)
     }
     return db.publicationsGet(this.communityId, id)
-      .then(data => {
-        this.list.push(data)
-        return data
-      })
+      .then(data => this.list.push(data))
   }
   
   getAll = () => this._fetchedAll
@@ -59,8 +56,7 @@ class Publications extends EventEmitter {
     : db.publicationsGetAll(this.communityId)
         .then(list => {
           this._fetchedAll = true
-          this.list = list
-          return list
+          return this.list = list
         })
   
   post = data => db.publicationsPost(this.communityId, data)
