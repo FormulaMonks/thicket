@@ -60,7 +60,7 @@ class Welcome extends Component{
       .then(() => communities.post(NEW_COMMUNITY_ID))
       .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })))
       .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.publications.post(data)))
-      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
+      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`))
 
 }
 

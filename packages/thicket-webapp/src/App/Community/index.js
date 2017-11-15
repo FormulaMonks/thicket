@@ -3,25 +3,25 @@ import { Route, Link } from 'react-router-dom'
 import { Button, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import FirstGIF from './FirstGIF'
-import Onboarding from './Onboarding'
 import Create from '../../components/Create'
 import Publication from '../../components/Publication'
 import Settings from './Settings'
 import Invite from './Invite'
+import Join from './Join'
 import './Community.css'
 import add from './add.svg'
 import link from './link.svg'
 import settings from './settings.svg'
 import usersvg from './user.svg'
 import store from '../../database/store'
-const { user, communities } = store
+import queryString from 'query-string'
 
-const FIRST_GIF = 'show the user info from their first gif'
-const ONBOARD = 'show the user how to get things done around here'
+const { user, communities } = store
 const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
 const SETTINGS = 'user can modify the community title and/or leave the community'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
+const JOIN = 'user can join the community'
 
 const NoContent = props => <div className="nocontent">
   <h2>Your Community doesn’t have content yet!</h2>
@@ -41,15 +41,22 @@ class Community extends Component {
 
   async componentDidMount() {
     const { c } = this.props.match.params
-    const invited = await communities.has(c)
-    if (!invited) {
+    // join?
+    const { token = '' } = queryString.parse(window.location.search);
+    const join = atob(token) === c
+    if (join) {
+      this.setState({ mode: JOIN })
+    }
+    // uninvited?
+    const uninvited = await communities.has(c)
+    if (!uninvited && !join) {
       this.setState({ mode: UNINVITED })
       return
     }
+    // get data
     this.fetchMetadata()
     this.fetchPublications()
-    this.setMode()
-
+    // subscribe
     const community = await communities.get(c)
     const { publications } = community
     community.on('update', this.fetchMetadata)
@@ -91,6 +98,8 @@ class Community extends Component {
         </div>
       </div>,
       <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
+      <Route key="first_gif" exact path="/c/:c/first-gif" render={({ history }) =>
+        <FirstGIF onClose={() => history.replace(`/c/${c}`)} title={title} community={c} />} />,
       mode === CREATE &&
         <div key="create" className="community__create">
           <Create community={c} nickname={this.props.nickname} onSave={this.onSave} />
@@ -103,9 +112,8 @@ class Community extends Component {
           communityId={c}
           history={this.props.history}
           />,
-      mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} />,
-      mode === ONBOARD && <Onboarding key="onboard" onFinish={() => this.setState({ mode: null })} />,
-      mode === FIRST_GIF && <FirstGIF key="first" onClose={this.setMode} title={title} community={c} />,
+      mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} community={c} />,
+      mode === JOIN && <Join key="join" onClose={() => this.setState({ mode: null })} />
     ]
   }
 
@@ -126,11 +134,6 @@ class Community extends Component {
     await publications.post(data)
     await user.put({ nickname: data.nickname })
     this.setState({ mode: null })
-  }
-
-  setMode = async () => {
-    const { hasDoneFirstGIF, hasDoneCommunityOnboarding } = await user.get()
-    this.setState({ mode: !hasDoneFirstGIF ? FIRST_GIF : !hasDoneCommunityOnboarding ? ONBOARD : this.state.mode })
   }
 
 }
