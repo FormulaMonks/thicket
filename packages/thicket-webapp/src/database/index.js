@@ -1,204 +1,207 @@
 import IPFS from 'ipfs'
-import { Buffer } from 'safe-buffer'
+import CID from 'cids'
 import ImageDataConverter from '../utils/imageDataConverter'
 import Y from 'yjs'
 import yMemory from 'y-memory'
 import yIndexeddb from 'y-indexeddb'
 import yArray from 'y-array'
+import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
-import CID from 'cids'
+import EventEmitter from 'eventemitter3'
 import pull from 'pull-stream'
 import concat from 'concat-stream'
 import pullPromise from 'pull-promise'
+import pullSort from 'pull-sort'
 
-const SAVE_SUCCESS = 'DatabaseSaveSuccessEvent'
-const SAVE_FAIL = 'DatabaseSaveFailEvent'
+const ipfsConfig = {
+  repo: 'thicket',
+  EXPERIMENTAL: {
+    pubsub: true,
+  },
+  config: {
+    Addresses: {
+      Swarm: ['/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star'],
+      API: '',
+      Gateway: '',
+    },
+    Bootstrap: [
+      '/dns4/ams-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd',
+      '/dns4/lon-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3',
+      '/dns4/sfo-3.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM',
+      '/dns4/nyc-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLueR4xBeUbY9WZ9xGUUxunbKWcrNFTDAadQJmocnWm',
+      '/dns4/nyc-2.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64',
+      '/dns4/wss0.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic',
+      '/dns4/wss1.bootstrap.libp2p.io/tcp/443/wss/ipfs/Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6',
+    ],
+  },
+}
 
-Y.extend(yMemory, yArray, yIpfsConnector, yIndexeddb)
+const yConfig = (node, id) => ({
+  db: {
+    name: 'indexeddb'
+  },
+  connector: {
+    name: 'ipfs',
+    room: `thicket/${id}`,
+    ipfs: node,
+  },
+  share: {
+    publications: 'Array',
+    publicationsMetadata: 'Map',
+    metadata: 'Map'
+  }
+})
 
-class Database {
-  constructor(name, initialState) {
-    this.id = name
-    this.initialState = initialState
-    this.initIpfsNode()
+const toBase64 = src =>
+  `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
+
+const timedPromiseConcatStream = ({ hash, stream }) => {
+  return new Promise((resolve, reject) => {
+    let returned = false
+    // timed fallback
+    setTimeout(() => {
+      if (!returned) {
+        returned = true
+        resolve({ hash, src: `https://ipfs.io/ipfs/${hash}` })
+      }
+    }, 1000)
+    // or
+    stream.pipe(concat(src => {
+      if (!returned) {
+        returned = true
+        resolve({ hash, src: toBase64(src) })
+      }
+    }))
+  })
+}
+
+class Database extends EventEmitter {
+  constructor() {
+    super()
+    this._ipfs = null
+    this._communities = new Map()
+    this._initIPFS()
   }
 
-  initIpfsNode = () => {
-    if (!this.initPromise) {
-      this.initPromise = new Promise((resolve, reject) => {
-        this._node = new IPFS({
-          repo: 'thicket',
-          EXPERIMENTAL: {
-            pubsub: true,
-          },
-          config: {
-            Addresses: {
-              Swarm: ['/dns4/star-signal.cloud.ipfs.team/wss/p2p-webrtc-star'],
-              API: '',
-              Gateway: '',
-            },
-            Bootstrap: [
-              '/dns4/ams-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd',
-              '/dns4/lon-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3',
-              '/dns4/sfo-3.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM',
-              '/dns4/nyc-1.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLueR4xBeUbY9WZ9xGUUxunbKWcrNFTDAadQJmocnWm',
-              '/dns4/nyc-2.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64',
-              '/dns4/wss0.bootstrap.libp2p.io/tcp/443/wss/ipfs/QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic',
-              '/dns4/wss1.bootstrap.libp2p.io/tcp/443/wss/ipfs/Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6',
-            ],
-          },
-        })
-
-        this._node.once('ready', () => {
-          Y({
-            db: {
-              name: 'indexeddb',
-            },
-            connector: {
-              name: 'ipfs',
-              room: 'thicket-pubsub-crdt',
-              ipfs: this._node,
-            },
-            share: {
-              publications: 'Array',
-            },
-          }).then(y => {
-            this._y = y
-
-            // new events local and/or peers
-            y.share.publications.observe(event => {
-              // todo: if delete remove local files
-              // todo: if insert add to local files
-              window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
-            })
-            // initial sync from local storage and/or other peers
-            // todo: review how events behave if the users has been disconnected for a while
-            window.dispatchEvent(new CustomEvent(SAVE_SUCCESS))
-
-            resolve(this._nodeInfo())
-          })
-        })
-
-        this._node.on('error', err => {
-          console.error('Error connecting the IPFS node: ', err)
-          reject(err)
-        })
+  _initIPFS() {
+    if (!this.ipfs) {
+      this._ipfs = new Promise((resolve, reject) => {
+        const node = new IPFS(ipfsConfig)
+        node.once('ready', () => resolve(node))
       })
     }
-    return this.initPromise
+    return this._ipfs
   }
 
-  mapData(data) {
-    return {
-      publications: data.reduce((p, c) => {
-        p[c.id] = c
-        return p
-      }, {}),
-      publicationOrder: data
-        .sort((a, b) => b.createdAt - a.createdAt)
-        .map(x => x.id),
+  _initCommunity(communityId) {
+    if (!communityId) {
+      throw new Error('Please provide a Community Id')
     }
+    if (!this._communities.has(communityId)) {
+      this._communities.set(communityId, this._initIPFS().then(node =>
+        Y(yConfig(node, communityId)).then(y => {
+          y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
+          y.share.publications.observe(() =>
+            this._publicationsMap(communityId, y.share.publications.toArray()).then(data =>
+              this.emit(`update-${communityId}-publications`, data)))
+          y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+
+          return y
+        })
+      ))
+    }
+    return this._communities.get(communityId)
   }
 
-  toBase64(src) {
-    return `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
-  }
-
-  fetchData() {
-    return new Promise((resolve, reject) => {
-      this.initIpfsNode().then(({ node, y }) => {
+  _unlink = (hash, cb = () => {}) =>
+    // unlink from local storage
+    this._initIPFS().then(node =>
+      // all blocks from this hash
+      node.dag.get(new CID(hash), (err, res) =>
         pull(
-          pull.values(y.share.publications.toArray()),
-          pullPromise.through(p => node.files.cat(p.id).then(stream => { return { ...p, stream }})),
-          pullPromise.through(({ stream, ...rest }) => new Promise(r => stream.pipe(concat(src => r({ ...rest, src }))))),
-          pull.map(obj => ({ ...obj, src: this.toBase64(obj.src) })),
-          pull.collect((err, res) => resolve(this.mapData(res))),
+          pull.values(res.value.links),
+          pull.map(i => new CID(i.multihash)),
+          pull.drain(
+            i => node._ipldResolver.bs.delete(i),
+            // then the actual block for id
+            () => node._ipldResolver.bs.delete(new CID(hash), cb)
+          )
         )
+      )
+    )
+
+  publicationsDelete = (communityId, id) => {
+    return new Promise((resolve, reject) =>
+      this._initCommunity(communityId).then(y => {
+        y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
+        this._unlink(id, resolve)
       })
-    })
-  }
+    )}
 
-  insert(str) {
+  _publicationsMap = (communityId, data) => {
     return new Promise((resolve, reject) => {
-      this.addBase64File(str).then(id => {
-        this.initIpfsNode().then(({ y }) => {
-          y.share.publications.push([
-            {
-              id,
-              createdAt: Date.now(),
-            },
-          ])
-
-          resolve()
-        })
-      })
-    })
-  }
-
-  remove(hash) {
-    return new Promise((resolve, reject) => {
-      this.initIpfsNode().then(({ node, y }) => {
-        // unlink local storage
-        // first all blocks from this hash
-        node.dag.get(new CID(hash), (err, res) => {
+      this._initCommunity(communityId).then(y => {
+        this._initIPFS().then(node => {
           pull(
-            pull.values(res.value.links),
-            pull.map(i => new CID(i.multihash)),
-            pull.drain(
-              i => node._ipldResolver.bs.delete(i),
-              () => {
-                // then the actual hash
-                node._ipldResolver.bs.delete(new CID(hash), () => {
-                  // broadcast to the world
-                  y.share.publications.delete(
-                    y.share.publications
-                      .toArray()
-                      .findIndex(i => i.id === hash),
-                  )
-                  // done
-                  resolve()
-                })
-              },
-            ),
+            pull.values(data),
+            pullPromise.through(hash => node.files.cat(hash).then(stream => ({ hash, stream }))),
+            //pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src: toBase64(src) }))))),
+            pullPromise.through(timedPromiseConcatStream),
+            pull.map(({ hash, src }) => ({ id: hash, src, ...y.share.publicationsMetadata.get(hash) })),
+            pullSort((a, b) => b.createdAt - a.createdAt),
+            pull.collect((err, res) => resolve(res)),
           )
         })
       })
     })
   }
 
-  addBase64File = base64 =>
-    new Promise((resolve, reject) => {
-      this.initIpfsNode().then(({ node }) =>
-        node.files.add(
-          Buffer.from(new ImageDataConverter(base64).convertToTypedArray()),
-          (err, res) => {
-            if (err) {
-              console.error('Error publishing to IPFS: ', err)
-              reject(err)
-            }
-            resolve(res[0].hash)
-          },
-        ),
+  publicationsGet = (communityId, id) =>
+    this.publicationsGetAll(communityId, [id]).then(res => res[0])
+
+  publicationsGetAll = (communityId, ids = []) =>
+    this._initCommunity(communityId)
+      .then(y => y.share.publications.toArray())
+      .then(data => data.filter(id => !ids.length || ids.includes(id)))
+      .then(data => this._publicationsMap(communityId, data))
+
+  publicationsPost = (communityId, { src, ...data }) =>
+    this._initIPFS().then(node =>
+      node.files
+        .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
+        .then(res =>
+          this._initCommunity(communityId).then(y => {
+            const id = res[0].hash
+            y.share.publications.push([id])
+            y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
+          })
+        )
       )
+
+  publicationsPut = (communityId, id, data) =>
+    this._initCommunity(communityId).then(y =>
+      y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
+
+  communityDelete = communityId =>
+    this._initCommunity(communityId).then(y => {
+      // async remove all local publications
+      y.share.publications.toArray().forEach(hash => this._unlink(hash))
+      // leave room
+      return y.destroy()
     })
 
-  addSaveSuccessListener(func) {
-    window.addEventListener(SAVE_SUCCESS, func, false)
-  }
+  communityGet = communityId =>
+    this._initCommunity(communityId)
+      .then(y => y.share.metadata.get(communityId))
+      .then(data => ({ id: communityId, title: '', ...data }))
 
-  removeSaveSuccessListener(func) {
-    window.removeEventListener(SAVE_SUCCESS, func, false)
-  }
+  communityPost = (communityId, data) =>
+    this._initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...data, createdAt: Date.now() }))
 
-  addSaveFailListener(func) {
-    window.addEventListener(SAVE_FAIL, func, false)
-  }
-
-  removeSaveFailListener(func) {
-    window.removeEventListener(SAVE_FAIL, func, false)
-  }
-
-  _nodeInfo = () => ({ node: this._node, y: this._y })
+  communityPut = (communityId, data) =>
+    this._initCommunity(communityId).then(y => y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data }))
 }
 
-export default ({ name, initialState }) => new Database(name, initialState)
+Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
+
+export default new Database()

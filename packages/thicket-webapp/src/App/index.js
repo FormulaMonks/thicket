@@ -3,75 +3,63 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
+  Link,
 } from 'react-router-dom'
-import Camera from './Camera'
-import Stream from './Stream'
-import Publication from './Publication'
-import { BottomNav as Nav } from 'thicket-elements'
-import BackNav from './Back'
+import Profile from './Profile'
+import Welcome, { FINISHED } from './Welcome'
+import Communities from './Communities'
+import Community from './Community'
+import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
+import store from '../database/store'
 import './App.css'
+import usersvg from './user.svg'
 
-import db, { initialState } from './syncedDB';
+const { user } = store
 
 class App extends Component {
 
-  state = { ...initialState, loaded: false }
+  state = { nickname: '' }
 
   componentDidMount() {
-    db.addSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-
-    this.fetchData()
+    this.fetchNickname()
+    user.on('update', this.fetchNickname)
   }
 
   componentWillUnmount() {
-    db.removeSaveSuccessListener(this.fetchData)
-    db.addSaveFailListener(this.handleDatabaseError)
-  }
-
-  fetchData = () => {
-    db.fetchData()
-      .then(data => this.setState({ loaded: true, ...data }))
-  }
-
-  handleDatabaseError = e => {
-    console.error(e.detail)
-    alert(e.detail.message)
+    user.off('update', this.fetchNickname)
   }
 
   render() {
-    const { loaded, ...data } = this.state
+    const { nickname } = this.state
 
     return <Router>
-      <div className="app">
-        <header className="app__header">
-          <Route path="/:x" render={() =>
-            <BackNav to="/" alt="Back Home" />} />
-          Thicket
-        </header>
-        <main className="app__main">
-          {!loaded
-            ? <div className="stream__spinner"><Spinner /></div>
-            : <Switch>
-                <Route exact path="/" render={() =>
-                  <Stream {...data} />
-                }/>
-                <Route exact path="/camera" component={Camera} />
-                <Route path="/:id" render={props =>
-                  <Publication {...props} {...data} />
-                }/>
-              </Switch>
-          }
-        </main>
-        <Route exact path="/" render={() =>
-          <footer className="app__footer">
-            <Nav.Camera to="/camera" alt="New GIF" />
-          </footer>
-        } />
-      </div>
+      <main className="app">
+        <Link className="app__home" to="/">Thicket</Link>
+        <Link className="app__profile" to="/profile">{nickname}<img src={usersvg} alt={nickname}/></Link>
+        <Switch>
+          <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
+          <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
+          <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
+          <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
+          <Route exact path="/gif/:g" render={props => <Gif {...props} />} />
+          <Route exact path="/" render={props => <Index {...props} />} />
+        </Switch>
+        <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
+      </main>
     </Router>
   }
+
+  fetchNickname = () =>
+    user.get().then(({ nickname }) => this.setState({ nickname }))
+
+}
+
+const Index = props => {
+  const { history } = props
+  user.get().then(({ onboarding }) => onboarding === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
+
+  return <div className="index"><Spinner /></div>
 }
 
 export default App

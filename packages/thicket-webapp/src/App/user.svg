@@ -1,0 +1,23 @@
+<svg width="62" height="61" viewBox="0 0 62 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Mask Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(24958 -24467)">
+<g id="Mask Group">
+<mask id="mask0_alpha" mask-type="alpha">
+<g id="Ellipse 2.1">
+<use xlink:href="#path0_fill" transform="translate(-24957.5 24467.3)" fill="#FFFFFF"/>
+</g>
+</mask>
+<g id="Ellipse 2.1" mask="url(#mask0_alpha)">
+<use xlink:href="#path0_fill" transform="translate(-24957.5 24467.3)" fill="#FFFFFF"/>
+</g>
+<g id="layer" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-24951.4 24479.4)" fill="#C4C4C4"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 60.4742 30.2371C 60.4742 46.9366 46.9366 60.4742 30.2371 60.4742C 13.5376 60.4742 0 46.9366 0 30.2371C 0 13.5376 13.5376 0 30.2371 0C 46.9366 0 60.4742 13.5376 60.4742 30.2371Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 14.1124 14.5707C 13.6667 14.837 12.827 16.5088 13.2069 17.9756C 13.7718 20.157 15.7814 21.0084 15.7814 21.0084C 15.7814 21.0084 18.9253 25.0365 18.9253 27.3791C 18.9253 29.7217 18.9254 30.6318 18.0828 32.5861C 17.2403 34.5405 0.702105 36.8832 0 48.4045L 24.0714 48.4045L 48.407 48.407C 47.7049 36.8857 31.1667 34.543 30.3242 32.5886C 29.4817 30.6343 29.4817 29.7242 29.4817 27.3816C 29.4817 25.039 32.6256 21.0109 32.6256 21.0109C 32.6256 21.0109 34.6352 20.1595 35.2002 17.9781C 35.5801 16.5113 34.7403 14.8396 34.2946 14.5732C 35.4861 11.0454 36.2565 0.444776 24.3357 0.00642996C 24.2755 -0.00185722 24.2157 -0.000377907 24.1562 0.00132694C 12.1505 0.44226 12.921 11.0429 14.1124 14.5707Z"/>
+</defs>
+</svg>

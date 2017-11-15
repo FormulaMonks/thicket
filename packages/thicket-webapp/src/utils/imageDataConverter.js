@@ -19,4 +19,3 @@ export default class ImageDataConverter {
     return ia
   }
 }
-

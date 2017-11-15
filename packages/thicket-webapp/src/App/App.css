@@ -2,33 +2,38 @@
   display: flex;
   height: 100%;
   width: 100%;
-  flex: 1;
   flex-direction: column;
 }
 
-.app__header{
-  background-color: #26A65B;
-  color: #FFF;
-  font-size: 30px;
-  padding: 15px;
-  box-shadow: 0 0 10px #000;
+.app__home{
+  position: absolute;
   z-index: 1;
-  height: 30px;
-  overflow: hidden;
+  left: 15px;
+  height: 100px;
   display: flex;
   align-items: center;
 }
 
-.app__main{
-  position: relative;
-  flex: 1;
-  overflow: auto;
+.app__profile{
+  position: absolute;
+  z-index: 1;
+  height: 100px;
+  right: 15px;
+  display: flex;
+  align-items: center;
 }
 
-.app__footer{
-  height: 120px;
+.app__citruslabs{
+  position: absolute;
+  z-index: 1;
+  bottom: 15px;
+  right: 15px;
+}
+
+.index{
+  height: 100%;
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
-  border-top: 1px solid #CCC;
 }
