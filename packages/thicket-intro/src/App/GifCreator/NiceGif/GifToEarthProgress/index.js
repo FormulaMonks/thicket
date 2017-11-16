@@ -26,17 +26,19 @@ const Sending = ({ gif }) => (
   </div>
 )
 
-const Arrived = ({ scrollTo }) => (
+const Arrived = ({ onClick, scrollTo }) => (
   <div className="arrived">
     <img src={mars} alt="mars" className="mars" />
     <span>
-      Success, interplanetary GIFs exchanged!{' '} <a href={scrollTo}>Check it out!</a>
+      Success, interplanetary GIFs exchanged!{' '} <a href={scrollTo} onClick={onClick}>Check it out!</a>
     </span>
     <img src={earth} alt="earth" className="earth"  />
   </div>
 )
 
 export default class GifToEarthProgress extends React.Component {
+
+  state = { showBanner: true }
 
   componentDidMount() {
     var progress = getProgress(this.props.gifCreated);
@@ -74,6 +76,7 @@ export default class GifToEarthProgress extends React.Component {
   }
 
   maybeStick = scrollPosition => {
+    if (!this.wrap) return;
     if (scrollPosition > this.offset) {
       this.wrap.className = "GifToEarthProgress sticky"
     } else {
@@ -82,6 +85,7 @@ export default class GifToEarthProgress extends React.Component {
   }
 
   adjustOffset = () => {
+    if (!this.wrap) return;
     this.offset = this.wrap.parentElement.offsetTop
   }
 
@@ -93,12 +97,19 @@ export default class GifToEarthProgress extends React.Component {
     )
   }
 
+  stopShowingBanner = () => { this.setState({ showBanner: false }) }
+
   render() {
     const { id, gif, arrived } = this.props
 
+    if (!this.state.showBanner) return null
+
     return (
       <div ref={div => this.wrap = div} className="GifToEarthProgress">
-        {arrived ? <Arrived scrollTo={`#${id}`} /> : <Sending gif={gif} />}
+        {arrived
+          ? <Arrived scrollTo={`#${id}`} onClick={this.stopShowingBanner} />
+          : <Sending gif={gif} />
+        }
       </div>
     )
   }
