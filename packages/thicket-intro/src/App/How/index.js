@@ -1,7 +1,10 @@
 import React from 'react'
 import Columns from '../Columns'
 import Square from '../Square'
-import placeholder from './placeholder.svg'
+
+import offline from './offline.svg'
+import p2p from './p2p.svg'
+import conflictResolution from './conflict-resolution.svg'
 
 import './How.css'
 
@@ -26,15 +29,15 @@ export default () => (
       </p>
       <Columns>
         <div>
-          <Square background={placeholder} />
+          <Square background={offline} />
           <div>Website &amp; Data Available Offline</div>
         </div>
         <div>
-          <Square background={placeholder} />
+          <Square background={p2p} />
           <div>Peer-to-Peer Data Sharing</div>
         </div>
         <div>
-          <Square background={placeholder} />
+          <Square background={conflictResolution} />
           <div>Automatic Conflict Resolution</div>
         </div>
       </Columns>
