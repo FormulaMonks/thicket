@@ -44,12 +44,12 @@ class Community extends Component {
     // join?
     const { token = '' } = queryString.parse(window.location.search);
     const join = atob(token) === c
-    if (join) {
+    const member = await communities.has(c)
+    if (!member && join) {
       this.setState({ mode: JOIN })
     }
     // uninvited?
-    const uninvited = await communities.has(c)
-    if (!uninvited && !join) {
+    if (!member && !join) {
       this.setState({ mode: UNINVITED })
       return
     }
