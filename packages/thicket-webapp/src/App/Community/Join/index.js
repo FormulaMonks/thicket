@@ -25,7 +25,7 @@ class Join extends Component {
 
     return [
       mode === ONBOARD && <div key="onboard" className="join__onboard">
-          <Onboarding onComplete={ths.onComplete} />
+          <Onboarding onComplete={this.onComplete} />
         </div>,
       mode === JOIN && <div key="join" className="join__header">
           Hey {this.props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.<Button onClick={this.onJoin}>Join</Button><Button onClick={this.onDecline}>Decline</Button>
@@ -33,7 +33,7 @@ class Join extends Component {
     ]
   }
 
-  onComplete = () => {
+  onComplete = async () => {
     await user.put({ onboarding: FINISHED })
     this.setState({ mode: JOIN })
   }
