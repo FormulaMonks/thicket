@@ -1,0 +1,26 @@
+<svg width="40" height="44" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-32116 -26078)">
+<g id="Group">
+<g id="Twitter Copy" filter="url(#filter0_d)">
+<use xlink:href="#path0_fill" transform="translate(32116.4 26078.2)" fill="#FFFFFF"/>
+</g>
+<g id="Path">
+<use xlink:href="#path1_fill" transform="translate(32128.2 26090.9)" fill="#172B42"/>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="32116" y="26078" width="40" height="44" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
+<feOffset dx="0" dy="4"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.0743886 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<path id="path0_fill" fill-rule="evenodd" d="M 38.8291 19.4146C 38.8291 30.1368 30.1368 38.8291 19.4146 38.8291C 8.69233 38.8291 0 30.1368 0 19.4146C 0 8.69233 8.69233 0 19.4146 0C 30.1368 0 38.8291 8.69233 38.8291 19.4146Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 16.6512 1.6017C 16.0386 1.87351 15.3806 2.05686 14.6893 2.13992C 15.3947 1.71711 15.9372 1.04731 16.1917 0.249154C 15.5316 0.64068 14.8004 0.925427 14.0227 1.07859C 13.3993 0.414177 12.5116 0 11.529 0C 9.64149 0 8.11205 1.52944 8.11205 3.41588C 8.11205 3.68337 8.14225 3.94439 8.20049 4.19462C 5.36165 4.05225 2.84423 2.69215 1.15948 0.62558C 0.866105 1.12928 0.696767 1.71603 0.696767 2.34269C 0.696767 3.52806 1.2997 4.57321 2.2165 5.18584C 1.65671 5.16859 1.13036 5.01435 0.669802 4.75872C 0.668724 4.77275 0.668724 4.78677 0.668724 4.80187C 0.668724 6.45642 1.84654 7.83809 3.40941 8.15088C 3.12251 8.22962 2.8205 8.27168 2.50987 8.27168C 2.28876 8.27168 2.0752 8.25011 1.86703 8.2102C 2.3017 9.56706 3.56257 10.555 5.05749 10.582C 3.8883 11.4988 2.41603 12.0446 0.815411 12.0446C 0.539293 12.0446 0.267489 12.0284 0 11.9971C 1.51218 12.9657 3.30802 13.5319 5.23762 13.5319C 11.5204 13.5319 14.9568 8.32669 14.9568 3.81173C 14.9568 3.66396 14.9535 3.51619 14.9471 3.3695C 15.6147 2.88846 16.1939 2.2866 16.6512 1.6017Z"/>
+</defs>
+</svg>
