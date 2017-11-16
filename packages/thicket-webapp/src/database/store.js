@@ -24,7 +24,7 @@ class Publications extends EventEmitter {
     if (!communityId) {
       throw new Error('Please provide a Community Id')
     }
-    
+
     super()
     this.communityId = communityId
     this.list = []
@@ -41,26 +41,30 @@ class Publications extends EventEmitter {
   }
 
   delete = id => db.publicationsDelete(this.communityId, id)
-  
+
   get = id => {
     const cached = this.list.find(p => p.id === id)
     if (cached) {
       return Promise.resolve(cached)
     }
     return db.publicationsGet(this.communityId, id)
-      .then(data => this.list.push(data))
+      .then(data => {
+        this.list.push(data)
+        return data
+      })
   }
-  
+
   getAll = () => this._fetchedAll
     ? Promise.resolve(this.list)
     : db.publicationsGetAll(this.communityId)
         .then(list => {
           this._fetchedAll = true
-          return this.list = list
+          this.list = list
+          return list
         })
-  
+
   post = data => db.publicationsPost(this.communityId, data)
-  
+
   put = (id, data) => db.publicationsPut(this.communityId, id, data)
     .then(() => this.list = this.list.map(p => p.id === id ? { id, ...data } : p))
 
@@ -83,19 +87,19 @@ class Community extends EventEmitter {
       this.data = data
       this.emit('update')
     })
-    
+
     // publications
     this.publications = new Publications(communityId)
   }
 
   delete = () => db.communityDelete(this.communityId)
-  
+
   get = () => this.data
     ? Promise.resolve(this.data)
     : db.communityGet(this.communityId).then(data => this.data = data)
-  
+
   post = data => db.communityPost(this.communityId, data)
-  
+
   put = data => db.communityPut(this.communityId, data)
 }
 
@@ -147,14 +151,14 @@ class User extends EventEmitter {
     await this._initUser()
     return state.user
   }
-  
+
   put = async data => {
     await this._initUser()
     state.user = { ...state.user, ...data }
     await localForage.setItem('user', state.user)
     this.emit('update')
   }
-  
+
   // user communities & communities
   _initCommunities() {
     if (!this.userCommunities) {
@@ -162,7 +166,7 @@ class User extends EventEmitter {
     }
     return this.userCommunities
   }
-  
+
   get communities() {
     if (!this._communities) {
       this._communities = new EventEmitterCommunities(this)
