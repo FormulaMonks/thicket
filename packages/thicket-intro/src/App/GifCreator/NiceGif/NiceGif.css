@@ -1,0 +1,16 @@
+.NiceGif--share button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1em;
+}
+.NiceGif--share img {
+  vertical-align: middle;
+}
+.NiceGif--share button:focus, .NiceGif--share button:hover {
+  outline: none;
+  transform: scale(1.25);
+}
+.NiceGif--share button:active {
+  transform: scale(.9);
+}

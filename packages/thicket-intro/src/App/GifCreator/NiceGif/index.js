@@ -1,9 +1,17 @@
 import React from 'react'
 import GifToEarthProgress from './GifToEarthProgress'
 import Arrow from '../../Arrow'
-import earth from './earth.gif'
+import Image from '../Image'
 
-const sendingCopy = scrollTo => [
+import earth from '../../Hero/earth.svg'
+import download from './download.svg'
+import link from './link.svg'
+import facebook from './facebook.svg'
+import twitter from './twitter.svg'
+
+import './NiceGif.css'
+
+const sendingCopy = ({ scrollTo }) => [
   <h2 key="h2">Nice GIF! We here on Mars love it.</h2>,
   <p key="p">
     With traditional apps, your fellow Martians would have to wait until it
@@ -18,15 +26,28 @@ const sendingCopy = scrollTo => [
   <Arrow key="p3" scrollTo={scrollTo} />,
 ]
 
-const arrivedCopy = () => [
+const arrivedCopy = ({ gif }) => [
+  <Image key="earth" alt="" src={earth} />,
   <h2 key="h2">Your GIF finally made it to Earth!</h2>,
   <p key="p">
-    And as luck would have it, this GIF from your Earth friends just arrived to
-    you on Mars. Enjoy!
+    View your GIF below and share it with your friends!
   </p>,
-  <p key="img">
-    <img src={earth} alt="Earth is better with you on it" />
-  </p>,
+  <img key="gif" alt="your GIF" src={gif} />,
+  <p key="p2"><small>Share this GIF! <em>(Turn WiFi back on)</em></small></p>,
+  <div key="share" className="NiceGif--share">
+    <button onClick={() => alert('todo')}>
+      <img alt="download" src={download} />
+    </button>
+    <button onClick={() => alert('todo')}>
+      <img alt="copy link" src={link} />
+    </button>
+    <button onClick={() => alert('todo')}>
+      <img alt="share on facebook" src={facebook} />
+    </button>
+    <button onClick={() => alert('todo')}>
+      <img alt="tweet" src={twitter} />
+    </button>
+  </div>,
 ]
 
 const selectCopyFor = arrived => arrived ? arrivedCopy : sendingCopy
@@ -49,7 +70,7 @@ export default class NiceGif extends React.Component {
         setArrived={this.setArrived}
         arrived={arrived}
       />,
-      ...selectCopyFor(arrived)(scrollTo),
+      ...selectCopyFor(arrived)({ scrollTo, gif }),
     ]
   }
 }
