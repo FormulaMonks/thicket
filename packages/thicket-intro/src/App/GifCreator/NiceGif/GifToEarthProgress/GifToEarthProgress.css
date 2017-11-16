@@ -62,9 +62,6 @@
   background-color: rgba(255,255,255,0.1);
   border-radius: 2px;
 }
-.GifToEarthProgress--progressBars .progress.fromEarth {
-  margin-bottom: 3px;
-}
 .GifToEarthProgress--progressBars .progress div {
   border-radius: 2px;
   animation: loadingBar var(--timeToComplete) linear forwards;
@@ -72,30 +69,14 @@
 .GifToEarthProgress--progressBars .progress.fromMars div {
   background-color: #e75252;
 }
-.GifToEarthProgress--progressBars .progress.fromEarth div {
-  background-color: #00A9E0;
-  float: right;
-}
 
 .GifToEarthProgress .gif {
   line-height: 0;
   position: absolute;
-  width: 44px;
-}
-.GifToEarthProgress .gif.martian {
   background-color: #e75252;
   margin-left: -22px;
   top: calc(100% + 11px);
   animation: gifFromMars var(--timeToComplete) linear forwards;
-}
-.GifToEarthProgress .gif.terran {
-  background-color: #00A9E0;
-  bottom: calc(100% + 11px);
-  height: 34px;
-  font-size: 20px;
-  line-height: 34px;
-  margin-right: -22px;
-  animation: gifFromEarth var(--timeToComplete) linear forwards;
 }
 .GifToEarthProgress .gif img {
   width: 40px;
@@ -109,14 +90,8 @@
   content: " ";
   font-size: 0;
   line-height: 0;
-}
-.GifToEarthProgress .gif.martian:after {
   bottom: 100%;
   border-bottom: 11px solid #e75252;
-}
-.GifToEarthProgress .gif.terran:after {
-  top: 100%;
-  border-top: 11px solid #00A9E0;
 }
 
 @keyframes loadingBar {
@@ -126,8 +101,4 @@
 @keyframes gifFromMars {
   0% { left: var(--progress) }
   100% { left: 100% }
-}
-@keyframes gifFromEarth {
-  0% { right: var(--progress) }
-  100% { right: 100% }
 }
