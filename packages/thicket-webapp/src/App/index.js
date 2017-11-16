@@ -42,7 +42,7 @@ class App extends Component {
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
-          <Route exact path="/gif/:g" render={props => <Gif {...props} />} />
+          <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Route exact path="/" render={props => <Index {...props} />} />
         </Switch>
         <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
