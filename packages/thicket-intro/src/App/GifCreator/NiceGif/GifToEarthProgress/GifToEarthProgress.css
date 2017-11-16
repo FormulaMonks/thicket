@@ -29,6 +29,13 @@
 }
 .GifToEarthProgress.sticky {
   position: fixed;
+  background-image:
+    url(../../../Hero/stars.svg),
+    linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%)
+    ;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: cover;
 }
 .GifToEarthProgress + * {
   margin-top: 115px; /* 2 x 32px padding + 51px height of earth */
