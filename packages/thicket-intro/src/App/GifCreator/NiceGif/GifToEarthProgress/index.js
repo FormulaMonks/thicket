@@ -32,9 +32,11 @@ const Sending = ({ gif }) => (
 
 const Arrived = ({ scrollTo }) => (
   <div className="arrived">
+    <img src={mars} alt="mars" className="mars" />
     <span>
-      Interplanetary GIFs unlocked! <a href={scrollTo}>Check it out!</a> 🎉🎉
+      Success, interplanetary GIFs exchanged!{' '} <a href={scrollTo}>Check it out!</a>
     </span>
+    <img src={earth} alt="earth" className="earth"  />
   </div>
 )
 
