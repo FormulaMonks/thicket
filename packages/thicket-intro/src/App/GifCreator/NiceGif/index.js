@@ -8,12 +8,11 @@ const sendingCopy = scrollTo => [
   <p key="p">
     With traditional apps, your fellow Martians would have to wait until it
     makes a round-trip to an Earth server. With Thicket, we get it right away.
-    Your Earth friends will get it as fast as lightspeed allows.
+    We’re sending your GIF off to your Earth friends now; they’ll get it as
+    fast as lightspeed allows.
   </p>,
   <p key="p2">
-    And <em>maybe</em> an Earth friend just sent you something, too!
-    {' '}<em>Maybe</em> if you stick around for three minutes, you'll find out
-    what it is!
+    <small>Learn more about Thicket while you’re waiting.</small>
   </p>,
   <Arrow key="p3" scrollTo={scrollTo} />,
 ]

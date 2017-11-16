@@ -27,3 +27,5 @@ a.muted:focus .highlight, a.muted:hover .highlight { color: #00A9E0 }
 a.muted:active .highlight { color: #06AC4B }
 
 img { max-width: 100% }
+
+small { font-size: 0.7em }

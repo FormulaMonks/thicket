@@ -17,12 +17,8 @@ const Sending = ({ gif }) => (
   <div>
     <img src={mars} alt="mars" className="mars" />
     <div className="GifToEarthProgress--progressBars">
-      <div className="gif terran">
-        ?
-      </div>
-      <div className="progress fromEarth"><div /></div>
       <div className="progress fromMars"><div /></div>
-      <div className="gif martian">
+      <div className="gif">
         <img src={gif} alt="your GIF" />
       </div>
     </div>
