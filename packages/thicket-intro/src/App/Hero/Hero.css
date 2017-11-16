@@ -4,6 +4,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  background-image: url(./mars.svg), url(./earth.svg), url(./stars.svg);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center bottom, 75% 75%, 100% 100%;
+  background-size: 102%, 1em, cover;
 }
 
 @media(min-height: 400px) {
