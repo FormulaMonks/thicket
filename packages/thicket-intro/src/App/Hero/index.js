@@ -1,18 +1,10 @@
 import React from 'react'
 import Nav from './Nav'
-import stars from './stars.svg'
-import earth from './earth.svg'
-import mars from './mars.svg'
 import Arrow from '../Arrow'
 import './Hero.css'
 
 export default ({ scrollTo }) => (
-  <header className="Hero" style={{
-    backgroundImage: `url(${mars}), url(${earth}), url(${stars})`,
-    backgroundRepeat: 'no-repeat, no-repeat, no-repeat',
-    backgroundPosition: 'center bottom, 75% 75%, 100% 100%',
-    backgroundSize: '102%, 1em, cover',
-  }}>
+  <header className="Hero">
     <div className="Hero--PinToTop">
       <Nav />
     </div>
