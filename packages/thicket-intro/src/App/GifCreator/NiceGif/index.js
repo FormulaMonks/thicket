@@ -55,7 +55,10 @@ export default class NiceGif extends React.Component {
 
   state = { arrived: false }
 
-  setArrived = () => this.setState({ arrived: true })
+  setArrived = () => {
+    this.props.onArrival()
+    this.setState({ arrived: true })
+  }
 
   render() {
     const { id, gif, gifCreated, scrollTo } = this.props

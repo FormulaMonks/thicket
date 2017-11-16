@@ -7,8 +7,9 @@
 
   background-image: url(./mars.svg), url(./earth.svg), url(./stars.svg);
   background-repeat: no-repeat, no-repeat, no-repeat;
-  background-position: center bottom, 75% 75%, 100% 100%;
+  background-position: center bottom, 75% 75%, top left;
   background-size: 102%, 1em, cover;
+  background-attachment: scroll, scroll, fixed;
 }
 
 @media(min-height: 400px) {

@@ -41,15 +41,23 @@ export default class GifCreator extends React.Component {
     this.setState({ gif, gifCreated, creating: false })
   }
 
+  setArrived = () => this.setState({ arrived: true })
+
   render() {
     const { id, scrollTo } = this.props
-    const { gif, gifCreated, online, creating } = this.state
+    const { gif, gifCreated, online, creating, arrived } = this.state
 
     return (
-      <div className="GifCreator" id={id}>
+      <div id={id} className={`GifCreator${arrived ? ' arrived' : ''}`}>
         <div className="GifCreator--Explanation">
           {gif
-            ? <NiceGif id={id} gif={gif} gifCreated={gifCreated} scrollTo={scrollTo} />
+            ? <NiceGif
+                id={id}
+                gif={gif}
+                gifCreated={gifCreated}
+                scrollTo={scrollTo}
+                onArrival={this.setArrived}
+              />
             : online
               ? <TurnOffWifi />
               : creating

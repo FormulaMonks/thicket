@@ -5,6 +5,13 @@
   flex-direction: column;
   justify-content: space-around;
 }
+.GifCreator.arrived {
+  background-image: url(../Hero/stars.svg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top left;
+  background-size: cover;
+}
 
 .GifCreator--Explanation {
   margin: 0 auto;
