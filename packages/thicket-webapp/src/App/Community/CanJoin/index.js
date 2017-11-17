@@ -2,21 +2,21 @@ import React, { Component } from 'react'
 import Onboarding from '../../../components/Onboarding'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
-import './Join.css'
+import './CanJoin.css'
 import { FINISHED } from '../../Welcome'
 
 const { user, communities } = store
 const ONBOARD = 'show the user how to get things done around here'
-const JOIN = 'present the user options to accept/decline the invitation to join the community'
+const CAN_JOIN = 'present the user options to accept/decline the invitation to join the community'
 
-class Join extends Component {
+class CanJoin extends Component {
 
   state = { mode: ONBOARD }
 
   async componentDidMount() {
     const { onboarding } = await user.get()
     if (onboarding === FINISHED) {
-      this.setState({ mode: JOIN })
+      this.setState({ mode: CAN_JOIN })
     }
   }
 
@@ -27,7 +27,7 @@ class Join extends Component {
       mode === ONBOARD && <div key="onboard" className="join__onboard">
           <Onboarding onComplete={this.onComplete} />
         </div>,
-      mode === JOIN && <div key="join" className="join__header">
+      mode === CAN_JOIN && <div key="join" className="join__header">
           Hey {this.props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.<Button onClick={this.onJoin}>Join</Button><Button onClick={this.onDecline}>Decline</Button>
         </div>,
     ]
@@ -35,7 +35,7 @@ class Join extends Component {
 
   onComplete = async () => {
     await user.put({ onboarding: FINISHED })
-    this.setState({ mode: JOIN })
+    this.setState({ mode: CAN_JOIN })
   }
 
   onDecline = () => this.props.history.replace('/welcome')
@@ -48,4 +48,4 @@ class Join extends Component {
 
 }
 
-export default Join
+export default CanJoin
