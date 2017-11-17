@@ -43,6 +43,7 @@ class CanJoin extends Component {
   onJoin = async () => {
     const { community } = this.props
     await communities.post(community)
+    this.props.history.push(`/c/${community}`)
     this.props.onClose()
   }
 
