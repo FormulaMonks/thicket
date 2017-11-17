@@ -4,8 +4,6 @@
 }
 
 .GifToEarthProgress {
-  background: #172B42;
-  background: linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%);
   top: 0;
   left: 0;
   width: 100%;
@@ -29,12 +27,15 @@
 }
 .GifToEarthProgress.sticky {
   position: fixed;
+  background: #172B42;
+  background: linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%);
   background-image:
     url(../../../Hero/stars.svg),
     linear-gradient(to bottom, #172B42 0%, #172B42 95%, rgba(22,43,66,0) 100%)
     ;
   background-repeat: no-repeat;
-  background-position: 100% 100%;
+  background-position: top left;
+  background-attachment: fixed;
   background-size: cover;
 }
 .GifToEarthProgress + * {
