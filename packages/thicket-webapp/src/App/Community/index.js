@@ -7,7 +7,7 @@ import Create from '../../components/Create'
 import Publication from './Publication'
 import Settings from './Settings'
 import Invite from './Invite'
-import Join from './Join'
+import CanJoin from './CanJoin'
 import './Community.css'
 import add from './add.svg'
 import link from './link.svg'
@@ -21,7 +21,7 @@ const CREATE = 'user is creating a gif'
 const INVITE = 'user is presented with a link to invite other to this community'
 const SETTINGS = 'user can modify the community title and/or leave the community'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
-const JOIN = 'user can join the community'
+const CAN_JOIN = 'user can join the community'
 
 const NoContent = props => <div className="nocontent">
   <h2>Your Community doesn’t have content yet!</h2>
@@ -41,15 +41,15 @@ class Community extends Component {
 
   async componentDidMount() {
     const { c } = this.props.match.params
-    // join?
+    // is the user coming from an invite link?
     const { token = '' } = queryString.parse(window.location.search);
-    const join = atob(token) === c
+    const canJoin = atob(token) === c
     const member = await communities.has(c)
-    if (!member && join) {
-      this.setState({ mode: JOIN })
+    if (!member && canJoin) {
+      this.setState({ mode: CAN_JOIN })
     }
     // uninvited?
-    if (!member && !join) {
+    if (!member && !canJoin) {
       this.setState({ mode: UNINVITED })
       return
     }
@@ -114,7 +114,7 @@ class Community extends Component {
           history={history}
           />,
       mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} community={c} />,
-      mode === JOIN && <Join key="join" community={c} history={history} nickname={nickname} onClose={() => this.setState({ mode: null })} />
+      mode === CAN_JOIN && <CanJoin key="join" community={c} history={history} nickname={nickname} onClose={() => this.setState({ mode: null })} />
     ]
   }
 
