@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
 import Gif from '../../../components/Gif'
-import { Button, Spinner } from 'thicket-elements'
+import { Button } from 'thicket-elements'
 import store from '../../../database/store'
 import './Publication.css'
 

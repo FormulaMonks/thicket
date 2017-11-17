@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Spinner } from 'thicket-elements'
+import './Gif.css'
 import Editable from '../Editable'
 import download from './download.svg'
 import share from './share.svg'
@@ -16,14 +17,14 @@ class Gif extends Component {
 
   render() {
     if (!this.props.gif) {
-      return <div className="publication__main"><Spinner /></div>
+      return <div className="gif__main"><Spinner /></div>
     }
 
     const { mode } = this.state
     const { gif, editable, onChange } = this.props
     const { src, nickname, caption, id } = gif
 
-    return <div className="publication__main">
+    return <div className="gif__main">
       {mode === GIF && <img src={src} alt={caption} />}
       {mode === DOWNLOAD && <div>
         <div>
