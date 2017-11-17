@@ -2,9 +2,10 @@ import React from 'react'
 import Modal from '../../../components/Modal'
 import { Button } from 'thicket-elements'
 import copy from 'copy-to-clipboard'
+import { getCommunityInviteLink } from '../../../utils/inviteLinks'
 
 const Invite = props => {
-  const link = document.location.origin + '/c/' + props.community + '?token=' + btoa(props.community)
+  const link = getCommunityInviteLink(props.community)
   return <Modal
     header={<div>Copy Community Invite Link</div>}
     footer={[
