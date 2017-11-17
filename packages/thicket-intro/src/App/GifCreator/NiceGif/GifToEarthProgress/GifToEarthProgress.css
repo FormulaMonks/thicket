@@ -89,6 +89,7 @@
 .GifToEarthProgress .gif img {
   width: 40px;
   margin: 2px;
+  max-width: none; /* override global rule */
 }
 .GifToEarthProgress .gif:after {
   position: absolute;
