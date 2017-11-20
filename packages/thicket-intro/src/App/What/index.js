@@ -18,15 +18,15 @@ export default () => (
       <Columns style={{textAlign: 'left'}}>
         <a className="muted" href="https://www.youtube.com/watch?v=FXhPBiv4Roo">
           <img alt="" src={onlineOfflineEquivalence} />
-          <div><div className="highlight">Watch:</div> What Our Interplanetary Tomorrow Can Teach Us About Building Apps Today</div>
+          <div><div className="highlight" style={{marginTop: '0.7em'}}>Watch:</div> What Our Interplanetary Tomorrow Can Teach Us About Building Apps Today</div>
         </a>
         <a className="muted" href="https://medium.com/@denis.sokolov_53985/state-on-the-front-end-5b80c0045f07">
           <img alt="" src={stateOnFrontend} />
-          <div><div className="highlight">Read:</div> State on the front-end</div>
+          <div><div className="highlight" style={{marginTop: '0.7em'}}>Read:</div> State on the front-end</div>
         </a>
         <a className="muted" href="https://github.com/citrusbyte/thicket">
           <img alt="" src={thicket} />
-          <div><div className="highlight">Code:</div> Thicket source code</div>
+          <div><div className="highlight" style={{marginTop: '0.7em'}}>Code:</div> Thicket source code</div>
         </a>
       </Columns>
     </div>
