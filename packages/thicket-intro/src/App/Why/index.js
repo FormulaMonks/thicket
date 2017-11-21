@@ -27,12 +27,12 @@ export default ({ id }) => (
         <div>
           <Square background={centralized} />
           <img src={x} alt="" />
-          <div>Centralized Web limits opportunity</div>
+          <div style={{marginTop: '0.7em'}}>Centralized Web limits opportunity</div>
         </div>
         <div>
           <Square background={decentralized} />
           <img src={check} alt="" />
-          <div>Decentralized Web offers persistent availability without a backbone</div>
+          <div style={{marginTop: '0.7em'}}>Decentralized Web offers persistent availability without a backbone</div>
         </div>
       </Columns>
     </div>

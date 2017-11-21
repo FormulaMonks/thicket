@@ -1,9 +1,6 @@
 .How.wrap {
-  min-height: 100vh;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  padding-bottom: 6em;
 }
 
 .How.inner {
