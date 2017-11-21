@@ -1,8 +1,12 @@
 import React from 'react'
 import './Buttons.css'
 
-export const Button = ({ children, onClick }) => (
-  <button className="Button" onClick={onClick}>{children}</button>
+export const Button = ({ component = 'button', children, ...props }) => (
+  React.createElement(
+    component,
+    { className: 'Button', ...props },
+    children
+  )
 )
 
 export const DisabledButton = ({ children, tip }) => (
