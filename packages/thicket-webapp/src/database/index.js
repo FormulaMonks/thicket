@@ -55,6 +55,7 @@ const yConfig = (node, id) => ({
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
+// https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedPromiseConcatStream = ({ hash, stream }) => {
   return new Promise((resolve, reject) => {
     let returned = false
