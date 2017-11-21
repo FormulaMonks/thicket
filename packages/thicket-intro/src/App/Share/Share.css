@@ -1,17 +1,30 @@
-.Share-buttons button {
+.Share-buttons {
+  position: relative;
+}
+.Share-buttons:focus {
+  outline: none
+}
+
+.Share-button {
   background: none;
   border: none;
   cursor: pointer;
   display: inline-block;
   margin-left: 1em;
-}
-.Share-buttons img {
+  padding: 0;
   vertical-align: middle;
 }
-.Share-buttons button:focus, .Share-buttons button:hover {
+.Share-button img {
+  vertical-align: middle;
+}
+.Share-button:focus, .Share-button:hover {
   outline: none;
   transform: scale(1.25);
 }
-.Share-buttons button:active {
+.Share-button:active {
   transform: scale(.9);
+}
+
+.Share-link {
+  position: absolute;
 }
