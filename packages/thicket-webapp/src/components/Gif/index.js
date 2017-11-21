@@ -7,6 +7,8 @@ import share from './share.svg'
 import facebook from './facebook.svg'
 import twitter from './twitter.svg'
 import { getGIFLink } from '../../utils/links'
+import streamSaver from 'streamsaver'
+import ImageDataConverter from '../../utils/imageDataConverter'
 
 const GIF = 'show GIF'
 const DOWNLOAD = 'show options for downloading'
@@ -33,7 +35,7 @@ class Gif extends Component {
           <Button onClick={() => this.setState({ mode: GIF })}>x</Button>
         </div>
         <div>
-          <Button>Download</Button>
+          <Button onClick={this.onDownload}>Download</Button>
         </div>
       </div>}
       {mode === SHARE && <div>
@@ -64,6 +66,18 @@ class Gif extends Component {
       </div>
     </div>
   }
+
+  onDownload = () => {
+    const { gif } = this.props
+    const filename = `thicket${gif.nickname ? `-${gif.nickname}` : ''}${gif.caption ? `-${gif.caption}` : ''}.gif`
+    const fileStream = streamSaver.createWriteStream(filename)
+    const writer = fileStream.getWriter()
+    const encoder = new TextEncoder
+    const data = new ImageDataConverter(this.props.gif.src).convertToTypedArray()
+    writer.write(data)
+    writer.close()
+  }
+
 }
 
 export default Gif
