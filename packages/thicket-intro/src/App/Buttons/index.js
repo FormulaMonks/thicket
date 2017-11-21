@@ -1,10 +1,10 @@
 import React from 'react'
 import './Buttons.css'
 
-export const Button = ({ component = 'button', children, ...props }) => (
+export const Button = ({ component = 'button', children, color, ...props }) => (
   React.createElement(
     component,
-    { className: 'Button', ...props },
+    { className: 'Button', 'data-color': color, ...props },
     children
   )
 )

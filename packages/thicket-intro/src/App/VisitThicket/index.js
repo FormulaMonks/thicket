@@ -17,7 +17,7 @@ export default () => (
     <h2>
       Check out the full Thicket web application to create and share GIFs!
     </h2>
-    <Button component="a" href="https://thicket.surge.sh" target="_blank">
+    <Button component="a" href="https://thicket.surge.sh" target="_blank" color="#E75252">
       Visit Thicket
     </Button>
   </Section>

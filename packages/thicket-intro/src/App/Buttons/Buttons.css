@@ -16,6 +16,7 @@
 
 .Button:enabled:focus, .Button:enabled:hover {
   color: #172B42;
+  color: attr(color data-color);
   background-color: white;
 }
 
