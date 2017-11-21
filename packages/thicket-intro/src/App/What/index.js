@@ -6,7 +6,7 @@ import stateOnFrontend from './stateOnFrontend.png'
 import thicket from './thicket.png'
 
 export default () => (
-  <Section style={{paddingBottom: '9em'}}>
+  <Section style={{paddingBottom: '2em'}}>
     <h2>Open Source &amp; More Info</h2>
     <p>
       Thicket is one project we built to dive deeper with technologies we

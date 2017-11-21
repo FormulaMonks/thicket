@@ -5,6 +5,8 @@ import GifCreator from './GifCreator'
 import Why from './Why'
 import What from './What'
 import How from './How'
+import VisitThicket from './VisitThicket'
+import Share from './Share'
 import Footer from './Footer'
 import './App.css'
 
@@ -14,8 +16,8 @@ export default () => [
   <Why key="why" id="why" />,
   <How key="how" />,
   <What key="what" />,
-  // <ShareYourGif key="share" />,
-  // <VisitThicket key="thicket" />,
+  <VisitThicket key="thicket" />,
+  <Share key="share" />,
   <Footer key="footer" />,
 ]
 

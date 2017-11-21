@@ -6,8 +6,6 @@ import { Button } from '../../Buttons'
 
 import earth from '../../Hero/earth.svg'
 
-import './NiceGif.css'
-
 const sendingCopy = ({ scrollTo }) => [
   <h2 key="h2">Nice GIF! We here on Mars love it.</h2>,
   <p key="p">
