@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Image from '../Image'
-import { Button } from '../Buttons'
+import { Button } from '../../Buttons'
 import mars from './mars.svg'
 
 export default ({ onActivate }) => [
