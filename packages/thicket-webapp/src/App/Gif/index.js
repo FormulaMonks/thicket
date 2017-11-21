@@ -19,12 +19,13 @@ class G extends Component {
   }
 
   render() {
-    const { history } = this.props
+    const { history, match } = this.props
     const { gif, newUser } = this.state
     const nickname = (gif && gif.nickname) || `Guest${Math.floor(1 + Math.random() * 1000)}`
+
     return <div className="gif">
       <div>Welcome, check out this GIF!</div>
-      <Gif gif={gif} />
+      <Gif gif={gif} communityId={match.params.c} />
       {newUser && <div>
         <div>{nickname} and lots of other users are using Thicket to create and share GIFs. 
 Get started for yourself today!</div>

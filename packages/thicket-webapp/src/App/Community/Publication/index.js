@@ -52,7 +52,7 @@ class Publication extends Component {
       header={<Header />}
       footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ mode: DELETE })} />}
       onClose={this.close}>
-      <Gif gif={this.state.gif} editable={true} onChange={gif => this.setState({ gif, modified: true })} />
+      <Gif communityId={this.props.match.params.c} gif={this.state.gif} editable={true} onChange={gif => this.setState({ gif, modified: true })} />
     </Modal>
   }
 

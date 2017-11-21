@@ -6,6 +6,7 @@ import download from './download.svg'
 import share from './share.svg'
 import facebook from './facebook.svg'
 import twitter from './twitter.svg'
+import { getGIFLink } from '../../utils/links'
 
 const GIF = 'show GIF'
 const DOWNLOAD = 'show options for downloading'
@@ -21,7 +22,7 @@ class Gif extends Component {
     }
 
     const { mode } = this.state
-    const { gif, editable, onChange } = this.props
+    const { gif, editable, onChange, communityId } = this.props
     const { src, nickname, caption, id } = gif
 
     return <div className="gif__main">
@@ -29,22 +30,18 @@ class Gif extends Component {
       {mode === DOWNLOAD && <div>
         <div>
           <div>Download</div>
-          <div><Button onClick={() => this.setState({ mode: GIF })}>x</Button></div>
+          <Button onClick={() => this.setState({ mode: GIF })}>x</Button>
         </div>
         <div>
-          <input type="text" value={`https://ipfs.io/ipfs/${id}`} />
           <Button>Download</Button>
         </div>
       </div>}
       {mode === SHARE && <div>
         <div>
           <div>Share</div>
-          <div><Button onClick={() => this.setState({ mode: GIF })}>x</Button></div>
+          <Button onClick={() => this.setState({ mode: GIF })}>x</Button>
         </div>
-        <div>IPFS</div>
-         <input type="text" value={`https://ipfs.io/ipfs/${id}`} readOnly />
-        <div>This link</div>
-         <input type="text" value={`${window.location.href}`} readOnly />
+        <input type="text" value={getGIFLink(communityId, id)} readOnly />
       </div>}
       <div>
         <div>Created by:</div>
