@@ -88,7 +88,7 @@ class Database extends EventEmitter {
   }
 
   _initIPFS() {
-    if (!this.ipfs) {
+    if (!this._ipfs) {
       this._ipfs = new Promise((resolve, reject) => {
         const node = new IPFS(ipfsConfig)
         node.once('ready', () => resolve(node))

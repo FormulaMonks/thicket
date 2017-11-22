@@ -10346,6 +10346,10 @@ streamifier@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/streamifier/-/streamifier-0.1.1.tgz#97e98d8fa4d105d62a2691d1dc07e820db8dfc4f"
 
+streamsaver@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/streamsaver/-/streamsaver-1.0.1.tgz#475d404973b5e6926a557f0e4cd8558a3520e07c"
+
 streamsearch@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/streamsearch/-/streamsearch-0.1.2.tgz#808b9d0e56fc273d809ba57338e929919a1a9f1a"

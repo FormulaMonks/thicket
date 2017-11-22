@@ -65,6 +65,7 @@
     "react-router-dom": "^4.2.2",
     "react-spinkit": "^3.0.0",
     "safe-buffer": "^5.1.1",
+    "streamsaver": "^1.0.1",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "thicket-camera": "^1.0.1",
@@ -89,7 +90,7 @@
     "deploy": "scripts/deploy.sh"
   },
   "engines": {
-    "node": "8.6.0",
+    "node": ">8.6.0",
     "npm": "5.4.2"
   },
   "devDependencies": {
