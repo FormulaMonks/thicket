@@ -1,9 +1,9 @@
-.How.wrap {
+.Section--wrap {
   text-align: center;
-  padding-bottom: 6em;
+  padding-bottom: 9em;
 }
 
-.How.inner {
+.Section--inner {
   margin: 0 auto;
   padding: 1em;
   max-width: 30em;
