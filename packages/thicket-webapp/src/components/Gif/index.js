@@ -72,7 +72,6 @@ class Gif extends Component {
     const filename = `thicket${gif.nickname ? `-${gif.nickname}` : ''}${gif.caption ? `-${gif.caption}` : ''}.gif`
     const fileStream = streamSaver.createWriteStream(filename)
     const writer = fileStream.getWriter()
-    const encoder = new TextEncoder
     const data = new ImageDataConverter(this.props.gif.src).convertToTypedArray()
     writer.write(data)
     writer.close()
