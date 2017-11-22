@@ -3,8 +3,8 @@
   "name": "An introduction to Thicket and the key technologies and philosophies behind it",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "192x192",
+      "src": "favicon.png",
+      "sizes": "64x64",
       "type": "image/png"
     }
   ],
