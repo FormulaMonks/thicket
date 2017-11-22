@@ -84,3 +84,8 @@
   background-image: url(./clipboard-white.svg);
   outline: none;
 }
+.Share-linkbox-copybutton.copied {
+  background-color: #E75252;
+  background-image: url(./checkmark.svg);
+  background-size: 80% auto;
+}

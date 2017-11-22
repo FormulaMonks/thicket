@@ -1,4 +1,5 @@
 import React from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import Section from '../Section'
 
@@ -11,19 +12,19 @@ const pageURL = window.encodeURIComponent(window.location.href)
 
 export default class Share extends React.Component {
 
-  state = { linking: false }
+  state = { linking: false, copied: false }
 
   maybeHideDropdown = e => {
     if (
       !e.relatedTarget ||
       (this.sharebox && !this.sharebox.contains(e.relatedTarget))
     ) {
-      this.setState({ linking: false })
+      this.setState({ linking: false, copied: false })
     }
   }
 
   render() {
-    const { linking } = this.state
+    const { linking, copied } = this.state
 
     return (
       <Section
@@ -65,9 +66,14 @@ export default class Share extends React.Component {
                     value={window.location.href}
                     ref={input => { if (input) { input.focus(); input.select(); } } }
                   />
-                  <button className="Share-linkbox-copybutton">
-                    Copy
-                  </button>
+                  <CopyToClipboard
+                    text={window.location.href }
+                    onCopy={() => this.setState({ copied: true })}
+                  >
+                    <button className={`Share-linkbox-copybutton${copied ? ' copied' : ''}`}>
+                      Copy
+                    </button>
+                  </CopyToClipboard>
                 </div>
               </div>
           }
