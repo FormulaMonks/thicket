@@ -1,23 +1,23 @@
-<svg width="39" height="44" viewBox="0 0 39 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="40" height="44" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>Group</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(-32007 -26078)">
+<g id="Canvas" transform="translate(-27713 -32773)">
 <g id="Group">
 <g id="Twitter Copy" filter="url(#filter0_d)">
-<use xlink:href="#path0_fill" transform="translate(32007 26078.2)" fill="#FFFFFF"/>
+<use xlink:href="#path0_fill" transform="translate(27713.5 32773.6)" fill="#FFFFFF"/>
 </g>
 <g id="Link">
 <g id="Fill 647">
-<use xlink:href="#path1_fill" transform="matrix(1 5.51769e-17 -5.58474e-17 1 32017.8 26095.1)" fill="#172B42"/>
+<use xlink:href="#path1_fill" transform="matrix(1 5.51769e-17 -5.58474e-17 1 27724.3 32790.5)" fill="#AC3434"/>
 </g>
 <g id="Fill 648">
-<use xlink:href="#path2_fill" transform="matrix(1 5.51769e-17 -5.58474e-17 1 32024.4 26090)" fill="#172B42"/>
+<use xlink:href="#path2_fill" transform="matrix(1 5.51769e-17 -5.58474e-17 1 27730.9 32785.4)" fill="#AC3434"/>
 </g>
 </g>
 </g>
 </g>
 <defs>
-<filter id="filter0_d" filterUnits="userSpaceOnUse" x="32007" y="26078" width="39" height="44" color-interpolation-filters="sRGB">
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="27713" y="32773" width="40" height="44" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
 <feOffset dx="0" dy="4"/>

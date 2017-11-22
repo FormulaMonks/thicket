@@ -23,6 +23,8 @@ export default class Share extends React.Component {
   }
 
   render() {
+    const { linking } = this.state
+
     return (
       <Section
         style={{
@@ -39,7 +41,10 @@ export default class Share extends React.Component {
           onBlur={this.maybeHideDropdown}
           ref={div => this.sharebox = div}
         >
-          <button className="Share-button" onClick={() => this.setState({ linking: true })}>
+          <button
+            className={`Share-button${linking ? ' Share-button-link' : ''}`}
+            onClick={() => this.setState({ linking: true })}
+          >
             <img alt="copy link" src={link} />
           </button>
           <a className="Share-button" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${pageURL}`}>
@@ -48,16 +53,22 @@ export default class Share extends React.Component {
           <a className="Share-button" target="_blank" href={`https://twitter.com/home?status=Mars.%20GIFs.%20Fun%20times.%20Check%20it%20out%3A%20${pageURL}`}>
             <img alt="tweet" src={twitter} />
           </a>
-          {this.state.linking &&
-              <div className="Share-link">
-                <label>
-                  Copy the link and share it with your friends:
+          {linking &&
+              <div className="Share-linkbox">
+                <div><strong>Copy Share Link</strong></div>
+                <label htmlFor="url">Copy the link and share it with your friends:</label>
+                <div className="Share-linkbox-inputWrap">
                   <input
+                    className="Share-linkbox-input"
                     readOnly
+                    id="url"
                     value={window.location.href}
                     ref={input => { if (input) { input.focus(); input.select(); } } }
                   />
-                </label>
+                  <button className="Share-linkbox-copybutton">
+                    Copy
+                  </button>
+                </div>
               </div>
           }
         </div>

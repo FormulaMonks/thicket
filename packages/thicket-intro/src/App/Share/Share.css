@@ -10,21 +10,77 @@
   border: none;
   cursor: pointer;
   display: inline-block;
+  font-size: inherit;
   margin-left: 1em;
   padding: 0;
   vertical-align: middle;
 }
 .Share-button img {
+  height: 2.5em;
   vertical-align: middle;
 }
 .Share-button:focus, .Share-button:hover {
   outline: none;
+}
+.Share-button:focus img, .Share-button:hover img {
   transform: scale(1.25);
 }
-.Share-button:active {
+.Share-button:active img {
   transform: scale(.9);
 }
 
-.Share-link {
+.Share-button-link {
+  position: relative;
+}
+.Share-button-link:after {
+  border-bottom: 10px solid white;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  content: ' ';
   position: absolute;
+  top: 100%;
+  left: calc(50% - 10px);
+  z-index: 2;
+}
+
+.Share-linkbox {
+  background-color: white;
+  border: 1px solid rgba(8, 19, 31, 0.5);
+  border-top: none;
+  color: black;
+  font-size: 0.75em;
+  margin-top: 10px;
+  padding: 1em;
+  position: absolute;
+  text-align: left;
+}
+.Share-linkbox-inputWrap {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5em;
+}
+.Share-linkbox-input, .Share-linkbox-copybutton {
+  border: 1px solid #c4c4c4;
+}
+.Share-linkbox-input {
+  border-right: none;
+  font-size: inherit;
+  flex: 1;
+  padding: 0.5em;
+}
+.Share-linkbox-copybutton {
+  background-color: white;
+  background-image: url(./clipboard.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 80%;
+  border-radius: 0;
+  cursor: pointer;
+  width: 1.8rem;
+  text-indent: -999em;
+}
+.Share-linkbox-copybutton:focus, .Share-linkbox-copybutton:hover {
+  background-color: #E75252;
+  background-image: url(./clipboard-white.svg);
+  outline: none;
 }
