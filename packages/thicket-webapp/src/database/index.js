@@ -55,6 +55,10 @@ const yConfig = (node, id) => ({
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
+// IPFS team has not yet implemented a timeout/cancel feature on fetching files
+// if we try to fetch a file that is not in the reach of this node/peer this call will never finish/complete
+// read more here
+// https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedPromiseConcatStream = ({ hash, stream }) => {
   return new Promise((resolve, reject) => {
     let returned = false
