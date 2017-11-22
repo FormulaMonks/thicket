@@ -45,7 +45,6 @@ class App extends Component {
           <Route exact path="/gif/:g" render={props => <Gif {...props} />} />
           <Route exact path="/" render={props => <Index {...props} />} />
         </Switch>
-        <div className="app__citruslabs">Created by <a href="#">CitrusLabs</a></div>
       </main>
     </Router>
   }
