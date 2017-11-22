@@ -6,7 +6,6 @@ import store from '../../../database/store'
 import './Publication.css'
 
 const { user, communities } = store
-const DELETE = 'show confirm box for gif deletion'
 
 const Header = () =>
   <header className="publication__header">View / Edit your GIF</header>
@@ -18,7 +17,7 @@ const Footer = props => <footer className="publication__footer">
 
 class Publication extends Component {
 
-  state = { gif: null, mode: null, modified: false }
+  state = { gif: null, showDeleteConfimation: false, modified: false }
 
   componentDidMount() {
     communities.get(this.props.match.params.c).then(({ publications }) =>
@@ -32,16 +31,14 @@ class Publication extends Component {
   }
 
   render() {
-    const { mode } = this.state
-
-    if (mode === DELETE) {
+    if (this.state.showDeleteConfimation) {
       return <Modal
         header={<div>Confirm Delete GIF</div>}
         footer={<div>
-            <Button onClick={() => this.setState({ mode: null })}>Cancel</Button>
+            <Button onClick={() => this.setState({ showDeleteConfimation: false })}>Cancel</Button>
             <Button onClick={this.onDelete}>Confirm</Button>
           </div>}
-        onClose={() => this.setState({ mode: null })}>
+        onClose={() => this.setState({ showDeleteConfimation: false })}>
         <div>Are you sure you want to delete this GIF:</div>
         <div>{this.state.gif.caption}</div>
         <div>NOTE: this action cannot be undone</div>
@@ -50,7 +47,7 @@ class Publication extends Component {
 
     return <Modal
       header={<Header />}
-      footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ mode: DELETE })} />}
+      footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ showDeleteConfimation: true })} />}
       onClose={this.close}>
       <Gif communityId={this.props.match.params.c} gif={this.state.gif} editable={true} onChange={gif => this.setState({ gif, modified: true })} />
     </Modal>
