@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Image from '../Image'
-import { DisabledButton } from '../Buttons'
+import { DisabledButton } from '../../Buttons'
 import noWifi from './no-wifi.svg'
 
 export default () => [
