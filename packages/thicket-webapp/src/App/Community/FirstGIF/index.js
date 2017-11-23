@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
+import { getCommunityInviteLink } from '../../../utils/inviteLinks'
 import './FirstGIF.css'
 
 const { user, communities } = store
@@ -36,7 +37,7 @@ const Header = () => <header className="firstgif__header">
 </header>
 
 const Main = props => {
-  const { title } = props
+  const { title, community } = props
   return <div className="firstgif__main">
     <h4 className="firstgif__message">
       Awesome, you shot your first GIF! We automatically added it to a new Community called "{title}".
@@ -50,7 +51,7 @@ const Main = props => {
       </label>
       <label className="firstgif__label">
         <div>Or copy the Community Invite Link below and share with friends so they can create and add content:</div>
-        <input type="text" value="tbd" readOnly />
+        <input type="text" value={getCommunityInviteLink(community)} readOnly />
       </label>
       <aside>
         NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically.

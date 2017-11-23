@@ -44,7 +44,7 @@ class Welcome extends Component{
 
     return <div className="welcome">
       {mode === ARRIVED && <Arrived onContinue={() => this.continue(ONBOARD)} mode={mode} />}
-      {mode === ONBOARD && <Onboarding onContinue={() => this.continue(CAMERA_ACCESS)} />}
+      {mode === ONBOARD && <Onboarding onComplete={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
       {mode === CREATE && <div className="welcome__create">
           <Create nickname={nickname} onSave={this.onSave} />
@@ -60,7 +60,7 @@ class Welcome extends Component{
       .then(() => communities.post(NEW_COMMUNITY_ID))
       .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })))
       .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.publications.post(data)))
-      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}`))
+      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`))
 
 }
 

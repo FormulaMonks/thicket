@@ -59,6 +59,7 @@
     "pull-promise": "^2.0.0",
     "pull-sort": "^1.0.1",
     "pull-stream": "^3.6.1",
+    "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-dev-utils": "^4.1.0",
     "react-dom": "^16.0.0",
@@ -90,7 +91,7 @@
     "deploy": "scripts/deploy.sh"
   },
   "engines": {
-    "node": ">8.6.0",
+    "node": ">=8.6.0",
     "npm": "5.4.2"
   },
   "devDependencies": {

@@ -40,7 +40,10 @@ class Publications extends EventEmitter {
     })
   }
 
-  delete = id => db.publicationsDelete(this.communityId, id)
+  delete = id => {
+    this.list = this.list.filter(p => p.id === id)
+    return db.publicationsDelete(this.communityId, id)
+  }
 
   get = id => {
     const cached = this.list.find(p => p.id === id)
@@ -49,7 +52,9 @@ class Publications extends EventEmitter {
     }
     return db.publicationsGet(this.communityId, id)
       .then(data => {
-        this.list.push(data)
+        if (data) {
+          this.list.push(data)
+        }
         return data
       })
   }

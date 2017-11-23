@@ -31,6 +31,12 @@ class Publication extends Component {
   }
 
   render() {
+    const { mode, gif } = this.state
+
+    if (!gif) {
+      return null
+    }
+
     if (this.state.showDeleteConfimation) {
       return <Modal
         header="Confirm Delete GIF"
@@ -40,7 +46,7 @@ class Publication extends Component {
           </div>}
         onClose={() => this.setState({ showDeleteConfimation: false })}>
         <div>Are you sure you want to delete this GIF:</div>
-        <div>{this.state.gif.caption}</div>
+        <div>{gif.caption}</div>
         <div>NOTE: this action cannot be undone</div>
       </Modal>
     }
@@ -66,7 +72,7 @@ class Publication extends Component {
   fetch = () => {
     const { c, id } = this.props.match.params
     communities.get(c).then(({ publications }) => publications.get(id)
-        .then(gif => this.setState({ gif })))
+      .then(gif => this.setState({ gif })))
   }
 
   onDelete = () => {
