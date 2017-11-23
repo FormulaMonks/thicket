@@ -33,7 +33,7 @@ class Publication extends Component {
   render() {
     if (this.state.showDeleteConfimation) {
       return <Modal
-        header={<div>Confirm Delete GIF</div>}
+        header="Confirm Delete GIF"
         footer={<div>
             <Button onClick={() => this.setState({ showDeleteConfimation: false })}>Cancel</Button>
             <Button onClick={this.onDelete}>Confirm</Button>
