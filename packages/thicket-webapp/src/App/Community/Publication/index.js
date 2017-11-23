@@ -45,12 +45,20 @@ class Publication extends Component {
       </Modal>
     }
 
-    return <Modal
-      header={<Header />}
-      footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ showDeleteConfimation: true })} />}
-      onClose={this.close}>
-      <Gif communityId={this.props.match.params.c} gif={this.state.gif} editable={true} onChange={gif => this.setState({ gif, modified: true })} />
-    </Modal>
+    return (
+      <Modal
+        header={<Header />}
+        footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ showDeleteConfimation: true })} />}
+        onClose={this.close}
+      >
+        <Gif
+          communityId={this.props.match.params.c}
+          gif={this.state.gif}
+          editable
+          onChange={gif => this.setState({ gif, modified: true })}
+        />
+      </Modal>
+    )
   }
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
