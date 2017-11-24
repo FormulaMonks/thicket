@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     const { nickname } = this.state
     const { components = {} } = this.props
-    const { Tos = null } = components
+    const { Tos, CanJoinTos, CanJoinPrompt } = components
 
     return <Router>
       <main className="app">
@@ -43,7 +43,8 @@ class App extends Component {
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} Tos={Tos} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
-          <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
+          <Route path="/c/:c" render={props =>
+            <Community {...props} nickname={nickname} CanJoinTos={CanJoinTos} CanJoinPrompt={CanJoinPrompt} />} />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Route exact path="/" render={props => <Index {...props} />} />
         </Switch>
