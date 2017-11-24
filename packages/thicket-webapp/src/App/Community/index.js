@@ -73,7 +73,7 @@ class Community extends Component {
 
   render() {
     const { list, mode, title, loading } = this.state
-    const { nickname, match, history } = this.props
+    const { nickname, match, history, CanJoinTos, CanJoinPrompt } = this.props
     const { c } = match.params
 
     if (mode === UNINVITED) {
@@ -114,7 +114,16 @@ class Community extends Component {
           history={history}
           />,
       mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} community={c} />,
-      mode === CAN_JOIN && <CanJoin key="join" community={c} history={history} nickname={nickname} onClose={() => this.setState({ mode: null })} />
+      mode === CAN_JOIN &&
+        <CanJoin
+          key="join"
+          community={c}
+          history={history}
+          nickname={nickname}
+          onClose={() => this.setState({ mode: null })}
+          CanJoinTos={CanJoinTos}
+          CanJoinPrompt={CanJoinPrompt}
+        />
     ]
   }
 
