@@ -113,21 +113,30 @@ class EventEmitterCommunities extends EventEmitter {
     super()
 
     // user communities
-    this.delete = id => ctx._initCommunities()
-      .then(() => this.get(id).then(community => community.delete()))
-      .then(() => state.userCommunities.delete(id))
-      .then(() => localForage.setItem('userCommunities', [...state.userCommunities]))
-      .then(() => this.emit('update', [...state.userCommunities]))
+    this.delete = async id => {
+      await ctx._initCommunities()
+      const community = await this.get(id)
+      await community.delete()
+      state.userCommunities.delete(id)
+      localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      this.emit('update', Array.from(state.userCommunities))
+    }
 
-    this.getAll = () => ctx._initCommunities().then(() => [...state.userCommunities])
+    this.getAll = async () => {
+      await ctx._initCommunities()
+      return Array.from(state.userCommunities)
+    }
 
     this.has = id => ctx._initCommunities().then(() => state.userCommunities.has(id))
 
-    this.post = id => ctx._initCommunities()
-      .then(() => state.userCommunities.add(id))
-      .then(() => state.communities.set(id, new Community(id)))
-      .then(() => localForage.setItem('userCommunities', [...state.userCommunities]))
-      .then(() => this.emit('update', [...state.userCommunities]))
+    this.post = async id => {
+      await ctx._initCommunities()
+      state.userCommunities.add(id)
+      state.communities.set(id, new Community(id))
+      await localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      this.emit('update', Array.from(state.userCommunities))
+      return state.communities.get(id)
+    }
 
     // communities
     this.get = id => ctx._initCommunities()
