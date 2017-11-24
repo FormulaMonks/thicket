@@ -14,6 +14,7 @@ const ONBOARD = 'quick presentation of what thicket is'
 const CAMERA_ACCESS = 'we need to be able to access the camera'
 const CREATE = 'user is shooting first gif'
 const FINISHED = 'user has finished onboarding'
+const TOS = 'user must accept terms of service'
 const NEW_COMMUNITY = 'Amazing GIFs'
 const NEW_COMMUNITY_ID = uuid()
 
@@ -25,26 +26,25 @@ const Arrived = props => {
 }
 
 class Welcome extends Component{
-  
-  state = { mode: LOADING }
 
-  componentDidMount() {
-    user.get()
-      .then(({ onboarding }) => {
-        if (onboarding === FINISHED) {
-          this.props.history.replace('/communities')
-        }
-        this.setState({ mode: onboarding || ARRIVED })
-      })
+  state = { mode: LOADING, Tos: null }
+
+  async componentDidMount() {
+    const { onboarding } = await user.get()
+    if (onboarding === FINISHED) {
+      this.props.history.replace('/communities')
+    }
+    this.setState({ mode: onboarding || ARRIVED })
   }
-  
+
   render() {
     const { mode } = this.state
     const { nickname } = this.props
 
     return <div className="welcome">
       {mode === ARRIVED && <Arrived onContinue={() => this.continue(ONBOARD)} mode={mode} />}
-      {mode === ONBOARD && <Onboarding onComplete={() => this.continue(CAMERA_ACCESS)} />}
+      {mode === ONBOARD && <Onboarding onComplete={() => this.continue(TOS)} />}
+      {mode === TOS && <this.props.Tos onAccept={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
       {mode === CREATE && <div className="welcome__create">
           <Create nickname={nickname} onSave={this.onSave} />
@@ -52,8 +52,13 @@ class Welcome extends Component{
     </div>
   }
 
-  continue = mode =>
-    user.put({ onboarding: mode }).then(() => this.setState({ mode }))
+  continue = async mode => {
+    if (mode === TOS && !this.props.Tos) {
+      mode = CAMERA_ACCESS
+    }
+    await user.put({ onboarding: mode })
+    this.setState({ mode })
+  }
 
   onSave = data =>
     user.put({ onboarding: FINISHED, nickname: data.nickname })

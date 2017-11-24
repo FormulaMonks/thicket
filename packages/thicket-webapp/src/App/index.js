@@ -32,6 +32,8 @@ class App extends Component {
 
   render() {
     const { nickname } = this.state
+    const { components = {} } = this.props
+    const { Tos = null } = components
 
     return <Router>
       <main className="app">
@@ -39,7 +41,7 @@ class App extends Component {
         <Link className="app__profile" to="/profile">{nickname}<img src={usersvg} alt={nickname}/></Link>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-          <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
+          <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} Tos={Tos} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
