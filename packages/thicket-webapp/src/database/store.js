@@ -70,7 +70,7 @@ class Publications extends EventEmitter {
 
   put = (id, data) => {
     this.list = this.list.map(p => p.id === id ? { ...p, ...data } : p)
-    return db.publicationsPut(this.communityId, id, data)
+    db.publicationsPut(this.communityId, id, data)
   }
 
 }

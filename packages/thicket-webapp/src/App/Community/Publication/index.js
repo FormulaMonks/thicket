@@ -82,17 +82,18 @@ class Publication extends Component {
     this.close()
   }
 
-  onSave = () => {
+  onSave = async () => {
     if (!this.state.modified) {
       this.close()
       return
     }
 
     const { c, id } = this.props.match.params
-    communities.get(c).then(community =>
-      community.publications.put(id, this.state.gif)
-        .then(() => user.put({ nickname: this.state.gif.nickname }))
-        .then(this.close))
+    const { publications } = await communities.get(c)
+    const { gif } = this.state
+    await publications.put(id, gif)
+    await user.put({ nickname: gif.nickname })
+    this.close()
   }
 
 }
