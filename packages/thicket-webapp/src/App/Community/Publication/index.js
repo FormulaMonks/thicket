@@ -69,10 +69,11 @@ class Publication extends Component {
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
 
-  fetch = () => {
+  fetch = async () => {
     const { c, id } = this.props.match.params
-    communities.get(c).then(({ publications }) => publications.get(id)
-      .then(gif => this.setState({ gif })))
+    const { publications } = await communities.get(c)
+    const gif = await publications.get(id)
+    this.setState({ gif })
   }
 
   onDelete = async () => {
