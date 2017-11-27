@@ -195,20 +195,19 @@ class User extends EventEmitter {
   // subscribe to all communities
   // this helps redistribute content and data without need for the UI
   // to visit the related sections
-  _subscribe() {
-    this._initCommunities().then(() => {
-      for (const communityId of state.userCommunities) {
-        // the next line will subscribe to the communities's rooms
-        // thus becoming part of the mesh and redistributing the data
-        // for the Array and Map y-elements
-        this.communities.get(communityId)
-          // this is potentially terribly expensive
-          // as it would get all publications for all communities
-          // and one by one would store all the files locally
-          // and in memory (state cache keeps the data source for gifs)
-          .then(({ publications }) => publications.getAll())
-      }
-    })
+  _subscribe = async () => {
+    await this._initCommunities()
+    for (const communityId of state.userCommunities) {
+      // the next line will subscribe to the communities's rooms
+      // thus becoming part of the swarm and redistributing the data
+      // for the Array and Map y-elements
+      const { publications } = await this.communities.get(communityId)
+      // this is potentially terribly expensive
+      // as it would get all publications for all communities
+      // and one by one would store all the files locally
+      // and in memory (state cache keeps the data source for gifs)
+      publications.getAll()
+    }
   }
 
 }
