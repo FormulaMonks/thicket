@@ -138,9 +138,13 @@ class EventEmitterCommunities extends EventEmitter {
     }
 
     // communities
-    this.get = id => ctx._initCommunities()
-      .then(() => { if (!state.communities.has(id)) state.communities.set(id, new Community(id)) })
-      .then(() => state.communities.get(id))
+    this.get = async id => {
+      await ctx._initCommunities()
+      if (!state.communities.has(id)) {
+        state.communities.set(id, new Community(id))
+      }
+      return state.communities.get(id)
+    }
   }
 }
 
