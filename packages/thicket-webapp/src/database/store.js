@@ -177,11 +177,12 @@ class User extends EventEmitter {
   }
 
   // user communities & communities
-  _initCommunities() {
-    if (!this.userCommunities) {
-      this.userCommunities = localForage.getItem('userCommunities').then(v => state.userCommunities = new Set(v || []))
+  _initCommunities = async () => {
+    if (!this._fetchedCommunities) {
+      const list = await localForage.getItem('userCommunities')
+      state.userCommunities = new Set(list)
+      this._fetchedCommunities = true
     }
-    return this.userCommunities
   }
 
   get communities() {
