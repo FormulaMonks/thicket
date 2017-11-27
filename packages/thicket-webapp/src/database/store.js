@@ -157,11 +157,11 @@ class User extends EventEmitter {
   }
 
   // user
-  _initUser() {
-    if (!this.user) {
-      this.user = localForage.getItem('user').then(v => state.user = v || state.user)
+  _initUser = async() => {
+    if (!this._fetched) {
+      state.user = await localForage.getItem('user') || state.user
+      this._fetched = true
     }
-    return this.user
   }
 
   get = async () => {
