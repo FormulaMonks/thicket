@@ -59,25 +59,10 @@ const toBase64 = src =>
 // if we try to fetch a file that is not in the reach of this node/peer this call will never finish/complete
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
-const timedPromiseConcatStream = ({ hash, stream }) => {
-  return new Promise((resolve, reject) => {
-    let returned = false
-    // timed fallback
-    setTimeout(() => {
-      if (!returned) {
-        returned = true
-        resolve({ hash, src: `https://ipfs.io/ipfs/${hash}` })
-      }
-    }, 1000)
-    // or
-    stream.pipe(concat(src => {
-      if (!returned) {
-        returned = true
-        resolve({ hash, src: toBase64(src) })
-      }
-    }))
-  })
-}
+const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
+  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
+  new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
+])
 
 class Database extends EventEmitter {
   constructor() {
@@ -143,7 +128,7 @@ class Database extends EventEmitter {
     const y = await this._initCommunity(communityId)
     const list = await Promise.all(data.map(async hash => {
       const stream = await node.files.cat(hash)
-      const { src } = await timedPromiseConcatStream({ hash, stream })
+      const src = await timedPromiseConcatStream({ hash, stream })
       return { id: hash, src, ...y.share.publicationsMetadata.get(hash) }
     }))
     return list.sort((a, b) => b.createdAt - a.createdAt)
