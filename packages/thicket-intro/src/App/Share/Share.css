@@ -26,7 +26,7 @@
   transform: scale(1.25);
 }
 .Share-button:active img {
-  transform: scale(.9);
+  transform: scale(1.15);
 }
 
 .Share-button-link {
