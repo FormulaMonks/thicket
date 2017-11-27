@@ -40,10 +40,7 @@ class Publications extends EventEmitter {
     })
   }
 
-  delete = id => {
-    this.list = this.list.filter(p => p.id === id)
-    db.publicationsDelete(this.communityId, id)
-  }
+  delete = id => db.publicationsDelete(this.communityId, id)
 
   get = async id => {
     const cached = this.list.find(p => p.id === id)
@@ -67,10 +64,7 @@ class Publications extends EventEmitter {
 
   post = data => db.publicationsPost(this.communityId, data)
 
-  put = (id, data) => {
-    this.list = this.list.map(p => p.id === id ? { ...p, ...data } : p)
-    db.publicationsPut(this.communityId, id, data)
-  }
+  put = (id, data) => db.publicationsPut(this.communityId, id, data)
 
 }
 
