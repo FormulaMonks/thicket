@@ -42,7 +42,7 @@ class Publications extends EventEmitter {
 
   delete = id => {
     this.list = this.list.filter(p => p.id === id)
-    return db.publicationsDelete(this.communityId, id)
+    db.publicationsDelete(this.communityId, id)
   }
 
   get = async id => {

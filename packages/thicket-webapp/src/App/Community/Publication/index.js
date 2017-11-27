@@ -75,9 +75,11 @@ class Publication extends Component {
       .then(gif => this.setState({ gif })))
   }
 
-  onDelete = () => {
+  onDelete = async () => {
     const { c, id } = this.props.match.params
-    communities.get(c).then(({ publications }) => publications.delete(id).then(this.close))
+    const { publications } = await communities.get(c)
+    await publications.delete(id)
+    this.close()
   }
 
   onSave = () => {
