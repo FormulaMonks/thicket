@@ -135,18 +135,14 @@ class Database extends EventEmitter {
     return publications.sort((a, b) => b.createdAt - a.createdAt)
   }
 
-  publicationsPost = (communityId, { src, ...data }) =>
-    this._initIPFS().then(node =>
-      node.files
-        .add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
-        .then(res =>
-          this._initCommunity(communityId).then(y => {
-            const id = res[0].hash
-            y.share.publications.push([id])
-            y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
-          })
-        )
-      )
+  publicationsPost = async (communityId, { src, ...data }) => {
+    const node = await this._initIPFS()
+    const res = await node.files.add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
+    const id = res[0].hash
+    const y = await this._initCommunity(communityId)
+    y.share.publications.push([id])
+    y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
+  }
 
   publicationsPut = (communityId, id, data) =>
     this._initCommunity(communityId).then(y =>
