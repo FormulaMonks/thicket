@@ -8,10 +8,7 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
-import pull from 'pull-stream'
 import concat from 'concat-stream'
-import pullPromise from 'pull-promise'
-import pullSort from 'pull-sort'
 
 const ipfsConfig = {
   repo: 'thicket',
