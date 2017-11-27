@@ -19,15 +19,15 @@ class Publication extends Component {
 
   state = { gif: null, showDeleteConfimation: false, modified: false }
 
-  componentDidMount() {
-    communities.get(this.props.match.params.c).then(({ publications }) =>
-      publications.on('update', this.fetch))
+  async componentDidMount() {
+    const { publications } = await communities.get(this.props.match.params.c)
+    publications.on('update', this.fetch)
     this.fetch()
   }
 
-  componentWillUnmount() {
-    communities.get(this.props.match.params.c).then(({ publications }) =>
-      publications.off('update', this.fetch))
+  async componentWillUnmount() {
+    const { publications } = await communities.get(this.props.match.params.c)
+    publications.off('update', this.fetch)
   }
 
   render() {
