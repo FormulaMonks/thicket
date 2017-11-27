@@ -132,14 +132,11 @@ class Database extends EventEmitter {
     node._ipldResolver.bs.delete(new CID(hash))
   }
 
-  publicationsDelete = (communityId, id) => {
-    return new Promise((resolve, reject) =>
-      this._initCommunity(communityId).then(y => {
-        y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
-        this._unlink(id)
-        resolve()
-      })
-    )}
+  publicationsDelete = async (communityId, id) => {
+    const y = await this._initCommunity(communityId)
+    y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
+    this._unlink(id)
+  }
 
   _publicationsMap = (communityId, data) => {
     return new Promise((resolve, reject) => {
