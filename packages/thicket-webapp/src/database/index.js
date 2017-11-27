@@ -186,13 +186,13 @@ class Database extends EventEmitter {
     this._initCommunity(communityId).then(y =>
       y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
 
-  communityDelete = communityId =>
-    this._initCommunity(communityId).then(y => {
-      // async remove all local publications
-      y.share.publications.toArray().forEach(hash => this._unlink(hash))
-      // leave room
-      return y.destroy()
-    })
+  communityDelete = async communityId => {
+    const y = await this._initCommunity(communityId)
+    // async remove all local publications
+    y.share.publications.toArray().forEach(this._unlink)
+    // leave room
+    return y.destroy()
+  }
 
   communityGet = async communityId => {
     const y = await this._initCommunity(communityId)
