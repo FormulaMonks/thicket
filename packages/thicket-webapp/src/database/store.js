@@ -158,9 +158,9 @@ class User extends EventEmitter {
 
   // user
   _initUser = async() => {
-    if (!this._fetched) {
+    if (!this._fetchedUser) {
       state.user = await localForage.getItem('user') || state.user
-      this._fetched = true
+      this._fetchedUser = true
     }
   }
 
