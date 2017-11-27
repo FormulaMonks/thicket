@@ -45,18 +45,16 @@ class Publications extends EventEmitter {
     return db.publicationsDelete(this.communityId, id)
   }
 
-  get = id => {
+  get = async id => {
     const cached = this.list.find(p => p.id === id)
     if (cached) {
       return Promise.resolve(cached)
     }
-    return db.publicationsGet(this.communityId, id)
-      .then(data => {
-        if (data) {
-          this.list.push(data)
-        }
-        return data
-      })
+    const publication = await db.publicationsGet(this.communityId, id)
+    if (publication) {
+      this.list.push(publication)
+    }
+    return publication
   }
 
   getAll = () => this._fetchedAll
