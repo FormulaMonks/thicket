@@ -122,28 +122,22 @@ class Database extends EventEmitter {
     return this._communities.get(communityId)
   }
 
-  _unlink = (hash, cb = () => {}) =>
+  _unlink = async hash => {
     // unlink from local storage
-    this._initIPFS().then(node =>
-      // all blocks from this hash
-      node.dag.get(new CID(hash), (err, res) =>
-        pull(
-          pull.values(res.value.links),
-          pull.map(i => new CID(i.multihash)),
-          pull.drain(
-            i => node._ipldResolver.bs.delete(i),
-            // then the actual block for id
-            () => node._ipldResolver.bs.delete(new CID(hash), cb)
-          )
-        )
-      )
-    )
+    const node = await this._initIPFS()
+    const { value: { links } } = await node.dag.get(new CID(hash))
+    // all blocks from this hash
+    links.forEach(link => node._ipldResolver.bs.delete(new CID(link.multihash)))
+    // then the actual block for id
+    node._ipldResolver.bs.delete(new CID(hash))
+  }
 
   publicationsDelete = (communityId, id) => {
     return new Promise((resolve, reject) =>
       this._initCommunity(communityId).then(y => {
         y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
-        this._unlink(id, resolve)
+        this._unlink(id)
+        resolve()
       })
     )}
 
