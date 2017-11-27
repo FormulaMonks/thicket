@@ -57,14 +57,13 @@ class Publications extends EventEmitter {
     return publication
   }
 
-  getAll = () => this._fetchedAll
-    ? Promise.resolve(this.list)
-    : db.publicationsGetAll(this.communityId)
-        .then(list => {
-          this._fetchedAll = true
-          this.list = list
-          return list
-        })
+  getAll = async () => {
+    if (!this._fetchedAll) {
+      this.list = await db.publicationsGetAll(this.communityId)
+      this._fetchedAll = true
+    }
+    return this.list
+  }
 
   post = data => db.publicationsPost(this.communityId, data)
 
