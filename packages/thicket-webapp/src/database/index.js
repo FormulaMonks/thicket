@@ -131,8 +131,13 @@ class Database extends EventEmitter {
     return list.sort((a, b) => b.createdAt - a.createdAt)
   }
 
-  publicationsGet = (communityId, id) =>
-    this.publicationsGetAll(communityId, [id]).then(res => res[0])
+  publicationsGet = async (communityId, id) => {
+    const node = await this._initIPFS()
+    const y = await this._initCommunity(communityId)
+    const stream = await node.files.cat(id)
+    const src = await timedPromiseConcatStream({ hash: id, stream })
+    return { id, src, ...y.share.publicationsMetadata.get(id) }
+  }
 
   publicationsGetAll = (communityId, ids = []) =>
     this._initCommunity(communityId)
