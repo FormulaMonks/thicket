@@ -92,9 +92,12 @@ class Community extends EventEmitter {
 
   delete = () => db.communityDelete(this.communityId)
 
-  get = () => this.data
-    ? Promise.resolve(this.data)
-    : db.communityGet(this.communityId).then(data => this.data = data)
+  get = async () => {
+    if (!this.data) {
+      this.data = await db.communityGet(this.communityId)
+    }
+    return this.data
+  }
 
   post = data => db.communityPost(this.communityId, data)
 
