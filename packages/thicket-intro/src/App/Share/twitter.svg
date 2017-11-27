@@ -1,18 +1,18 @@
 <svg width="40" height="44" viewBox="0 0 40 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>Group</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(-32116 -26078)">
+<g id="Canvas" transform="translate(-27842 -32773)">
 <g id="Group">
 <g id="Twitter Copy" filter="url(#filter0_d)">
-<use xlink:href="#path0_fill" transform="translate(32116.4 26078.2)" fill="#FFFFFF"/>
+<use xlink:href="#path0_fill" transform="translate(27842.9 32773.6)" fill="#FFFFFF"/>
 </g>
 <g id="Path">
-<use xlink:href="#path1_fill" transform="translate(32128.2 26090.9)" fill="#172B42"/>
+<use xlink:href="#path1_fill" transform="translate(27854.7 32786.3)" fill="#AC3434"/>
 </g>
 </g>
 </g>
 <defs>
-<filter id="filter0_d" filterUnits="userSpaceOnUse" x="32116" y="26078" width="40" height="44" color-interpolation-filters="sRGB">
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="27842" y="32773" width="40" height="44" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
 <feOffset dx="0" dy="4"/>
