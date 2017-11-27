@@ -25,19 +25,17 @@ const Arrived = props => {
 }
 
 class Welcome extends Component{
-  
+
   state = { mode: LOADING }
 
-  componentDidMount() {
-    user.get()
-      .then(({ onboarding }) => {
-        if (onboarding === FINISHED) {
-          this.props.history.replace('/communities')
-        }
-        this.setState({ mode: onboarding || ARRIVED })
-      })
+  async componentDidMount() {
+    const { onboarding } = await user.get()
+    if (onboarding === FINISHED) {
+      this.props.history.replace('/communities')
+    }
+    this.setState({ mode: onboarding || ARRIVED })
   }
-  
+
   render() {
     const { mode } = this.state
     const { nickname } = this.props
@@ -47,13 +45,15 @@ class Welcome extends Component{
       {mode === ONBOARD && <Onboarding onComplete={() => this.continue(CAMERA_ACCESS)} />}
       {mode === CAMERA_ACCESS && <CameraAccess onGranted={() => this.continue(CREATE)} />}
       {mode === CREATE && <div className="welcome__create">
-          <Create nickname={nickname} onSave={this.onSave} />
+        <Create nickname={nickname} onSave={this.onSave} />
       </div>}
     </div>
   }
 
-  continue = mode =>
-    user.put({ onboarding: mode }).then(() => this.setState({ mode }))
+  continue = async mode => {
+    await user.put({ onboarding: mode })
+    this.setState({ mode })
+  }
 
   onSave = async data => {
     await user.put({ onboarding: FINISHED, nickname: data.nickname })

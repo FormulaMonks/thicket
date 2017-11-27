@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
 
 class Onboarding extends Component {
-  
+
   state = { step: 1 }
 
   render() {
