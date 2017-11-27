@@ -138,22 +138,15 @@ class Database extends EventEmitter {
     this._unlink(id)
   }
 
-  _publicationsMap = (communityId, data) => {
-    return new Promise((resolve, reject) => {
-      this._initCommunity(communityId).then(y => {
-        this._initIPFS().then(node => {
-          pull(
-            pull.values(data),
-            pullPromise.through(hash => node.files.cat(hash).then(stream => ({ hash, stream }))),
-            //pullPromise.through(({ hash, stream }) => new Promise(r => stream.pipe(concat(src => r({ hash, src: toBase64(src) }))))),
-            pullPromise.through(timedPromiseConcatStream),
-            pull.map(({ hash, src }) => ({ id: hash, src, ...y.share.publicationsMetadata.get(hash) })),
-            pullSort((a, b) => b.createdAt - a.createdAt),
-            pull.collect((err, res) => resolve(res)),
-          )
-        })
-      })
-    })
+  _publicationsMap = async (communityId, data) => {
+    const node = await this._initIPFS()
+    const y = await this._initCommunity(communityId)
+    const list = await Promise.all(data.map(async hash => {
+      const stream = await node.files.cat(hash)
+      const { src } = await timedPromiseConcatStream({ hash, stream })
+      return { id: hash, src, ...y.share.publicationsMetadata.get(hash) }
+    }))
+    return list.sort((a, b) => b.createdAt - a.createdAt)
   }
 
   publicationsGet = (communityId, id) =>
