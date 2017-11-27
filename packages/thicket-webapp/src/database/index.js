@@ -139,11 +139,10 @@ class Database extends EventEmitter {
     return { id, src, ...y.share.publicationsMetadata.get(id) }
   }
 
-  publicationsGetAll = (communityId, ids = []) =>
-    this._initCommunity(communityId)
-      .then(y => y.share.publications.toArray())
-      .then(data => data.filter(id => !ids.length || ids.includes(id)))
-      .then(data => this._publicationsMap(communityId, data))
+  publicationsGetAll = async communityId => {
+    const y = await this._initCommunity(communityId)
+    return await this._publicationsMap(communityId, y.share.publications.toArray())
+  }
 
   publicationsPost = (communityId, { src, ...data }) =>
     this._initIPFS().then(node =>
