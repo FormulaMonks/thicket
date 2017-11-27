@@ -144,9 +144,10 @@ class Database extends EventEmitter {
     y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
   }
 
-  publicationsPut = (communityId, id, data) =>
-    this._initCommunity(communityId).then(y =>
-      y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data }))
+  publicationsPut = async (communityId, id, data) => {
+    const y = await this._initCommunity(communityId)
+    y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data })
+  }
 
   communityDelete = async communityId => {
     const y = await this._initCommunity(communityId)
