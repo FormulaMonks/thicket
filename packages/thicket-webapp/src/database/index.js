@@ -97,22 +97,27 @@ class Database extends EventEmitter {
     return this._ipfs
   }
 
-  _initCommunity(communityId) {
+  async _initCommunity(communityId) {
     if (!communityId) {
       throw new Error('Please provide a Community Id')
     }
     if (!this._communities.has(communityId)) {
-      this._communities.set(communityId, this._initIPFS().then(node =>
-        Y(yConfig(node, communityId)).then(y => {
-          y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
-          y.share.publications.observe(() =>
-            this._publicationsMap(communityId, y.share.publications.toArray()).then(data =>
-              this.emit(`update-${communityId}-publications`, data)))
-          y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
-
-          return y
+      const promise = new Promise(async resolve => {
+        const node = await this._initIPFS()
+        const y = await Y(yConfig(node, communityId))
+        // updates to the community metadata (eg change community title)
+        y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
+        // updates to the publications (eg new publication)
+        y.share.publications.observe(async () => {
+          const data = await this._publicationsMap(communityId, y.share.publications.toArray())
+          this.emit(`update-${communityId}-publications`, data)
         })
-      ))
+        // updates to publications metadata (eg change publication caption)
+        y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+
+        resolve(y)
+      })
+      this._communities.set(communityId, promise)
     }
     return this._communities.get(communityId)
   }
