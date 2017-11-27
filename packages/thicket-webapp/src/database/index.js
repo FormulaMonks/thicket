@@ -91,7 +91,7 @@ class Database extends EventEmitter {
         y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
         // updates to the publications (eg new publication)
         y.share.publications.observe(async () => {
-          const data = await this._publicationsMap(communityId, y.share.publications.toArray())
+          const data = await this.publicationsGetAll(communityId)
           this.emit(`update-${communityId}-publications`, data)
         })
         // updates to publications metadata (eg change publication caption)
@@ -120,17 +120,6 @@ class Database extends EventEmitter {
     this._unlink(id)
   }
 
-  _publicationsMap = async (communityId, data) => {
-    const node = await this._initIPFS()
-    const y = await this._initCommunity(communityId)
-    const list = await Promise.all(data.map(async hash => {
-      const stream = await node.files.cat(hash)
-      const src = await timedPromiseConcatStream({ hash, stream })
-      return { id: hash, src, ...y.share.publicationsMetadata.get(hash) }
-    }))
-    return list.sort((a, b) => b.createdAt - a.createdAt)
-  }
-
   publicationsGet = async (communityId, id) => {
     const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
@@ -140,8 +129,15 @@ class Database extends EventEmitter {
   }
 
   publicationsGetAll = async communityId => {
+    const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
-    return await this._publicationsMap(communityId, y.share.publications.toArray())
+    const data = y.share.publications.toArray()
+    const list = await Promise.all(data.map(async hash => {
+      const stream = await node.files.cat(hash)
+      const src = await timedPromiseConcatStream({ hash, stream })
+      return { id: hash, src, ...y.share.publicationsMetadata.get(hash) }
+    }))
+    return list.sort((a, b) => b.createdAt - a.createdAt)
   }
 
   publicationsPost = (communityId, { src, ...data }) =>
