@@ -17,7 +17,6 @@ const SplashPage = props => {
     <Button className="welcome__start" onClick={props.onContinue}>Create a GIF!</Button>
   </div>
 }
-
 const defaultOnboardingWorkflow = [
   { step: 'LOADING', Component: () => <div>Loading</div> },
   { step: 'SPLASH_PAGE', Component: SplashPage },
