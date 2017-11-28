@@ -56,10 +56,10 @@ class Welcome extends Component{
     user.put({ onboarding: mode }).then(() => this.setState({ mode }))
 
   onSave = async data => {
-    await user.put({ onboarding: FINISHED, nickname: data.nickname })
+    user.put({ onboarding: FINISHED, nickname: data.nickname })
     const community = await communities.post(NEW_COMMUNITY_ID)
-    await community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })
-    await community.publications.post(data)
+    community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })
+    community.publications.post(data)
     this.props.history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`)
   }
 
