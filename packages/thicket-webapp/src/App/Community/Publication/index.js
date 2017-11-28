@@ -31,7 +31,7 @@ class Publication extends Component {
   }
 
   render() {
-    const { mode, gif } = this.state
+    const { gif } = this.state
 
     if (!gif) {
       return null
