@@ -11,16 +11,6 @@
   text-align: center;
 }
 
-.welcome__start--disabled{
-  border: 1px solid #CCC;
-  color: #CCC;
-}
-
-.welcome__start--disabled:hover{
-  background: none;
-  color: #CCC;
-}
-
 .welcome__create{
   height: 100%;
   width: 100%;

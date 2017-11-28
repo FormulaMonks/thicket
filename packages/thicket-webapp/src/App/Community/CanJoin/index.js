@@ -3,7 +3,6 @@ import Onboarding from '../../../components/Onboarding'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
 import './CanJoin.css'
-import { FINISHED } from '../../Welcome'
 
 const { user, communities } = store
 const ONBOARD = 'show the user how to get things done around here'
@@ -15,7 +14,7 @@ class CanJoin extends Component {
 
   async componentDidMount() {
     const { onboarding } = await user.get()
-    if (onboarding === FINISHED) {
+    if (onboarding === 'COMPLETED') {
       this.setState({ mode: CAN_JOIN })
     }
   }
@@ -34,7 +33,7 @@ class CanJoin extends Component {
   }
 
   onComplete = async () => {
-    await user.put({ onboarding: FINISHED })
+    await user.put({ onboarding: 'COMPLETED' })
     this.setState({ mode: CAN_JOIN })
   }
 
