@@ -50,8 +50,8 @@ class Welcome extends Component{
     </div>
   }
 
-  continue = async mode => {
-    await user.put({ onboarding: mode })
+  continue = mode => {
+    user.put({ onboarding: mode })
     this.setState({ mode })
   }
 
