@@ -112,7 +112,7 @@ class EventEmitterCommunities extends EventEmitter {
     this.delete = async id => {
       await ctx._initCommunities()
       const community = await this.get(id)
-      await community.delete()
+      community.delete()
       state.userCommunities.delete(id)
       localForage.setItem('userCommunities', Array.from(state.userCommunities))
       this.emit('update', Array.from(state.userCommunities))
@@ -132,7 +132,7 @@ class EventEmitterCommunities extends EventEmitter {
       await ctx._initCommunities()
       state.userCommunities.add(id)
       state.communities.set(id, new Community(id))
-      await localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      localForage.setItem('userCommunities', Array.from(state.userCommunities))
       this.emit('update', Array.from(state.userCommunities))
       return state.communities.get(id)
     }

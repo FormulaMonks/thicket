@@ -7,21 +7,31 @@ import NiceGif from './NiceGif'
 
 import './GifCreator.css'
 
+const ONE_DAY_AGO = new Date((new Date()) - 24 * 60 * 60 * 1000)
+
 export default class GifCreator extends React.Component {
 
-  state = (() => {
-    const gifCreated = window.localStorage.getItem('gifCreated')
-    return {
-      online: window.navigator.onLine,
-      creating: false,
-      gif: window.localStorage.getItem('gif'),
-      gifCreated: gifCreated && new Date(Number(gifCreated)),
-    }
-  })()
+  state = {
+    online: window.navigator.onLine,
+    creating: false,
+    gif: null,
+    gifCreated: null,
+  }
 
   componentDidMount() {
     window.addEventListener('online', this.goOnline, false)
     window.addEventListener('offline', this.goOffline, false)
+
+    const gif = window.localStorage.getItem('gif')
+    let gifCreated = window.localStorage.getItem('gifCreated')
+    if (gifCreated) gifCreated = new Date(Number(gifCreated))
+
+    if (gifCreated < ONE_DAY_AGO) {
+      window.localStorage.removeItem('gif')
+      window.localStorage.removeItem('gifCreated')
+    } else {
+      this.setState({ gif, gifCreated })
+    }
   }
 
   componentWillUnmount() {

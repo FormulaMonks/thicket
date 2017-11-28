@@ -1,4 +1,5 @@
 import React from 'react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import Section from '../Section'
 
@@ -11,18 +12,20 @@ const pageURL = window.encodeURIComponent(window.location.href)
 
 export default class Share extends React.Component {
 
-  state = { linking: false }
+  state = { linking: false, copied: false }
 
   maybeHideDropdown = e => {
     if (
       !e.relatedTarget ||
       (this.sharebox && !this.sharebox.contains(e.relatedTarget))
     ) {
-      this.setState({ linking: false })
+      this.setState({ linking: false, copied: false })
     }
   }
 
   render() {
+    const { linking, copied } = this.state
+
     return (
       <Section
         style={{
@@ -39,7 +42,10 @@ export default class Share extends React.Component {
           onBlur={this.maybeHideDropdown}
           ref={div => this.sharebox = div}
         >
-          <button className="Share-button" onClick={() => this.setState({ linking: true })}>
+          <button
+            className={`Share-button${linking ? ' Share-button-link' : ''}`}
+            onClick={() => this.setState({ linking: true })}
+          >
             <img alt="copy link" src={link} />
           </button>
           <a className="Share-button" target="_blank" href={`https://www.facebook.com/sharer/sharer.php?u=${pageURL}`}>
@@ -48,16 +54,27 @@ export default class Share extends React.Component {
           <a className="Share-button" target="_blank" href={`https://twitter.com/home?status=Mars.%20GIFs.%20Fun%20times.%20Check%20it%20out%3A%20${pageURL}`}>
             <img alt="tweet" src={twitter} />
           </a>
-          {this.state.linking &&
-              <div className="Share-link">
-                <label>
-                  Copy the link and share it with your friends:
+          {linking &&
+              <div className="Share-linkbox">
+                <div><strong>Copy Share Link</strong></div>
+                <label htmlFor="url">Copy the link and share it with your friends:</label>
+                <div className="Share-linkbox-inputWrap">
                   <input
+                    className="Share-linkbox-input"
                     readOnly
+                    id="url"
                     value={window.location.href}
                     ref={input => { if (input) { input.focus(); input.select(); } } }
                   />
-                </label>
+                  <CopyToClipboard
+                    text={window.location.href }
+                    onCopy={() => this.setState({ copied: true })}
+                  >
+                    <button className={`Share-linkbox-copybutton${copied ? ' copied' : ''}`}>
+                      Copy
+                    </button>
+                  </CopyToClipboard>
+                </div>
               </div>
           }
         </div>

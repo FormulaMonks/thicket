@@ -2,6 +2,13 @@
   "name": "thicket-webapp",
   "private": true,
   "description": "Create GIFs and share them with your friends, without any middlemen",
+  "files": [
+    "css",
+    "es",
+    "images",
+    "lib",
+    "umd"
+  ],
   "keywords": [
     "gif",
     "vine",
@@ -82,6 +89,9 @@
     "yjs": "^12.3.3"
   },
   "scripts": {
+    "build:module": "npm run clean && nwb build-react-component --copy-files",
+    "clean": "nwb clean-module",
+    "postinstall": "npm run build:module",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
@@ -92,6 +102,7 @@
     "npm": "5.4.2"
   },
   "devDependencies": {
+    "nwb": "^0.20.0",
     "surge": "^0.19.0"
   },
   "jest": {

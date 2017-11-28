@@ -11,7 +11,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna run prepublish"
+    "bootstrap": "lerna bootstrap && lerna run prepublish && lerna run postinstall",
+    "postinstall": "lerna run postinstall"
   },
   "workspaces": [
     "packages/*"
