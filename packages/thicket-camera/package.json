@@ -1,6 +1,6 @@
 {
   "name": "thicket-camera",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Camera component for React, used by Thicket",
   "main": "lib/index.js",
   "module": "es/index.js",
