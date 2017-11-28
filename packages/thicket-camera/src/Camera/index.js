@@ -67,38 +67,39 @@ export default class Camera extends Component {
   }
 
   again = () => {
+    this.setState({ stream: null })
     this.startVideo()
     this.setState({ mode: STANDBY })
   }
 
   capture = () => {
-    setTimeout(() => {
-      this.stopVideo()
-      this.setState({ mode: LOADING })
-    }, GIF_DURATION + 500);
-    this.setState({ mode: SHOOTING }, () => {
-      gifshot.createGIF({
-        ...GIF_OPTIONS,
-        webcamVideoElement: this.video,
-        cameraStream: this.state.stream,
-      }, obj => {
-        if (obj.error) {
-          console.warn('GIFshot error: ', obj.error, obj.errorCode, obj.errorMsg, obj)
-          this.setState({ mode: STANDBY })
-          return
-        }
-        this.setState({ mode: REVIEW, gif: obj.image })
+    if (this.state.stream) {
+      setTimeout(() => {
+        this.stopVideo()
+        this.setState({ mode: LOADING })
+      }, GIF_DURATION + 500);
+      this.setState({ mode: SHOOTING }, () => {
+        gifshot.createGIF({
+          ...GIF_OPTIONS,
+          webcamVideoElement: this.video,
+          cameraStream: this.state.stream,
+        }, obj => {
+          if (obj.error) {
+            console.warn('GIFshot error: ', obj.error, obj.errorCode, obj.errorMsg, obj)
+            this.setState({ mode: STANDBY })
+            return
+          }
+          this.setState({ mode: REVIEW, gif: obj.image })
+        })
       })
-    })
+    }
   }
 
-  startVideo = () => {
-    navigator.mediaDevices.getUserMedia({ video: true })
-      .then(stream => {
-        this.video.src = window.URL.createObjectURL(stream)
-        this.video.play()
-        this.setState({ stream  })
-      })
+  startVideo = async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+    this.video.src = window.URL.createObjectURL(stream)
+    await this.video.play()
+    this.setState({ stream })
   }
 
   stopVideo = () => {
