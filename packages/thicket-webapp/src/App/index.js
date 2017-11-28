@@ -4,6 +4,7 @@ import {
   Route,
   Switch,
   Link,
+  Redirect,
 } from 'react-router-dom'
 import Profile from './Profile'
 import Welcome, { FINISHED } from './Welcome'
@@ -19,46 +20,47 @@ const { user } = store
 
 class App extends Component {
 
-  state = { nickname: '' }
+  state = { nickname: '', loading: true, onboarding: null }
 
   componentDidMount() {
-    this.fetchNickname()
-    user.on('update', this.fetchNickname)
+    this.fetchUser()
+    user.on('update', this.fetchUser)
   }
 
   componentWillUnmount() {
-    user.off('update', this.fetchNickname)
+    user.off('update', this.fetchUser)
   }
 
   render() {
-    const { nickname } = this.state
+    const { nickname, loading, onboarding } = this.state
+
+    if (loading) {
+      return <div className="index"><Spinner /></div>
+    }
 
     return <Router>
       <main className="app">
         <Link className="app__home" to="/">Thicket</Link>
-        <Link className="app__profile" to="/profile">{nickname}<img src={usersvg} alt={nickname}/></Link>
+        <Link className="app__profile" to="/profile">
+          {nickname}<img src={usersvg} alt={nickname}/>
+        </Link>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props => <Welcome nickname={nickname} {...props} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props => <Community {...props} nickname={nickname} />} />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
-          <Route exact path="/" render={props => <Index {...props} />} />
+          <Redirect exact from="/" to={onboarding === FINISHED ? 'communities' : 'welcome'} />
         </Switch>
       </main>
     </Router>
   }
 
-  fetchNickname = () =>
-    user.get().then(({ nickname }) => this.setState({ nickname }))
+  fetchUser = async () => {
+    const { nickname, onboarding } = await user.get()
+    this.setState({ nickname, onboarding, loading: false })
+  }
 
-}
-
-const Index = props => {
-  const { history } = props
-  user.get().then(({ onboarding }) => onboarding === FINISHED ? history.replace('/communities') : history.replace('/welcome'))
-
-  return <div className="index"><Spinner /></div>
 }
 
 export default App

@@ -19,15 +19,15 @@ class Publication extends Component {
 
   state = { gif: null, showDeleteConfimation: false, modified: false }
 
-  componentDidMount() {
-    communities.get(this.props.match.params.c).then(({ publications }) =>
-      publications.on('update', this.fetch))
+  async componentDidMount() {
+    const { publications } = await communities.get(this.props.match.params.c)
+    publications.on('update', this.fetch)
     this.fetch()
   }
 
-  componentWillUnmount() {
-    communities.get(this.props.match.params.c).then(({ publications }) =>
-      publications.off('update', this.fetch))
+  async componentWillUnmount() {
+    const { publications } = await communities.get(this.props.match.params.c)
+    publications.off('update', this.fetch)
   }
 
   render() {
@@ -69,28 +69,32 @@ class Publication extends Component {
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
 
-  fetch = () => {
+  fetch = async () => {
     const { c, id } = this.props.match.params
-    communities.get(c).then(({ publications }) => publications.get(id)
-      .then(gif => this.setState({ gif })))
+    const { publications } = await communities.get(c)
+    const gif = await publications.get(id)
+    this.setState({ gif })
   }
 
-  onDelete = () => {
+  onDelete = async () => {
     const { c, id } = this.props.match.params
-    communities.get(c).then(({ publications }) => publications.delete(id).then(this.close))
+    const { publications } = await communities.get(c)
+    await publications.delete(id)
+    this.close()
   }
 
-  onSave = () => {
+  onSave = async () => {
     if (!this.state.modified) {
       this.close()
       return
     }
 
     const { c, id } = this.props.match.params
-    communities.get(c).then(community =>
-      community.publications.put(id, this.state.gif)
-        .then(() => user.put({ nickname: this.state.gif.nickname }))
-        .then(this.close))
+    const { publications } = await communities.get(c)
+    const { gif } = this.state
+    await publications.put(id, gif)
+    await user.put({ nickname: gif.nickname })
+    this.close()
   }
 
 }
