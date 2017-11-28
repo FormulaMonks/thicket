@@ -40,38 +40,31 @@ class Publications extends EventEmitter {
     })
   }
 
-  delete = id => {
-    this.list = this.list.filter(p => p.id === id)
-    return db.publicationsDelete(this.communityId, id)
-  }
+  delete = id => db.publicationsDelete(this.communityId, id)
 
-  get = id => {
+  get = async id => {
     const cached = this.list.find(p => p.id === id)
     if (cached) {
       return Promise.resolve(cached)
     }
-    return db.publicationsGet(this.communityId, id)
-      .then(data => {
-        if (data) {
-          this.list.push(data)
-        }
-        return data
-      })
+    const publication = await db.publicationsGet(this.communityId, id)
+    if (publication) {
+      this.list.push(publication)
+    }
+    return publication
   }
 
-  getAll = () => this._fetchedAll
-    ? Promise.resolve(this.list)
-    : db.publicationsGetAll(this.communityId)
-        .then(list => {
-          this._fetchedAll = true
-          this.list = list
-          return list
-        })
+  getAll = async () => {
+    if (!this._fetchedAll) {
+      this.list = await db.publicationsGetAll(this.communityId)
+      this._fetchedAll = true
+    }
+    return this.list
+  }
 
   post = data => db.publicationsPost(this.communityId, data)
 
   put = (id, data) => db.publicationsPut(this.communityId, id, data)
-    .then(() => this.list = this.list.map(p => p.id === id ? { id, ...data } : p))
 
 }
 
@@ -99,9 +92,12 @@ class Community extends EventEmitter {
 
   delete = () => db.communityDelete(this.communityId)
 
-  get = () => this.data
-    ? Promise.resolve(this.data)
-    : db.communityGet(this.communityId).then(data => this.data = data)
+  get = async () => {
+    if (!this.data) {
+      this.data = await db.communityGet(this.communityId)
+    }
+    return this.data
+  }
 
   post = data => db.communityPost(this.communityId, data)
 
@@ -127,7 +123,10 @@ class EventEmitterCommunities extends EventEmitter {
       return Array.from(state.userCommunities)
     }
 
-    this.has = id => ctx._initCommunities().then(() => state.userCommunities.has(id))
+    this.has = async id => {
+      await ctx._initCommunities()
+      return state.userCommunities.has(id)
+    }
 
     this.post = async id => {
       await ctx._initCommunities()
@@ -139,9 +138,13 @@ class EventEmitterCommunities extends EventEmitter {
     }
 
     // communities
-    this.get = id => ctx._initCommunities()
-      .then(() => { if (!state.communities.has(id)) state.communities.set(id, new Community(id)) })
-      .then(() => state.communities.get(id))
+    this.get = async id => {
+      await ctx._initCommunities()
+      if (!state.communities.has(id)) {
+        state.communities.set(id, new Community(id))
+      }
+      return state.communities.get(id)
+    }
   }
 }
 
@@ -154,11 +157,11 @@ class User extends EventEmitter {
   }
 
   // user
-  _initUser() {
-    if (!this.user) {
-      this.user = localForage.getItem('user').then(v => state.user = v || state.user)
+  _initUser = async() => {
+    if (!this._fetchedUser) {
+      state.user = await localForage.getItem('user') || state.user
+      this._fetchedUser = true
     }
-    return this.user
   }
 
   get = async () => {
@@ -174,11 +177,12 @@ class User extends EventEmitter {
   }
 
   // user communities & communities
-  _initCommunities() {
-    if (!this.userCommunities) {
-      this.userCommunities = localForage.getItem('userCommunities').then(v => state.userCommunities = new Set(v || []))
+  _initCommunities = async () => {
+    if (!this._fetchedCommunities) {
+      const list = await localForage.getItem('userCommunities')
+      state.userCommunities = new Set(list)
+      this._fetchedCommunities = true
     }
-    return this.userCommunities
   }
 
   get communities() {
@@ -191,20 +195,19 @@ class User extends EventEmitter {
   // subscribe to all communities
   // this helps redistribute content and data without need for the UI
   // to visit the related sections
-  _subscribe() {
-    this._initCommunities().then(() => {
-      for (const communityId of state.userCommunities) {
-        // the next line will subscribe to the communities's rooms
-        // thus becoming part of the mesh and redistributing the data
-        // for the Array and Map y-elements
-        this.communities.get(communityId)
-          // this is potentially terribly expensive
-          // as it would get all publications for all communities
-          // and one by one would store all the files locally
-          // and in memory (state cache keeps the data source for gifs)
-          .then(({ publications }) => publications.getAll())
-      }
-    })
+  _subscribe = async () => {
+    await this._initCommunities()
+    for (const communityId of state.userCommunities) {
+      // the next line will subscribe to the communities's rooms
+      // thus becoming part of the swarm and redistributing the data
+      // for the Array and Map y-elements
+      const { publications } = await this.communities.get(communityId)
+      // this is potentially terribly expensive
+      // as it would get all publications for all communities
+      // and one by one would store all the files locally
+      // and in memory (state cache keeps the data source for gifs)
+      publications.getAll()
+    }
   }
 
 }

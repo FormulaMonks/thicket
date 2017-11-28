@@ -9,7 +9,6 @@ import add from './add.svg'
 import store from '../../database/store'
 
 const { communities } = store
-const CREATE = 'user is creating a community'
 
 class New extends Component {
 
@@ -31,7 +30,7 @@ class New extends Component {
 
 class Communities extends Component {
 
-  state = { data: [], mode: null }
+  state = { data: [], creating: false }
 
   componentDidMount() {
     this.fetch()
@@ -43,14 +42,14 @@ class Communities extends Component {
   }
 
   render() {
-    const { data, mode } = this.state
+    const { data, creating } = this.state
 
     return [
       <div className="communities" key="communities">
         <div className="communities__header">Your communities</div>
         <ul className="communities__grid" key="grid">
           <li key="new" className="communities__element">
-            <button onClick={() => this.setState({ mode: CREATE })} className="communities__btnNew">
+            <button onClick={() => this.setState({ creating: true })} className="communities__btnNew">
               <img src={add} alt="Create New Community" />
                Create New Community
             </button>
@@ -62,22 +61,22 @@ class Communities extends Component {
           </li>)}
         </ul>
       </div>,
-      mode === CREATE && <div className="communities__create" key="create">
+      creating && <div className="communities__create" key="create">
         <New onCancel={() => this.setState({ mode: null })} onSave={this.onSave} />
       </div>,
     ]
   }
 
-  fetch = () => {
-    communities.getAll().then(data => this.setState({ data }))
+  fetch = async () => {
+    const data = await communities.getAll()
+    this.setState({ data })
   }
 
-  onSave = title => {
+  onSave = async title => {
     const newId = uuid()
-    communities.post(newId)
-      .then(() => communities.get(newId)
-        .then(community => community.post({ title, createdBy: this.props.nickname })))
-      .then(() => this.setState({ mode: null }))
+    const community = await communities.post(newId)
+    community.post({ title, createdBy: this.props.nickname })
+    this.setState({ creating: false })
   }
 }
 
