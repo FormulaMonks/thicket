@@ -9,7 +9,7 @@ class Profile extends Component {
       <h2>Change your Thicket nickname</h2>
       <div>You can update with your own nickname below.</div>
       <form onSubmit={this.onSubmit} ref={f => (this.form = f)}>
-        <input type="text" defaultValue={this.props.nickname} />
+        <input type="text" name="nickname" defaultValue={this.props.nickname} />
         <Button type="button" onClick={this.close}>Cancel</Button>
         <Button type="submit">Save</Button>
       </form>
@@ -24,9 +24,9 @@ class Profile extends Component {
     history.push('/')
   }
 
-  onSubmit = async e => {
+  onSubmit = e => {
     e.preventDefault()
-    await store.user.put({ nickname: this.form.elements[0].value })
+    store.user.put({ nickname: this.form.elements.nickname.value })
     this.close()
   }
 
