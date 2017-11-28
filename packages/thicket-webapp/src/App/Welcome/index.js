@@ -55,12 +55,13 @@ class Welcome extends Component{
   continue = mode =>
     user.put({ onboarding: mode }).then(() => this.setState({ mode }))
 
-  onSave = data =>
+  onSave = async data => {
     user.put({ onboarding: FINISHED, nickname: data.nickname })
-      .then(() => communities.post(NEW_COMMUNITY_ID))
-      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })))
-      .then(() => communities.get(NEW_COMMUNITY_ID).then(community => community.publications.post(data)))
-      .then(() => this.props.history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`))
+    const community = await communities.post(NEW_COMMUNITY_ID)
+    community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })
+    community.publications.post(data)
+    this.props.history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`)
+  }
 
 }
 
