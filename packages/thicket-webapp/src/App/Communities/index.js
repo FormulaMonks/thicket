@@ -74,9 +74,8 @@ class Communities extends Component {
 
   onSave = async title => {
     const newId = uuid()
-    await communities.post(newId)
-    const community = await communities.get(newId)
-    await community.post({ title, createdBy: this.props.nickname })
+    const community = await communities.post(newId)
+    community.post({ title, createdBy: this.props.nickname })
     this.setState({ creating: false })
   }
 }
