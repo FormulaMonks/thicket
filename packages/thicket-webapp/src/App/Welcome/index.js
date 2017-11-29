@@ -18,7 +18,7 @@ const SplashPage = props => {
   </div>
 }
 const defaultOnboardingWorkflow = [
-  { step: 'LOADING', Component: () => <div>Loading</div> },
+  { step: 'LOADING', Component: () => null },
   { step: 'SPLASH_PAGE', Component: SplashPage },
   { step: 'QUICK_EXPLANATION', Component: props => <QuickExplanation onComplete={props.onContinue} /> },
   { step: 'NEED_CAMERA_ACCESS', Component: props => <CameraAccess onGranted={props.onContinue} /> },
@@ -52,7 +52,7 @@ class Welcome extends Component {
     const { workflow, history } = this.props
     const currentIndex = workflow.findIndex(x => x.step === this.state.step)
     const nextIndex = currentIndex + 1
-    const step = workflow.length > nextIndex ? workflow[nextIndex] : 'COMPLETED'
+    const step = workflow.length > nextIndex ? workflow[nextIndex].step : 'COMPLETED'
     user.put({ onboarding: step })
     this.setState({ step: step })
     if (step === 'COMPLETED') {

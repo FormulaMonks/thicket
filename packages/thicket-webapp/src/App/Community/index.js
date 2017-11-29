@@ -3,7 +3,7 @@ import { Route, Link } from 'react-router-dom'
 import { Button, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import FirstGIF from './FirstGIF'
-import Create from '../../components/Create'
+import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
 import Settings from './Settings'
 import Invite from './Invite'
@@ -103,7 +103,7 @@ class Community extends Component {
         <FirstGIF onClose={() => history.replace(`/c/${c}`)} title={title} community={c} />} />,
       mode === CREATE &&
         <div key="create" className="community__create">
-          <Create community={c} nickname={nickname} onSave={this.onSave} />
+          <CreateGif community={c} nickname={nickname} onSave={this.onSave} />
         </div>,
       mode === SETTINGS &&
         <Settings

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Onboarding from '../../../components/Onboarding'
+import QuickExplanation from '../../../components/QuickExplanation'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
 import './CanJoin.css'
@@ -24,7 +24,7 @@ class CanJoin extends Component {
 
     return [
       mode === ONBOARD && <div key="onboard" className="join__onboard">
-          <Onboarding onComplete={this.onComplete} />
+          <QuickExplanation onComplete={this.onComplete} />
         </div>,
       mode === CAN_JOIN && <div key="join" className="join__header">
           Hey {this.props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.<Button onClick={this.onJoin}>Join</Button><Button onClick={this.onDecline}>Decline</Button>
@@ -33,7 +33,7 @@ class CanJoin extends Component {
   }
 
   onComplete = async () => {
-    await user.put({ onboarding: 'COMPLETED' })
+    user.put({ onboarding: 'COMPLETED' })
     this.setState({ mode: CAN_JOIN })
   }
 
