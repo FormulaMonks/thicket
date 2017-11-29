@@ -3,7 +3,7 @@ import { Button } from 'thicket-elements'
 import DetectRTC from 'detectrtc'
 
 class CameraAccess extends Component {
-  
+
   state = { accepted: false, rejected: false }
 
   componentDidMount() {
@@ -28,7 +28,7 @@ class CameraAccess extends Component {
       <Button onClick={this.requestAccess} key="done">Camera Permissions</Button>,
     ]
   }
-  
+
   requestAccess = () =>
     navigator.mediaDevices.getUserMedia({ video: true })
       .then(this.props.onGranted)
