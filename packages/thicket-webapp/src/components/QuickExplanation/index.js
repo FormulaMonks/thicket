@@ -4,15 +4,22 @@ import { Button } from 'thicket-elements'
 const wordings = new Map([
   [
     1,
-    `Step 1`
+    `Thicket is a new kind of app where your data isn't controlled by any
+    central authority.`
   ],
   [
     2,
-    `Step 2`
+    `All the GIFs you create are stored right on your device, and on the
+    devices of your friends.`
   ],
   [
     3,
-    `Step 3`
+    `If you are part of a Thicket Community, you are helping back up and
+    preserve that community's GIFs.`
+  ],
+  [
+    4,
+    `You are not the product. No ads or tracking, ever.`
   ],
 ])
 
