@@ -2,50 +2,47 @@ import React, { Component } from 'react'
 import QuickExplanation from '../../../components/QuickExplanation'
 import { Button } from 'thicket-elements'
 import store from '../../../database/store'
+import Workflow from '../../../components/Workflow'
 import './CanJoin.css'
 
 const { user, communities } = store
-const ONBOARD = 'show the user how to get things done around here'
-const CAN_JOIN = 'present the user options to accept/decline the invitation to join the community'
 
-class CanJoin extends Component {
-
-  state = { mode: ONBOARD }
-
-  async componentDidMount() {
-    const { onboarding } = await user.get()
-    if (onboarding === 'COMPLETED') {
-      this.setState({ mode: CAN_JOIN })
-    }
-  }
-
-  render() {
-    const { mode } = this.state
-
-    return [
-      mode === ONBOARD && <div key="onboard" className="join__onboard">
-          <QuickExplanation onComplete={this.onComplete} />
-        </div>,
-      mode === CAN_JOIN && <div key="join" className="join__header">
-          Hey {this.props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.<Button onClick={this.onJoin}>Join</Button><Button onClick={this.onDecline}>Decline</Button>
-        </div>,
-    ]
-  }
-
-  onComplete = async () => {
-    user.put({ onboarding: 'COMPLETED' })
-    this.setState({ mode: CAN_JOIN })
-  }
-
-  onDecline = () => this.props.history.replace('/welcome')
-
-  onJoin = async () => {
-    const { community } = this.props
-    await communities.post(community)
-    this.props.history.push(`/c/${community}`)
-    this.props.onClose()
-  }
-
+const SplashPage = props => {
+  user.get().then(({ onboarding }) =>
+    props.onContinue({ step: onboarding === 'COMPLETED' ? 'PROMPT' : null }))
+  return null
 }
 
-export default CanJoin
+const Explain = props => <div className="join__onboard">
+  <QuickExplanation onComplete={() => {
+    user.put({ onboarding: 'COMPLETED' })
+    props.onContinue()
+  }} />
+</div>
+
+const onDecline = props => props.history.replace('/welcome')
+
+const onJoin = async props => {
+  const { community, history, onContinue } = props
+  await communities.post(community)
+  history.push(`/c/${community}`)
+  onContinue()
+}
+
+const Prompt = props => {
+  return <div className="join__header">
+    Hey {props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.
+    <Button onClick={() => onJoin(props)}>Join</Button>
+    <Button onClick={() => onDecline(props)}>Decline</Button>
+  </div>
+}
+
+const defaultCanJoinWorkflow = [
+  { step: 'SPLASH_PAGE', Component: SplashPage },
+  { step: 'QUICK_EXPLANATION', Component: Explain },
+  { step: 'PROMPT', Component: Prompt },
+  { step: 'COMPLETED', Component: () => null }
+]
+
+export default ({ canJoinWorkflow = x => x, ...props }) =>
+  <Workflow {...props} workflow={canJoinWorkflow(defaultCanJoinWorkflow)} />
