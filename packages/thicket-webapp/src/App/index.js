@@ -47,7 +47,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props =>
-            <Welcome nickname={nickname} {...props} onboardingWorkflow={this.props.onboardingWorkflow} />} />
+            <Welcome onboarding={onboarding} nickname={nickname} {...props} onboardingWorkflow={this.props.onboardingWorkflow} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props =>
             <Community {...props} nickname={nickname} canJoinWorkflow={this.props.canJoinWorkflow} />} />
