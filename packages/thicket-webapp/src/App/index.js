@@ -22,13 +22,23 @@ class App extends Component {
 
   state = { nickname: '', loading: true, onboarding: null }
 
-  componentDidMount() {
-    this.fetchUser()
+  async componentDidMount() {
     user.on('update', this.fetchUser)
+    await this.fetchUser()
+    this.setState({ loading: false })
   }
 
   componentWillUnmount() {
     user.off('update', this.fetchUser)
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // store.user sends an update event whenever there is an operation that changes data (eg user.put)
+    // even if the underlying data did not change and that was triggering a setState which meant a render
+    // this check avoids unnecessary rerenders
+    return this.state.nickname !== nextState.nickname ||
+      this.state.onboarding !== nextState.onboarding ||
+      this.state.loading !== nextState.loading
   }
 
   render() {
@@ -60,7 +70,7 @@ class App extends Component {
 
   fetchUser = async () => {
     const { nickname, onboarding } = await user.get()
-    this.setState({ nickname, onboarding, loading: false })
+    this.setState({ nickname, onboarding })
   }
 
 }
