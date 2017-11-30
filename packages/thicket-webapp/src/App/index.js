@@ -7,7 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom'
 import Profile from './Profile'
-import Welcome from './Welcome'
+import Welcome, { COMPLETED } from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
@@ -52,7 +52,7 @@ class App extends Component {
           <Route path="/c/:c" render={props =>
             <Community {...props} nickname={nickname} canJoinWorkflow={this.props.canJoinWorkflow} />} />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
-          <Redirect exact from="/" to={onboarding === 'COMPLETED' ? 'communities' : 'welcome'} />
+          <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
         </Switch>
       </main>
     </Router>

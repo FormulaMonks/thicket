@@ -4,18 +4,19 @@ import { Button } from 'thicket-elements'
 import store from '../../../database/store'
 import Workflow from '../../../components/Workflow'
 import './CanJoin.css'
+import { COMPLETED } from '../../Welcome'
 
 const { user, communities } = store
 
 const Explain = props => {
   user.get().then(({ onboarding }) => {
-    if (onboarding === 'COMPLETED') {
+    if (onboarding === COMPLETED) {
       props.onContinue()
     }
   })
   return <div className="join__onboard">
     <QuickExplanation onComplete={() => {
-      user.put({ onboarding: 'COMPLETED' })
+      user.put({ onboarding: COMPLETED })
       props.onContinue()
     }} />
   </div>
@@ -44,7 +45,7 @@ const Prompt = props => {
 const defaultCanJoinWorkflow = [
   { step: 'QUICK_EXPLANATION', Component: Explain },
   { step: 'PROMPT', Component: Prompt },
-  { step: 'COMPLETED', Component: () => null }
+  { step: COMPLETED, Component: () => null }
 ]
 
 export default ({ canJoinWorkflow = x => x, ...props }) =>
