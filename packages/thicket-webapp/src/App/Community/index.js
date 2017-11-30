@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import { Button, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import FirstGIF from './FirstGIF'
@@ -98,9 +98,11 @@ class Community extends Component {
           ]}
         </div>
       </div>,
-      <Route key="publication" exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
-      <Route key="first_gif" exact path="/c/:c/first-gif" render={() =>
-        <FirstGIF onClose={() => history.replace(`/c/${c}`)} title={title} community={c} />} />,
+      <Switch key="publication-or-first-gif">
+        <Route exact path="/c/:c/first-gif" render={() =>
+          <FirstGIF onClose={() => history.replace(`/c/${c}`)} title={title} community={c} />} />,
+        <Route exact path="/c/:c/:id" render={props => <Publication {...props} />} />,
+      </Switch>,
       mode === CREATE &&
         <div key="create" className="community__create">
           <Create community={c} nickname={nickname} onSave={this.onSave} />
