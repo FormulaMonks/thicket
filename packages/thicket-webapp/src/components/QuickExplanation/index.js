@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button } from 'thicket-elements'
 
-class Onboarding extends Component {
+class QuickExplanation extends Component {
 
   state = { step: 1 }
 
@@ -25,4 +25,4 @@ class Onboarding extends Component {
   }
 }
 
-export default Onboarding
+export default QuickExplanation

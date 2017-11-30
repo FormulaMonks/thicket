@@ -5,7 +5,7 @@ import Customize from './Customize'
 const CAMERA = 'user is interacting with the camera process'
 const CUSTOMIZE = 'add metadata to the gif (username and label)'
 
-class Create extends Component {
+class CreateGif extends Component {
 
   state = { mode: CAMERA, src: null, caption: '', nickname: '' }
 
@@ -22,4 +22,4 @@ class Create extends Component {
   }
 }
 
-export default Create
+export default CreateGif
