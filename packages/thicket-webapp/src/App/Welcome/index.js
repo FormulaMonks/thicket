@@ -7,6 +7,7 @@ import QuickExplanation from '../../components/QuickExplanation'
 import CameraAccess from '../../components/CameraAccess'
 import './Welcome.css'
 
+export const COMPLETED = 'COMPLETED'
 const { user, communities } = store
 const NEW_COMMUNITY = 'Amazing GIFs'
 const NEW_COMMUNITY_ID = uuid()
@@ -18,7 +19,7 @@ const SplashPage = props => <div className="welcome__arrived">
 
 const CreateFirstGif = props => <div className="welcome__create">
   <CreateGif nickname={props.nickname} onSave={async data => {
-    user.put({ onboarding: 'COMPLETED', nickname: data.nickname })
+    user.put({ onboarding: COMPLETED, nickname: data.nickname })
     const community = await communities.post(NEW_COMMUNITY_ID)
     community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })
     community.publications.post(data)
@@ -33,7 +34,7 @@ const defaultOnboardingWorkflow = [
   { step: 'QUICK_EXPLANATION', Component: props => <QuickExplanation onComplete={props.onContinue} /> },
   { step: 'NEED_CAMERA_ACCESS', Component: props => <CameraAccess onGranted={props.onContinue} /> },
   { step: 'CREATING_FIRST_GIF', Component: CreateFirstGif },
-  { step: 'COMPLETED', Component: () => null }
+  { step: COMPLETED, Component: () => null }
 ]
 
 class Welcome extends Component {
@@ -42,7 +43,7 @@ class Welcome extends Component {
 
   async componentDidMount() {
     const { onboarding } = await user.get()
-    if (onboarding === 'COMPLETED') {
+    if (onboarding === COMPLETED) {
       this.props.history.replace('/communities')
     }
     this.setState({ step: onboarding || this.props.workflow[1].step })
@@ -60,7 +61,7 @@ class Welcome extends Component {
     const { workflow } = this.props
     const currentIndex = workflow.findIndex(x => x.step === this.state.step)
     const nextIndex = currentIndex + 1
-    const step = workflow.length > nextIndex ? workflow[nextIndex].step : 'COMPLETED'
+    const step = workflow.length > nextIndex ? workflow[nextIndex].step : COMPLETED
     user.put({ onboarding: step })
     this.setState({ step })
   }

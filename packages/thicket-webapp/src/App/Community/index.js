@@ -116,7 +116,16 @@ class Community extends Component {
           history={history}
           />,
       mode === INVITE && <Invite key="invite" onClose={() => this.setState({ mode: null })} community={c} />,
-      mode === CAN_JOIN && <CanJoin key="join" community={c} history={history} nickname={nickname} onClose={() => this.setState({ mode: null })} />
+      mode === CAN_JOIN &&
+        <CanJoin
+          key="join"
+          canJoinWorkflow={this.props.canJoinWorkflow}
+          canJoinOptions={this.props.canJoinOptions}
+          community={c}
+          history={history}
+          nickname={nickname}
+          onClose={() => this.setState({ mode: null })}
+        />
     ]
   }
 
