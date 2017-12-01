@@ -13,7 +13,7 @@ const NEW_COMMUNITY = 'Amazing GIFs'
 const NEW_COMMUNITY_ID = uuid()
 
 const SplashPage = props => <div className="welcome__arrived">
-  <h2>Welcome to Thicket, a simple web app for creating and sharing GIFs!</h2>
+  <h2>Connecting your world to others using the power of GIFs.</h2>
   <Button className="welcome__start" onClick={props.onContinue}>Create a GIF!</Button>
 </div>
 
