@@ -120,6 +120,7 @@ class Community extends Component {
         <CanJoin
           key="join"
           canJoinWorkflow={this.props.canJoinWorkflow}
+          canJoinOptions={this.props.canJoinOptions}
           community={c}
           history={history}
           nickname={nickname}

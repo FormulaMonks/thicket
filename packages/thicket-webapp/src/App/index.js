@@ -50,7 +50,13 @@ class App extends Component {
             <Welcome nickname={nickname} {...props} onboardingWorkflow={this.props.onboardingWorkflow} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props =>
-            <Community {...props} nickname={nickname} canJoinWorkflow={this.props.canJoinWorkflow} />} />
+            <Community
+              {...props}
+              nickname={nickname}
+              canJoinWorkflow={this.props.canJoinWorkflow}
+              canJoinOptions={this.props.canJoinOptions}
+            />}
+          />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
         </Switch>

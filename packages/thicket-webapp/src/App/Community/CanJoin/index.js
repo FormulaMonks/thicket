@@ -34,11 +34,16 @@ const onJoin = async props => {
   onContinue()
 }
 
-const Prompt = props => {
+const Prompt = ({ nickname, history, onContinue, options, community }) => {
   return <div className="join__header">
-    Hey {props.nickname}, if you join this Community, you’ll be able to create & contribute GIFs.
-    <Button onClick={() => onJoin(props)}>Join</Button>
-    <Button onClick={() => onDecline(props)}>Decline</Button>
+    Hey {nickname}, if you join this Community, you’ll be able to create & contribute GIFs.
+    {options.map(({ label, action }) =>
+      <Button
+        key={label}
+        onClick={() => action({ community, history, onContinue })}
+      >
+        {label}
+      </Button>)}
   </div>
 }
 
@@ -48,5 +53,16 @@ const defaultCanJoinWorkflow = [
   { step: COMPLETED, Component: () => null }
 ]
 
-export default ({ canJoinWorkflow = x => x, ...props }) =>
-  <Workflow {...props} workflow={canJoinWorkflow(defaultCanJoinWorkflow)} />
+const defaultCanJoinOptions = [
+  { label: 'Join', action: onJoin },
+  { label: 'Decline', action: onDecline }
+]
+
+const identity = x => x
+
+export default ({ canJoinOptions = identity, canJoinWorkflow = identity, ...props }) =>
+  <Workflow
+    {...props}
+    workflow={canJoinWorkflow(defaultCanJoinWorkflow)}
+    options={canJoinOptions(defaultCanJoinOptions)}
+  />
