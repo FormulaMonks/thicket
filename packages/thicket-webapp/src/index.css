@@ -3,7 +3,9 @@ html, body, #root {
 }
 
 html {
+  background-color: #102131;
   box-sizing: border-box;
+  color: white;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   font-weight: 300;
   font-size: calc(.85em + 1vw);
@@ -13,4 +15,13 @@ html {
 body {
   margin: 0;
   padding: 0;
+}
+
+a {
+  color: rgba(210, 102, 160, .8);
+  text-decoration: none;
+}
+
+a:focus, a:hover, a:active {
+  color: rgba(210, 102, 160, 1)
 }
