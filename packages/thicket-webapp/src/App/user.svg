@@ -1,23 +1,37 @@
-<svg width="62" height="61" viewBox="0 0 62 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title>Mask Group</title>
+<svg width="30" height="30" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 28</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(24958 -24467)">
+<g id="Canvas" transform="translate(8942 -21298)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M -10324 21274L -8883.97 21274L -8883.97 22042L -10324 22042L -10324 21274Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="Landing " clip-path="url(#clip-0)">
+<g id="Thicket Username &#38; Icon" opacity="0.8">
+<g id="Group 28">
 <g id="Mask Group">
 <mask id="mask0_alpha" mask-type="alpha">
-<g id="Ellipse 2.1">
-<use xlink:href="#path0_fill" transform="translate(-24957.5 24467.3)" fill="#FFFFFF"/>
+<g id="Ellipse 3.2">
+<use xlink:href="#path0_fill" transform="translate(-8940.32 21299.7)" fill="#777777"/>
 </g>
 </mask>
-<g id="Ellipse 2.1" mask="url(#mask0_alpha)">
-<use xlink:href="#path0_fill" transform="translate(-24957.5 24467.3)" fill="#FFFFFF"/>
+<g id="Ellipse 3" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-8938.55 21318.8)" fill="#FFFFFF"/>
 </g>
-<g id="layer" mask="url(#mask0_alpha)">
-<use xlink:href="#path1_fill" transform="translate(-24951.4 24479.4)" fill="#C4C4C4"/>
+</g>
+<g id="Ellipse 3">
+<use xlink:href="#path2_fill" transform="translate(-8931.33 21305.9)" fill="#FFFFFF"/>
+</g>
+<g id="Background">
+<use xlink:href="#path3_stroke" transform="translate(-8940.32 21299.7)" fill="#FFFFFF"/>
+</g>
+</g>
 </g>
 </g>
 </g>
 <defs>
-<path id="path0_fill" d="M 60.4742 30.2371C 60.4742 46.9366 46.9366 60.4742 30.2371 60.4742C 13.5376 60.4742 0 46.9366 0 30.2371C 0 13.5376 13.5376 0 30.2371 0C 46.9366 0 60.4742 13.5376 60.4742 30.2371Z"/>
-<path id="path1_fill" fill-rule="evenodd" d="M 14.1124 14.5707C 13.6667 14.837 12.827 16.5088 13.2069 17.9756C 13.7718 20.157 15.7814 21.0084 15.7814 21.0084C 15.7814 21.0084 18.9253 25.0365 18.9253 27.3791C 18.9253 29.7217 18.9254 30.6318 18.0828 32.5861C 17.2403 34.5405 0.702105 36.8832 0 48.4045L 24.0714 48.4045L 48.407 48.407C 47.7049 36.8857 31.1667 34.543 30.3242 32.5886C 29.4817 30.6343 29.4817 29.7242 29.4817 27.3816C 29.4817 25.039 32.6256 21.0109 32.6256 21.0109C 32.6256 21.0109 34.6352 20.1595 35.2002 17.9781C 35.5801 16.5113 34.7403 14.8396 34.2946 14.5732C 35.4861 11.0454 36.2565 0.444776 24.3357 0.00642996C 24.2755 -0.00185722 24.2157 -0.000377907 24.1562 0.00132694C 12.1505 0.44226 12.921 11.0429 14.1124 14.5707Z"/>
+<path id="path0_fill" d="M 27.502 13.751C 27.502 21.3454 21.3454 27.502 13.751 27.502C 6.15652 27.502 0 21.3454 0 13.751C 0 6.15652 6.15652 0 13.751 0C 21.3454 0 27.502 6.15652 27.502 13.751Z"/>
+<path id="path1_fill" d="M 23.962 11.981C 23.962 18.598 18.598 23.962 11.981 23.962C 5.36409 23.962 0 18.598 0 11.981C 0 5.36409 5.36409 0 11.981 0C 18.598 0 23.962 5.36409 23.962 11.981Z"/>
+<path id="path2_fill" d="M 9.51774 4.75887C 9.51774 7.38712 7.38712 9.51774 4.75887 9.51774C 2.13062 9.51774 0 7.38712 0 4.75887C 0 2.13062 2.13062 0 4.75887 0C 7.38712 0 9.51774 2.13062 9.51774 4.75887Z"/>
+<path id="path3_stroke" d="M 13.7512 28.2523C 21.7599 28.2523 28.2523 21.7599 28.2523 13.7512L 26.7523 13.7512C 26.7523 20.9315 20.9315 26.7523 13.7512 26.7523L 13.7512 28.2523ZM 28.2523 13.7512C 28.2523 5.74239 21.7599 -0.75 13.7512 -0.75L 13.7512 0.75C 20.9315 0.75 26.7523 6.57082 26.7523 13.7512L 28.2523 13.7512ZM 13.7512 -0.75C 5.74239 -0.75 -0.75 5.74239 -0.75 13.7512L 0.75 13.7512C 0.75 6.57082 6.57082 0.75 13.7512 0.75L 13.7512 -0.75ZM -0.75 13.7512C -0.75 21.7599 5.74239 28.2523 13.7512 28.2523L 13.7512 26.7523C 6.57082 26.7523 0.75 20.9315 0.75 13.7512L -0.75 13.7512Z"/>
 </defs>
 </svg>
