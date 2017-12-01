@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Styled = styled.button`
-  cursor: pointer;
-  border: 1px solid #000;
-  padding: 20px;
   background: #FFF;
+  border: 1px solid #000;
   color: #000;
+  cursor: pointer;
+  padding: 20px;
   width: 50%;
 
   &:hover{
