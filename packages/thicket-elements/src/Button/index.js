@@ -9,6 +9,7 @@ import {
 const Styled = styled.button`
   background: ${linearGradient};
   box-shadow: ${defaultBoxShadow};
+  border: none;
   border-radius: 4px;
   color: white;
   cursor: pointer;
