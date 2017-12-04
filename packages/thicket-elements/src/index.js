@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import Button from './Button'
 import Spinner from './Spinner'
 import * as BottomNav from './BottomNav'
+import Input from './Input'
 
 export default () => (
   <div>
@@ -20,6 +21,8 @@ export default () => (
     <BottomNav.Cancel onClick={() => console.log('cancel!')} />
     <h2>Button</h2>
     <Button onClick={() => console.log('button!')}>Click Me</Button>
+    <h2>Text Input</h2>
+    <Input placeholder="Text Input" />
   </div>
 )
 
@@ -27,4 +30,5 @@ export {
   Spinner,
   BottomNav,
   Button,
+  Input,
 }
