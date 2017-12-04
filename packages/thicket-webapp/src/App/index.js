@@ -32,15 +32,6 @@ class App extends Component {
     user.off('update', this.fetchUser)
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    // store.user sends an update event whenever there is an operation that changes data (eg user.put)
-    // even if the underlying data did not change and that was triggering a setState which meant a render
-    // this check avoids unnecessary rerenders
-    return this.state.nickname !== nextState.nickname ||
-      this.state.onboarding !== nextState.onboarding ||
-      this.state.loading !== nextState.loading
-  }
-
   render() {
     const { nickname, loading, onboarding } = this.state
 
