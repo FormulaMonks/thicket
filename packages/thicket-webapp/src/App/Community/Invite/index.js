@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from '../../../components/Modal'
-import { Button } from 'thicket-elements'
+import { Button, Input } from 'thicket-elements'
 import copy from 'copy-to-clipboard'
 import { getCommunityInviteLink } from '../../../utils/inviteLinks'
 
@@ -14,7 +14,7 @@ const Invite = props => {
     ]}
     onClose={props.onClose}>
     <div>Copy the Community Invite Link below and send to others to join and contribute to this community.</div>
-    <div><input type="text" readOnly value={link} /></div>
+    <div><Input readOnly value={link} /></div>
     <div>NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically.</div>
   </Modal>
 }

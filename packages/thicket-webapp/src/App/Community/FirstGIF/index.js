@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
-import { Button } from 'thicket-elements'
+import { Button, Input } from 'thicket-elements'
 import store from '../../../database/store'
 import { getCommunityInviteLink } from '../../../utils/inviteLinks'
 import './FirstGIF.css'
@@ -22,7 +22,7 @@ class Title extends Component {
 
   render() {
     return [
-      <input key="input" type="text" onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />,
+      <Input onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />,
       <Button key="button" onClick={this.update}>Update</Button>,
     ]
   }
@@ -51,7 +51,7 @@ const Main = props => {
       </label>
       <label className="firstgif__label">
         <div>Or copy the Community Invite Link below and share with friends so they can create and add content:</div>
-        <input type="text" value={getCommunityInviteLink(community)} readOnly />
+        <Input value={getCommunityInviteLink(community)} readOnly />
       </label>
       <aside>
         NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically.

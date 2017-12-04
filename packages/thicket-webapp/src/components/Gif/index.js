@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Spinner } from 'thicket-elements'
+import { Button, Input, Spinner } from 'thicket-elements'
 import './Gif.css'
 import Editable from '../Editable'
 import download from './download.svg'
@@ -43,7 +43,7 @@ class Gif extends Component {
           <div>Share</div>
           <Button onClick={() => this.setState({ mode: GIF })}>x</Button>
         </div>
-        <input type="text" value={getGIFLink(communityId, id)} readOnly />
+        <Input value={getGIFLink(communityId, id)} readOnly />
       </div>}
       <div>
         <div>Created by:</div>

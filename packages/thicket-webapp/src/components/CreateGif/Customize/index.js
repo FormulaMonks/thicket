@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from 'thicket-elements'
+import { Button, Input } from 'thicket-elements'
 import './Customize.css'
 
 class Customize extends Component {
@@ -17,11 +17,11 @@ class Customize extends Component {
         <div className="customize__inputs">
           <label className="customize__label">
             Use a different nickname? <span className="customize__span">(Optional)</span>
-            <input className="customize__input" type="text" value={this.state.nickname} onChange={e => this.setState({ nickname: e.target.value })} />
+            <Input value={this.state.nickname} onChange={e => this.setState({ nickname: e.target.value })} />
           </label>
           <label className="customize__label">
             Give your GIF a caption:
-            <input className="customize__input" type="text" value={this.state.caption} onChange={e => this.setState({ caption: e.target.value })} />
+            <Input value={this.state.caption} onChange={e => this.setState({ caption: e.target.value })} />
           </label>
         </div>
       </div>
