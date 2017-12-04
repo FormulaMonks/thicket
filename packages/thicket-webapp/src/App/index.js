@@ -22,9 +22,10 @@ class App extends Component {
 
   state = { nickname: '', loading: true, onboarding: null }
 
-  componentDidMount() {
-    this.fetchUser()
+  async componentDidMount() {
     user.on('update', this.fetchUser)
+    await this.fetchUser()
+    this.setState({ loading: false })
   }
 
   componentWillUnmount() {
@@ -47,7 +48,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props =>
-            <Welcome nickname={nickname} {...props} onboardingWorkflow={this.props.onboardingWorkflow} />} />
+            <Welcome onboarding={onboarding} nickname={nickname} {...props} onboardingWorkflow={this.props.onboardingWorkflow} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props =>
             <Community
@@ -66,7 +67,7 @@ class App extends Component {
 
   fetchUser = async () => {
     const { nickname, onboarding } = await user.get()
-    this.setState({ nickname, onboarding, loading: false })
+    this.setState({ nickname, onboarding })
   }
 
 }

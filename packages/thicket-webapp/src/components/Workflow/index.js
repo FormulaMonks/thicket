@@ -8,15 +8,19 @@ class Workflow extends Component {
   }
 
   render() {
+    // avoid passing raw onContinue to component
+    const { onContinue, ...props } = this.props
     const { Component } = this.props.workflow.find(x => x.step === this.state.step)
-    return <Component onContinue={this.onContinue} {...this.props} />
+    return <Component onContinue={this.onContinue} {...props} />
   }
 
   onContinue = ({ step } = {}) => {
     const { workflow } = this.props
     const currentIndex = workflow.findIndex(x => x.step === this.state.step)
     const nextIndex = workflow.length > currentIndex + 1 ? currentIndex + 1 : currentIndex
-    this.setState({ step: step || workflow[nextIndex].step })
+    const nextStep = step || workflow[nextIndex].step
+    this.setState({ step: nextStep })
+    this.props.onContinue && this.props.onContinue(nextStep)
   }
 
 }
