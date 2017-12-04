@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-
-const defaultBoxShadow = '0px 2px 2px rgba(113, 114, 215, 0.34), 0px 0px 2px rgba(113, 114, 215, 0.22)'
+import {
+  linearGradient,
+  defaultBoxShadow,
+  activeBoxShadow,
+} from '../sharedStyles'
 
 const Styled = styled.button`
-  background: linear-gradient(23deg, #F7618B, #2A7AFF 140%);
+  background: ${linearGradient};
   box-shadow: ${defaultBoxShadow};
   border-radius: 4px;
   color: white;
@@ -17,8 +20,7 @@ const Styled = styled.button`
   }
 
   &:active {
-    box-shadow: 0px 0px 8px rgba(113, 114, 215, 0.32),
-      inset 0 0 0 99em rgba(255, 255, 255, 0.05);
+    box-shadow: ${activeBoxShadow}
   }
 `
 

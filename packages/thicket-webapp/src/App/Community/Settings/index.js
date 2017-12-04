@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Modal from '../../../components/Modal'
-import { Button } from 'thicket-elements'
+import { Button, Input } from 'thicket-elements'
 import store from '../../../database/store'
 
 const { communities } = store
@@ -16,7 +16,7 @@ class Settings extends Component {
       header={<div>Community Settings</div>}
       footer={<Button onClick={this.props.onClose}>Close</Button>}
       onClose={this.props.onClose}>
-      <input onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />
+      <Input onChange={e => this.setState({ title: e.currentTarget.value })} value={this.state.title} />
       <Button onClick={this.onSave}>Save</Button>
       <Button onClick={this.onLeave}>Leave Community</Button>
     </Modal>

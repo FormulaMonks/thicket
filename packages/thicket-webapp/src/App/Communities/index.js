@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
 import Modal from '../../components/Modal'
-import { Button } from 'thicket-elements'
+import { Button, Input } from 'thicket-elements'
 import './Communities.css'
 import placeholder from './placeholder.png'
 import add from './add.svg'
@@ -23,7 +23,7 @@ class New extends Component {
       ]}
       onClose={this.props.onCancel}>
       <div>Give your new Community a title:</div>
-      <input type="text" onChange={e => this.setState({ title: e.currentTarget.value })} />
+      <Input onChange={e => this.setState({ title: e.currentTarget.value })} />
     </Modal>
   }
 }

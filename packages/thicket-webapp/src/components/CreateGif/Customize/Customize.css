@@ -35,13 +35,6 @@
   font-weight: normal;
 }
 
-.customize__input{
-  box-sizing: border-box;
-  margin: 10px 0;
-  padding: 15px;
-  width: 100%;
-}
-
 .customize__controls{
   margin-top: 10px;
   display: flex;
