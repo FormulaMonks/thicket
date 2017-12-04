@@ -9,17 +9,17 @@ export default () => (
     <h2>Spinner</h2>
     <Spinner />
     <h2>BottomNav.Camera</h2>
-    <BottomNav.Camera onClick={() => alert('camera coming right up!')} />
+    <BottomNav.Camera onClick={() => console.log('camera coming right up!')} />
     <h2>BottomNav.Again</h2>
-    <BottomNav.Again onClick={() => alert('again, again!')} />
+    <BottomNav.Again onClick={() => console.log('again, again!')} />
     <h2>BottomNav.Accept</h2>
-    <BottomNav.Accept onClick={() => alert('accepted!')} />
+    <BottomNav.Accept onClick={() => console.log('accepted!')} />
     <h2>BottomNav.Shoot</h2>
-    <BottomNav.Shoot onClick={() => alert('shoot!')} />
+    <BottomNav.Shoot onClick={() => console.log('shoot!')} />
     <h2>BottomNav.Cancel</h2>
-    <BottomNav.Cancel onClick={() => alert('cancel!')} />
+    <BottomNav.Cancel onClick={() => console.log('cancel!')} />
     <h2>Button</h2>
-    <Button onClick={() => alert('button!')}>Click Me</Button>
+    <Button onClick={() => console.log('button!')}>Click Me</Button>
   </div>
 )
 
