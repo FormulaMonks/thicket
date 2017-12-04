@@ -1,4 +1,5 @@
 {
+  "version": "1.0.0",
   "name": "thicket",
   "description": "Thicket is a Dapp for sharing GIFs. This repo contains it and all of its supporting libraries.",
   "private": true,
@@ -11,8 +12,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap && lerna run prepublish && lerna run postinstall",
-    "postinstall": "lerna run postinstall"
+    "bootstrap": "lerna bootstrap && lerna run prepublish"
   },
   "workspaces": [
     "packages/*"
