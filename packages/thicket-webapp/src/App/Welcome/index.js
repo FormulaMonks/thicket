@@ -19,7 +19,7 @@ const Loading = ({ onContinue, onboarding }) => {
 }
 
 const SplashPage = props => <div className="welcome__arrived">
-  <h2>Connecting your world to others using the power of GIFs.</h2>
+  <h1>Connecting your world to others using the power of GIFs.</h1>
   <Button className="welcome__start" onClick={props.onContinue}>Create a GIF!</Button>
 </div>
 
