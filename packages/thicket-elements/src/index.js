@@ -4,6 +4,7 @@ import Button from './Button'
 import Spinner from './Spinner'
 import * as BottomNav from './BottomNav'
 import Input from './Input'
+import * as Styles from './sharedStyles'
 
 export default () => (
   <div>
@@ -31,4 +32,5 @@ export {
   BottomNav,
   Button,
   Input,
+  Styles,
 }
