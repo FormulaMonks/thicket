@@ -4,9 +4,9 @@ import uuid from 'uuid'
 import Modal from '../../components/Modal'
 import { Button, Input } from 'thicket-elements'
 import './Communities.css'
-import placeholder from './placeholder.png'
 import store from '../../database/store'
 import Add from './Add'
+import Card from './Card'
 
 const { communities } = store
 
@@ -53,7 +53,7 @@ class Communities extends Component {
           </li>
           {data.map(communityId => <li key={communityId} className="communities__element">
             <Link to={`/c/${communityId}`} className="communities__link">
-              <img src={placeholder} alt="" className="communities__img" />
+              <Card communityId={communityId} />
             </Link>
           </li>)}
         </ul>
