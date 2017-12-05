@@ -8,10 +8,12 @@ class Profile extends Component {
     return <div className="profile">
       <h2>Change your Thicket nickname</h2>
       <div>You can update with your own nickname below.</div>
-      <form onSubmit={this.onSubmit} ref={f => (this.form = f)}>
-        <Input name="nickname" defaultValue={this.props.nickname} />
-        <Button type="button" onClick={this.close}>Cancel</Button>
-        <Button type="submit">Save</Button>
+      <form className="profile__form" onSubmit={this.onSubmit} ref={f => (this.form = f)}>
+        <Input className="profile__input" name="nickname" defaultValue={this.props.nickname} />
+        <div className="profile__buttons-wrap">
+          <Button className="profile__buttons" type="button" onClick={this.close}>Cancel</Button>
+          <Button className="profile__buttons" type="submit">Save</Button>
+        </div>
       </form>
     </div>
   }
