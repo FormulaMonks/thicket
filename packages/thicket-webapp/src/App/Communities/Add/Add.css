@@ -22,6 +22,7 @@
   font-size: inherit;
   color: #46569F;
   border: none;
+  outline: none;
 }
 
 .add__cross {
