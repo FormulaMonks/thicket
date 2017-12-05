@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 html, body, #root {
   height: 100%;
 }
@@ -6,7 +8,7 @@ html {
   background-color: #102131;
   box-sizing: border-box;
   color: white;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   font-weight: 300;
   font-size: calc(1em + 0.5vw);
   line-height: 1.5;

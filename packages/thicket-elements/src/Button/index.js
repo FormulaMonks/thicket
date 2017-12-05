@@ -12,6 +12,7 @@ const Styled = styled.button`
   border-radius: 4px;
   color: white;
   cursor: pointer;
+  font-family: inherit;
   font-size: inherit;
   padding: 1em 3em;
 

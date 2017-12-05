@@ -11,6 +11,7 @@ const StyledInput = styled.input`
   outline: none;
   border-radius: 4px;
   color: #274058;
+  font-family: inherit;
   font-size: inherit;
   padding: 1em;
   margin: 1px;
