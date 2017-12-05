@@ -15,21 +15,16 @@ const StyledInput = styled.input`
   padding: 1em;
   margin: 1px;
   caret-color: #D266A0;
-`
 
-const Base = styled.div`
+  &::placeholder{
+    color: rgba(39, 64, 88, 0.6);
+  }
+`
+const Wrap = styled.div`
   border-radius: 4px;
   background: ${linearGradient};
   display: inline-block;
-`
-
-const Wrap = Base.extend`
-  opacity: .6;
-  box-shadow: ${defaultBoxShadow};
-`
-const WrapFocus = Base.extend`
-  opacity: 1;
-  box-shadow: ${activeBoxShadow};
+  box-shadow: ${({ focused }) => focused ? activeBoxShadow : defaultBoxShadow}
 `
 
 class Input extends Component {
@@ -37,8 +32,7 @@ class Input extends Component {
   state = { focused: false }
 
   render() {
-    const Wrapper = this.state.focused ? WrapFocus : Wrap
-    return <Wrapper>
+    return <Wrap focused={this.state.focused}>
       <StyledInput
         {...this.props}
         autoFocus={this.state.focused}
@@ -46,7 +40,7 @@ class Input extends Component {
         onFocus={() => this.setState({ focused: true })}
         onBlur={() => this.setState({ focused: false })}
       />
-    </Wrapper>
+    </Wrap>
   }
 }
 
