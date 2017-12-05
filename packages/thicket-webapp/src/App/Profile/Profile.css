@@ -4,5 +4,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20%;
+  margin: 0 auto;
+  max-width: 38em;
+  padding: 1.5em;
+  text-align: center;
+}
+
+.profile__form{
+  margin-top: 2em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.profile__input{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.profile__buttons-wrap{
+  margin-top: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile__buttons{
+  width: 33.3333333%;
+  min-width: 9em;
 }
