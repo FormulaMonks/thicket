@@ -51,8 +51,8 @@ class Communities extends Component {
           <li key="new" className="communities__element">
             <Add onClick={() => this.setState({ creating: true })} />
           </li>
-          {data.map(item => <li key={item} className="communities__element">
-            <Link to={`/c/${item}`} className="communities__link">
+          {data.map(communityId => <li key={communityId} className="communities__element">
+            <Link to={`/c/${communityId}`} className="communities__link">
               <img src={placeholder} alt="" className="communities__img" />
             </Link>
           </li>)}
