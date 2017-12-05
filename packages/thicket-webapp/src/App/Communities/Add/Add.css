@@ -1,0 +1,48 @@
+.add__wrap{
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.add__container{
+  border: 2px dashed #FFF;
+  height: calc(100% - 4px);
+  border-radius: 4px;
+}
+
+.add__btnNew{
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  color: #46569F;
+  border: none;
+}
+
+.add__cross {
+  margin-top: 1em;
+  height: 130px;
+  width: 130px;
+  position: relative;
+}
+
+.add__cross-vertical {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 4px;
+  left: calc(50% - 2px);
+}
+
+.add__cross-horizontal {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: calc(50% - 2px);
+}
