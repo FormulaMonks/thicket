@@ -14,8 +14,8 @@
   position: absolute;
   top: 5px;
   right: 5px;
-  height: 42px;
-  width: 42px;
+  height: 2.5em;
+  width: 2.5em;
 }
 
 .card__meta{
@@ -26,8 +26,7 @@
   justify-content: center;
   color: #46569F;
   box-sizing: border-box;
-  padding: 15px;
-  font-size: 1.5em;
+  padding: 1rem;
 }
 
 .card__extra{
@@ -35,9 +34,4 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  font-size: .75em;
-}
-
-.card__usage{
-  font-size: .65em;
 }
