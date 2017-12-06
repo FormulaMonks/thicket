@@ -1,0 +1,16 @@
+<svg width="21" height="21" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Vector</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(26385 -23327)">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(-26384.7 23327.9)" fill="url(#paint0_linear)" fill-opacity="0.8"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(23.7804 -31.7255 31.7255 23.7804 0.485782 22.5306)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<path id="path0_fill" d="M 16.989 7.02417L 5.84135 18.2164L 1.78362 14.1586L 12.9758 3.01103L 16.989 7.02417ZM 19.6198 2.52054C 19.8874 2.78808 20.0137 3.11507 19.9988 3.50153C 19.984 3.88798 19.8279 4.22984 19.5306 4.52711L 17.5241 6.53368L 13.4663 2.47594L 15.4729 0.469373C 15.7702 0.172102 16.112 0.0160372 16.4985 0.00117347C 16.8849 -0.0136902 17.2119 0.112648 17.4795 0.380192L 19.6198 2.52054ZM 1.4269 14.7829L 5.21709 18.5731L 0 20L 1.4269 14.7829Z"/>
+</defs>
+</svg>
