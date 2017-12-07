@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {
   linearGradient,
   defaultBoxShadow,
+  hoverBoxShadow,
   activeBoxShadow,
 } from '../sharedStyles'
 
@@ -15,10 +16,11 @@ const Styled = styled.button`
   cursor: pointer;
   font-family: inherit;
   font-size: inherit;
+  outline: none;
   padding: 1em 3em;
 
   &:focus, &:hover {
-    box-shadow: ${defaultBoxShadow}, inset 0 0 0 99em rgba(0,0,0,0.1);
+    box-shadow: ${hoverBoxShadow};
   }
 
   &:active {
