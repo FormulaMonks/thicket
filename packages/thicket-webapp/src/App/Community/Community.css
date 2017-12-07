@@ -16,7 +16,6 @@
   display: flex;
   width: 100%;
   align-items: center;
-  box-sizing: border-box;
   padding: 10px 20px;
 }
 
@@ -45,7 +44,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  box-sizing: border-box;
   padding: 0 50px;
 }
 
