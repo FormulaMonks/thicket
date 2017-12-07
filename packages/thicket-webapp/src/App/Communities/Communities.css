@@ -25,13 +25,6 @@
   margin: 0;
 }
 
-.communities__create{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  z-index: 2;
-}
-
 .communities__element{
   overflow: hidden;
   height: 300px;
@@ -46,4 +39,41 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+
+.communities__new{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.communities__title{
+  color: #46569F;
+}
+
+.communities__message{
+  color: #274058;
+}
+
+.communities__form{
+  display: block;
+  width: 85%;
+}
+
+.communities__buttons{
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 600px){
+  .communities__form{
+    padding-bottom: 2rem;
+  }
+
+  .communities__buttons{
+    flex-direction: column-reverse;
+  }
 }
