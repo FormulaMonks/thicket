@@ -5,8 +5,8 @@ import Modal from '../../components/Modal'
 import { Button, Input } from 'thicket-elements'
 import './Communities.css'
 import placeholder from './placeholder.png'
-import add from './add.svg'
 import store from '../../database/store'
+import Add from './Add'
 
 const { communities } = store
 
@@ -49,10 +49,7 @@ class Communities extends Component {
         <div className="communities__header">Your communities</div>
         <ul className="communities__grid" key="grid">
           <li key="new" className="communities__element">
-            <button onClick={() => this.setState({ creating: true })} className="communities__btnNew">
-              <img src={add} alt="Create New Community" />
-               Create New Community
-            </button>
+            <Add onClick={() => this.setState({ creating: true })} />
           </li>
           {data.map(item => <li key={item} className="communities__element">
             <Link to={`/c/${item}`} className="communities__link">
