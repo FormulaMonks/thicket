@@ -7,25 +7,42 @@ import {
 } from '../sharedStyles'
 
 const StyledInput = styled.input`
+  background: transparent url(../../images/pencil.svg) no-repeat right center;
+  background-size: 1em;
   border: none;
   outline: none;
-  border-radius: 4px;
-  color: #274058;
+  opacity: .6;
+  color: inherit;
   font-family: inherit;
   font-size: inherit;
-  padding: 1em;
-  margin: 1px;
+  padding: 0.5em 0;
+  padding-right: 1.2em;
   caret-color: #D266A0;
 
-  &::placeholder{
-    color: rgba(39, 64, 88, 0.6);
+  & + div{
+    opacity: .6;
+    height: 2px;
+    background: ${linearGradient};
+    box-shadow: ${activeBoxShadow};
+    position: relative;
+  }
+
+  &:hover, &:hover + div {
+    opacity: .8;
+  }
+
+  &:focus{
+    opacity: 1;
+    background: transparent;
+
+    & + div{
+      opacity: 1;
+      box-shadow: ${defaultBoxShadow};
+    }
   }
 `
 const Wrap = styled.div`
-  border-radius: 4px;
-  background: ${linearGradient};
   display: inline-block;
-  box-shadow: ${({ focused }) => focused ? activeBoxShadow : defaultBoxShadow}
 `
 
 class Input extends Component {
@@ -33,14 +50,13 @@ class Input extends Component {
   state = { focused: false }
 
   render() {
-    return <Wrap focused={this.state.focused}>
+    return <Wrap>
       <StyledInput
         {...this.props}
         autoFocus={this.state.focused}
         type="text"
-        onFocus={() => this.setState({ focused: true })}
-        onBlur={() => this.setState({ focused: false })}
       />
+      <div />
     </Wrap>
   }
 }
