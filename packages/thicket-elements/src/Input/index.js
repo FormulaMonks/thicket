@@ -13,7 +13,7 @@ const StyledInput = styled.input`
   color: #274058;
   font-family: inherit;
   font-size: inherit;
-  padding: 1em;
+  padding: 0.75em 1em;
   margin: 1px;
   caret-color: #D266A0;
 
