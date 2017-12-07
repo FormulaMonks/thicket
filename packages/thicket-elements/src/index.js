@@ -4,6 +4,7 @@ import Button from './Button'
 import Spinner from './Spinner'
 import Input from './Input'
 import * as Styles from './sharedStyles'
+import CommunityCard from './CommunityCard'
 
 export default () => (
   <div>
@@ -20,6 +21,10 @@ export default () => (
     </p>
     <h2>Text Input</h2>
     <Input placeholder="Text Input" />
+    <h2>Community Card</h2>
+    <div style={{ height: 300, width: 300 }}>
+      <CommunityCard title="Community Title" createdBy="Nickname" usage="disk space" />
+    </div>
   </div>
 )
 
@@ -28,4 +33,5 @@ export {
   Button,
   Input,
   Styles,
+  CommunityCard,
 }
