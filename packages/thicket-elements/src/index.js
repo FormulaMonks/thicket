@@ -6,7 +6,7 @@ import Input from './Input'
 import * as Styles from './sharedStyles'
 
 export default () => (
-  <div>
+  <div style={{backgroundColor: 'inherit'}}>
     <h2>Spinner</h2>
     <Spinner />
     <h2>Button</h2>
