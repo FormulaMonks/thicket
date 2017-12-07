@@ -11,6 +11,8 @@ export default () => (
     <Spinner />
     <h2>Button</h2>
     <Button onClick={() => console.log('button!')}>Click Me</Button>
+    <h2>Secondary Button</h2>
+    <Button secondary onClick={() => console.log('button!')}>Click Me</Button>
     <h2>Text Input</h2>
     <Input placeholder="Text Input" />
   </div>

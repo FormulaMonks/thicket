@@ -7,7 +7,7 @@ import {
   activeBoxShadow,
 } from '../sharedStyles'
 
-const Styled = styled.button`
+const Button = styled.button`
   background: ${linearGradient};
   box-shadow: ${defaultBoxShadow};
   border: none;
@@ -28,9 +28,24 @@ const Styled = styled.button`
   }
 `
 
-const Button = props => {
-  const { children, ...rest } = props
-  return <Styled {...rest}>{children}</Styled>
-}
+const Secondary = styled(Button)`
+  background: transparent;
+  background: inherit;
+  border: 1px solid #F3638D;
+  border-image: ${linearGradient} 1;
+  color: inherit;
+  padding: calc(1em - 1px) calc(3em - 1px);
 
-export default Button
+  &:focus, &:hover, &:active {
+    background: ${linearGradient};
+    padding: 1em 3em;
+    border-width: 0;
+    color: white;
+  }
+`
+
+export default props => {
+  const { children, secondary, ...rest } = props
+  const Component = secondary ? Secondary : Button
+  return <Component {...rest}>{children}</Component>
+}
