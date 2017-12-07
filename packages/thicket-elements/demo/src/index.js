@@ -9,7 +9,15 @@ const light = 'white'
 const dark = '#102131'
 
 injectGlobal`
+  * { background-color: inherit }
+  html { font-size: calc(0.9em + 0.7vw) }
   body { margin: 0 }
+  code {
+    box-shadow: inset 0 0 99em rgba(0,0,0,0.1), inset 0 0 99em rgba(255,255,255,0.2), inset 0 0 5px rgba(0,0,0,0.2);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
 `
 
 const Wrap = styled.main`
