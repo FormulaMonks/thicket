@@ -1,32 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import Modal from '../../components/Modal'
-import { Button, Input } from 'thicket-elements'
+import { Modal, Button, Input } from 'thicket-elements'
 import './Communities.css'
 import store from '../../database/store'
 import Add from './Add'
 import Card from './Card'
 
 const { communities } = store
-
-class New extends Component {
-
-  state = { title: '' }
-
-  render() {
-    return <Modal
-      header={<div>Create New Community</div>}
-      footer={[
-        <Button key="cancel" onClick={this.props.onCancel}>Cancel</Button>,
-        <Button key="save" onClick={() => this.props.onSave(this.state.title)}>Save</Button>
-      ]}
-      onClose={this.props.onCancel}>
-      <div>Give your new Community a title:</div>
-      <Input onChange={e => this.setState({ title: e.currentTarget.value })} />
-    </Modal>
-  }
-}
 
 class Communities extends Component {
 
@@ -45,7 +26,7 @@ class Communities extends Component {
     const { data, creating } = this.state
 
     return [
-      <div className="communities" key="communities">
+      (!creating || document.documentElement.clientWidth > 600) && <div className="communities" key="communities">
         <div className="communities__header">Your communities</div>
         <ul className="communities__grid" key="grid">
           <li key="new" className="communities__element">
@@ -58,9 +39,26 @@ class Communities extends Component {
           </li>)}
         </ul>
       </div>,
-      creating && <div className="communities__create" key="create">
-        <New onCancel={() => this.setState({ mode: null })} onSave={this.onSave} />
-      </div>,
+      creating && <Modal key="communities__new" className="communities__new">
+        <h2 className="communities__title">Create New Community</h2>
+        <h4 className="communities__message">Exciting to see you’re creating a new Community on Thicket!</h4>
+        <form className="communities__form" ref={f => this.form = f} onSubmit={this.onSubmit}>
+          <Input placeholder="Community Title" name="title" />
+          <div className="communities__buttons">
+            <div className="communities__button communities__button--primary">
+              <Button type="submit">Create Community</Button>
+            </div>
+            <Button
+              secondary
+              type="button"
+              className="communities__button--secondary"
+              onClick={() => this.setState({ creating: false })}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </Modal>,
     ]
   }
 
@@ -69,12 +67,14 @@ class Communities extends Component {
     this.setState({ data })
   }
 
-  onSave = async title => {
+  onSubmit = async e => {
+    e.preventDefault()
     const newId = uuid()
     const community = await communities.post(newId)
-    community.post({ title, createdBy: this.props.nickname })
+    community.post({ title: this.form.elements.title.value, createdBy: this.props.nickname })
     this.setState({ creating: false })
   }
+
 }
 
 export default Communities
