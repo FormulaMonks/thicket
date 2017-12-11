@@ -54,6 +54,14 @@
   color: #274058;
 }
 
+.community__input-wrap{
+  display: block;
+}
+
+.community__input{
+  width: 100%;
+}
+
 .communities__buttons{
   margin-top: 1em;
 }
