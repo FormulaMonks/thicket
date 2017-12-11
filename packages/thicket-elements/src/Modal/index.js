@@ -29,6 +29,10 @@ const Wrap = styled.div`
   /* mobile
    * */
   width: 100%;
+  background: #F6F9FD;
+  box-shadow: ${glow};
+  border-radius: 4px;
+  overflow: hidden;
 
   /* desktop
    * white background container
@@ -36,10 +40,6 @@ const Wrap = styled.div`
   @media (min-width: 600px){
     height: 60%;
     width: 50%;
-    background: #F6F9FD;
-    border-radius: 4px;
-    box-shadow: ${glow};
-    overflow: hidden;
   }
 `
 
