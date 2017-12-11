@@ -70,9 +70,8 @@
 @media (min-width: 600px){
   /* desktop */
   .communities__form{
-    padding-bottom: 0;
     display: block;
-    width: 85%;
+    width: 90%;
   }
 
   .communities__buttons{
