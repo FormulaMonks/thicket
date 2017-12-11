@@ -3,3 +3,5 @@ export const hoverBoxShadow = `${defaultBoxShadow}, inset 0 0 0 99em rgba(255,25
 export const activeBoxShadow =  '0px 0px 8px rgba(113,114,215,0.32), inset 0 0 0 99em rgba(0,0,0,0.1)'
 export const linearGradient = 'linear-gradient(23deg, #F7618B, #2A7AFF 140%)'
 export const radialGradient = 'radial-gradient(circle at top left,#F7618B, #2A7AFF)'
+export const hoverLinearGradient = 'linear-gradient(246.08deg, #F7618B -16.64%, #2A7AFF 113.5%)'
+export const activeLinearGradient = 'linear-gradient(0deg, rgba(16, 31, 45, 0.2), rgba(16, 31, 45, 0.2)), linear-gradient(246.08deg, #F7618B -16.64%, #2A7AFF 113.5%)'
