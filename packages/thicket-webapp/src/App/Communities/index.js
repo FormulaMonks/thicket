@@ -41,12 +41,21 @@ class Communities extends Component {
       </div>,
       creating && <Modal key="communities__new" className="communities__new">
         <h2 className="communities__title">Create New Community</h2>
-        <h4 className="communities__message">Exciting to see you're creating a new Community on Thicket!</h4>
+        <h4 className="communities__message">Exciting to see you’re creating a new Community on Thicket!</h4>
         <form className="communities__form" ref={f => this.form = f} onSubmit={this.onSubmit}>
-          <Input key="input" placeholder="Community Title" name="title" className="communities__input" />
+          <Input placeholder="Community Title" name="title" />
           <div className="communities__buttons">
-            <Button type="button" className="communities__buttons"  onClick={() => this.setState({ creating: false })}>Cancel</Button>
-            <Button type="submit" className="communities__buttons">Create Community</Button>
+            <div className="communities__button communities__button--primary">
+              <Button type="submit">Create Community</Button>
+            </div>
+            <Button
+              secondary
+              type="button"
+              className="communities__button--secondary"
+              onClick={() => this.setState({ creating: false })}
+            >
+              Cancel
+            </Button>
           </div>
         </form>
       </Modal>,
