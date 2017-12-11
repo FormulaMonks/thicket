@@ -51,7 +51,7 @@ class Input extends Component {
   state = { focused: false }
 
   render() {
-    return <Wrap>
+    return <Wrap className={this.props.wrapClassName}>
       <StyledInput
         {...this.props}
         autoFocus={this.state.focused}
