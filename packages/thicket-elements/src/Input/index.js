@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import pencil from '../../images/pencil.svg'
 import {
   linearGradient,
   defaultBoxShadow,
@@ -7,7 +8,7 @@ import {
 } from '../sharedStyles'
 
 const StyledInput = styled.input`
-  background: transparent url(../../images/pencil.svg) no-repeat right center;
+  background: transparent url(${pencil}) no-repeat right center;
   background-size: 1em;
   border: none;
   outline: none;
