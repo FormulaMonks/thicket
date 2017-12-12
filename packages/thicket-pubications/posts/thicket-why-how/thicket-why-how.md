@@ -141,9 +141,9 @@ It’s true that we got some rudimentary version of that done pretty quickly. Bu
 It’s actually kinda done now
 ============================
 
-It’s just ugly.
+It just needs some styling and explanatory text.
 
-An acceptable amount of the Communities functionality is done, but the app is unusably ugly. We are working on that. We really want to finish it.
+An acceptable amount of the Communities functionality is done, but the app is pretty confusing to newcomers right now. We are working on that. We really want to finish it.
 
 
 Does it matter?
