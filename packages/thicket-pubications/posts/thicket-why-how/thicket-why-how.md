@@ -41,6 +41,10 @@ Lacking the expertise to build a similar tool that would likewise impact the Dis
 
 We laid out our initial plan in four steps, with the nice feature that we could stop after step 2 or 3 and still have accomplished our goal of building something fun that serves as a good technology demonstration. The initial steps: 
 
+0. **Research** _[1 week]_
+
+    We started off with a week or so of research. We found a large number of tools and strategies we could use for building a distributed app. We could have ended the experiment here and still had several blog posts to write about all of it.
+
 1. **Create GIFs from device’s camera** _[1 week]_
 
     The very basics. All client-side functionality with no GIF sharing.
