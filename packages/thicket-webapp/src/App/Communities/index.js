@@ -26,9 +26,9 @@ class Communities extends Component {
     const { data, creating } = this.state
 
     return [
-      (!creating || document.documentElement.clientWidth > 600) && <div className="communities" key="communities">
-        <div className="communities__header">Your communities</div>
-        <ul className="communities__grid" key="grid">
+      (!creating || document.documentElement.clientWidth > 600) && [
+        <h2 key="title" className="communities__list--grid">Your communities</h2>,
+        <ul key="grid" className="communities__list communities__list--grid">
           <li key="new" className="communities__element">
             <Add onClick={() => this.setState({ creating: true })} />
           </li>
@@ -37,10 +37,10 @@ class Communities extends Component {
               <Card communityId={communityId} />
             </Link>
           </li>)}
-        </ul>
-      </div>,
+        </ul>,
+      ],
       creating && <Modal key="communities__new" className="communities__new">
-        <h2 className="communities__title">Create New Community</h2>
+        <h3 className="communities__title">Create New Community</h3>
         <h4 className="communities__message">Exciting to see you’re creating a new Community on Thicket!</h4>
         <form className="communities__form" ref={f => this.form = f} onSubmit={this.onSubmit}>
           <Input placeholder="Community Title" name="title" />
