@@ -90,7 +90,7 @@ But Step 3, as noted, is risky. We weren’t totally sure we’d be able to comp
 Wouldn’t it be better to build something useful and fun without authentication, than to risk the whole project on such a big unknown?
 
 
-A solution: authentication-free “communities”
+A solution: authentication-free “Communities”
 =============================================
 
 We abandoned the initial plan after Step 2, and went down a new side route. 
@@ -105,9 +105,9 @@ What is a Community?
 
 Since we can’t have any public content and we have no authentication, this “social network” needs to work a bit differently from others.
 
-If you have the URL to a Community, you can see all content created by that community. More than that, by knowing this URL, you become part of the community. You can contribute to it, and you help back up and replicate its data. Without authentication, even a task like deleting or editing any post has to stay open to anyone in the community.
+If you have the URL to a Community, you can see all content created by that Community. More than that, by knowing this URL, you become part of the Community. You can contribute to it, and you help back up and replicate its data. Without authentication, even a task like deleting or editing any post has to stay open to anyone in the Community.
 
-Anyone can create a new Community and share its link with one of their trusted networks. We could have a Citrusbyte community to which we all add GIFs. My coworking space could have its own community. If I’ve shared a link on Slack from my desktop, then I can also click that link on my phone, and my phone can be another member of the community, also helping to back up and replicate the data.
+Anyone can create a new Community and share its link with one of their trusted networks. We could have a Citrusbyte Community to which we all add GIFs. My coworking space could have its own Community. If I’ve shared a link on Slack from my desktop, then I can also click that link on my phone, and my phone can be another member of the Community, also helping to back up and replicate the data.
 
 
 Circling back to Authentication
