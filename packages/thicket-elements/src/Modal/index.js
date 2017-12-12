@@ -38,8 +38,10 @@ const Wrap = styled.div`
    * white background container
    * */
   @media (min-width: 600px){
-    height: 60%;
-    width: 50%;
+    width: auto;
+    max-width: 60%;
+    max-height: 50%;
+    padding: 1em;
   }
 `
 
