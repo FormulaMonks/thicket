@@ -36,15 +36,17 @@ class App extends Component {
     const { nickname, loading, onboarding } = this.state
 
     if (loading) {
-      return <div className="index"><Spinner /></div>
+      return <div className="app__index"><Spinner /></div>
     }
 
     return <Router>
-      <main className="app">
-        <Link className="app__home" to="/">Thicket</Link>
-        <Link className="app__profile" to="/profile">
-          {nickname}<img src={usersvg} alt={nickname}/>
-        </Link>
+      <main className="app app--with-fixed-header">
+        <div className="app__header">
+          <Link to="/">Thicket</Link>
+          <Link to="/profile">
+            {nickname}<img src={usersvg} alt={nickname}/>
+          </Link>
+        </div>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props =>
