@@ -110,6 +110,16 @@ If you have the URL to a Community, you can see all content created by that Comm
 Anyone can create a new Community and share its link with one of their trusted networks. We could have a Citrusbyte Community to which we all add GIFs. My coworking space could have its own Community. If I’ve shared a link on Slack from my desktop, then I can also click that link on my phone, and my phone can be another member of the Community, also helping to back up and replicate the data.
 
 
+A concept all ours
+==================
+
+As far as we know, we created this concept of Communities. This is a concept that Citrusbyte has created and will soon offer to the larger web engineering community as a means by which to have authentication-free collaboration on the distributed web.
+
+Whatever content (GIFs in our case) you receive from your Community, you are (automatically and instantly) re-distributing. Meaning, you are helping out your Community simply by passively consuming content—this is one of the new ideas we brought to our Communities. Not doing anything, in this case, is doing something.
+
+Maybe a whole class of future apps won't need authentication at all.
+
+
 Circling back to Authentication
 ===============================
 
