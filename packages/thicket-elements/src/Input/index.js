@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import pencil from '../../images/pencil.svg'
 import {
   linearGradient,
   defaultBoxShadow,
@@ -7,7 +8,7 @@ import {
 } from '../sharedStyles'
 
 const StyledInput = styled.input`
-  background: transparent url(../../images/pencil.svg) no-repeat right center;
+  background: transparent url(${pencil}) no-repeat right center;
   background-size: 1em;
   border: none;
   outline: none;
@@ -18,6 +19,7 @@ const StyledInput = styled.input`
   padding: 0.5em 0;
   padding-right: 1.2em;
   caret-color: #D266A0;
+  width: 100%;
 
   & + div{
     opacity: .6;
@@ -41,23 +43,20 @@ const StyledInput = styled.input`
     }
   }
 `
-const Wrap = styled.div`
-  display: inline-block;
-`
 
 class Input extends Component {
 
   state = { focused: false }
 
   render() {
-    return <Wrap>
+    return <div className={this.props.wrapClassName}>
       <StyledInput
         {...this.props}
         autoFocus={this.state.focused}
         type="text"
       />
       <div />
-    </Wrap>
+    </div>
   }
 }
 
