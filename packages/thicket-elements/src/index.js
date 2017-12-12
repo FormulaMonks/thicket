@@ -7,10 +7,10 @@ import * as Styles from './sharedStyles'
 import CommunityCard from './CommunityCard'
 import Modal from './Modal'
 
-export default () => (
+export default ({ dark = false }) => (
   <div>
     <h2>Spinner</h2>
-    <Spinner />
+    <Spinner backgroundColor={!dark ? "#FFF" : null} />
     <h2>Button</h2>
     <Button onClick={() => console.log('button!')}>Click Me</Button>
     <h2>Secondary Button</h2>

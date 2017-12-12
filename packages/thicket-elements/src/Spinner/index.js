@@ -7,7 +7,7 @@ const spin = keyframes`
 `
 
 // via the "backgroundColor" parameter this component can be customized
-const bgColor = ({ backgroundColor }) => backgroundColor ? backgroundColor : '#FFF'
+const bgColor = ({ backgroundColor }) => backgroundColor ? backgroundColor : '#102131'
 
 const Spinner = styled.div`
   width: 50px;
