@@ -19,6 +19,7 @@ const StyledInput = styled.input`
   padding: 0.5em 0;
   padding-right: 1.2em;
   caret-color: #D266A0;
+  width: 100%;
 
   & + div{
     opacity: .6;
@@ -42,23 +43,20 @@ const StyledInput = styled.input`
     }
   }
 `
-const Wrap = styled.div`
-  display: inline-block;
-`
 
 class Input extends Component {
 
   state = { focused: false }
 
   render() {
-    return <Wrap className={this.props.wrapClassName}>
+    return <div className={this.props.wrapClassName}>
       <StyledInput
         {...this.props}
         autoFocus={this.state.focused}
         type="text"
       />
       <div />
-    </Wrap>
+    </div>
   }
 }
 

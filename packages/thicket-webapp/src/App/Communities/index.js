@@ -43,12 +43,7 @@ class Communities extends Component {
         <h2 className="communities__title">Create New Community</h2>
         <h4 className="communities__message">Exciting to see you’re creating a new Community on Thicket!</h4>
         <form className="communities__form" ref={f => this.form = f} onSubmit={this.onSubmit}>
-          <Input
-            placeholder="Community Title"
-            name="title"
-            wrapClassName="community__input-wrap"
-            className="community__input"
-          />
+          <Input placeholder="Community Title" name="title" />
           <div className="communities__buttons">
             <div className="communities__button communities__button--primary">
               <Button type="submit">Create Community</Button>
