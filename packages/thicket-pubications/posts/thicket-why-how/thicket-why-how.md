@@ -27,6 +27,8 @@ What we liked about the Distributed Vine idea
 
 Creating GIFs and sharing them with people is fun. People would be more curious to try a product if it’s fun and beautiful. Getting more people to look at this will always benefit Citrusbyte, wether techies applying for engineering jobs or companies looking for a consultancy.
 
+(Later, when we started building, this suspicion that a GIF-sharing app would be fun was immediately confirmed. Everyone we demoed it to enjoyed it. Our coworking spaces wanted to find out when it was live; other Citrusbyte teammates shared GIFs they'd created with it; and for ourselves, we had a hard time deleting our test GIFs every time we changed how we stored and replicated data.)
+
 
 ## 2. Good technology demonstration
 
