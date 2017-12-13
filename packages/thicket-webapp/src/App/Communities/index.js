@@ -27,7 +27,9 @@ class Communities extends Component {
 
     return [
       (!creating || document.documentElement.clientWidth > 600) && [
-        <h2 key="title" className="communities__list--grid">Your communities</h2>,
+        <div key="title" className="communities__list--grid">
+          <h2>Your communities</h2>
+        </div>,
         <ul key="grid" className="communities__list communities__list--grid">
           <li key="new" className="communities__element">
             <Add onClick={() => this.setState({ creating: true })} />
