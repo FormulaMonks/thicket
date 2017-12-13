@@ -6,26 +6,19 @@
 
 .communities__list--grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, 332px);
+  grid-template-columns: repeat(auto-fill, 16em);
   justify-content: center;
+  grid-gap: 1em;
+}
+
+@media (width: 600px){
+  .communities__list--grid{
+    grid-template-columns: repeat(auto-fill, 28em);
+  }
 }
 
 .communities__element{
-  height: 240px;
-  width: 332px;
-  padding: 0.5em;
-}
-
-/* desktop */
-@media (min-width: 600px){
-  .communities__list--grid{
-    grid-template-columns: repeat(auto-fill, 444px);
-  }
-
-  .communities__element{
-    height: 292px;
-    width: 444px;
-  }
+  height: 15em;
 }
 
 .communities__link{
