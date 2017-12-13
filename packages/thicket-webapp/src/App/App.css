@@ -1,18 +1,5 @@
-.app{
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  overflow: auto;
-}
-
-.app--with-fixed-header{
-  /* header  height */
-  padding-top: 5em;
-}
-
 .app__header{
-  position: absolute;
+  position: sticky;
   top: 0;
   left:0;
   right: 0;
