@@ -1,29 +1,16 @@
-.app{
+.app__header{
+  position: sticky;
+  top: 0;
+  left:0;
+  right: 0;
+  z-index: 10;
+  padding: 1em;
   display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-}
-
-.app__home{
-  position: absolute;
-  z-index: 1;
-  left: 15px;
-  height: 100px;
-  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.app__profile{
-  position: absolute;
-  z-index: 1;
-  height: 100px;
-  right: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.index{
+.app__index{
   height: 100%;
   width: 100%;
   display: flex;

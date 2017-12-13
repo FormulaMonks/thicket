@@ -6,7 +6,7 @@
 
 .add__container{
   border: 2px dashed #FFF;
-  height: calc(100% - 4px);
+  height: 100%;
   border-radius: 4px;
 }
 
