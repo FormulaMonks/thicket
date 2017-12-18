@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "react-router-dom": "^4.2.2",
+    "react-svg": "^2.2.5",
     "styled-components": "^2.2.1"
   },
   "peerDependencies": {

@@ -1,6 +1,19 @@
-.gif{
+.individualGif{
   height: 100%;
   display: flex;
   flex-direction: column;
-  margin: 10%;
+}
+
+.individualGif__wrap{
+  padding: 0 1em;
+}
+
+.individualGif__header{
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+
+.individualGif__message{
+  padding: 1em;
+  text-align: center;
 }

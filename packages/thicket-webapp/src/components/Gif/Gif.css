@@ -1,8 +1,55 @@
-.gif__main{
-  flex: 1;
+.gif__loading{
   display: flex;
-  height: 100%;
-  width: 100%;
+  height: 300px;
   align-items: center;
   justify-content: center;
+}
+
+.gif__wrap{
+  border-radius: 4px;
+  padding: 1em;
+}
+
+.gif__img{
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
+  margin-bottom: 1em;
+}
+
+@media (min-width: 600px){
+  .gif__wrap{
+    margin: 0 auto;
+    max-width: 38em;
+    display: grid;
+    grid-template-columns: 65% 35%;
+    grid-column-gap: 0.5em;
+    justify-content: center;
+  }
+  .gif__img{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.gif__inner{
+  padding: 1em;
+  background: #F6F9FD;
+  border-radius: 4px;
+  color: #46569F;
+  box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
+}
+
+.gif__buttons{
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  text-align: center;
+}
+
+.gif__button{
+  cursor: pointer;
+  border: none;
 }

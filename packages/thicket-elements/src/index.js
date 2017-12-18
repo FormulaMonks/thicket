@@ -6,11 +6,13 @@ import Input from './Input'
 import * as Styles from './sharedStyles'
 import CommunityCard from './CommunityCard'
 import Modal from './Modal'
+import Icon from './Icon'
+import * as Icons from './Icons'
 
-export default () => (
+export default ({ dark = false }) => (
   <div>
     <h2>Spinner</h2>
-    <Spinner />
+    <Spinner backgroundColor={!dark ? "#FFF" : null} />
     <h2>Button</h2>
     <Button onClick={() => console.log('button!')}>Click Me</Button>
     <h2>Secondary Button</h2>
@@ -34,6 +36,11 @@ export default () => (
         <p>Tempus iaculis urna id volutpat lacus laoreet. Malesuada bibendum arcu vitae elementum curabitur. Amet risus nullam eget felis eget. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Ac auctor augue mauris augue neque. Et egestas quis ipsum suspendisse. Cras tincidunt lobortis feugiat vivamus at. Aenean vel elit scelerisque mauris pellentesque pulvinar. Id diam vel quam elementum pulvinar etiam non. Sagittis purus sit amet volutpat. Suspendisse faucibus interdum posuere lorem ipsum dolor sit. Amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus. Purus sit amet luctus venenatis. Lobortis scelerisque fermentum dui faucibus in. Enim nec dui nunc mattis enim. Senectus et netus et malesuada fames ac turpis. Elit scelerisque mauris pellentesque pulvinar pellentesque habitant morbi tristique senectus. Lectus nulla at volutpat diam ut venenatis tellus.</p>
       </Modal>
     </div>
+    <h2>Icons</h2>
+    <Icon src={Icons.downloadSvg} size="50" />
+    <Icon src={Icons.shareSvg} size="50" />
+    <Icon src={Icons.facebookSvg} size="50" />
+    <Icon src={Icons.twitterSvg} size="50" />
   </div>
 )
 
@@ -44,4 +51,6 @@ export {
   Styles,
   CommunityCard,
   Modal,
+  Icons,
+  Icon
 }

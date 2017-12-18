@@ -44,19 +44,20 @@ class Demo extends Component {
   state = { dark: false }
 
   render() {
-    return <Wrap dark={this.state.dark}>
-      <Head dark={this.state.dark}>
+    const { dark } = this.state
+    return <Wrap dark={dark}>
+      <Head dark={dark}>
         <h1>thicket-elements Demo</h1>
         <label>
           <input
             type="checkbox"
-            checked={this.state.dark}
+            checked={dark}
             onChange={e => this.setState({ dark: e.target.checked })}
           />
           dark
         </label>
       </Head>
-      <Example/>
+      <Example dark={dark} />
     </Wrap>
   }
 }

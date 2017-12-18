@@ -1,0 +1,16 @@
+<svg width="11" height="21" viewBox="0 0 11 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Path</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(9538 -42468)">
+<g id="Path">
+<use xlink:href="#path0_fill_facebook" transform="translate(-9537.24 42468.3)" fill="url(#paint0_linear)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(11.0728 -31.6601 14.7723 23.7313 0.226194 22.4841)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<path id="path0_fill_facebook" fill-rule="evenodd" d="M 6.19278 9.97938L 8.94654 9.97938L 9.31258 6.53895L 6.19278 6.53895L 6.19704 4.81802C 6.19704 3.92138 6.28216 3.44043 7.57179 3.44043L 9.29272 3.44043L 9.29272 0L 6.53753 0C 3.22904 0 2.06284 1.66985 2.06284 4.47469L 2.06284 6.53895L 0 6.53895L 0 9.97938L 2.06284 9.97938L 2.06284 19.9588L 6.19278 19.9588L 6.19278 9.97938Z"/>
+</defs>
+</svg>

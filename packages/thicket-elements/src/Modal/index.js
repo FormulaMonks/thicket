@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-const glow = '0px 14px 65px rgba(210, 102, 160, 0.7), 0px 4px 14px rgba(16, 33, 49, 0.6), 0px 8px 14px rgba(39, 64, 88, 0.4)'
+import { glow } from '../sharedStyles'
 
 const Background = styled.div`
   /* mobile
