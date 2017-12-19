@@ -36,23 +36,64 @@ The following Dapp ideas benefit from the use of IPFS's prtocols and tools and i
 
 ## The Dapps
 
-1. *Decentralised file collaboration and file sharing app with offline functionality.* A decentralised Google Docs + Dropbox. Allow real-time collaboration on docs and be able to share them easily by storing them directly in your file system. Work offline and then merge your updates when connected. If there are conflicts, branch of directly. Share files any way you want, and by adding them to your _selected folders_ the network will replicate and distribute them - meaning, you can access your files even if your computer is turned off.
-2. *Distributed password manager.* Once encrypted passwords will be replicated, distributed and ready for retrieval from any node connected to the network. No need to keep your machine turned on.
-3. *Distributed Wikipedia* Want to help out Wikipedia? How about sharing disk space and bandwidth in order to replicate content and redistribute it? Once you access any content on Wikipedia you can be part of the network of nodes helping keep the costs down and the uptime, well, up. This works for different languages too, you read Wikipedia in English, then you'll be helping with that specific content. Read it in any other language and you'll be doing the same thing.
-4. *Distributed package management* Never let one person break the Internet again. With a decentralised network of nodes accessing distributed git repos and building the software, then the built packages will be ready for download on demand. Once a built packages is added and replicated it doesn't matter if the author turns their machine off, the package will persist in the network and ready to be downloaded.
-5. *Distributed botnet + command center* A network of machines interconnected to each other ready, listening to events? We can turn those events into commands. Need some extra power for some computations? Distribute the tasks between the peers and wait for their responses. In exchange, your machine will also await for commands and execute them when needed.
-6. *Distributed continuous integration* We've seen how testing doesn't scale. Does having to run tests in series for a long time ring a bell? Does it get worse every time new features increase the number of tests? Bottleneck. Distribute the tests via the network of peers, let each node execute part of the total and return the result. There is a double gain here: run tests in parallel and distribute the workload.
-7. *Distributed containers* With distributed computing a network of nodes can execute tasks on demand, why not execute apps on demand too? Run any container in a distributed network. Piture this as having a decentralised EC2.
-8. *Distributed video analysis for augmented reality* One type of augmented reality applications involve reading from an input source (usually video) to find objects and relate them to metadata. Imagine an application that receives input from any movie and can in real time recognize the actors and fetch data from IMDB and display the information in real time. This type of applications would rely on different processes reading from the input source and publishing events whenever a match occurs.In a distributed network (private or not) nodes can take on individual tasks thus delegating the workload throughout all the network. Whenever one of the peers reaches a goal, using the experimental pubsub features of the IPFS network the event can be broadcasted and business logic can be applied.
-9. *Private networks for massive events* Connecting to the Internet during massive events in countries like Mexico, Argentina and Spain is an impossible task. By introducing a custom network, companies can provide their users with the full capabilities of real internet applications. The network can deliver those applications, users can execute them directly in their devices (similar to offline mode) and take further actions if needed once the users can connect online. Furthermore, the network can use the replicate & redistribute capabilities of the network to provide realtime events to all the connected users.
-10. *Private networks events with low or no connectivity* Connecting to the Internet during massive events in countries like Mexico, Argentina and Spain is an impossible task. By introducing a custom network, companies can provide their users with the full capabilities of real internet applications. The network can deliver those applications, users can execute them directly in their devices (similar to offline mode) and take further actions if needed once the users can connect online. Furthermore, the network can use the replicate & redistribute capabilities of the network to provide realtime events to all the connected users.
-11. *Global ranking system* It is possible to offer a decentralised ranking service using the IPFS network. The idea is to leverage append only logs where users are given a rank level in the network.
+1. **Decentralised file collaboration and file sharing app with offline functionality.** Bring in the best features of file sharing & collaboration tools out there and mix them with distributed technologies while working directly from the user's file system:
+    - Select folders to upload and set access rights to them and/or to individual files.
+    - Allow real-time collaboration on docs.
+    - Include new files simply by copying them to one of the selected folders.
+    - Work offline and merge the updates when reconnected.
+    - Access files when needed. The network allows to access files even if the author's computer is turned off.
+    - Keep files under version control; allowing users to merge updates or to branch out.
+
+
+2. **Distributed password manager.** Keep an encrypted distributed store of passwords. Available any time - high availability even while the user's computer is turned off. Interconnected nodes will help maintain an always accessible copy of the encrypted data - which can only be accessed by the user holding the master password. Once connected help replicate and distribute other's data.
+
+
+3. **Distributed Wikipedia.** Every now and then Wikipedia displays banners asking the users for their support. They ask for donations to help out with server and bandwidth costs. With a decentralised infrastructure every user of Wikipedia can help out without having to donate money - they can help out with direct resources. By replicating content and redistributing any user accessing content can take part of a decentralised swarm that can help keep the server costs low and the server uptime high. Simply by accessing content, nodes can automatically download, replicate content and help distribute it to others.
+
+
+4. **Distributed package management.** One person broke the Internet one day. With the help of a decentralised network of interconnected nodes we can avoid this doomsday events: high availability will ensure a package cannot be removed even if the author decides to turn their computer off. This network can keep cached references of built packages or build them on demand. Once a built package is uploaded it will be replicated and distributed to the whole network:
+    - A node requests a package.
+    - If the package does not exist any node can fetch it from a decentralised git network and checkout the version that is being requested.
+    - Build the package and upload it to the network.
+    - The original node receives the package it requested, replicates it and helps distribute it to other users when needed.
+    - The network will maintain high availability for such package from then onward.
+
+
+5. **Distributed botnet + command center.** The previous ideas explored the concept of shared resources. They did so looking at keeping high availability of data by sharing disk space usage and bandwidth resources. The idea here is to explore sharing other resources: computational operations. The interconnected swarm of computers can share data amongst all of them, and with the help of CRDT tools keep this data normalized. What if the data store held _commands/operations_ to be executed. The swarm could effectively respond to events in a real-time fashion and execute high workload in a distributed fashion delegating the operations between the interconnected nodes.
+
+
+6. **Distributed continuous integration.** A specific implementation of idea #5. This comes from a real world problem: testing environments that don't scale correctly when either the team grows and/or the number of tests grow and this are run in series. New features will increase the number of tests to be run to be able to correctly merge the new features - potentially never-ending and bottleneck. By distributing the tests via the interconnected nodes we can solve both problems. Different strategies can be put into place to define how the network should delegate the tasks; a basic implementation can have each node run one test and return the given result. This way all the tests can be run in parallel and the workload is distributed.
+
+
+7. **Distributed containers** Another specific implementation of idea #5. Here an interconnected swarm of nodes distributes tasks to the individual nodes; and the nodes execute the tasks they're given. This tasks have the individual nodes execute containers and run apps inside those containers. A high number of nodes in the network can mean any container/app combination can be run at any given moment. Imagine using this type of network to offer cloud services: picture a decentralised EC2.
+
+
+8. **Distributed video analysis for augmented reality.** One final implementation of idea #5. One type of augmented reality applications involves reading from a video input source and analyze the data for a match given a query - most of the time this can be seen as looking for an object or groups of objects in the video and relating them to some metadata. When a match is found a request for metadata is executed and the response can be embedded on top of the video source. Imagine an application that is reading into any movie and can recognize actors faces, fetch metadata from IMDB and display the given data near the actors face. Now imagine the same application looking for any other matches (cars, animals, books, etc). This type of application can delegate the tasks of finding the different matches to different nodes in the swarm, effectively distributing the workload while having the network benefit from the independent efforts of each node. Whenever a node finds a match the information is distributed to all the nodes, thus all nodes will receive the metadata for the video source while only having to work on independent, smaller tasks.
+
+
+9. **Private networks for massive events.** Connecting to the Internet during massive events in countries like Mexico, Argentina and Spain is an impossible task. By introducing a custom network, companies can provide their users with the full capabilities of real internet applications. The network can deliver those applications, users can execute them directly in their devices (similar to offline mode) and take further actions if needed once the users can connect online. Furthermore, the network can use the replicate & redistribute capabilities of the network to provide realtime events to all the connected users.
+
+
+10. **Private networks events with low or no connectivity.** Connecting to the Internet during massive events in countries like Mexico, Argentina and Spain is an impossible task. By introducing a custom network, companies can provide their users with the full capabilities of real internet applications. The network can deliver those applications, users can execute them directly in their devices (similar to offline mode) and take further actions if needed once the users can connect online. Furthermore, the network can use the replicate & redistribute capabilities of the network to provide realtime events to all the connected users.
+
+
+11. **Global ranking system.** It is possible to offer a decentralised ranking service using the IPFS network. The idea is to leverage append only logs where users are given a rank level in the network.
 Rather than receiving points and having to compute the new state of the leaderboard every time an event takes place, users can trade ranking spots (similar to trading cryptocurrencies). Imagine this ranking structure in a way that a user “owns” the Nth ranking spot and whenever an event occurs the spot is exchanged.
-12. *Decentralised video sharing app* A distributed swarm of computers can excel and distributing large files. With an optimized content distribution strategy, IPFS can deliver rare pieces of content over more common ones, making it easier to seed even incomplete files thus benefiting the whole network. Aim this at video, and improve the experience.
-13. *Decentralised maps/cartography app* Decentralised maps with real time updates from nodes. Imagine receiving the traffic updates directly from nodes and having the network distribute all this data. No central point of failure and less chance of getting directions into wild fires.
-14. *Distributed software distribution* Decentralised software distribution. Need an app? Get it from the closest node to you. Upload your changes and let the network to broadcast the changes and the nodes that are interested can download thenm accordingly.
-15. *Peer to peer content sharing network* Any type of content can benefit from IPFS's optimized content distribution strategy. Share any type of file, share JSON documents that refer to any other type of file and maintain the files ready to be fetched even when the original author is not online.
-16. *Enterprise for any of the above* With private swarms a controlled network can include any option from above (and maybe mix them up), put that in a box and ship it out. Any company can use their existing infrastructure to integrate any and all of the distributed/decentralised ideas from the list.
+
+
+12. **Decentralised video sharing app.** A distributed swarm of computers can excel and distributing large files. With an optimized content distribution strategy, IPFS can deliver rare pieces of content over more common ones, making it easier to seed even incomplete files thus benefiting the whole network. Aim this at video, and improve the experience.
+
+
+13. **Decentralised maps/cartography app.** Decentralised maps with real time updates from nodes. Imagine receiving the traffic updates directly from nodes and having the network distribute all this data. No central point of failure and less chance of getting directions into wild fires.
+
+
+14. **Distributed software distribution.** Decentralised software distribution. Need an app? Get it from the closest node to you. Upload your changes and let the network to broadcast the changes and the nodes that are interested can download thenm accordingly.
+
+
+15. **Decentralise state store for Dapps.** Any type of frontend app that uses a store container similar to React's redux or Vue's vuex can implement their store using decentralised tools and have a swarm of interconnected webapps share the same state. Updates will be broadcasted in a real-time fashion and users with low connectiviy can benefit from offline behaviour.
+
+
+16. **Enterprise for any of the above.** With private swarms a controlled network can include any option from above (and maybe mix them up), put that in a box and ship it out. Any company can use their existing infrastructure to integrate any and all of the distributed/decentralised ideas from the list.
 
 ## Where do we _fork_ from here?
 
