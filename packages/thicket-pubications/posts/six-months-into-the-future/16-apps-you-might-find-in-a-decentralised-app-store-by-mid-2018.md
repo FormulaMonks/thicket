@@ -5,6 +5,8 @@ For some of us, trying to picture the future is a daily activity; some days lead
 
 ## Building the future
 
+![Computer Science](https://s-i.huffpost.com/gen/1378599/images/o-COMPUTER-SCIENCE-facebook.jpg)
+
 > Computer science is all about creating good abstractions. Good abstractions are all about presenting a view of the world that can be used.
 
 This past September, my team at Citrusbyte embarked on a research project into decentralised applications. We set our goal to build a decentralised clone of Vine - the GIF sharing app. We started out from scratch, coding small, step-by-step sized features one at a time. We refactored once the new concepts where settling in our minds and came up with new concepts of our own.
@@ -96,6 +98,8 @@ Rather than receiving points and having to compute the new state of the leaderbo
 16. **Enterprise for any of the above.** With private swarms a controlled network can include any option from above (and maybe mix them up), put that in a box and ship it out. Any company can use their existing infrastructure to integrate any and all of the distributed/decentralised ideas from the list.
 
 ## Where do we _fork_ from here?
+
+![Fork](http://forked.yannick.io/images/logo.png)
 
 There is a big trend going on of _"X company with Blockchain"_ type of ideas, still there are a lot of concepts that need to be fully understood, questioned and worked out before the tipping point is reached and Dapps go mainstream. We identified some problems that need to be solved before full delivery of the Dapps in the list is reached. These problems include:
 
