@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import favorite from './favorite.svg'
-import placeholder from './placeholder.png'
+import favorite from '../../images/favorite.svg'
+import placeholder from '../../images/placeholder.png'
 import {
   linearGradient,
   hoverLinearGradient,
@@ -37,7 +37,7 @@ const Card = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
-  width: 100%; 
+  width: 100%;
   display: flex;
   align-items: flex-end;
   border-radius: 4px;
@@ -45,7 +45,7 @@ const Card = styled.div`
 
 const Favorite = styled.img`
   position: absolute;
-  top: 5px; 
+  top: 5px;
   right: 5px;
   height: 2.5em;
   width: 2.5em;
@@ -66,7 +66,7 @@ const Meta = styled.div`
 `
 
 const Extra = styled.div`
-  color: #677897; 
+  color: #677897;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

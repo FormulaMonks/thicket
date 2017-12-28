@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import ReactSVG from 'react-svg'
 
-import clipboard from './clipboard.svg'
-import checkmark from './checkmark.svg'
+import clipboard from '../../images/clipboard.svg'
+import checkmark from '../../images/checkmark.svg'
 import { linearGradient } from '../sharedStyles'
 
 export Trigger from './Trigger'
