@@ -15,7 +15,6 @@ import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
 import store from '../database/store'
 import './App.css'
-import usersvg from './user.svg'
 
 const { user } = store
 
@@ -41,13 +40,10 @@ class App extends Component {
     }
 
     return <Router>
-      <main className="app app--with-fixed-header">
-        <div className="app__header">
+      <div className="app app--with-fixed-header">
+        <header className="app__header">
           <Link to="/"><Logo /></Link>
-          <Link to="/profile">
-            {nickname}<img src={usersvg} alt={nickname}/>
-          </Link>
-        </div>
+        </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
           <Route exact path="/welcome" render={props =>
@@ -64,7 +60,7 @@ class App extends Component {
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
         </Switch>
-      </main>
+      </div>
     </Router>
   }
 
