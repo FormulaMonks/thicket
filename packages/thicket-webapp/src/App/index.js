@@ -6,6 +6,7 @@ import {
   Link,
   Redirect,
 } from 'react-router-dom'
+import Logo from './Logo'
 import Profile from './Profile'
 import Welcome, { COMPLETED } from './Welcome'
 import Communities from './Communities'
@@ -42,7 +43,7 @@ class App extends Component {
     return <Router>
       <main className="app app--with-fixed-header">
         <div className="app__header">
-          <Link to="/">Thicket</Link>
+          <Link to="/"><Logo /></Link>
           <Link to="/profile">
             {nickname}<img src={usersvg} alt={nickname}/>
           </Link>

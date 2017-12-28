@@ -1,9 +1,9 @@
 {
-  "short_name": "Thicket",
-  "name": "Thicket",
+  "short_name": "THICKET",
+  "name": "THICKET",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     }
