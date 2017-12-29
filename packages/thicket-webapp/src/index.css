@@ -31,3 +31,7 @@ a {
 a:focus, a:hover, a:active {
   color: rgba(210, 102, 160, 1)
 }
+
+img {
+  max-width: 100%;
+}

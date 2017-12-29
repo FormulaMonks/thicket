@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
+
 import store from '../../database/store'
+import Logo from '../Logo'
 
 import heart from './heart.svg'
 import singleNode from './singleNode.svg'
@@ -8,7 +10,7 @@ import twoNodes from './twoNodes.svg'
 import threeNodes from './threeNodes.svg'
 import manyNodes from './manyNodes.svg'
 import Carousel from './Carousel'
-import classes from './Welcome.scss'
+import './Welcome.css'
 
 export const COMPLETED = 'COMPLETED'
 const { user } = store
@@ -23,17 +25,18 @@ export default class Welcome extends React.Component {
 
   render() {
     return (
-      <main>
-        <div className={classes.top}>
-          <h1 className={classes.lead}>
+      <main className="Welcome">
+        <div className="Welcome-top">
+          <header className="Welcome-header"><Logo /></header>
+          <h1 className="Welcome-lead">
             Create and share GIFs with your friends in a peer to peer, private
-            network
+            network.
           </h1>
-          <Button>Start a New Community</Button>
-          <div className={classes.bigDeal}>
+          <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+          <div className="Welcome-bigDeal">
             <h2>What's the big deal?</h2>
-            <ol className={classes.keyPoints}>
-              <li className={classes.decentralized}>
+            <ol className="Welcome-keyPoints">
+              <li className="Welcome-decentralized">
                 <p><strong>Decentralized</strong></p>
                 <p>
                   Thicket uses IPFS to transfer data directly between you and
@@ -41,7 +44,7 @@ export default class Welcome extends React.Component {
                   that no company sits between you and your friends.
                 </p>
               </li>
-              <li className={classes.communityHosted}>
+              <li className="Welcome-communityHosted">
                 <p><strong>Community-hosted</strong></p>
                 <p>
                   All the GIFs you create are stored right on your device and
@@ -51,7 +54,7 @@ export default class Welcome extends React.Component {
                   stored on any centralized server.
                 </p>
               </li>
-              <li className={classes.noAds}>
+              <li className="Welcome-noAds">
                 <p><strong>You are not the product</strong></p>
                 <p>
                   No ads or tracking, ever. You don’t even have to trust us on
@@ -62,18 +65,21 @@ export default class Welcome extends React.Component {
             </ol>
           </div>
         </div>
-        <div className={classes.whyGifs}>
-          <div className={classes.heartGif}>
+        <div className="Welcome-whyGifs">
+          <div className="Welcome-heartGif">
             <img alt="" src={heart} />
           </div>
-          <h2>Why GIFs? Because they're fun.</h2>
+          <h2>
+            <span className="Welcome-nobreak">Why GIFs?</span>{' '}
+            <span className="Welcome-nobreak">Because they're fun.</span>
+          </h2>
           <p>
             Could this be implemented for any other type of media? Absolutely.
             We chose GIFs because they’re fun. But think of any other type of
             content, and we could build the same sort of app for that, too.
           </p>
         </div>
-        <div className={classes.howItWorks}>
+        <div className="Welcome-howItWorks">
           <h2>How it works</h2>
           <Carousel>
             <div>
@@ -108,9 +114,9 @@ export default class Welcome extends React.Component {
             </div>
           </Carousel>
         </div>
-        <div className={classes.bottom}>
-          <h2>Start creating and sharing now</h2>
-          <Button>Start a New Community</Button>
+        <div className="Welcome-bottom">
+          <h2>Start creating and sharing now.</h2>
+          <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
         </div>
       </main>
     )

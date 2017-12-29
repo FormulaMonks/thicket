@@ -1,0 +1,76 @@
+.Welcome {
+  text-align: center;
+}
+
+.Welcome h1, .Welcome h2 {
+  font-size: 1.6em;
+  font-weight: 100;
+}
+
+.Welcome-top {
+  background-image: url(./network.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top left;
+}
+
+/* hacks to fix our `* { background-color: inherit }` hack :( */
+.Welcome-top header, .Welcome-top div, .Welcome-top h1, .Welcome-top h2,
+.Welcome-top p, .Welcome-top ol, .Welcome-top li, .Welcome-top strong {
+  background-color: transparent;
+}
+
+.Welcome-top {
+  padding: 0.5em 1em;
+}
+
+.Welcome-header {
+  text-align: left;
+}
+
+.Welcome-lead {
+  padding-top: 5rem;
+}
+
+.Welcome-bigDeal {
+  margin-top: 2.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.Welcome-keyPoints {
+  padding: 0;
+  list-style: none;
+}
+
+.Welcome-keyPoints li {
+  padding-bottom: 0.1em;
+}
+
+.Welcome-whyGifs {
+  background-image: linear-gradient(100deg, #205096, #83425E);
+  padding: 2.5rem 2rem 1rem;
+}
+
+/* hacks to get around the `* { background-color: inherit }` hack :( */
+.Welcome-whyGifs * {
+  background-color: transparent;
+}
+
+.Welcome-nobreak {
+  white-space: nowrap;
+}
+
+.Welcome-howItWorks {
+  padding-top: 1rem;
+}
+
+.Welcome-howItWorks p {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.Welcome-bottom {
+  padding: 2rem;
+}
