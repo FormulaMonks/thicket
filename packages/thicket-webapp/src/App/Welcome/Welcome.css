@@ -13,6 +13,9 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: top left;
+
+  padding: 0.5em 1em;
+  position: relative;
 }
 
 /* hacks to fix our `* { background-color: inherit }` hack :( */
@@ -21,8 +24,41 @@
   background-color: transparent;
 }
 
-.Welcome-top {
-  padding: 0.5em 1em;
+.Welcome-bgGifs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Welcome-bgGifs div {
+  line-height: 0;
+  opacity: 0.5;
+}
+
+.Welcome-bgGifs div::after {
+  background-image: linear-gradient(rgba(247, 97, 139, 0.4), rgba(42, 122, 255, 0.4));
+  content: ' ';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.Welcome-bgGifs div:first-child {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 8rem;
+}
+
+.Welcome-bgGifs div:nth-child(2) {
+  position: absolute;
+  right: 8.1rem;
+  top: 5rem;
+  width: 4rem;
 }
 
 .Welcome-header {

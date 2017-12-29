@@ -10,6 +10,8 @@ import twoNodes from './twoNodes.svg'
 import threeNodes from './threeNodes.svg'
 import manyNodes from './manyNodes.svg'
 import Carousel from './Carousel'
+import harper from './harper.gif'
+import anne from './anne.gif'
 import './Welcome.css'
 
 export const COMPLETED = 'COMPLETED'
@@ -27,6 +29,10 @@ export default class Welcome extends React.Component {
     return (
       <main className="Welcome">
         <div className="Welcome-top">
+          <div className="Welcome-bgGifs">
+            <div><img alt="" src={harper} /></div>
+            <div><img alt="" src={anne} /></div>
+          </div>
           <header className="Welcome-header"><Logo /></header>
           <h1 className="Welcome-lead">
             Create and share GIFs with your friends in a peer to peer, private
