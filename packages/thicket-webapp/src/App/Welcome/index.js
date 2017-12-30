@@ -75,10 +75,7 @@ export default class Welcome extends React.Component {
           <div className="Welcome-heartGif">
             <img alt="" src={heart} />
           </div>
-          <h2>
-            <span className="Welcome-nobreak">Why GIFs?</span>{' '}
-            <span className="Welcome-nobreak">Because they're fun.</span>
-          </h2>
+          <h2>Why GIFs? Because they're fun.</h2>
           <p>
             Could this be implemented for any other type of media? Absolutely.
             We chose GIFs because they’re fun. But think of any other type of
@@ -88,35 +85,51 @@ export default class Welcome extends React.Component {
         <div className="Welcome-howItWorks">
           <h2>How it works</h2>
           <Carousel>
-            <div>
+            <div className="Welcome-slide">
               <p>
-                When you start your community and createa a GIF, it is only
+                When you start your community and create a GIF, it is only
                 stored on your device.
               </p>
-              <img alt="" src={singleNode} />
+              <img
+                alt=""
+                src={singleNode}
+                style={{objectFit: 'scale-down'}}
+              />
             </div>
-            <div>
+            <div className="Welcome-slide">
               <p>
                 When you invite a peer to a Community, your machine talks
                 directly to theirs. All GIFs are then stored on each of your
                 devices. Thicket must be open to sync devices.
               </p>
-              <img alt="" src={twoNodes} />
+              <img
+                alt=""
+                src={twoNodes}
+                style={{padding: '0 1rem', objectFit: 'scale-down'}}
+              />
             </div>
-            <div>
+            <div className="Welcome-slide">
               <p>
                 When a third peer is invited, they will pull data directly from
                 you and/or peer #2. If you or peer #2 is offline, peer #3 will
                 get the data from the other.
               </p>
-              <img alt="" src={threeNodes} />
+              <img
+                alt=""
+                src={threeNodes}
+                style={{padding: '0 1rem'}}
+              />
             </div>
-            <div>
+            <div className="Welcome-slide">
               <p>
                 The more people in a Community, the more secure the data, and
                 the easier it becomes for new peers to get all of it.
               </p>
-              <img alt="" src={manyNodes} />
+              <img
+                alt=""
+                src={manyNodes}
+                style={{objectFit: 'cover'}}
+              />
             </div>
           </Carousel>
         </div>

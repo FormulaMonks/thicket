@@ -102,9 +102,23 @@
   padding-top: 1rem;
 }
 
-.Welcome-howItWorks p {
+.Welcome-slide {
+  display: flex;
+  flex-direction: column;
+}
+
+.Welcome-slide p {
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: 30em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+
+.Welcome-slide img {
+  flex: 1;
+  margin-bottom: 1em;
 }
 
 .Welcome-bottom {
