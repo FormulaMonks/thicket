@@ -128,7 +128,7 @@ export default class Welcome extends React.Component {
               <img
                 alt=""
                 src={manyNodes}
-                style={{objectFit: 'cover'}}
+                style={{padding: '1.6em 0', objectFit: 'cover'}}
               />
             </div>
           </Carousel>

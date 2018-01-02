@@ -1,669 +1,303 @@
-<svg width="1440" height="338" viewBox="0 0 1440 338" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<title>Group 13</title>
+<svg width="1440" height="341" viewBox="0 0 1440 341" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 14</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(3451 -23335)">
-<g id="Group 13">
-<g id="Group 11">
+<g id="Canvas" transform="translate(3451 -23332)">
+<g id="Group 14">
+<mask id="mask0_alpha" mask-type="alpha">
+<g id="Rectangle 2">
+<use xlink:href="#path0_fill" transform="translate(-3451 23290)" fill="#C4C4C4"/>
+</g>
+</mask>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-2752 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path2_fill" transform="translate(-2985 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path3_fill" transform="translate(-2514 23461)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path4_fill" transform="translate(-2882 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path5_fill" transform="translate(-2649 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-2279 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path4_fill" transform="translate(-2409 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path5_fill" transform="translate(-2176 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-3228 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-3468 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path1_fill" transform="translate(-2032 23462)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path4_fill" transform="translate(-3358 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path5_fill" transform="translate(-3125 23468)" fill="#FFFFFF"/>
+</g>
+<g id="Group 11.1" mask="url(#mask0_alpha)">
 <g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-3053.78 23335)" fill="#FFFFFF"/>
+<use xlink:href="#path6_fill" transform="translate(-2561 23555)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-3008.57 23359.8)" fill="url(#paint1_linear)"/>
+<use xlink:href="#path7_fill" transform="translate(-2515.79 23579.8)" fill="url(#paint15_linear)"/>
 </g>
 </g>
 </g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-2673 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 11.3" mask="url(#mask0_alpha)">
+<g id="Vector">
+<use xlink:href="#path6_fill" transform="translate(-2087 23555)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path7_fill" transform="translate(-2041.79 23579.8)" fill="url(#paint18_linear)"/>
+</g>
+</g>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-2199 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 12.5" mask="url(#mask0_alpha)">
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path9_fill" transform="translate(-2746.32 23595)" fill="url(#paint20_linear)"/>
+</g>
+</g>
+<g id="Vector">
+<use xlink:href="#path10_fill" transform="translate(-2758 23571)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path11_fill" transform="translate(-2737.25 23644.4)" fill="#FFFFFF"/>
+</g>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path12_fill" transform="translate(-2395 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 11.4" mask="url(#mask0_alpha)">
+<g id="Vector">
+<use xlink:href="#path6_fill" transform="translate(-3036 23555)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path7_fill" transform="translate(-2990.79 23579.8)" fill="url(#paint25_linear)"/>
+</g>
+</g>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path8_fill" transform="translate(-3148 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 12.7" mask="url(#mask0_alpha)">
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path9_fill" transform="translate(-3220.32 23595)" fill="url(#paint27_linear)"/>
+</g>
+</g>
+<g id="Vector">
+<use xlink:href="#path10_fill" transform="translate(-3232 23571)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path11_fill" transform="translate(-3211.25 23644.4)" fill="#FFFFFF"/>
+</g>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path12_fill" transform="translate(-2870 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 11.5" mask="url(#mask0_alpha)">
+<g id="Vector">
+<use xlink:href="#path6_fill" transform="translate(-3510 23555)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path7_fill" transform="translate(-3464.79 23579.8)" fill="url(#paint32_linear)"/>
+</g>
+</g>
+</g>
+<g id="Union" opacity="0.6" mask="url(#mask0_alpha)">
+<use xlink:href="#path12_fill" transform="translate(-3348 23586)" fill="#FFFFFF"/>
+</g>
+<g id="Group 12.1" mask="url(#mask0_alpha)">
+<g id="Vector">
+<g id="path0 fill">
+<use xlink:href="#path9_fill" transform="translate(-2271.32 23595)" fill="url(#paint34_linear)"/>
+</g>
+</g>
+<g id="Vector">
+<use xlink:href="#path10_fill" transform="translate(-2283 23571)" fill="#FFFFFF"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path11_fill" transform="translate(-2262.25 23644.4)" fill="#FFFFFF"/>
+</g>
+</g>
+<g id="Group 13.1" mask="url(#mask0_alpha)">
 <g id="Group 11.1">
 <g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-2798.3 23555)" fill="#FFFFFF"/>
+<use xlink:href="#path6_fill" transform="translate(-2797 23332)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-2753.08 23579.8)" fill="url(#paint3_linear)"/>
+<use xlink:href="#path7_fill" transform="translate(-2751.79 23356.8)" fill="url(#paint38_linear)"/>
 </g>
 </g>
 </g>
-<g id="Group 10" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2809.05 23389.5)" fill="#FFFFFF"/>
+<g id="Union" opacity="0.6">
+<use xlink:href="#path8_fill" transform="translate(-2909 23363)" fill="#FFFFFF"/>
 </g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2809.05 23389.5)" fill="#FFFFFF"/>
+<g id="Group 11.3">
+<g id="Vector">
+<use xlink:href="#path6_fill" transform="translate(-2323 23332)" fill="#FFFFFF"/>
 </g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2864.37 23396.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2875.42 23375.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2877.6 23368.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2877.6 23368.7)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.26" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-3104.45 23389.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-3104.45 23389.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-3159.77 23396.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-3170.82 23375.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-3173 23368.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-3173 23368.7)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.23" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2855.14 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2855.14 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2910.46 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2921.51 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2923.69 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2923.69 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.32" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-3058.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-3058.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-3113.77 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-3124.82 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-3127 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-3127 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.25" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-3326.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-3326.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-3381.77 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-3392.82 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-3395 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-3395 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.1" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2739.6 23529.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2739.62 23529.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path10_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2746.6 23474.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2725.79 23463.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2718.81 23461.3)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2718.81 23461.3)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.22" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2985.71 23544.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2985.73 23544.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path10_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2992.71 23489.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2971.9 23478.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2964.92 23476.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2964.92 23476.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.29" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2480.5 23543.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2480.51 23543.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path10_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2487.49 23488.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2466.69 23477.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2459.71 23475.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2459.71 23475.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.2" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2848.32 23530.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2848.33 23530.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2892.38 23496.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2885.48 23473.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2882.09 23467.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2882.09 23467.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 12">
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-2751.33 23374)" fill="url(#paint58_linear)"/>
+<use xlink:href="#path7_fill" transform="translate(-2277.79 23356.8)" fill="url(#paint41_linear)"/>
 </g>
 </g>
-<g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-2763.01 23350)" fill="#FFFFFF"/>
 </g>
-<g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-2742.26 23423.4)" fill="#FFFFFF"/>
-</g>
+<g id="Union" opacity="0.6">
+<use xlink:href="#path8_fill" transform="translate(-2435 23363)" fill="#FFFFFF"/>
 </g>
 <g id="Group 12.5">
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-3004.6 23595)" fill="url(#paint61_linear)"/>
+<use xlink:href="#path9_fill" transform="translate(-2982.32 23372)" fill="url(#paint43_linear)"/>
 </g>
 </g>
 <g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-3016.28 23571)" fill="#FFFFFF"/>
+<use xlink:href="#path10_fill" transform="translate(-2994 23348)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-2995.53 23644.4)" fill="#FFFFFF"/>
+<use xlink:href="#path11_fill" transform="translate(-2973.25 23421.4)" fill="#FFFFFF"/>
 </g>
 </g>
-<g id="Group 11.2">
+<g id="Union" opacity="0.6">
+<use xlink:href="#path12_fill" transform="translate(-2631 23363)" fill="#FFFFFF"/>
+</g>
+<g id="Group 11.4">
 <g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-2548.67 23335)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-2503.45 23359.8)" fill="url(#paint65_linear)"/>
-</g>
-</g>
-</g>
-<g id="Group 10.3" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2598.48 23389.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2598.48 23389.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2653.81 23396.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2664.85 23375.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2667.04 23368.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2667.04 23368.7)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.6" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2572.7 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2572.7 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2628.02 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2639.07 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2641.25 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2641.25 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.5" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2638.75 23518)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2638.76 23517.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2604.58 23473.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2582.05 23480.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2575.58 23484.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2575.58 23484.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.33" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3124.09 23518)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3124.1 23517.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3089.92 23473.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3067.39 23480.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3060.91 23484.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -3060.91 23484.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.30" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2358.86 23513.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2358.87 23513.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2402.92 23479)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2396.02 23456.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2392.63 23450)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -2392.63 23450)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 11.6">
-<g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-3546 23335)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 11.7">
-<g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-3290.51 23555)" fill="#FFFFFF"/>
+<use xlink:href="#path6_fill" transform="translate(-3272 23332)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-3245.3 23579.8)" fill="url(#paint98_linear)"/>
+<use xlink:href="#path7_fill" transform="translate(-3226.79 23356.8)" fill="url(#paint48_linear)"/>
 </g>
 </g>
 </g>
-<g id="Group 10.15" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-3301.27 23390.6)" fill="#FFFFFF"/>
+<g id="Union" opacity="0.6">
+<use xlink:href="#path8_fill" transform="translate(-3384 23363)" fill="#FFFFFF"/>
 </g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-3301.27 23390.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-3356.59 23397.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-3367.64 23376.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-3369.82 23369.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-3369.82 23369.8)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.16" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3231.82 23524.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3231.84 23524.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path10_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3238.82 23469.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3218.01 23458.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3211.03 23456.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3211.03 23456.4)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.31" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3448.5 23530.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3448.51 23530.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3434.69 23464.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3427.71 23462.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -3427.71 23462.4)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.34" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path23_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2061.5 23537.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path24_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2061.51 23537.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path25_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2068.49 23482.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path26_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2047.69 23471.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path27_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2040.71 23469)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path28_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2040.71 23469)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.17" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3330.54 23526.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3330.55 23526.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3374.6 23492.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3367.7 23469.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3364.31 23463.2)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(0.70711 0.707104 -0.70711 0.707104 -3364.31 23463.2)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 12.4">
+<g id="Group 12.7">
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-3243.55 23374)" fill="url(#paint128_linear)"/>
+<use xlink:href="#path9_fill" transform="translate(-3456.32 23372)" fill="url(#paint50_linear)"/>
 </g>
 </g>
 <g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-3255.23 23350)" fill="#FFFFFF"/>
+<use xlink:href="#path10_fill" transform="translate(-3468 23348)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-3234.48 23423.4)" fill="#FFFFFF"/>
+<use xlink:href="#path11_fill" transform="translate(-3447.25 23421.4)" fill="#FFFFFF"/>
 </g>
 </g>
-<g id="Group 12.6">
-<g id="Vector">
-<g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-3460.32 23595)" fill="url(#paint131_linear)"/>
-</g>
-</g>
-<g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-3472 23571)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-3451.25 23644.4)" fill="#FFFFFF"/>
-</g>
+<g id="Union" opacity="0.6">
+<use xlink:href="#path12_fill" transform="translate(-3106 23363)" fill="#FFFFFF"/>
 </g>
 <g id="Group 12.1">
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-2529.96 23595)" fill="url(#paint134_linear)"/>
+<use xlink:href="#path9_fill" transform="translate(-2507.32 23372)" fill="url(#paint54_linear)"/>
 </g>
 </g>
 <g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-2541.64 23571)" fill="#FFFFFF"/>
+<use xlink:href="#path10_fill" transform="translate(-2519 23348)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-2520.89 23644.4)" fill="#FFFFFF"/>
+<use xlink:href="#path11_fill" transform="translate(-2498.25 23421.4)" fill="#FFFFFF"/>
 </g>
 </g>
-<g id="Group 11.4">
-<g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-2348.27 23555)" fill="#FFFFFF"/>
+<g id="Union" opacity="0.6">
+<use xlink:href="#path12_fill" transform="translate(-2157 23363)" fill="#FFFFFF"/>
 </g>
-<g id="Vector">
-<g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-2303.05 23579.8)" fill="url(#paint138_linear)"/>
-</g>
-</g>
-</g>
-<g id="Group 10.8" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path8_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2273.5 23521.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path9_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2273.51 23521.9)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path10_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2280.49 23466.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path11_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2259.69 23455.5)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path12_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2252.71 23453.4)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path13_fill" transform="matrix(6.12329e-17 1 -1 6.12318e-17 -2252.71 23453.4)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 12.2">
+<g id="Group 12.6">
 <g id="Vector">
 <g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-2285.32 23374)" fill="url(#paint145_linear)"/>
+<use xlink:href="#path9_fill" transform="translate(-2033.32 23372)" fill="url(#paint58_linear)"/>
 </g>
 </g>
 <g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-2297 23350)" fill="#FFFFFF"/>
+<use xlink:href="#path10_fill" transform="translate(-2045 23348)" fill="#FFFFFF"/>
 </g>
 <g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-2276.25 23423.4)" fill="#FFFFFF"/>
+<use xlink:href="#path11_fill" transform="translate(-2024.25 23421.4)" fill="#FFFFFF"/>
 </g>
-</g>
-<g id="Group 11.5">
-<g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-2118.64 23335)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<g id="path0 fill">
-<use xlink:href="#path1_fill" transform="translate(-2073.43 23359.8)" fill="url(#paint149_linear)"/>
-</g>
-</g>
-</g>
-<g id="Group 10.10" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2154.45 23381.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2154.45 23381.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2209.78 23388.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2220.82 23367.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2223.01 23360.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2223.01 23360.8)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.27" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2327.45 23381.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2327.45 23381.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2382.77 23388.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2393.82 23367.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2396 23360.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2396 23360.8)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.28" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2396.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2396.45 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2451.77 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2462.82 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2465 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2465 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.11" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path2_fill" transform="translate(-2122.67 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path3_fill" transform="translate(-2122.67 23606.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path4_fill" transform="translate(-2177.99 23613.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path5_fill" transform="translate(-2189.04 23593)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path6_fill" transform="translate(-2191.22 23586)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path7_fill" transform="translate(-2191.22 23586)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 10.12" opacity="0.6">
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path14_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2178.72 23509.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path15_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2178.73 23509.8)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path16_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2144.55 23465.7)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path17_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2122.03 23472.6)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path18_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2115.55 23476)" fill="#FFFFFF"/>
-</g>
-<g id="Vector" opacity="0.6">
-<use xlink:href="#path19_fill" transform="matrix(-0.70711 0.707104 -0.70711 -0.707104 -2115.55 23476)" fill="#FFFFFF"/>
-</g>
-</g>
-<g id="Group 12.3">
-<g id="Vector">
-<g id="path0 fill">
-<use xlink:href="#path20_fill" transform="translate(-2079.93 23595)" fill="url(#paint180_linear)"/>
-</g>
-</g>
-<g id="Vector">
-<use xlink:href="#path21_fill" transform="translate(-2091.61 23571)" fill="#FFFFFF"/>
-</g>
-<g id="Vector">
-<use xlink:href="#path22_fill" transform="translate(-2070.86 23644.4)" fill="#FFFFFF"/>
 </g>
 </g>
 </g>
 </g>
 <defs>
-<linearGradient id="paint1_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<linearGradient id="paint15_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
 <stop offset="0" stop-color="#F7618B"/>
 <stop offset="1" stop-color="#2A7AFF"/>
 </linearGradient>
-<linearGradient id="paint3_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<linearGradient id="paint18_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint20_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint25_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint27_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint32_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint34_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint38_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint41_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint43_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint48_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint50_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint54_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
 <stop offset="0" stop-color="#F7618B"/>
 <stop offset="1" stop-color="#2A7AFF"/>
 </linearGradient>
@@ -671,74 +305,18 @@
 <stop offset="0" stop-color="#F7618B"/>
 <stop offset="1" stop-color="#2A7AFF"/>
 </linearGradient>
-<linearGradient id="paint61_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint65_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint98_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint128_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint131_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint134_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint138_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint145_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint149_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(50.4977 -66.5275 -67.3725 -49.864 26.1511 83.555)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<linearGradient id="paint180_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(33.4351 -44.8088 -44.608 -33.5853 17.3149 56.2774)">
-<stop offset="0" stop-color="#F7618B"/>
-<stop offset="1" stop-color="#2A7AFF"/>
-</linearGradient>
-<path id="path0_fill" d="M 132.64 91.8342L 132.64 0L 4.80934e-05 0L 4.80934e-05 91.8342L 63.7757 91.8342L 63.7757 112.244L 45.9152 112.244L 45.9152 117.35L 86.7251 117.35L 86.7251 112.244L 68.8646 112.244L 68.8646 91.8342L 132.64 91.8342ZM 5.10537 5.09004L 127.535 5.09004L 127.535 86.7277L 5.10537 86.7277L 5.10537 5.09004Z"/>
-<path id="path1_fill" d="M 41.9539 13.9015C 41.579 13.0875 40.9018 12.4514 40.066 12.1282C 39.2228 11.7919 38.2828 11.7919 37.4395 12.1282C 37.2231 12.227 37.0145 12.3422 36.8157 12.473L 19.7104 3.88564C 19.8508 3.21204 19.7762 2.51133 19.497 1.88246C 19.098 1.11597 18.4234 0.529233 17.6091 0.24051C 16.7856 -0.0801699 15.8718 -0.0801699 15.0482 0.24051C 14.6456 0.398168 14.278 0.633837 13.9666 0.933985C 13.6553 1.23413 13.4063 1.59285 13.2339 1.98952C 13.0616 2.3862 12.9693 2.81303 12.9623 3.24549C 12.9553 3.67796 13.0338 4.10754 13.1932 4.50958L 13.3738 4.85439L 3.44219 17.2511C 2.99332 17.2371 2.54637 17.3153 2.12894 17.481C 1.70823 17.6387 1.32316 17.8787 0.99624 18.187C 0.681017 18.4931 0.430436 18.8594 0.259309 19.2641C 0.0881814 19.6688 5.10282e-06 20.1038 5.10282e-06 20.5432C 5.10282e-06 20.9826 0.0881814 21.4176 0.259309 21.8223C 0.430436 22.2271 0.681017 22.5933 0.99624 22.8994C 1.63037 23.5406 2.49139 23.9063 3.393 23.9174L 6.67618 31.7824C 6.05373 32.2903 5.63902 33.0088 5.51061 33.8019C 5.38414 34.588 5.54754 35.3932 5.9703 36.0678C 6.40514 36.7611 7.0754 37.2742 7.85807 37.5128C 8.6415 37.7462 9.4811 37.7057 10.2384 37.3978C 10.6719 37.2252 11.0637 36.9621 11.3875 36.6261L 18.906 38.6621C 18.9844 39.5488 19.409 40.3689 20.0879 40.9444C 20.4287 41.2352 20.8254 41.4531 21.2535 41.5848C 21.6867 41.729 22.1444 41.7848 22.5996 41.749C 23.0457 41.7121 23.4804 41.5894 23.88 41.3878C 24.2886 41.1908 24.6519 40.9112 24.9471 40.5668C 25.2321 40.2344 25.4495 39.8495 25.5872 39.4338C 25.7331 39.018 25.7836 38.5747 25.735 38.1367L 33.9429 33.5228C 34.3087 33.8055 34.7273 34.012 35.1741 34.1303C 35.6294 34.2206 36.0979 34.2206 36.5531 34.1303C 37.0041 34.0647 37.4385 33.9143 37.8335 33.687C 38.2312 33.4522 38.5774 33.1394 38.8513 32.7675C 39.1187 32.4051 39.3087 31.9915 39.4095 31.5525C 39.5162 31.1125 39.5275 30.6548 39.4425 30.2102C 39.3576 29.7655 39.1784 29.3442 38.917 28.9746C 38.6606 28.5947 38.3244 28.2754 37.932 28.0387L 39.5736 18.384C 40.0927 18.3158 40.5881 18.1244 41.0182 17.8258C 41.4456 17.5398 41.7998 17.1573 42.0524 16.7093C 42.3072 16.2623 42.4534 15.7618 42.4792 15.2479C 42.4934 14.741 42.3983 14.237 42.2002 13.7702L 41.9539 13.9015ZM 22.8622 35.2797L 22.5832 27.973L 32.4327 31.2569C 32.4327 31.454 32.4327 31.651 32.5476 31.8316L 24.7008 36.2649C 24.2329 35.7606 23.6185 35.4159 22.9443 35.2797L 22.8622 35.2797ZM 34.3533 27.8909C 33.6822 28.1462 33.1081 28.6056 32.7118 29.2045L 22.4025 25.7236L 22.0907 17.5138C 22.8731 17.1033 23.4628 16.4015 23.7323 15.5599L 35.3219 15.9868C 35.3709 16.207 35.4423 16.4216 35.5352 16.6272C 35.8358 17.3367 36.3763 17.9179 37.062 18.2691L 35.4204 27.6611C 35.0125 27.6798 34.6116 27.7744 34.2384 27.9402L 34.3533 27.8909ZM 6.70894 20.3544L 6.70894 20.1902L 17.9375 16.6272C 18.4911 17.2728 19.2619 17.6933 20.1044 17.8094L 20.3998 24.9518L 6.70894 20.3544ZM 15.0154 6.39782C 15.8844 6.74758 16.855 6.74758 17.724 6.39782C 18.0508 6.25723 18.3551 6.06911 18.6269 5.83956L 34.5996 13.8523L 23.7323 13.4582C 23.7457 13.3987 23.7457 13.337 23.7323 13.2776C 23.3948 12.5545 22.8137 11.9732 22.0907 11.6356C 21.3712 11.2892 20.5572 11.1911 19.776 11.3565C 19.0022 11.5289 18.3119 11.9641 17.8225 12.588C 17.3398 13.1986 17.0896 13.9609 17.1167 14.7389L 5.74046 18.384L 5.55991 18.2034L 15.0154 6.39782ZM 11.8964 33.1452C 11.6179 32.5125 11.1468 31.9838 10.5503 31.6346C 9.94944 31.2678 9.24999 31.0958 8.54761 31.142L 5.37926 23.3592C 5.69698 23.1206 5.97414 22.8322 6.20005 22.5053L 20.4327 27.2998L 20.7609 35.5096C 20.1893 35.7713 19.6967 36.1791 19.3328 36.6918L 12.159 34.7379C 12.2138 34.1771 12.1234 33.6116 11.8964 33.0959L 11.8964 33.1452Z"/>
-<path id="path2_fill" d="M 1.37895 1.00217e-06L -2.40467e-05 1.47775L 7.28864 8.24258L -2.40467e-05 15.0238L 1.37895 16.5016L 10.2435 8.24258L 1.37895 1.00217e-06Z"/>
-<path id="path3_fill" d="M 1.37895 16.4852L -2.40467e-05 15.0074L 7.28864 8.24258L -2.40467e-05 1.47775L 1.37895 1.37798e-06L 10.2435 8.24258L 1.37895 16.4852Z"/>
-<path id="path4_fill" d="M 63.3818 0L -4.40856e-05 0L -4.40856e-05 2.51218L 63.3818 2.51218L 63.3818 0Z"/>
-<path id="path5_fill" d="M 63.3817 0L -1.20234e-05 0L -1.20234e-05 2.51218L 63.3817 2.51218L 63.3817 0Z"/>
-<path id="path6_fill" d="M 8.86458 16.4852L 10.2436 15.0074L 2.9549 8.24258L 10.2436 1.47775L 8.86458 -3.13177e-07L -4.00779e-05 8.24258L 8.86458 16.4852Z"/>
-<path id="path7_fill" d="M 8.86458 -3.13177e-07L 10.2436 1.47775L 2.9549 8.24258L 10.2436 15.0074L 8.86458 16.4852L -4.00779e-05 8.24258L 8.86458 -3.13177e-07Z"/>
-<path id="path8_fill" d="M 1.37894 1.00217e-06L -2.40465e-05 1.47777L 7.28857 8.24265L -2.40465e-05 15.024L 1.37894 16.5017L 10.2434 8.24265L 1.37894 1.00217e-06Z"/>
-<path id="path9_fill" d="M 1.37894 16.4853L -2.40465e-05 15.0075L 7.28857 8.24265L -2.40465e-05 1.47777L 1.37894 1.37799e-06L 10.2434 8.24265L 1.37894 16.4853Z"/>
-<path id="path10_fill" d="M 63.3813 0L -4.40853e-05 0L -4.40853e-05 2.5122L 63.3813 2.5122L 63.3813 0Z"/>
-<path id="path11_fill" d="M 63.3812 0L -1.20233e-05 0L -1.20233e-05 2.5122L 63.3812 2.5122L 63.3812 0Z"/>
-<path id="path12_fill" d="M 8.86451 16.4853L 10.2435 15.0075L 2.95488 8.24265L 10.2435 1.47777L 8.86451 -3.1318e-07L -4.00775e-05 8.24265L 8.86451 16.4853Z"/>
-<path id="path13_fill" d="M 8.86451 -3.1318e-07L 10.2435 1.47777L 2.95488 8.24265L 10.2435 15.0075L 8.86451 16.4853L -4.00775e-05 8.24265L 8.86451 -3.1318e-07Z"/>
-<path id="path14_fill" d="M 1.37895 1.00217e-06L -2.40466e-05 1.47776L 7.28861 8.24262L -2.40466e-05 15.0239L 1.37895 16.5017L 10.2434 8.24262L 1.37895 1.00217e-06Z"/>
-<path id="path15_fill" d="M 1.37895 16.4852L -2.40466e-05 15.0075L 7.28861 8.24262L -2.40466e-05 1.47776L 1.37895 1.37798e-06L 10.2434 8.24262L 1.37895 16.4852Z"/>
-<path id="path16_fill" d="M 63.3815 0L -4.40855e-05 0L -4.40855e-05 2.51219L 63.3815 2.51219L 63.3815 0Z"/>
-<path id="path17_fill" d="M 63.3815 0L -1.20233e-05 0L -1.20233e-05 2.51219L 63.3815 2.51219L 63.3815 0Z"/>
-<path id="path18_fill" d="M 8.86454 16.4852L 10.2435 15.0075L 2.95489 8.24262L 10.2435 1.47776L 8.86454 -3.13178e-07L -4.00777e-05 8.24262L 8.86454 16.4852Z"/>
-<path id="path19_fill" d="M 8.86454 -3.13178e-07L 10.2435 1.47776L 2.95489 8.24262L 10.2435 15.0075L 8.86454 16.4852L -4.00777e-05 8.24262L 8.86454 -3.13178e-07Z"/>
-<path id="path20_fill" d="M 27.7781 9.3632C 27.5299 8.81491 27.0815 8.38651 26.5281 8.16881C 25.9698 7.9423 25.3474 7.9423 24.7891 8.16881C 24.6458 8.23531 24.5077 8.31295 24.3761 8.40105L 13.0505 2.61712C 13.1434 2.16343 13.094 1.69148 12.9091 1.26791C 12.645 0.751647 12.1983 0.356458 11.6592 0.161992C 11.1139 -0.0539974 10.5089 -0.0539974 9.96359 0.161992C 9.69697 0.268181 9.4536 0.426913 9.24745 0.629074C 9.0413 0.831235 8.87643 1.07284 8.76231 1.34002C 8.64818 1.6072 8.58708 1.89468 8.58246 2.18596C 8.57784 2.47724 8.62978 2.76658 8.73537 3.03737L 8.85492 3.26961L 2.27911 11.6193C 1.98191 11.6098 1.68598 11.6625 1.40959 11.7741C 1.13104 11.8803 0.87608 12.042 0.659621 12.2496C 0.450908 12.4558 0.284996 12.7025 0.171691 12.9751C 0.0583858 13.2477 3.37863e-06 13.5406 3.37863e-06 13.8366C 3.37863e-06 14.1326 0.0583858 14.4256 0.171691 14.6982C 0.284996 14.9708 0.450908 15.2174 0.659621 15.4236C 1.07948 15.8554 1.64957 16.1018 2.24654 16.1093L 4.42036 21.4066C 4.00824 21.7487 3.73365 22.2327 3.64863 22.7669C 3.56489 23.2963 3.67308 23.8387 3.953 24.293C 4.2409 24.76 4.68469 25.1055 5.20291 25.2662C 5.72162 25.4235 6.27753 25.3962 6.77894 25.1888C 7.06598 25.0725 7.32537 24.8953 7.5398 24.669L 12.5179 26.0404C 12.5698 26.6376 12.8509 27.1899 13.3004 27.5776C 13.526 27.7734 13.7887 27.9202 14.0722 28.0089C 14.359 28.106 14.6621 28.1436 14.9634 28.1195C 15.2588 28.0946 15.5466 28.012 15.8112 27.8762C 16.0817 27.7435 16.3223 27.5552 16.5177 27.3232C 16.7064 27.0994 16.8504 26.8402 16.9416 26.5602C 17.0381 26.2801 17.0716 25.9815 17.0394 25.6865L 22.474 22.5789C 22.7161 22.7692 22.9933 22.9084 23.2892 22.9881C 23.5906 23.0488 23.9008 23.0488 24.2022 22.9881C 24.5008 22.9438 24.7884 22.8425 25.0499 22.6895C 25.3132 22.5313 25.5424 22.3206 25.7238 22.0701C 25.9009 21.826 26.0267 21.5475 26.0934 21.2518C 26.1641 20.9555 26.1715 20.6472 26.1153 20.3477C 26.059 20.0482 25.9404 19.7644 25.7673 19.5155C 25.5976 19.2596 25.375 19.0445 25.1152 18.8851L 26.2021 12.3823C 26.5458 12.3364 26.8738 12.2075 27.1586 12.0063C 27.4415 11.8137 27.6761 11.5561 27.8433 11.2543C 28.012 10.9533 28.1088 10.6161 28.1259 10.27C 28.1353 9.92862 28.0723 9.58914 27.9412 9.27472L 27.7781 9.3632ZM 15.1373 23.7622L 14.9525 18.8409L 21.474 21.0527C 21.474 21.1854 21.474 21.3181 21.5501 21.4398L 16.3546 24.4257C 16.0449 24.0861 15.638 23.854 15.1916 23.7622L 15.1373 23.7622ZM 22.7457 18.7856C 22.3013 18.9575 21.9212 19.2669 21.6588 19.6703L 14.8329 17.3258L 14.6265 11.7962C 15.1445 11.5197 15.5349 11.047 15.7134 10.4802L 23.387 10.7677C 23.4194 10.916 23.4667 11.0606 23.5282 11.199C 23.7272 11.6769 24.0851 12.0684 24.5391 12.3049L 23.4522 18.6308C 23.1821 18.6434 22.9167 18.7071 22.6696 18.8188L 22.7457 18.7856ZM 4.44206 13.7094L 4.44206 13.5988L 11.8766 11.199C 12.2431 11.6339 12.7535 11.9171 13.3113 11.9953L 13.5069 16.806L 4.44206 13.7094ZM 9.94183 4.30917C 10.5172 4.54475 11.1599 4.54475 11.7353 4.30917C 11.9516 4.21447 12.1531 4.08777 12.3331 3.93316L 22.9088 9.33002L 15.7134 9.0646C 15.7223 9.02455 15.7223 8.983 15.7134 8.94295C 15.4899 8.45591 15.1052 8.06441 14.6265 7.83704C 14.1501 7.6037 13.6111 7.53759 13.0939 7.64903C 12.5815 7.76515 12.1245 8.05824 11.8005 8.47847C 11.4808 8.88975 11.3152 9.4032 11.3331 9.92721L 3.80081 12.3823L 3.68127 12.2607L 9.94183 4.30917ZM 7.87674 22.3245C 7.69231 21.8984 7.3804 21.5423 6.98546 21.3071C 6.58763 21.06 6.12451 20.9442 5.65946 20.9753L 3.56166 15.7333C 3.77203 15.5726 3.95554 15.3784 4.10512 15.1582L 13.5287 18.3875L 13.746 23.917C 13.3676 24.0933 13.0414 24.368 12.8004 24.7133L 8.05061 23.3972C 8.08685 23.0195 8.02699 22.6387 7.87674 22.2913L 7.87674 22.3245Z"/>
-<path id="path21_fill" d="M 46.7361 -3.13177e-08L 4.31734 -3.13177e-08C 3.1723 -3.13177e-08 2.07418 0.454965 1.26451 1.26481C 0.454847 2.07465 -4.40856e-05 3.17303 -4.40856e-05 4.31833L -4.40856e-05 81.8512C 0.00428 82.9951 0.460592 84.091 1.26932 84.8999C 2.07805 85.7088 3.17363 86.1652 4.31734 86.1695L 46.7361 86.1695C 47.8826 86.1651 48.9807 85.7065 49.7899 84.8941C 50.5991 84.0816 51.0534 82.9816 51.0534 81.8347L 51.0534 4.31833C 51.0534 3.17303 50.5985 2.07465 49.7889 1.26481C 48.9792 0.454965 47.8811 -3.13177e-08 46.7361 -3.13177e-08ZM 47.8688 81.8512C 47.8688 82.1516 47.7494 82.4398 47.537 82.6523C 47.3246 82.8647 47.0365 82.9841 46.7361 82.9841L 4.31734 82.9841C 4.16936 82.9841 4.02292 82.9547 3.88641 82.8976C 3.74989 82.8404 3.62607 82.7567 3.5222 82.6513C 3.41832 82.5459 3.33645 82.4208 3.28133 82.2835C 3.22621 82.1461 3.1989 81.9992 3.20107 81.8512L 3.20107 67.0736L 47.8688 67.0736L 47.8688 81.8512ZM 47.8688 63.7897L 3.18464 63.7897L 3.18464 12.8236L 47.8688 12.8236L 47.8688 63.7897ZM 47.8688 9.6054L 3.18464 9.6054L 3.18464 4.31833C 3.18464 4.01785 3.30407 3.72968 3.51649 3.51721C 3.72891 3.30474 4.01693 3.18538 4.31734 3.18538L 46.7361 3.18538C 47.0365 3.18538 47.3246 3.30474 47.537 3.51721C 47.7494 3.72968 47.8688 4.01785 47.8688 4.31833L 47.8688 9.63824L 47.8688 9.6054Z"/>
-<path id="path22_fill" d="M -2.00389e-05 -7.51625e-07L 9.57047 -7.51625e-07L 9.57047 3.18538L -2.00389e-05 3.18538L -2.00389e-05 -7.51625e-07Z"/>
-<path id="path23_fill" d="M 1.37894 1.00217e-06L -2.40465e-05 1.47777L 7.28857 8.24265L -2.40465e-05 15.024L 1.37894 16.5017L 10.2434 8.24265L 1.37894 1.00217e-06Z"/>
-<path id="path24_fill" d="M 1.37894 16.4853L -2.40465e-05 15.0075L 7.28857 8.24265L -2.40465e-05 1.47777L 1.37894 1.37799e-06L 10.2434 8.24265L 1.37894 16.4853Z"/>
-<path id="path25_fill" d="M 63.3813 0L -4.40853e-05 0L -4.40853e-05 2.5122L 63.3813 2.5122L 63.3813 0Z"/>
-<path id="path26_fill" d="M 63.3812 0L -1.20233e-05 0L -1.20233e-05 2.5122L 63.3812 2.5122L 63.3812 0Z"/>
-<path id="path27_fill" d="M 8.86451 16.4853L 10.2435 15.0075L 2.95488 8.24265L 10.2435 1.47777L 8.86451 -3.1318e-07L -4.00775e-05 8.24265L 8.86451 16.4853Z"/>
-<path id="path28_fill" d="M 8.86451 -3.1318e-07L 10.2435 1.47777L 2.95488 8.24265L 10.2435 15.0075L 8.86451 16.4853L -4.00775e-05 8.24265L 8.86451 -3.1318e-07Z"/>
+<path id="path0_fill" d="M 0 0L 1440 0L 1440 410L 0 410L 0 0Z"/>
+<path id="path1_fill" fill-rule="evenodd" d="M 20.8047 8.86523L 22.2825 10.2441L 27.7988 4.30078L 27.7988 65.5645L 30.311 65.5645L 30.311 4.31641L 35.8123 10.2441L 37.29 8.86523L 29.0474 0L 20.8047 8.86523ZM 15.0239 68.5527L 9.50659 74.498L 9.50659 13.2305L 6.99438 13.2305L 6.99438 74.4824L 1.47778 68.5527L 0 69.9316L 8.25903 78.7969L 16.5017 69.9316L 15.0239 68.5527Z"/>
+<path id="path2_fill" fill-rule="evenodd" d="M 20.8047 8.86523L 22.2825 10.2441L 27.7988 4.30078L 27.7988 65.5645L 30.311 65.5645L 30.311 4.31641L 35.8123 10.2441L 37.29 8.86523L 29.0474 0L 20.8047 8.86523ZM 15.0239 68.5508L 9.50659 74.4961L 9.50659 13.2285L 6.99438 13.2285L 6.99438 74.4805L 1.47778 68.5508L 0 69.9297L 8.25903 78.7949L 16.5017 69.9297L 15.0239 68.5508Z"/>
+<path id="path3_fill" fill-rule="evenodd" d="M 20.8049 8.86523L 22.2827 10.2441L 27.7991 4.30078L 27.7991 65.5645L 30.3113 65.5645L 30.3113 4.31641L 35.8125 10.2441L 37.2903 8.86523L 29.0476 0L 20.8049 8.86523ZM 15.0239 68.5508L 9.50684 74.4961L 9.50684 13.2285L 6.99463 13.2285L 6.99463 74.4805L 1.47778 68.5508L 0 69.9297L 8.25903 78.7949L 16.5017 69.9297L 15.0239 68.5508Z"/>
+<path id="path4_fill" fill-rule="evenodd" d="M 6.67773 12.0977L 8.69775 12.0273L 8.39575 3.92383L 51.7166 47.2441L 53.4929 45.4668L 10.1841 2.16016L 18.2646 2.46094L 18.3347 0.439453L 6.23804 0L 6.67773 12.0977ZM 35.217 67.9688L 43.3113 68.2617L 0 24.9492L 1.77637 23.1738L 45.0977 66.4941L 44.7957 58.3906L 46.8157 58.3203L 47.2554 70.418L 35.165 69.9883L 35.217 67.9688Z"/>
+<path id="path5_fill" fill-rule="evenodd" d="M 47.2549 1.77734L 3.94409 45.0879L 12.0269 44.7852L 12.0967 46.8047L 0 47.2441L 0.431152 35.3926L 0.439941 35.1484L 2.45996 35.2188L 2.45239 35.418L 2.15796 43.3203L 45.4785 0L 47.2549 1.77734ZM 58.4014 8.69922L 66.5037 8.39844L 23.1838 51.7188L 24.9602 53.4941L 68.2695 10.1855L 67.9683 18.2676L 69.9883 18.3359L 70.4282 6.24023L 58.3315 6.67969L 58.4014 8.69922Z"/>
+<path id="path6_fill" d="M 132.64 91.8342L 132.64 0L 4.80934e-05 0L 4.80934e-05 91.8342L 63.7757 91.8342L 63.7757 112.244L 45.9152 112.244L 45.9152 117.35L 86.7251 117.35L 86.7251 112.244L 68.8646 112.244L 68.8646 91.8342L 132.64 91.8342ZM 5.10537 5.09004L 127.535 5.09004L 127.535 86.7277L 5.10537 86.7277L 5.10537 5.09004Z"/>
+<path id="path7_fill" d="M 41.9539 13.9015C 41.579 13.0875 40.9018 12.4514 40.066 12.1282C 39.2228 11.7919 38.2828 11.7919 37.4395 12.1282C 37.2231 12.227 37.0145 12.3422 36.8157 12.473L 19.7104 3.88564C 19.8508 3.21204 19.7762 2.51133 19.497 1.88246C 19.098 1.11597 18.4234 0.529233 17.6091 0.24051C 16.7856 -0.0801699 15.8718 -0.0801699 15.0482 0.24051C 14.6456 0.398168 14.278 0.633837 13.9666 0.933985C 13.6553 1.23413 13.4063 1.59285 13.2339 1.98952C 13.0616 2.3862 12.9693 2.81303 12.9623 3.24549C 12.9553 3.67796 13.0338 4.10754 13.1932 4.50958L 13.3738 4.85439L 3.44219 17.2511C 2.99332 17.2371 2.54637 17.3153 2.12894 17.481C 1.70823 17.6387 1.32316 17.8787 0.99624 18.187C 0.681017 18.4931 0.430436 18.8594 0.259309 19.2641C 0.0881814 19.6688 5.10282e-06 20.1038 5.10282e-06 20.5432C 5.10282e-06 20.9826 0.0881814 21.4176 0.259309 21.8223C 0.430436 22.2271 0.681017 22.5933 0.99624 22.8994C 1.63037 23.5406 2.49139 23.9063 3.393 23.9174L 6.67618 31.7824C 6.05373 32.2903 5.63902 33.0088 5.51061 33.8019C 5.38414 34.588 5.54754 35.3932 5.9703 36.0678C 6.40514 36.7611 7.0754 37.2742 7.85807 37.5128C 8.6415 37.7462 9.4811 37.7057 10.2384 37.3978C 10.6719 37.2252 11.0637 36.9621 11.3875 36.6261L 18.906 38.6621C 18.9844 39.5488 19.409 40.3689 20.0879 40.9444C 20.4287 41.2352 20.8254 41.4531 21.2535 41.5848C 21.6867 41.729 22.1444 41.7848 22.5996 41.749C 23.0457 41.7121 23.4804 41.5894 23.88 41.3878C 24.2886 41.1908 24.6519 40.9112 24.9471 40.5668C 25.2321 40.2344 25.4495 39.8495 25.5872 39.4338C 25.7331 39.018 25.7836 38.5747 25.735 38.1367L 33.9429 33.5228C 34.3087 33.8055 34.7273 34.012 35.1741 34.1303C 35.6294 34.2206 36.0979 34.2206 36.5531 34.1303C 37.0041 34.0647 37.4385 33.9143 37.8335 33.687C 38.2312 33.4522 38.5774 33.1394 38.8513 32.7675C 39.1187 32.4051 39.3087 31.9915 39.4095 31.5525C 39.5162 31.1125 39.5275 30.6548 39.4425 30.2102C 39.3576 29.7655 39.1784 29.3442 38.917 28.9746C 38.6606 28.5947 38.3244 28.2754 37.932 28.0387L 39.5736 18.384C 40.0927 18.3158 40.5881 18.1244 41.0182 17.8258C 41.4456 17.5398 41.7998 17.1573 42.0524 16.7093C 42.3072 16.2623 42.4534 15.7618 42.4792 15.2479C 42.4934 14.741 42.3983 14.237 42.2002 13.7702L 41.9539 13.9015ZM 22.8622 35.2797L 22.5832 27.973L 32.4327 31.2569C 32.4327 31.454 32.4327 31.651 32.5476 31.8316L 24.7008 36.2649C 24.2329 35.7606 23.6185 35.4159 22.9443 35.2797L 22.8622 35.2797ZM 34.3533 27.8909C 33.6822 28.1462 33.1081 28.6056 32.7118 29.2045L 22.4025 25.7236L 22.0907 17.5138C 22.8731 17.1033 23.4628 16.4015 23.7323 15.5599L 35.3219 15.9868C 35.3709 16.207 35.4423 16.4216 35.5352 16.6272C 35.8358 17.3367 36.3763 17.9179 37.062 18.2691L 35.4204 27.6611C 35.0125 27.6798 34.6116 27.7744 34.2384 27.9402L 34.3533 27.8909ZM 6.70894 20.3544L 6.70894 20.1902L 17.9375 16.6272C 18.4911 17.2728 19.2619 17.6933 20.1044 17.8094L 20.3998 24.9518L 6.70894 20.3544ZM 15.0154 6.39782C 15.8844 6.74758 16.855 6.74758 17.724 6.39782C 18.0508 6.25723 18.3551 6.06911 18.6269 5.83956L 34.5996 13.8523L 23.7323 13.4582C 23.7457 13.3987 23.7457 13.337 23.7323 13.2776C 23.3948 12.5545 22.8137 11.9732 22.0907 11.6356C 21.3712 11.2892 20.5572 11.1911 19.776 11.3565C 19.0022 11.5289 18.3119 11.9641 17.8225 12.588C 17.3398 13.1986 17.0896 13.9609 17.1167 14.7389L 5.74046 18.384L 5.55991 18.2034L 15.0154 6.39782ZM 11.8964 33.1452C 11.6179 32.5125 11.1468 31.9838 10.5503 31.6346C 9.94944 31.2678 9.24999 31.0958 8.54761 31.142L 5.37926 23.3592C 5.69698 23.1206 5.97414 22.8322 6.20005 22.5053L 20.4327 27.2998L 20.7609 35.5096C 20.1893 35.7713 19.6967 36.1791 19.3328 36.6918L 12.159 34.7379C 12.2138 34.1771 12.1234 33.6116 11.8964 33.0959L 11.8964 33.1452Z"/>
+<path id="path8_fill" fill-rule="evenodd" d="M 8.8645 16.4844L 10.2437 15.0078L 4.29932 9.49023L 65.5652 9.49023L 65.5652 6.97852L 4.31665 6.97852L 10.2437 1.47852L 8.8645 0L 0 8.24219L 8.8645 16.4844ZM 68.5525 22.2656L 69.9314 20.7871L 78.7959 29.0293L 69.9314 37.2891L 68.5525 35.8105L 74.4807 30.2949L 13.231 30.2949L 13.231 27.7832L 74.4983 27.7832L 68.5525 22.2656Z"/>
+<path id="path9_fill" d="M 27.7781 9.3632C 27.5299 8.81491 27.0815 8.38651 26.5281 8.16881C 25.9698 7.9423 25.3474 7.9423 24.7891 8.16881C 24.6458 8.23531 24.5077 8.31295 24.3761 8.40105L 13.0505 2.61712C 13.1434 2.16343 13.094 1.69148 12.9091 1.26791C 12.645 0.751647 12.1983 0.356458 11.6592 0.161992C 11.1139 -0.0539974 10.5089 -0.0539974 9.96359 0.161992C 9.69697 0.268181 9.4536 0.426913 9.24745 0.629074C 9.0413 0.831235 8.87643 1.07284 8.76231 1.34002C 8.64818 1.6072 8.58708 1.89468 8.58246 2.18596C 8.57784 2.47724 8.62978 2.76658 8.73537 3.03737L 8.85492 3.26961L 2.27911 11.6193C 1.98191 11.6098 1.68598 11.6625 1.40959 11.7741C 1.13104 11.8803 0.87608 12.042 0.659621 12.2496C 0.450908 12.4558 0.284996 12.7025 0.171691 12.9751C 0.0583858 13.2477 3.37863e-06 13.5406 3.37863e-06 13.8366C 3.37863e-06 14.1326 0.0583858 14.4256 0.171691 14.6982C 0.284996 14.9708 0.450908 15.2174 0.659621 15.4236C 1.07948 15.8554 1.64957 16.1018 2.24654 16.1093L 4.42036 21.4066C 4.00824 21.7487 3.73365 22.2327 3.64863 22.7669C 3.56489 23.2963 3.67308 23.8387 3.953 24.293C 4.2409 24.76 4.68469 25.1055 5.20291 25.2662C 5.72162 25.4235 6.27753 25.3962 6.77894 25.1888C 7.06598 25.0725 7.32537 24.8953 7.5398 24.669L 12.5179 26.0404C 12.5698 26.6376 12.8509 27.1899 13.3004 27.5776C 13.526 27.7734 13.7887 27.9202 14.0722 28.0089C 14.359 28.106 14.6621 28.1436 14.9634 28.1195C 15.2588 28.0946 15.5466 28.012 15.8112 27.8762C 16.0817 27.7435 16.3223 27.5552 16.5177 27.3232C 16.7064 27.0994 16.8504 26.8402 16.9416 26.5602C 17.0381 26.2801 17.0716 25.9815 17.0394 25.6865L 22.474 22.5789C 22.7161 22.7692 22.9933 22.9084 23.2892 22.9881C 23.5906 23.0488 23.9008 23.0488 24.2022 22.9881C 24.5008 22.9438 24.7884 22.8425 25.0499 22.6895C 25.3132 22.5313 25.5424 22.3206 25.7238 22.0701C 25.9009 21.826 26.0267 21.5475 26.0934 21.2518C 26.1641 20.9555 26.1715 20.6472 26.1153 20.3477C 26.059 20.0482 25.9404 19.7644 25.7673 19.5155C 25.5976 19.2596 25.375 19.0445 25.1152 18.8851L 26.2021 12.3823C 26.5458 12.3364 26.8738 12.2075 27.1586 12.0063C 27.4415 11.8137 27.6761 11.5561 27.8433 11.2543C 28.012 10.9533 28.1088 10.6161 28.1259 10.27C 28.1353 9.92862 28.0723 9.58914 27.9412 9.27472L 27.7781 9.3632ZM 15.1373 23.7622L 14.9525 18.8409L 21.474 21.0527C 21.474 21.1854 21.474 21.3181 21.5501 21.4398L 16.3546 24.4257C 16.0449 24.0861 15.638 23.854 15.1916 23.7622L 15.1373 23.7622ZM 22.7457 18.7856C 22.3013 18.9575 21.9212 19.2669 21.6588 19.6703L 14.8329 17.3258L 14.6265 11.7962C 15.1445 11.5197 15.5349 11.047 15.7134 10.4802L 23.387 10.7677C 23.4194 10.916 23.4667 11.0606 23.5282 11.199C 23.7272 11.6769 24.0851 12.0684 24.5391 12.3049L 23.4522 18.6308C 23.1821 18.6434 22.9167 18.7071 22.6696 18.8188L 22.7457 18.7856ZM 4.44206 13.7094L 4.44206 13.5988L 11.8766 11.199C 12.2431 11.6339 12.7535 11.9171 13.3113 11.9953L 13.5069 16.806L 4.44206 13.7094ZM 9.94183 4.30917C 10.5172 4.54475 11.1599 4.54475 11.7353 4.30917C 11.9516 4.21447 12.1531 4.08777 12.3331 3.93316L 22.9088 9.33002L 15.7134 9.0646C 15.7223 9.02455 15.7223 8.983 15.7134 8.94295C 15.4899 8.45591 15.1052 8.06441 14.6265 7.83704C 14.1501 7.6037 13.6111 7.53759 13.0939 7.64903C 12.5815 7.76515 12.1245 8.05824 11.8005 8.47847C 11.4808 8.88975 11.3152 9.4032 11.3331 9.92721L 3.80081 12.3823L 3.68127 12.2607L 9.94183 4.30917ZM 7.87674 22.3245C 7.69231 21.8984 7.3804 21.5423 6.98546 21.3071C 6.58763 21.06 6.12451 20.9442 5.65946 20.9753L 3.56166 15.7333C 3.77203 15.5726 3.95554 15.3784 4.10512 15.1582L 13.5287 18.3875L 13.746 23.917C 13.3676 24.0933 13.0414 24.368 12.8004 24.7133L 8.05061 23.3972C 8.08685 23.0195 8.02699 22.6387 7.87674 22.2913L 7.87674 22.3245Z"/>
+<path id="path10_fill" d="M 46.7361 -3.13177e-08L 4.31734 -3.13177e-08C 3.1723 -3.13177e-08 2.07418 0.454965 1.26451 1.26481C 0.454847 2.07465 -4.40856e-05 3.17303 -4.40856e-05 4.31833L -4.40856e-05 81.8512C 0.00428 82.9951 0.460592 84.091 1.26932 84.8999C 2.07805 85.7088 3.17363 86.1652 4.31734 86.1695L 46.7361 86.1695C 47.8826 86.1651 48.9807 85.7065 49.7899 84.8941C 50.5991 84.0816 51.0534 82.9816 51.0534 81.8347L 51.0534 4.31833C 51.0534 3.17303 50.5985 2.07465 49.7889 1.26481C 48.9792 0.454965 47.8811 -3.13177e-08 46.7361 -3.13177e-08ZM 47.8688 81.8512C 47.8688 82.1516 47.7494 82.4398 47.537 82.6523C 47.3246 82.8647 47.0365 82.9841 46.7361 82.9841L 4.31734 82.9841C 4.16936 82.9841 4.02292 82.9547 3.88641 82.8976C 3.74989 82.8404 3.62607 82.7567 3.5222 82.6513C 3.41832 82.5459 3.33645 82.4208 3.28133 82.2835C 3.22621 82.1461 3.1989 81.9992 3.20107 81.8512L 3.20107 67.0736L 47.8688 67.0736L 47.8688 81.8512ZM 47.8688 63.7897L 3.18464 63.7897L 3.18464 12.8236L 47.8688 12.8236L 47.8688 63.7897ZM 47.8688 9.6054L 3.18464 9.6054L 3.18464 4.31833C 3.18464 4.01785 3.30407 3.72968 3.51649 3.51721C 3.72891 3.30474 4.01693 3.18538 4.31734 3.18538L 46.7361 3.18538C 47.0365 3.18538 47.3246 3.30474 47.537 3.51721C 47.7494 3.72968 47.8688 4.01785 47.8688 4.31833L 47.8688 9.63824L 47.8688 9.6054Z"/>
+<path id="path11_fill" d="M -2.00389e-05 -7.51625e-07L 9.57047 -7.51625e-07L 9.57047 3.18538L -2.00389e-05 3.18538L -2.00389e-05 -7.51625e-07Z"/>
+<path id="path12_fill" fill-rule="evenodd" d="M 8.8645 16.4844L 10.2437 15.0078L 4.29932 9.49023L 65.5654 9.49023L 65.5654 6.97852L 4.31665 6.97852L 10.2437 1.47852L 8.8645 0L 0 8.24219L 8.8645 16.4844ZM 68.5527 22.2676L 69.9316 20.7891L 78.7961 29.0312L 69.9316 37.291L 68.5527 35.8125L 74.4832 30.2949L 13.2312 30.2949L 13.2312 27.7832L 74.4963 27.7832L 68.5527 22.2676Z"/>
 </defs>
 </svg>
