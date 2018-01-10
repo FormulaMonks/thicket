@@ -114,6 +114,7 @@ class Community extends EventEmitter {
   post = data => db.communityPost(this.communityId, data)
 
   put = data => db.communityPut(this.communityId, data)
+
 }
 
 class EventEmitterCommunities extends EventEmitter {
@@ -186,6 +187,8 @@ class User extends EventEmitter {
     state.user = { ...state.user, ...data }
     await localForage.setItem('user', state.user)
     this.emit('update')
+    // side effect
+    db.communityPutNicknames(state.userCommunities, state.user.nickname)
   }
 
   // user communities & communities

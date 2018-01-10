@@ -45,7 +45,8 @@ const yConfig = (node, id) => ({
   share: {
     publications: 'Array',
     publicationsMetadata: 'Map',
-    metadata: 'Map'
+    metadata: 'Map',
+    nicknames: 'Map',
   }
 })
 
@@ -60,6 +61,13 @@ const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
   new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
   new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
 ])
+
+const mapNicknames = y => y.share.nicknames.keys().reduce((p, c) => {
+  if (y.connector.roomEmitter.peers().includes(c)) {
+    p.push(y.share.nicknames.get(c))
+  }
+  return p
+}, [])
 
 class Database extends EventEmitter {
   constructor() {
@@ -96,9 +104,11 @@ class Database extends EventEmitter {
         })
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+        // nicknames: IPFS node id <-> nickname
+        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, mapNicknames(y)))
         // online peers
-        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, y.connector.roomEmitter.peers()))
-        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, y.connector.roomEmitter.peers()))
+        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, mapNicknames(y)))
+        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, mapNicknames(y)))
 
         resolve(y)
       })
@@ -169,9 +179,10 @@ class Database extends EventEmitter {
     }
   }
 
+
   communityGetOnlinePeers = async communityId => {
     const y = await this._initCommunity(communityId)
-    return y.connector.roomEmitter.peers()
+    return mapNicknames(y)
   }
 
   communityPost = async (communityId, data) => {
@@ -182,6 +193,15 @@ class Database extends EventEmitter {
   communityPut = async (communityId, data) => {
     const y = await this._initCommunity(communityId)
     y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data })
+  }
+
+  communityPutNicknames = async (communities, data) => {
+    for (let communityId of communities) {
+      const y = await this._initCommunity(communityId)
+      const node = await this._initIPFS()
+      const { id } = await node.id()
+      y.share.nicknames.set(id, data)
+    }
   }
 
 }
