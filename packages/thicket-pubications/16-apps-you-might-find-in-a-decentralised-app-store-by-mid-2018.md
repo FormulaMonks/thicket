@@ -4,7 +4,7 @@ For some of us, trying to picture the future is a daily activity; some days this
 
 This past September, my team at Citrusbyte embarked on a research project into decentralised applications. We set our goal to build a decentralised clone of Vine—the GIF sharing app. We started out from scratch, coding small, step-by-step sized features one at a time. We refactored once the new concepts were settling in our minds and came up with new concepts of our own.
 
-You can read more on our mission to evaluate the maturity of IPFS’s network, how we weighed strategies for building decentralised apps and the problems we ran into here: [The state of frontend development with IPFS in 2017](http://bits.citrusbyte.com/the-state-of-frontend-development-with-IPFS-in-2017/).
+You can read more on our mission to evaluate the maturity of IPFS’s network, how we weighed strategies for building decentralised apps and the problems we ran into here: [The state of Frontend development with IPFS in 2017](http://bits.citrusbyte.com/the-state-of-Frontend-development-with-IPFS-in-2017/).
 
 In discussions, we came up with a large number of ideas for decentralised apps that we don't have time to build ourselves, but would love to see other people build. This post lists out 16 such ideas.
 
@@ -33,7 +33,7 @@ By leveraging the independent resources in the swarm of interconnected computers
 
 Interconnected nodes in an IPFS swarm can maintain a shared data structure. This data structure can receive modification events like adding new data, removing data and modifying existing data. In order to be able to normalize the data state between all the nodes we looked into tools that treat the data structure as an _append only log store_. This means that changes can occur independently and be processed serially to reach the current state of the data. Data can receive updates while in offline mode and then be merged once the node reconnects.
 
-CRDT data structures can be used for Backend and Frontend apps. They can even be used to normalize state for a Backend app communicating with a Fronted app. IPFS nodes benefit from this data structures for any type of node, browser or not. It is a data structure to normalize state between webapps or backend apps or nodes (or a mix of all of them) that are accessing and modifying the same data source.
+CRDT data structures can be used for Backend and Frontend apps. They can even be used to normalize state for a Backend app communicating with a Fronted app. IPFS nodes benefit from this data structures for any type of node, browser or not. It is a data structure to normalize state between webapps or Backend apps or nodes (or a mix of all of them) that are accessing and modifying the same data source.
 
 To maintain data consistency between the interconnected nodes in our app, we used [`YJS`](https://github.com/y-js/yjs). It gave us the freedom to collaborate on shared data structures without having to normalize them every time any node updated the data. Changes are automatically broadcasted and there is no need to figure out who did what and in what order to keep the data consistent. It also gave us, out of the box, the ability to work offline and to merge updates into the shared data once the node reconnected to the network.
 
@@ -95,7 +95,7 @@ Your smartphone receives the event with the computed data that includes the acto
 Rather than receiving points and having to compute the new state of the leaderboard every time an event takes place, users can trade ranking spots (similar to trading cryptocurrencies). Imagine this ranking structure in a way that a user “owns” the Nth ranking spot and whenever an event occurs the spot is exchanged. A gaming layer could be implemented easily without having to implement software to maintain the data.
 There is one piece of the puzzle that hasn't been solved before this type of Dapp can surface: a sustainable and efficient distributed consensus process. Without that, it is not possible to differentiate valid transactions for events from ill-intenioned ones.
 
-    With this any developer can implement a decentralised leaderboard layer into their software and their users would be the ones holding the data. There would be no need for backend software. Every node connected to the network could fetch the leaderboard and see the user rankings.
+    With this any developer can implement a decentralised leaderboard layer into their software and their users would be the ones holding the data. There would be no need for Backend software. Every node connected to the network could fetch the leaderboard and see the user rankings.
 By defining events the users will trade spots. E.g. _a race around the world_. The player that wins gets the top most rank out of both players, the other gets the lowermost rank. Every user can access the leaderboard and see the person ranking in the first spot, if they want to become the leader, they'll have to challenge the current user (using the Dapps specific events).
 
 
@@ -117,7 +117,7 @@ Still, maybe smartphones aren't best suited to form mesh networks and share lots
 Developers can definitely benefit from an app store that does not charge a big commission out of their sales, but this Dapp would only help deliver the software, another Dapp or layer would be needed to start accepting payment for the downloads.
 
 
-15. **Decentralise state store for Dapps.** Any type of frontend app that uses a store container similar to React's redux or Vue's vuex can implement their store using decentralised tools and have a swarm of interconnected webapps share the same state. Updates will be broadcasted in a real-time fashion and users with low connectiviy can benefit from offline behaviour. There is no need for a server to hold the source of truth and the last word on the data. With the decentralised state store, apps will share data updates, generate new data, remove data and work in collaboration (as in some of the other ideas we've described above). This Dapp will work as an implementation layer for developers.
+15. **Decentralise state store for Dapps.** Any type of Frontend app that uses a store container similar to React's redux or Vue's vuex can implement their store using decentralised tools and have a swarm of interconnected webapps share the same state. Updates will be broadcasted in a real-time fashion and users with low connectiviy can benefit from offline behaviour. There is no need for a server to hold the source of truth and the last word on the data. With the decentralised state store, apps will share data updates, generate new data, remove data and work in collaboration (as in some of the other ideas we've described above). This Dapp will work as an implementation layer for developers.
 
 
 16. **Enterprise for any of the above.** With private swarms a controlled network can include any option from above (and maybe mix them up), put that in a box and ship it out. Any company can use their existing infrastructure to integrate any and all of the distributed/decentralised ideas from the list.
@@ -125,7 +125,7 @@ Developers can definitely benefit from an app store that does not charge a big c
 
 ## Next steps
 
-There is a big trend going on of [_X but with Blockchain_](https://angel.co/blockchains) and [_simply add Bitcoin to your business name_](https://www.nytimes.com/2017/12/21/technology/bitcoin-blockchain-stock-market.html) type of ideas. Does this mean the world is ready for a decentralised Internet? I don't think so. The hype might mean people are looking and working in the right direction, still I invite you all to dive into the [IPFS paper](https://ipfs.io/ipfs/QmR7GSQM93Cx5eAg6a6yRzNde1FQv7uL6X1o4k7zrJa3LX/ipfs.draft3.pdf) to fully understand all the concepts behind such tools and protocols–we really enjoyed working out the details and grasping the required concepts to make our Dapp work. I am certain as more people read the document and get their hands dirty working with these technologies, the tipping point will be reached and Dapps will go mainstream.
+There is a big trend going on of [_X but with Blockchain_](https://angel.co/blockchains) and [_simply add Bitcoin to your business name_](https://www.nytimes.com/2017/12/21/technology/bitcoin-blockchain-stock-market.html) type of ideas. Does this mean the world is ready for a decentralised Internet? I don't think so. The hype might means that developers want to make the distributed web a reality, but the current Dapp ecosystem still has many gaps. To get your footing, I invite you all to dive into the [IPFS paper](https://ipfs.io/ipfs/QmR7GSQM93Cx5eAg6a6yRzNde1FQv7uL6X1o4k7zrJa3LX/ipfs.draft3.pdf) to fully understand all the concepts behind such tools and protocols–we really enjoyed working out the details and grasping the required concepts to make our Dapp work. I am certain as more people read the document and get their hands dirty working with these technologies, the tipping point will be reached and Dapps will go mainstream.
 
 
 ### Gaps in the current Dapp stack
@@ -149,10 +149,10 @@ The _distributed video analysis_ app from above needs live peer to peer video in
 
 ![Fork](http://forked.yannick.io/images/logo.png)
 
-We also identified categories of Dapps that can be worked upon and that could start out from a fork of the work we did. These categories include:.
+We also identified categories of Dapps that can be worked upon and that could start out from a fork of the work we did. These categories include:
 
 - Apps that use collaborative editing on shared data/documents.
 - Apps that create & post or find & share content with other users.
 - Apps that share disk space usage and that can benefit from P2P redistribution of content.
 
-Let us know what other distributed Dapp ideas come to mind. We came up with this list after working with the technology and after we understood its inner ticks. We know these protocols & tools will help with problems that haven't yet been discovered.
+Let us know what other distributed app ideas come to mind.
