@@ -96,6 +96,9 @@ class Database extends EventEmitter {
         })
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+        // online peers
+        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, y.connector.roomEmitter.peers()))
+        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, y.connector.roomEmitter.peers()))
 
         resolve(y)
       })
@@ -164,6 +167,11 @@ class Database extends EventEmitter {
       title: '',
       ...y.share.metadata.get(communityId)
     }
+  }
+
+  communityGetOnlinePeers = async communityId => {
+    const y = await this._initCommunity(communityId)
+    return y.connector.roomEmitter.peers()
   }
 
   communityPost = async (communityId, data) => {

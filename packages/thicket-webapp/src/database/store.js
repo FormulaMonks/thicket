@@ -79,11 +79,16 @@ class Community extends EventEmitter {
     super()
     this.communityId = communityId
     this.data = null
+    this.onlinePeers = []
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
       this.data = data
       this.emit('update')
+    })
+    db.on(`peer-${communityId}`, peers => {
+      this.onlinePeers = peers
+      this.emit('peer')
     })
 
     // publications
@@ -97,6 +102,13 @@ class Community extends EventEmitter {
       this.data = await db.communityGet(this.communityId)
     }
     return this.data
+  }
+
+  getOnlinePeers = async () => {
+    if (!this.onlinePeers || true ) {
+      this.onlinePeers = await db.communityGetOnlinePeers(this.communityId)
+    }
+    return this.onlinePeers
   }
 
   post = data => db.communityPost(this.communityId, data)
