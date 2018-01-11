@@ -62,8 +62,8 @@ const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
   new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
 ])
 
-const mapNicknames = y => y.share.nicknames.keys().reduce((p, c) => {
-  if (y.connector.roomEmitter.peers().includes(c)) {
+const mapIPFSIdstoNicknames = y => y.connector.roomEmitter.peers().reduce((p, c) => {
+  if (y.share.nicknames.get(c)) {
     p.push(y.share.nicknames.get(c))
   }
   return p
@@ -105,10 +105,10 @@ class Database extends EventEmitter {
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
         // nicknames: IPFS node id <-> nickname
-        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, mapNicknames(y)))
+        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
         // online peers
-        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, mapNicknames(y)))
-        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, mapNicknames(y)))
+        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
+        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
 
         resolve(y)
       })
@@ -182,7 +182,7 @@ class Database extends EventEmitter {
 
   communityGetOnlinePeers = async communityId => {
     const y = await this._initCommunity(communityId)
-    return mapNicknames(y)
+    return mapIPFSIdstoNicknames(y)
   }
 
   communityPost = async (communityId, data) => {
