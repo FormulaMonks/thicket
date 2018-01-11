@@ -17,7 +17,7 @@ const downloadFile = gif => {
   writer.close()
 }
 
-export default ({ gif, header, editable, onChange, communityId }) => {
+export default ({ gif, header, editable, onChange, communityId, children }) => {
   if (!gif) {
     return <div className="gif__loading"><Spinner /></div>
   }
@@ -51,6 +51,7 @@ export default ({ gif, header, editable, onChange, communityId }) => {
         <a href={`https://www.facebook.com/sharer.php?u=${window.location.href}`} target="_blank"><Icon src={facebookSvg} /></a>
         <a href={`https://twitter.com/intent/tweet?url=${window.location.href}`} target="_blank"><Icon src={twitterSvg} /></a>
       </div>
+      {children}
     </div>
   </div>
 }
