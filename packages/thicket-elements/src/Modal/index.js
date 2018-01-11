@@ -36,13 +36,10 @@ const Wrap = styled.div`
   overflow: hidden;
 
   /* desktop
-   * white background container
+   * centered container
    * */
   @media (min-width: 600px){
     width: auto;
-    max-width: 60%;
-    max-height: 50%;
-    padding: 1em;
   }
 `
 
