@@ -175,6 +175,7 @@ class Database extends EventEmitter {
     return {
       id: communityId,
       title: '',
+      size: 0,
       ...y.share.metadata.get(communityId)
     }
   }

@@ -97,6 +97,15 @@ class Community extends EventEmitter {
 
   delete = () => db.communityDelete(this.communityId)
 
+  deletePublication = async id => {
+    // side effect
+    // when a GIF gets deleted we need to update the Community size
+    const { src } = await this.publications.get(id)
+    this.put({ ...this.data, size: this.data.size - src.length})
+    // delete
+    return this.publications.delete(id)
+  }
+
   get = async () => {
     if (!this.data) {
       this.data = await db.communityGet(this.communityId)
@@ -112,6 +121,14 @@ class Community extends EventEmitter {
   }
 
   post = data => db.communityPost(this.communityId, data)
+
+  postPublication = data => {
+    // side effect
+    // when a new gif is posted we calculate its size and add it to the Community size
+    this.put({ ...this.data, size: this.data.size + data.src.length })
+    // post
+    return this.publications.post(data)
+  }
 
   put = data => db.communityPut(this.communityId, data)
 
@@ -188,6 +205,7 @@ class User extends EventEmitter {
     await localForage.setItem('user', state.user)
     this.emit('update')
     // side effect
+    // when a user updates their nickname we broadcast this update to all the communities the user belongs to
     db.communityPutNicknames(state.userCommunities, state.user.nickname)
   }
 
