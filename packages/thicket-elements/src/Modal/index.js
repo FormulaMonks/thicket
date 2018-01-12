@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { glow } from '../sharedStyles'
 
@@ -43,10 +43,26 @@ const Wrap = styled.div`
   }
 `
 
-const Modal = ({ children, ...props }) => <Background>
-  <Wrap {...props}>
-    {children}
-  </Wrap>
-</Background>
+class Modal extends Component {
+
+  componentDidMount() {
+    if (document.documentElement.clientWidth > 600) {
+      document.querySelector('body').style.overflow = 'hidden'
+    }
+  }
+
+  componentWillUnmount() {
+    document.querySelector('body').style.overflow = 'auto'
+  }
+
+  render() {
+    const { children, ...props } = this.props
+    return <Background>
+      <Wrap {...props}>
+        {children}
+      </Wrap>
+    </Background>
+  }
+}
 
 export default Modal
