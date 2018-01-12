@@ -1,0 +1,18 @@
+<svg width="23" height="23" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>angle-right-circle</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-24849 -25865)">
+<g id="angle-right-circle">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(24849 25865)" fill="#CFD3D6"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path1_fill" transform="translate(24858 25871.3)" fill="#CFD3D6"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M -5.26283e-08 11.5C -5.26283e-08 17.8514 5.14771 23 11.5 23C 17.8523 23 23 17.8523 23 11.5C 23 5.14771 17.8523 -2.46695e-08 11.5 -2.46695e-08C 5.14771 -2.46695e-08 -5.26283e-08 5.14771 -5.26283e-08 11.5ZM 22.0791 11.5C 22.0791 17.3332 17.3332 22.08 11.4991 22.08C 5.66507 22.08 0.919172 17.3332 0.919172 11.5C 0.919172 5.66679 5.66593 0.920034 11.4991 0.920034C 17.3323 0.920034 22.0791 5.66679 22.0791 11.5Z"/>
+<path id="path1_fill" d="M 5.20376 5.8539L 5.8539 5.20376L 0.650146 1.31571e-07L -3.48663e-07 0.650146L 4.55361 5.20376L 0.0215567 9.73581L 0.671703 10.386L 3.2697 7.78796L 5.20376 5.8539Z"/>
+</defs>
+</svg>
