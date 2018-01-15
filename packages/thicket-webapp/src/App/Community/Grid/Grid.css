@@ -67,6 +67,17 @@
   border-radius: 4px;
 }
 
+.communityGrid__nickname{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.communityGrid__createdAt{
+  min-width: 40%;
+  text-align: right;
+}
+
 /* desktop */
 @media (min-width: 600px){
   .communityGrid{

@@ -14,8 +14,8 @@ const Grid = ({ community, list }) => <ul className="communityGrid">
         <div className="communityGrid__meta">
           <h3 className="communityGrid__caption">{caption}</h3>
           <div className="communityGrid__metadata">
-            <div>{nickname}</div>
-            <div>{prettydate.format(new Date(createdAt))}</div>
+            <div className="communityGrid__nickname">{nickname}</div>
+            <div className="communityGrid__createdAt">{prettydate.format(new Date(createdAt))}</div>
           </div>
         </div>
       </Link>
