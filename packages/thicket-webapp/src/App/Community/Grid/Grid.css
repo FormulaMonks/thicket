@@ -6,6 +6,7 @@
   padding: 0;
   width: 100%;
   display: grid;
+  grid-template-columns: repeat(auto-fill, 18em);
   justify-content: center;
   grid-gap: 1em;
 }
@@ -38,15 +39,20 @@
 .communityGrid__caption{
   color: #46569F;
   padding-left: 0.5em;
+  height: 2.5em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
 }
 
-.communityGrid__caption:after{
+.communityGrid__caption::after{
   content: '';
   display: block;
   height: 1px;
   background: #DADADA;
-  position: relative;
-  top: 0.5em;
+  position: absolute;
+  top: 2em;
   left: -0.5em;
   width: calc(100% + 0.5em);
 }
@@ -64,7 +70,6 @@
   .communityGrid{
     grid-column: 1 / 10;
     grid-row: 3;
-    grid-template-columns: repeat(auto-fill, 16em);
     justify-content: start;
   }
 }
