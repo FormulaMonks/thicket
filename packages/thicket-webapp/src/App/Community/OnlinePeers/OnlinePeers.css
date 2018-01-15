@@ -89,3 +89,40 @@
   justify-content: center;
   margin-right: 0.5em;
 }
+
+
+/* desktop */
+@media (min-width: 600px){
+  .onlinePeers{
+    grid-column: 10 / -1;
+    grid-row: 1 / 4;
+    margin: 0 0.5em;
+    align-self: flex-start;
+  }
+
+  .onlinePeers-wrap{
+    display: flex;
+    border: none;
+    background: inherit;
+    color: #FFF;
+    position: initial;
+    top: initial;
+  }
+
+  .onlinePeers-count{
+    display: none;
+  }
+
+  .onlinePeers-wrap::before{
+    display: none;
+  }
+
+  .onlinePeers-title{
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .onlinePeers-list{
+    padding: 0;
+  }
+}

@@ -143,7 +143,6 @@
   /* reset */
   .community__back,
   .community__form,
-  .community__onlinePeers,
   .community__leave,
   .community__size,
   .community__new,
@@ -186,10 +185,5 @@
   .community__spinner{
     grid-column: 1 / 10;
     max-width: 60%;
-  }
-
-  .community__onlinePeers{
-    grid-column: 10 / -1;
-    grid-row: 1;
   }
 }
