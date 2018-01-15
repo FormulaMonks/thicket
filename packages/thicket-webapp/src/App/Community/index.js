@@ -10,6 +10,7 @@ import store from '../../database/store'
 import queryString from 'query-string'
 import { getCommunityInviteLink } from '../../utils/inviteLinks'
 import back from '../../images/arrow-left.svg'
+import randomColor from 'randomcolor'
 import './Community.css'
 
 const { linearGradient } = Styles
@@ -69,6 +70,7 @@ class Community extends Component {
     title: '',
     onlinePeers: [],
     size: 0,
+    colors: ['#677897'],
   }
 
   async componentDidMount() {
@@ -107,9 +109,18 @@ class Community extends Component {
   }
 
   render() {
-    const { list, mode, title, loading, onlinePeers, size } = this.state
+    const { list, mode, title, loading, onlinePeers, size, colors } = this.state
     const { nickname, match } = this.props
     const { c } = match.params
+    const innerCount = new Map()
+    const onlinePeersNicknameCount = onlinePeers.reduce((p, c) => {
+      if (!p.has(c)) {
+        p.set(c, 0)
+        innerCount.set(c, 0)
+      }
+      p.set(c, p.get(c) + 1)
+      return p
+    }, new Map())
 
     if (mode === UNINVITED) {
       return <div>404</div>
@@ -121,7 +132,29 @@ class Community extends Component {
           <img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /> 
         </Link>
         <Title title={title} onSubmit={this.onSaveTitle} />
-        <div className="community__onlinePeers community__btn community__onlinePeers--aligned-left">{onlinePeers.length + 1} <img src={usersSvg} alt="Online Peers" /></div>
+        <div className="community__onlinePeers community__btn community__onlinePeers--aligned-left">
+          <div className="community__onlinePeers-count">{onlinePeers.length + 1} <img src={usersSvg} alt="Online Peers" />
+          </div>
+          <div className="community__onlinePeers-wrap">
+            <h4 className="community__onlinePeers-title">Browsers Online</h4>
+            <ul className="community__onlinePeers-list">
+              <li key="peer-you" className="community__onlinePeers-item" >
+                <span className="community__onlinePeers-initial" style={{ background: colors[0]}}>
+                  {nickname.substr(0, 1)}
+                </span> {nickname} (you)
+              </li>
+              {onlinePeers.map((peer, index) => {
+                const count = onlinePeersNicknameCount.get(peer)
+                innerCount.set(peer, innerCount.get(peer) + 1)
+                return <li key={`online-peer-${peer}-${index}`} className="community__onlinePeers-item">
+                  <span className="community__onlinePeers-initial" style={{ background: colors[index + 1]}}>
+                    {peer.substr(0, 1)}
+                  </span> {peer} {count > 1 ? `(${innerCount.get(peer)})` : ''}
+                </li>
+              })}
+            </ul>
+          </div>
+        </div>
         <button className="community__leave community__btn" onClick={() => this.setState({ mode: LEAVE })}>
           <img src={leaveSvg} alt="Leave community" /><span className="community__leave-label">Leave</span>
         </button>
@@ -167,9 +200,15 @@ class Community extends Component {
   }
 
   fetchOnlinePeers = async () => {
-    const community = await communities.get(this.props.match.params.c)
+    const { c } = this.props.match.params
+    const community = await communities.get(c)
     const onlinePeers = await community.getOnlinePeers()
-    this.setState({ onlinePeers })
+    const colors = [...randomColor({
+      count: onlinePeers.length + 1,
+      luminosity: 'bright',
+      seed: c,
+    })]
+    this.setState({ onlinePeers, colors })
   }
 
   onSave = async data => {
