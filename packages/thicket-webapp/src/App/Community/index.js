@@ -4,7 +4,7 @@ import { Styles, Input, Modal, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
-import usersSvg from './users.svg'
+import OnlinePeers from './OnlinePeers'
 import leaveSvg from './leave.svg'
 import store from '../../database/store'
 import queryString from 'query-string'
@@ -19,7 +19,6 @@ const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
 const CAN_JOIN = 'user can join the community'
 const LEAVE = 'user is displayed the confirm box to leave the community'
-
 const isItMobile = document.documentElement.clientWidth < 600
 
 const formatBytes = a => {
@@ -112,15 +111,6 @@ class Community extends Component {
     const { list, mode, title, loading, onlinePeers, size, colors } = this.state
     const { nickname, match } = this.props
     const { c } = match.params
-    const innerCount = new Map()
-    const onlinePeersNicknameCount = onlinePeers.reduce((p, c) => {
-      if (!p.has(c)) {
-        p.set(c, 0)
-        innerCount.set(c, 0)
-      }
-      p.set(c, p.get(c) + 1)
-      return p
-    }, new Map())
 
     if (mode === UNINVITED) {
       return <div>404</div>
@@ -132,29 +122,7 @@ class Community extends Component {
           <img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /> 
         </Link>
         <Title title={title} onSubmit={this.onSaveTitle} />
-        <div className="community__onlinePeers community__btn community__onlinePeers--aligned-left">
-          <div className="community__onlinePeers-count">{onlinePeers.length + 1} <img src={usersSvg} alt="Online Peers" />
-          </div>
-          <div className="community__onlinePeers-wrap">
-            <h4 className="community__onlinePeers-title">Browsers Online</h4>
-            <ul className="community__onlinePeers-list">
-              <li key="peer-you" className="community__onlinePeers-item" >
-                <span className="community__onlinePeers-initial" style={{ background: colors[0]}}>
-                  {nickname.substr(0, 1)}
-                </span> {nickname} (you)
-              </li>
-              {onlinePeers.map((peer, index) => {
-                const count = onlinePeersNicknameCount.get(peer)
-                innerCount.set(peer, innerCount.get(peer) + 1)
-                return <li key={`online-peer-${peer}-${index}`} className="community__onlinePeers-item">
-                  <span className="community__onlinePeers-initial" style={{ background: colors[index + 1]}}>
-                    {peer.substr(0, 1)}
-                  </span> {peer} {count > 1 ? `(${innerCount.get(peer)})` : ''}
-                </li>
-              })}
-            </ul>
-          </div>
-        </div>
+        <OnlinePeers onlinePeers={onlinePeers} colors={colors} />
         <button className="community__leave community__btn" onClick={() => this.setState({ mode: LEAVE })}>
           <img src={leaveSvg} alt="Leave community" /><span className="community__leave-label">Leave</span>
         </button>

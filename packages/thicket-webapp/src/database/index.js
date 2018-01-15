@@ -62,12 +62,15 @@ const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
   new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
 ])
 
-const mapIPFSIdstoNicknames = y => y.connector.roomEmitter.peers().reduce((p, c) => {
-  if (y.share.nicknames.get(c)) {
-    p.push(y.share.nicknames.get(c))
-  }
-  return p
-}, [])
+const mapIPFSIdstoNicknames = async(node, y) => {
+  const { id } = await node.id()
+  return y.connector.roomEmitter.peers().reduce((p, c) => {
+    if (y.share.nicknames.get(c)) {
+      p.push(y.share.nicknames.get(c))
+    }
+    return p
+  }, [y.share.nicknames.get(id)])
+}
 
 class Database extends EventEmitter {
   constructor() {
@@ -105,10 +108,10 @@ class Database extends EventEmitter {
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
         // nicknames: IPFS node id <-> nickname
-        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
+        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(node, y)))
         // online peers
-        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
-        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(y)))
+        y.connector.roomEmitter.on('peer joined', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(node, y)))
+        y.connector.roomEmitter.on('peer left', () => this.emit(`peer-${communityId}`, mapIPFSIdstoNicknames(node, y)))
 
         resolve(y)
       })
@@ -183,7 +186,7 @@ class Database extends EventEmitter {
 
   communityGetOnlinePeers = async communityId => {
     const y = await this._initCommunity(communityId)
-    return mapIPFSIdstoNicknames(y)
+    return mapIPFSIdstoNicknames(await this._initIPFS(), y)
   }
 
   communityPost = async (communityId, data) => {
