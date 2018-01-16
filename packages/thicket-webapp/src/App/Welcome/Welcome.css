@@ -24,6 +24,11 @@
   background-color: transparent;
 }
 
+.Welcome-container {
+  max-width: 50em;
+  margin: 0 auto;
+}
+
 .Welcome-bgGifs {
   position: absolute;
   top: 0;
@@ -100,6 +105,7 @@
 
 .Welcome-howItWorks {
   padding-top: 1rem;
+  text-align: center;
 }
 
 .Welcome-slide {
@@ -123,4 +129,59 @@
 
 .Welcome-bottom {
   padding: 2rem;
+  max-width: 50em;
+  margin: 0 auto;
+}
+
+@media(min-width: 700px) {
+  .Welcome {
+    text-align: left;
+  }
+  .Welcome-lead {
+    margin-right: 50%;
+    width: 50%;
+  }
+
+  .Welcome-bigDeal {
+    border-top: none;
+    margin-top: 0;
+    margin-left: 50%;
+    padding-top: 0;
+    width: 50%;
+  }
+  .Welcome-keyPoints li {
+    background-repeat: no-repeat;
+    background-position: 0 0.45em;
+    background-size: 0.6em;
+    padding-left: 1.4em;
+  }
+  .Welcome-decentralized {
+    background-image: url(./keypoints-dots/red.svg);
+  }
+  .Welcome-communityHosted {
+    background-image: url(./keypoints-dots/purple.svg);
+  }
+  .Welcome-noAds {
+    background-image: url(./keypoints-dots/blue.svg);
+  }
+
+  .Welcome-whyGifs {
+    padding: 2.5rem;
+  }
+  .Welcome-whyGifs > .Welcome-container {
+    display: flex;
+  }
+  .Welcome-heartGif {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 2em;
+  }
+  .Welcome-heartGif img {
+    height: 80%;
+  }
+  .Welcome-whyGifsText {
+    flex: 2;
+  }
 }

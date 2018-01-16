@@ -34,53 +34,61 @@ export default class Welcome extends React.Component {
             <div><img alt="" src={anne} /></div>
           </div>
           <header className="Welcome-header"><Logo /></header>
-          <h1 className="Welcome-lead">
-            Create and share GIFs with your friends in a peer to peer, private
-            network.
-          </h1>
-          <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
-          <div className="Welcome-bigDeal">
-            <h2>What's the big deal?</h2>
-            <ol className="Welcome-keyPoints">
-              <li className="Welcome-decentralized">
-                <p><strong>Decentralized</strong></p>
-                <p>
-                  Thicket uses IPFS to transfer data directly between you and
-                  your peers. Haven’t heard of IPFS? Don’t worry. Just know
-                  that no company sits between you and your friends.
-                </p>
-              </li>
-              <li className="Welcome-communityHosted">
-                <p><strong>Community-hosted</strong></p>
-                <p>
-                  All the GIFs you create are stored right on your device and
-                  the devices of your friends. When you are part of a Thicket
-                  Community, you are helping back up and preserve that
-                  Community's GIFs. You always own your own data; it's never
-                  stored on any centralized server.
-                </p>
-              </li>
-              <li className="Welcome-noAds">
-                <p><strong>You are not the product</strong></p>
-                <p>
-                  No ads or tracking, ever. You don’t even have to trust us on
-                  it—since this is open source and peer to peer, there isn’t
-                  someone who can add this stuff in later.
-                </p>
-              </li>
-            </ol>
+          <div className="Welcome-container">
+            <div className="Welcome-lead">
+              <h1>
+                Create and share GIFs with your friends in a peer to peer, private
+                network.
+              </h1>
+              <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+            </div>
+            <div className="Welcome-bigDeal">
+              <h2>What's the big deal?</h2>
+              <ol className="Welcome-keyPoints">
+                <li className="Welcome-decentralized">
+                  <strong>Decentralized</strong>
+                  <p>
+                    Thicket uses IPFS to transfer data directly between you and
+                    your peers. Haven’t heard of IPFS? Don’t worry. Just know
+                    that no company sits between you and your friends.
+                  </p>
+                </li>
+                <li className="Welcome-communityHosted">
+                  <strong>Community-hosted</strong>
+                  <p>
+                    All the GIFs you create are stored right on your device and
+                    the devices of your friends. When you are part of a Thicket
+                    Community, you are helping back up and preserve that
+                    Community's GIFs. You always own your own data; it's never
+                    stored on any centralized server.
+                  </p>
+                </li>
+                <li className="Welcome-noAds">
+                  <strong>You are not the product</strong>
+                  <p>
+                    No ads or tracking, ever. You don’t even have to trust us on
+                    it—since this is open source and peer to peer, there isn’t
+                    someone who can add this stuff in later.
+                  </p>
+                </li>
+              </ol>
+            </div>
           </div>
         </div>
         <div className="Welcome-whyGifs">
-          <div className="Welcome-heartGif">
-            <img alt="" src={heart} />
+          <div className="Welcome-container">
+            <div className="Welcome-heartGif">
+              <img alt="" src={heart} />
+            </div>
+            <div className="Welcome-whyGifsText">
+              <h2>Why GIFs? Because they're fun.</h2>
+              <p>
+                Could this be implemented for any other type of media? Absolutely.
+                We chose GIFs because they’re fun. But think of any other type of
+                content, and we could build the same sort of app for that, too.
+              </p>
+            </div>
           </div>
-          <h2>Why GIFs? Because they're fun.</h2>
-          <p>
-            Could this be implemented for any other type of media? Absolutely.
-            We chose GIFs because they’re fun. But think of any other type of
-            content, and we could build the same sort of app for that, too.
-          </p>
         </div>
         <div className="Welcome-howItWorks">
           <h2>How it works</h2>
