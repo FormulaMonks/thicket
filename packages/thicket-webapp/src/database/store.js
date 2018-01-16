@@ -163,6 +163,10 @@ class EventEmitterCommunities extends EventEmitter {
       state.userCommunities.add(id)
       state.communities.set(id, new Community(id))
       localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      // side effect
+      // when a user joins a community we set the nickname information into the shared data
+      db.communityPutNicknames([id], state.user.nickname)
+      //
       this.emit('update', Array.from(state.userCommunities))
       return state.communities.get(id)
     }
