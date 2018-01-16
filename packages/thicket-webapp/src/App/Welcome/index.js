@@ -1,60 +1,151 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
-import uuid from 'uuid'
+
 import store from '../../database/store'
-import CreateGif from '../../components/CreateGif'
-import QuickExplanation from '../../components/QuickExplanation'
-import CameraAccess from '../../components/CameraAccess'
-import Workflow from '../../components/Workflow'
+import Logo from '../Logo'
+
+import heart from './heart.svg'
+import singleNode from './singleNode.svg'
+import twoNodes from './twoNodes.svg'
+import threeNodes from './threeNodes.svg'
+import manyNodes from './manyNodes.svg'
+import Carousel from './Carousel'
+import harper from './harper.gif'
+import anne from './anne.gif'
 import './Welcome.css'
 
 export const COMPLETED = 'COMPLETED'
-const { user, communities } = store
-const NEW_COMMUNITY = 'Amazing GIFs'
-const NEW_COMMUNITY_ID = uuid()
+const { user } = store
 
-const Loading = ({ onContinue, onboarding }) => {
-  onContinue({ step: onboarding })
-  return null
+export default class Welcome extends React.Component {
+  async componentDidMount() {
+    const onboarding = await user.get('onboarding')
+    if (onboarding === COMPLETED) {
+      this.props.history.replace('/communities')
+    }
+  }
+
+  render() {
+    return (
+      <main className="Welcome">
+        <div className="Welcome-top">
+          <div className="Welcome-bgGifs">
+            <div><img alt="" src={harper} /></div>
+            <div><img alt="" src={anne} /></div>
+          </div>
+          <header className="Welcome-header"><Logo /></header>
+          <div className="Welcome-container">
+            <div className="Welcome-lead">
+              <h1>
+                Create and share GIFs with your friends in a peer to peer, private
+                network.
+              </h1>
+              <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+            </div>
+            <div className="Welcome-bigDeal">
+              <h2>What's the big deal?</h2>
+              <ol className="Welcome-keyPoints">
+                <li className="Welcome-decentralized">
+                  <strong>Decentralized</strong>
+                  <p>
+                    Thicket uses IPFS to transfer data directly between you and
+                    your peers. Haven’t heard of IPFS? Don’t worry. Just know
+                    that no company sits between you and your friends.
+                  </p>
+                </li>
+                <li className="Welcome-communityHosted">
+                  <strong>Community-hosted</strong>
+                  <p>
+                    All the GIFs you create are stored right on your device and
+                    the devices of your friends. When you are part of a Thicket
+                    Community, you are helping back up and preserve that
+                    Community's GIFs. You always own your own data; it's never
+                    stored on any centralized server.
+                  </p>
+                </li>
+                <li className="Welcome-noAds">
+                  <strong>You are not the product</strong>
+                  <p>
+                    No ads or tracking, ever. You don’t even have to trust us on
+                    it—since this is open source and peer to peer, there isn’t
+                    someone who can add this stuff in later.
+                  </p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div className="Welcome-whyGifs">
+          <div className="Welcome-container">
+            <div className="Welcome-heartGif">
+              <img alt="" src={heart} />
+            </div>
+            <div className="Welcome-whyGifsText">
+              <h2>Why GIFs? Because they're fun.</h2>
+              <p>
+                Could this be implemented for any other type of media? Absolutely.
+                We chose GIFs because they’re fun. But think of any other type of
+                content, and we could build the same sort of app for that, too.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="Welcome-howItWorks">
+          <h2>How it works</h2>
+          <Carousel>
+            <div className="Welcome-slide">
+              <p>
+                When you start your community and create a GIF, it is only
+                stored on your device.
+              </p>
+              <img
+                alt=""
+                src={singleNode}
+                style={{objectFit: 'scale-down'}}
+              />
+            </div>
+            <div className="Welcome-slide">
+              <p>
+                When you invite a peer to a Community, your machine talks
+                directly to theirs. All GIFs are then stored on each of your
+                devices. Thicket must be open to sync devices.
+              </p>
+              <img
+                alt=""
+                src={twoNodes}
+                style={{padding: '0 1rem', objectFit: 'scale-down'}}
+              />
+            </div>
+            <div className="Welcome-slide">
+              <p>
+                When a third peer is invited, they will pull data directly from
+                you and/or peer #2. If you or peer #2 is offline, peer #3 will
+                get the data from the other.
+              </p>
+              <img
+                alt=""
+                src={threeNodes}
+                style={{padding: '0 1rem'}}
+              />
+            </div>
+            <div className="Welcome-slide">
+              <p>
+                The more people in a Community, the more secure the data, and
+                the easier it becomes for new peers to get all of it.
+              </p>
+              <img
+                alt=""
+                src={manyNodes}
+                style={{padding: '1.6em 0', objectFit: 'cover'}}
+              />
+            </div>
+          </Carousel>
+        </div>
+        <div className="Welcome-bottom">
+          <h2>Start creating and sharing now.</h2>
+          <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+        </div>
+      </main>
+    )
+  }
 }
-
-const SplashPage = props => <div className="welcome__arrived">
-  <h1>Connecting your world to others using the power of GIFs.</h1>
-  <Button className="welcome__start" onClick={props.onContinue}>Create a GIF!</Button>
-</div>
-
-const CreateFirstGif = ({ nickname, history }) => <div className="welcome__create">
-  <CreateGif
-    nickname={nickname}
-    onSave={async data => {
-      // no need to call onContinue here since this is setting the onboarding step to completed
-      user.put({ onboarding: COMPLETED, nickname: data.nickname })
-      const community = await communities.post(NEW_COMMUNITY_ID)
-      community.put({ title: NEW_COMMUNITY, createdBy: data.nickname })
-      community.publications.post(data)
-      history.push(`/c/${NEW_COMMUNITY_ID}/first-gif`)
-    }}
-  />
-</div>
-
-const Completed = ({ history }) => {
-  history.replace('/communities')
-  return null
-}
-
-const defaultOnboardingWorkflow = [
-  { step: 'LOADING', Component: Loading },
-  { step: 'SPLASH_PAGE', Component: SplashPage },
-  { step: 'QUICK_EXPLANATION', Component: props => <QuickExplanation onComplete={props.onContinue} />},
-  { step: 'NEED_CAMERA_ACCESS', Component: props => <CameraAccess onGranted={props.onContinue} />},
-  { step: 'CREATING_FIRST_GIF', Component: CreateFirstGif },
-  { step: COMPLETED, Component: Completed }
-]
-
-export default ({ onboardingWorkflow = x => x, ...props }) => <div className="welcome">
-  <Workflow
-    {...props}
-    workflow={onboardingWorkflow(defaultOnboardingWorkflow)}
-    onContinue={step => user.put({ onboarding: step })}
-  />
-</div>
