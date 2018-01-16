@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
-
 import Logo from '../components/Logo'
 import heart from './heart.svg'
 import singleNode from './singleNode.svg'
@@ -12,8 +11,7 @@ import harper from './harper.gif'
 import anne from './anne.gif'
 import './Welcome.css'
 import localForage from 'localforage'
-
-export const COMPLETED = 'COMPLETED'
+import { COMPLETED } from '../utils/constants'
 
 export default class Welcome extends React.Component {
   async componentDidMount() {

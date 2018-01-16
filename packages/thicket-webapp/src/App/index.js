@@ -13,11 +13,11 @@ import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
+import { COMPLETED } from 'constants'
 import store from '../database/store'
 import './App.css'
 
 const { user } = store
-const COMPLETED = 'COMPLETED'
 
 class App extends Component {
 
