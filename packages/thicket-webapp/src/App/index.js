@@ -6,10 +6,9 @@ import {
   Redirect,
   Link,
 } from 'react-router-dom'
-import Logo from './Logo'
+import Logo from '../components/Logo'
 import UserProfile from './UserProfile'
 import Profile from './Profile'
-import Welcome, { COMPLETED } from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
@@ -18,6 +17,7 @@ import store from '../database/store'
 import './App.css'
 
 const { user } = store
+const COMPLETED = 'COMPLETED'
 
 class App extends Component {
 
@@ -48,8 +48,6 @@ class App extends Component {
         </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-          <Route exact path="/welcome" render={props =>
-            <Welcome onboarding={onboarding} {...props} />} />
           <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
           <Route path="/c/:c" render={props =>
             <Community
