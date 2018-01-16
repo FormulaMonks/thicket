@@ -79,7 +79,7 @@ class Community extends EventEmitter {
     super()
     this.communityId = communityId
     this.data = null
-    this.onlinePeers = []
+    this.onlinePeers = null
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
@@ -114,7 +114,7 @@ class Community extends EventEmitter {
   }
 
   getOnlinePeers = async () => {
-    if (!this.onlinePeers || true ) {
+    if (!this.onlinePeers) {
       this.onlinePeers = await db.communityGetOnlinePeers(this.communityId)
     }
     return this.onlinePeers
