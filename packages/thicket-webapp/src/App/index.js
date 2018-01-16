@@ -4,13 +4,16 @@ import {
   Route,
   Switch,
   Redirect,
+  Link,
 } from 'react-router-dom'
+import Logo from '../components/Logo'
+import UserProfile from './UserProfile'
 import Profile from './Profile'
-import Welcome, { COMPLETED } from './Welcome'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
+import { COMPLETED } from 'constants'
 import store from '../database/store'
 import './App.css'
 
@@ -38,22 +41,26 @@ class App extends Component {
     }
 
     return <Router>
-      <Switch>
-        <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-        <Route exact path="/welcome" render={props =>
-          <Welcome onboarding={onboarding} {...props} />} />
-        <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
-        <Route path="/c/:c" render={props =>
-          <Community
-            {...props}
-            nickname={nickname}
-            canJoinWorkflow={this.props.canJoinWorkflow}
-            canJoinOptions={this.props.canJoinOptions}
-          />}
-        />
-        <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
-        <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
-      </Switch>
+      <div className="app app--with-fixed-header">
+        <header className="app__header">
+          <Link to="/"><Logo /></Link>
+          <Link to="/profile"><UserProfile nickname={nickname} /></Link>
+        </header>
+        <Switch>
+          <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
+          <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
+          <Route path="/c/:c" render={props =>
+            <Community
+              {...props}
+              nickname={nickname}
+              canJoinWorkflow={this.props.canJoinWorkflow}
+              canJoinOptions={this.props.canJoinOptions}
+            />}
+          />
+          <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
+          <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
+        </Switch>
+      </div>
     </Router>
   }
 

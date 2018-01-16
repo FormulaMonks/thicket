@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UserName from '../../../components/UserName'
 import usersSvg from './users.svg'
 import './OnlinePeers.css'
 
@@ -31,9 +32,7 @@ class OnlinePeers extends Component {
            const count = onlinePeersNicknameCount.get(peer)
            innerCount.set(peer, innerCount.get(peer) + 1)
            return <li key={`online-peer-${peer}-${index}`} className="onlinePeers-item">
-             <span className="onlinePeers-initial" style={{ background: colors[index]}}>
-               {peer.substr(0, 1)}
-             </span> {peer} {index === 0
+             <UserName str={peer} bgColor={colors[index]} /> {index === 0
                ? '(you)'
                : count > 1 ? `(${innerCount.get(peer)})` : ''}
            </li>

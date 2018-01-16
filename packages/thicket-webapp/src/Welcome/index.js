@@ -1,9 +1,6 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
-
-import store from '../../database/store'
-import Logo from '../Logo'
-
+import Logo from '../components/Logo'
 import heart from './heart.svg'
 import singleNode from './singleNode.svg'
 import twoNodes from './twoNodes.svg'
@@ -13,13 +10,12 @@ import Carousel from './Carousel'
 import harper from './harper.gif'
 import anne from './anne.gif'
 import './Welcome.css'
-
-export const COMPLETED = 'COMPLETED'
-const { user } = store
+import localForage from 'localforage'
+import { COMPLETED } from '../utils/constants'
 
 export default class Welcome extends React.Component {
   async componentDidMount() {
-    const onboarding = await user.get('onboarding')
+    const onboarding = await localForage.getItem('onboarding')
     if (onboarding === COMPLETED) {
       this.props.history.replace('/communities')
     }
