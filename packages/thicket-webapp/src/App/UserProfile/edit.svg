@@ -1,0 +1,16 @@
+<svg width="21" height="21" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Edit Button - White - Default</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-24662 -25704)">
+<g id="Edit Button - White - Default" opacity="0.8">
+<g id="f2bf">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(24662 25704)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 17.442 7.21148L 5.99712 18.7022L 1.83118 14.5362L 13.3218 3.09132L 17.442 7.21148ZM 20.143 2.58775C 20.4177 2.86243 20.5474 3.19814 20.5321 3.5949C 20.5169 3.99166 20.3566 4.34263 20.0514 4.64783L 17.9914 6.70791L 13.8254 2.54197L 15.8855 0.48189C 16.1907 0.176691 16.5417 0.0164648 16.9384 0.00120476C 17.3352 -0.0140553 17.6709 0.115652 17.9456 0.390331L 20.143 2.58775ZM 1.46495 15.1771L 5.35621 19.0684L 0 20.5333L 1.46495 15.1771Z"/>
+</defs>
+</svg>
