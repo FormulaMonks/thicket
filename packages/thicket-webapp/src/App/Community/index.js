@@ -68,7 +68,7 @@ class Community extends Component {
     title: '',
     onlinePeers: [],
     size: 0,
-    colors: ['#677897'],
+    colors: [],
   }
 
   async componentDidMount() {
@@ -170,11 +170,11 @@ class Community extends Component {
     const { c } = this.props.match.params
     const community = await communities.get(c)
     const onlinePeers = await community.getOnlinePeers()
-    const colors = [...randomColor({
+    const colors = randomColor({
       count: onlinePeers.length + 1,
       luminosity: 'bright',
       seed: c,
-    })]
+    })
     this.setState({ onlinePeers, colors })
   }
 
