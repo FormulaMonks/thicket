@@ -210,19 +210,23 @@ class User extends EventEmitter {
     await this._initUser()
     state.user = { ...state.user, ...data }
     await localForage.setItem('user', state.user)
-    this.emit('update')
     // side effect
     // when a user updates their nickname we broadcast this update to all the communities the user belongs to
     db.communityPutNicknames(state.userCommunities, state.user.nickname)
+    // update
+    this.emit('update')
   }
 
   // user communities & communities
   _initCommunities = async () => {
-    if (!this._fetchedCommunities) {
-      const list = await localForage.getItem('userCommunities')
-      state.userCommunities = new Set(list)
-      this._fetchedCommunities = true
+    if (!this._initCommunitiesPromise) {
+      this._initCommunitiesPromise = new Promise(async resolve => {
+        const list = await localForage.getItem('userCommunities')
+        state.userCommunities = new Set(list)
+        resolve()
+      })
     }
+    return this._initCommunitiesPromise
   }
 
   get communities() {
