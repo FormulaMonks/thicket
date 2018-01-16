@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import { glow } from '../sharedStyles'
 
@@ -17,7 +17,7 @@ const Background = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 2;
+    z-index: 12;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,20 +36,33 @@ const Wrap = styled.div`
   overflow: hidden;
 
   /* desktop
-   * white background container
+   * centered container
    * */
   @media (min-width: 600px){
     width: auto;
-    max-width: 60%;
-    max-height: 50%;
-    padding: 1em;
   }
 `
 
-const Modal = ({ children, ...props }) => <Background>
-  <Wrap {...props}>
-    {children}
-  </Wrap>
-</Background>
+class Modal extends Component {
+
+  componentDidMount() {
+    if (document.documentElement.clientWidth > 600) {
+      document.querySelector('body').style.overflow = 'hidden'
+    }
+  }
+
+  componentWillUnmount() {
+    document.querySelector('body').style.overflow = 'auto'
+  }
+
+  render() {
+    const { children, ...props } = this.props
+    return <Background>
+      <Wrap {...props}>
+        {children}
+      </Wrap>
+    </Background>
+  }
+}
 
 export default Modal

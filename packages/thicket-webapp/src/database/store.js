@@ -79,11 +79,16 @@ class Community extends EventEmitter {
     super()
     this.communityId = communityId
     this.data = null
+    this.onlinePeers = null
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
       this.data = data
       this.emit('update')
+    })
+    db.on(`peer-${communityId}`, peers => {
+      this.onlinePeers = peers
+      this.emit('peer')
     })
 
     // publications
@@ -92,6 +97,15 @@ class Community extends EventEmitter {
 
   delete = () => db.communityDelete(this.communityId)
 
+  deletePublication = async id => {
+    // side effect
+    // when a GIF gets deleted we need to update the Community size
+    const { src } = await this.publications.get(id)
+    this.put({ ...this.data, size: this.data.size - src.length})
+    // delete
+    return this.publications.delete(id)
+  }
+
   get = async () => {
     if (!this.data) {
       this.data = await db.communityGet(this.communityId)
@@ -99,9 +113,25 @@ class Community extends EventEmitter {
     return this.data
   }
 
+  getOnlinePeers = async () => {
+    if (!this.onlinePeers) {
+      this.onlinePeers = await db.communityGetOnlinePeers(this.communityId)
+    }
+    return this.onlinePeers
+  }
+
   post = data => db.communityPost(this.communityId, data)
 
+  postPublication = data => {
+    // side effect
+    // when a new gif is posted we calculate its size and add it to the Community size
+    this.put({ ...this.data, size: this.data.size + data.src.length })
+    // post
+    return this.publications.post(data)
+  }
+
   put = data => db.communityPut(this.communityId, data)
+
 }
 
 class EventEmitterCommunities extends EventEmitter {
@@ -133,6 +163,10 @@ class EventEmitterCommunities extends EventEmitter {
       state.userCommunities.add(id)
       state.communities.set(id, new Community(id))
       localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      // side effect
+      // when a user joins a community we set the nickname information into the shared data
+      db.communityPutNicknames([id], state.user.nickname)
+      //
       this.emit('update', Array.from(state.userCommunities))
       return state.communities.get(id)
     }
@@ -158,10 +192,13 @@ class User extends EventEmitter {
 
   // user
   _initUser = async() => {
-    if (!this._fetchedUser) {
-      state.user = await localForage.getItem('user') || state.user
-      this._fetchedUser = true
+    if (!this._initUserPromise) {
+      this._initUserPromise = new Promise(async resolve => {
+        state.user = await localForage.getItem('user') || state.user
+        resolve()
+      })
     }
+    return this._initUserPromise
   }
 
   get = async () => {
@@ -173,16 +210,23 @@ class User extends EventEmitter {
     await this._initUser()
     state.user = { ...state.user, ...data }
     await localForage.setItem('user', state.user)
+    // side effect
+    // when a user updates their nickname we broadcast this update to all the communities the user belongs to
+    db.communityPutNicknames(state.userCommunities, state.user.nickname)
+    // update
     this.emit('update')
   }
 
   // user communities & communities
   _initCommunities = async () => {
-    if (!this._fetchedCommunities) {
-      const list = await localForage.getItem('userCommunities')
-      state.userCommunities = new Set(list)
-      this._fetchedCommunities = true
+    if (!this._initCommunitiesPromise) {
+      this._initCommunitiesPromise = new Promise(async resolve => {
+        const list = await localForage.getItem('userCommunities')
+        state.userCommunities = new Set(list)
+        resolve()
+      })
     }
+    return this._initCommunitiesPromise
   }
 
   get communities() {

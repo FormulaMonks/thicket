@@ -1,12 +1,16 @@
-<svg width="22" height="22" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="21" height="21" viewBox="0 0 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>Vector</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(22951 -26179)">
+<g id="Canvas" transform="translate(-10082 -24065)">
 <g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(-22950.3 26179.7)" fill="#C1C6C8"/>
+<use xlink:href="#path0_fill" transform="translate(10082.1 24065.5)" fill="url(#paint0_linear)" fill-opacity="0.8"/>
 </g>
 </g>
 <defs>
-<path id="path0_fill" d="M 20.6249 4.69245L 18.497 6.82042L 14.1319 2.45535L 16.2599 0.32738C 16.4781 0.109126 16.7509 0 17.0783 0C 17.4057 0 17.6785 0.109126 17.8968 0.32738L 20.6249 3.05555C 20.8432 3.2738 20.9523 3.54662 20.9523 3.874C 20.9523 4.20138 20.8432 4.47419 20.6249 4.69245ZM 0 16.5873L 12.8769 3.71031L 17.242 8.07537L 4.36507 20.9523L 0 20.9523L 0 16.5873Z"/>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(23.7804 -31.7255 31.7255 23.7804 0.485782 22.5306)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<path id="path0_fill" d="M 16.989 7.02417L 5.84135 18.2164L 1.78362 14.1586L 12.9758 3.01103L 16.989 7.02417ZM 19.6198 2.52054C 19.8874 2.78808 20.0137 3.11507 19.9988 3.50153C 19.984 3.88798 19.8279 4.22984 19.5306 4.52711L 17.5241 6.53368L 13.4663 2.47594L 15.4729 0.469373C 15.7702 0.172102 16.112 0.0160372 16.4985 0.00117347C 16.8849 -0.0136902 17.2119 0.112648 17.4795 0.380192L 19.6198 2.52054ZM 1.4269 14.7829L 5.21709 18.5731L 0 20L 1.4269 14.7829Z"/>
 </defs>
 </svg>

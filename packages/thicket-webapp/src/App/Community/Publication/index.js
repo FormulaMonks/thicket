@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
-import Modal from '../../../components/Modal'
+import { Link } from 'react-router-dom'
 import Gif from '../../../components/Gif'
-import { Button } from 'thicket-elements'
+import { Modal, Button } from 'thicket-elements'
 import store from '../../../database/store'
+import backSvg from '../../../images/arrow-left.svg'
 import './Publication.css'
 
 const { user, communities } = store
-
-const Header = () =>
-  <header className="publication__header">View / Edit your GIF</header>
-
-const Footer = props => <footer className="publication__footer">
-  <Button onClick={props.onDelete}>Delete GIF</Button>
-  <Button onClick={props.onSave}>Save Changes</Button>
-</footer>
 
 class Publication extends Component {
 
@@ -23,6 +16,7 @@ class Publication extends Component {
     const { publications } = await communities.get(this.props.match.params.c)
     publications.on('update', this.fetch)
     this.fetch()
+    window.scrollTo(0, 0)
   }
 
   async componentWillUnmount() {
@@ -31,6 +25,8 @@ class Publication extends Component {
   }
 
   render() {
+    const { title, match } = this.props
+    const { c } = match.params
     const { gif } = this.state
 
     if (!gif) {
@@ -38,33 +34,36 @@ class Publication extends Component {
     }
 
     if (this.state.showDeleteConfimation) {
-      return <Modal
-        header="Confirm Delete GIF"
-        footer={<div>
-            <Button onClick={() => this.setState({ showDeleteConfimation: false })}>Cancel</Button>
-            <Button onClick={this.onDelete}>Confirm</Button>
-          </div>}
-        onClose={() => this.setState({ showDeleteConfimation: false })}>
+      return <Modal>
+        <div>Confirm Delete GIF</div>
         <div>Are you sure you want to delete this GIF:</div>
         <div>{gif.caption}</div>
         <div>NOTE: this action cannot be undone</div>
+        <div>
+          <Button onClick={() => this.setState({ showDeleteConfimation: false })}>Cancel</Button>
+          <Button onClick={this.onDelete}>Confirm</Button>
+        </div>
       </Modal>
     }
 
-    return (
-      <Modal
-        header={<Header />}
-        footer={<Footer onSave={this.onSave} onDelete={() => this.setState({ showDeleteConfimation: true })} />}
-        onClose={this.close}
-      >
+    return [
+      <Link key="link" className="publication__link" to={`/c/${c}`}>
+        <img src={backSvg} alt={`Back to ${title}`} /> <span className="publication__title">{title}</span>
+      </Link>,
+      <Modal key="modal">
         <Gif
-          communityId={this.props.match.params.c}
+          communityId={c}
           gif={this.state.gif}
           editable
           onChange={gif => this.setState({ gif, modified: true })}
-        />
-      </Modal>
-    )
+        >
+          <div className="publication__btns">
+            <Button className="publication__save" onClick={this.onSave}>Save Changes</Button>
+            <Button secondary onClick={() => this.setState({ showDeleteConfimation: true })}>Delete GIF</Button>
+          </div>
+        </Gif>
+      </Modal>,
+    ]
   }
 
   close = () => this.props.history.push(`/c/${this.props.match.params.c}`)
@@ -78,8 +77,8 @@ class Publication extends Component {
 
   onDelete = async () => {
     const { c, id } = this.props.match.params
-    const { publications } = await communities.get(c)
-    await publications.delete(id)
+    const community = await communities.get(c)
+    await community.deletePublication(id)
     this.close()
   }
 

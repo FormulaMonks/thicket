@@ -1,19 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import add from './add.svg'
+import { Styles } from 'thicket-elements'
+import prettydate from 'pretty-date'
 import './Grid.css'
 
-const Grid = props => <ul className="communityGrid">
-  <li key="new" className="communityGrid__element">
-    <button onClick={props.onNew} className="communityGrid__btnNew">
-      <img src={add} alt="Create New GIF" />
-      Create New GIF
-    </button>
-  </li>
-  {props.list.map((item, index) =>
-    <li key={item.id} className="communityGrid__element">
-      <Link to={`/c/${props.community}/${item.id}`} className="communityGrid__link">
-        <img src={item.src} alt={item.caption} className="communityGrid__img" />
+const { linearGradient } = Styles
+
+const Grid = ({ community, list }) => <ul className="communityGrid">
+  {list.map(({ id, src, caption, nickname, createdAt, ...rest }) =>
+    <li key={id} className="communityGrid__element" style={{ background: linearGradient }}>
+      <Link to={`/c/${community}/${id}`} className="communityGrid__link">
+        <img src={src} alt={caption} className="communityGrid__img" />
+        <div className="communityGrid__meta">
+          <h3 className="communityGrid__caption">{caption}</h3>
+          <div className="communityGrid__metadata">
+            <div className="communityGrid__nickname">{nickname}</div>
+            <div className="communityGrid__createdAt">{prettydate.format(new Date(createdAt))}</div>
+          </div>
+        </div>
       </Link>
     </li>
   )}

@@ -1,0 +1,128 @@
+.onlinePeers{
+  display: flex;
+  flex-direction: none;
+  position: relative;
+  grid-row-start: 3;
+  align-items: center;
+  margin: 1em;
+}
+
+.onlinePeers--aligned-left{
+  margin-left: 0;
+}
+
+.onlinePeers-btn{
+  border: none;
+  font-size: initial;
+  font-weight: initial;
+  color: #FFF;
+  display: flex;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+}
+
+.onlinePeers-wrap{
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: calc(100% + 2px);
+  background: #FFF;
+  z-index: 1;
+  color: #677897;
+  width: 10em;
+  border: 1px solid #677897;
+  border-radius: 4px;
+}
+
+.onlinePeers-wrap--active{
+  display: flex;
+}
+
+.onlinePeers-wrap::before{
+  position: absolute;
+  left: 1em;
+  top: -7px;
+  display: block;
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #FFF;
+}
+
+.onlinePeers-title{
+  text-align: center;
+}
+
+.onlinePeers-title::after{
+  display: block;
+  content: '';
+  height: 1px;
+  background: #677897;
+  position: relative;
+  top: 0.75em;
+}
+
+.onlinePeers-list{
+  list-style: none;
+  padding: 0 1em 1em;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.onlinePeers-item{
+  display: flex;
+  align-items: center;
+}
+
+.onlinePeers-initial{
+  background: #677897;
+  color: #FFF;
+  border-radius: 50%;
+  font-size: 8px;
+  height: 16px;
+  width: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5em;
+}
+
+
+/* desktop */
+@media (min-width: 600px){
+  .onlinePeers{
+    grid-column: 10 / -1;
+    grid-row: 1 / 4;
+    margin: 0 0.5em;
+    align-self: flex-start;
+  }
+
+  .onlinePeers-wrap{
+    display: flex;
+    border: none;
+    background: inherit;
+    color: #FFF;
+    position: initial;
+    top: initial;
+  }
+
+  .onlinePeers-count{
+    display: none;
+  }
+
+  .onlinePeers-wrap::before{
+    display: none;
+  }
+
+  .onlinePeers-title{
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .onlinePeers-list{
+    padding: 0;
+  }
+}

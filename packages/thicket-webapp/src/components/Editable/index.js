@@ -14,7 +14,9 @@ class Editable extends Component {
       return <Input onChange={onChange} value={value} />
     }
 
-    return <div>{value}<img src={edit} alt="Edit" onClick={() => this.setState({ edit: true })} /></div>
+    return <div className="editable">
+      {value}<img src={edit} alt="Edit" onClick={() => this.setState({ edit: true })} />
+    </div>
   }
 }
 

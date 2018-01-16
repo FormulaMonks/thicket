@@ -11,6 +11,7 @@ const bgColor = ({ backgroundColor }) => backgroundColor ? backgroundColor : '#1
 
 const Spinner = styled.div`
   width: 50px;
+  max-width: 100%;
   height: 50px;
   border: 3px double transparent;
   border-radius: 50%;

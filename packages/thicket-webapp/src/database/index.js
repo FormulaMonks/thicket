@@ -39,13 +39,14 @@ const yConfig = (node, id) => ({
   },
   connector: {
     name: 'ipfs',
-    room: `thicket/${id}`,
+    room: `thicket:${id}`,
     ipfs: node,
   },
   share: {
     publications: 'Array',
     publicationsMetadata: 'Map',
-    metadata: 'Map'
+    metadata: 'Map',
+    nicknames: 'Map',
   }
 })
 
@@ -57,9 +58,21 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
-  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
+  //new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
+  new Promise(r => setTimeout(() => r(`http://localhost:9090/ipfs/${hash}`), 1000)),
   new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
 ])
+
+const mapIPFSIdstoNicknames = async(node, y) => {
+  const { id } = await node.id()
+  return [y.share.nicknames.get(id)]
+    .concat(y.connector.roomEmitter.peers().reduce((p, c) => {
+      if (y.share.nicknames.get(c)) {
+        p.push(y.share.nicknames.get(c))
+      }
+      return p
+    }, []))
+}
 
 class Database extends EventEmitter {
   constructor() {
@@ -96,6 +109,11 @@ class Database extends EventEmitter {
         })
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+        // nicknames: IPFS node id <-> nickname
+        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
+        // online peers
+        y.connector.roomEmitter.on('peer joined', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
+        y.connector.roomEmitter.on('peer left', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
 
         resolve(y)
       })
@@ -162,8 +180,16 @@ class Database extends EventEmitter {
     return {
       id: communityId,
       title: '',
+      size: 0,
       ...y.share.metadata.get(communityId)
     }
+  }
+
+
+  communityGetOnlinePeers = async communityId => {
+    const node = await this._initIPFS()
+    const y = await this._initCommunity(communityId)
+    return await mapIPFSIdstoNicknames(node, y)
   }
 
   communityPost = async (communityId, data) => {
@@ -174,6 +200,15 @@ class Database extends EventEmitter {
   communityPut = async (communityId, data) => {
     const y = await this._initCommunity(communityId)
     y.share.metadata.set(communityId, { ...y.share.metadata.get(communityId), ...data })
+  }
+
+  communityPutNicknames = async (communities, data) => {
+    for (let communityId of communities) {
+      const y = await this._initCommunity(communityId)
+      const node = await this._initIPFS()
+      const { id } = await node.id()
+      y.share.nicknames.set(id, data)
+    }
   }
 
 }

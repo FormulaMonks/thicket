@@ -1,24 +1,17 @@
-.publication{
-  position: absolute;
-  z-index: 2;
-  height: 100%;
-  width: 100%;
+.publication__link{
+  margin-left: 1.375em;
   display: flex;
-  background: rgba(0,0,0,0.3);
 }
 
-.publication__header{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  border-bottom: 1px solid #CCC;
+.publication__title{
+  margin-left: 0.5em;
 }
 
-.publication__footer{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  background: #EEE;
+.publication__btns{
+  margin-top: 1em;
+  text-align: center;
+}
+
+.publication__save{
+  margin-bottom: 1em;
 }
