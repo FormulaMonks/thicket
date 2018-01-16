@@ -77,20 +77,6 @@
   align-items: center;
 }
 
-.onlinePeers-initial{
-  background: #677897;
-  color: #FFF;
-  border-radius: 50%;
-  font-size: 8px;
-  height: 16px;
-  width: 16px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.5em;
-}
-
-
 /* desktop */
 @media (min-width: 600px){
   .onlinePeers{
