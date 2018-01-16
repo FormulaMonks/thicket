@@ -39,7 +39,7 @@ const yConfig = (node, id) => ({
   },
   connector: {
     name: 'ipfs',
-    room: `thicket/${id}`,
+    room: `thicket:${id}`,
     ipfs: node,
   },
   share: {
