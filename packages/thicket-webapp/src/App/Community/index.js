@@ -17,7 +17,6 @@ const { linearGradient } = Styles
 const { user, communities } = store
 const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
-const CAN_JOIN = 'user can join the community'
 const LEAVE = 'user is displayed the confirm box to leave the community'
 const isItMobile = document.documentElement.clientWidth < 600
 
@@ -79,7 +78,7 @@ class Community extends Component {
     const canJoin = atob(token) === c
     const member = await communities.has(c)
     if (!member && canJoin) {
-      this.setState({ mode: CAN_JOIN })
+      await communities.post(c)
     }
     // uninvited?
     if (!member && !canJoin) {
