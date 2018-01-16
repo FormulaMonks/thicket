@@ -43,6 +43,7 @@ class App extends Component {
       <div className="app app--with-fixed-header">
         <header className="app__header">
           <Link to="/"><Logo /></Link>
+          <Link to="/profile">{nickname}</Link>
         </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
