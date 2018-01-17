@@ -58,8 +58,7 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
-  //new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
-  new Promise(r => setTimeout(() => r(`http://localhost:9090/ipfs/${hash}`), 1000)),
+  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
   new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
 ])
 
