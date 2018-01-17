@@ -193,7 +193,11 @@ class User extends EventEmitter {
   _initUser = async() => {
     if (!this._initUserPromise) {
       this._initUserPromise = new Promise(async resolve => {
-        state.user = await localForage.getItem('user') || state.user
+        const local = await localForage.getItem('user')
+        if (!local) {
+          await localForage.setItem('user', state.user)
+        }
+        state.user = local || state.user
         resolve()
       })
     }
