@@ -5,3 +5,15 @@
   align-items: center;
   justify-content: center;
 }
+
+.app__header{
+  position: sticky;
+  top: 0;
+  left:0;
+  right: 0;
+  z-index: 10;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
