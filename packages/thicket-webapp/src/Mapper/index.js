@@ -21,7 +21,7 @@ const Wrap = props => <div
 
 const AsyncApp = Loadable({
   loader: () => import("../App"),
-  loading: () => Wrap
+  loading: Wrap
 })
 const AsyncWelcome = Loadable({
   loader: () => import("../Welcome"),
