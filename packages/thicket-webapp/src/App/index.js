@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import Setup from '../components/Setup'
 import Logo from '../components/Logo'
-import UserProfile from './UserProfile'
+import UserProfile from '../components/UserProfile'
 import Profile from './Profile'
 import Communities from './Communities'
 import Community from './Community'
