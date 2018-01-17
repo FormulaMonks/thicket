@@ -22,13 +22,24 @@
   width: 100%;
 }
 
-.profile__buttons-wrap{
+.profile__buttons{
   margin-top: 2em;
-  display: flex;
-  justify-content: space-between;
 }
 
-.profile__buttons{
-  width: 33.3333333%;
-  min-width: 9em;
+.profile__save{
+  margin-bottom: 2em;
+}
+
+/* desktop */
+@media (min-width: 600px){
+  .profile__buttons{
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile__save{
+    margin-bottom: 0;
+    margin-left: 2em;
+    order: 2;
+  }
 }
