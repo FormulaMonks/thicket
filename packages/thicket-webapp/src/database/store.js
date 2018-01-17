@@ -5,9 +5,6 @@ import db from './index.js'
 const state = {
   user: {
     nickname: `Guest${Math.floor(1 + Math.random() * 1000)}`,
-    onboarding: null,
-    hasDoneFirstGIF: false,
-    hasDoneCommunityOnboarding: false
   },
   userCommunities: new Set(),
   communities: new Map()
@@ -63,6 +60,8 @@ class Publications extends EventEmitter {
   }
 
   post = data => db.publicationsPost(this.communityId, data)
+
+  postByHash = data => db.publicationsPostByHash(this.communityId, data)
 
   put = (id, data) => db.publicationsPut(this.communityId, id, data)
 
@@ -194,7 +193,11 @@ class User extends EventEmitter {
   _initUser = async() => {
     if (!this._initUserPromise) {
       this._initUserPromise = new Promise(async resolve => {
-        state.user = await localForage.getItem('user') || state.user
+        const local = await localForage.getItem('user')
+        if (!local) {
+          await localForage.setItem('user', state.user)
+        }
+        state.user = local || state.user
         resolve()
       })
     }

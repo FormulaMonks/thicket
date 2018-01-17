@@ -11,12 +11,12 @@ import harper from './harper.gif'
 import anne from './anne.gif'
 import './Welcome.css'
 import localForage from 'localforage'
-import { COMPLETED } from '../utils/constants'
+import { COMPLETED, WELCOME_STATUS } from '../utils/constants'
 
 export default class Welcome extends React.Component {
   async componentDidMount() {
-    const onboarding = await localForage.getItem('onboarding')
-    if (onboarding === COMPLETED) {
+    const status = await localForage.getItem(WELCOME_STATUS)
+    if (status === COMPLETED) {
       this.props.history.replace('/communities')
     }
   }
@@ -36,7 +36,7 @@ export default class Welcome extends React.Component {
                 Create and share GIFs with your friends in a peer to peer, private
                 network.
               </h1>
-              <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+              <Button style={{padding: '1em 1.5em'}} onClick={this.onStart}>Start a New Community</Button>
             </div>
             <div className="Welcome-bigDeal">
               <h2>What's the big deal?</h2>
@@ -139,9 +139,14 @@ export default class Welcome extends React.Component {
         </div>
         <div className="Welcome-bottom">
           <h2>Start creating and sharing now.</h2>
-          <Button style={{padding: '1em 1.5em'}}>Start a New Community</Button>
+          <Button style={{padding: '1em 1.5em'}} onClick={this.onStart}>Start a New Community</Button>
         </div>
       </main>
     )
+  }
+
+  onStart = async () => {
+    localForage.setItem(WELCOME_STATUS, COMPLETED)
+    this.props.history.replace('/setup')
   }
 }

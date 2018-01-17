@@ -79,6 +79,7 @@ class Community extends Component {
     const member = await communities.has(c)
     if (!member && canJoin) {
       await communities.post(c)
+      this.props.history.replace(`/c/${c}`)
     }
     // uninvited?
     if (!member && !canJoin) {

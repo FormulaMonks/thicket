@@ -27,6 +27,8 @@
 .Welcome-container {
   max-width: 50em;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 .Welcome-bgGifs {
@@ -35,6 +37,7 @@
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 0;
 }
 
 .Welcome-bgGifs div {

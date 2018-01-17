@@ -3,17 +3,16 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
   Link,
 } from 'react-router-dom'
+import Setup from '../components/Setup'
 import Logo from '../components/Logo'
-import UserProfile from './UserProfile'
+import UserProfile from '../components/UserProfile'
 import Profile from './Profile'
 import Communities from './Communities'
 import Community from './Community'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
-import { COMPLETED } from 'constants'
 import store from '../database/store'
 import './App.css'
 
@@ -21,7 +20,7 @@ const { user } = store
 
 class App extends Component {
 
-  state = { nickname: '', loading: true, onboarding: null }
+  state = { nickname: '', loading: true }
 
   async componentDidMount() {
     user.on('update', this.fetchUser)
@@ -34,7 +33,7 @@ class App extends Component {
   }
 
   render() {
-    const { nickname, loading, onboarding } = this.state
+    const { nickname, loading } = this.state
 
     if (loading) {
       return <div className="app__index"><Spinner /></div>
@@ -43,7 +42,7 @@ class App extends Component {
     return <Router>
       <div className="app app--with-fixed-header">
         <header className="app__header">
-          <Link to="/"><Logo /></Link>
+          <Link to="/communities"><Logo /></Link>
           <Link to="/profile"><UserProfile nickname={nickname} /></Link>
         </header>
         <Switch>
@@ -58,15 +57,15 @@ class App extends Component {
             />}
           />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
-          <Redirect exact from="/" to={onboarding === COMPLETED ? 'communities' : 'welcome'} />
+          <Route exact path="/setup" render={props => <Setup nickname={nickname} {...props} />} />
         </Switch>
       </div>
     </Router>
   }
 
   fetchUser = async () => {
-    const { nickname, onboarding } = await user.get()
-    this.setState({ nickname, onboarding })
+    const { nickname } = await user.get()
+    this.setState({ nickname })
   }
 
 }
