@@ -34,7 +34,7 @@ class Publication extends Component {
     }
 
     if (this.state.showDeleteConfimation) {
-      return <Modal>
+      return <Modal disableBodyScroll>
         <div>Confirm Delete GIF</div>
         <div>Are you sure you want to delete this GIF:</div>
         <div>{gif.caption}</div>
@@ -50,7 +50,7 @@ class Publication extends Component {
       <Link key="link" className="publication__link" to={`/c/${c}`}>
         <img src={backSvg} alt={`Back to ${title}`} /> <span className="publication__title">{title}</span>
       </Link>,
-      <Modal key="modal">
+      <Modal key="modal" disableBodyScroll>
         <Gif
           communityId={c}
           gif={this.state.gif}

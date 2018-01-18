@@ -149,7 +149,7 @@ class EventEmitterCommunities extends EventEmitter {
 
     this.getAll = async () => {
       await ctx._initCommunities()
-      return Array.from(state.userCommunities)
+      return Array.from(state.userCommunities).reverse()
     }
 
     this.has = async id => {

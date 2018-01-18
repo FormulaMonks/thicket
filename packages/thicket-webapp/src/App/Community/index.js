@@ -136,7 +136,7 @@ class Community extends Component {
         <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
         {loading ? <Spinner className="community__spinner" /> : <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />}
       </div>,
-      mode === LEAVE && <Modal key="leave">
+      mode === LEAVE && <Modal key="leave" disableBodyScroll>
         <h3>Leave Community?</h3>
         <div>Are you sure you want to leave the "{title}" Community?</div>
         <div>Note: You will no longer be able to view or contribute content to this Community. Content will remain in the Community, but you will need to be reinvited to rejoin.</div>

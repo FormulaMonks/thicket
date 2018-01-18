@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import { Modal, Button, Input } from 'thicket-elements'
+import { Modal, Button, Input, Icons, Icon } from 'thicket-elements'
 import './Communities.css'
 import store from '../../database/store'
-import Add from './Add'
 import Card from './Card'
 
 const { communities } = store
+const { addSvg } = Icons
 
 class Communities extends Component {
 
@@ -26,22 +26,29 @@ class Communities extends Component {
     const { data, creating } = this.state
 
     return [
-      (!creating || document.documentElement.clientWidth > 600) && [
-        <div key="title" className="communities__list--grid">
-          <h2>Your communities</h2>
+      (!creating || document.documentElement.clientWidth > 600) &&
+        <div key="communities" className="communities">
+          <div className="communities__header">
+            <h2 className="communities__title">Your communities</h2>
+            <div className="communities__wrap">
+              <div className="communities__count">{data.length} communities</div>
+              <button
+                className="communities__new"
+                onClick={() => this.setState({ creating: true })}
+              >
+                <Icon src={addSvg} bgColor="inherit" />
+              </button>
+            </div>
+          </div>
+          <ul className="communities__list">
+            {data.map(communityId => <li key={communityId} className="communities__element">
+              <Link to={`/c/${communityId}`} className="communities__link">
+                <Card communityId={communityId} />
+              </Link>
+            </li>)}
+          </ul>
         </div>,
-        <ul key="grid" className="communities__list communities__list--grid">
-          <li key="new" className="communities__element">
-            <Add onClick={() => this.setState({ creating: true })} />
-          </li>
-          {data.map(communityId => <li key={communityId} className="communities__element">
-            <Link to={`/c/${communityId}`} className="communities__link">
-              <Card communityId={communityId} />
-            </Link>
-          </li>)}
-        </ul>,
-      ],
-      creating && <Modal key="communities__new" className="communities__new">
+      creating && <Modal key="modal" disableBodyScroll className="communities__new">
         <h3 className="communities__title">Create New Community</h3>
         <h4 className="communities__message">Exciting to see you’re creating a new Community on Thicket!</h4>
         <form className="communities__form" ref={f => this.form = f} onSubmit={this.onSubmit}>

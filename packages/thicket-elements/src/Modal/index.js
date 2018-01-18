@@ -46,7 +46,7 @@ const Wrap = styled.div`
 class Modal extends Component {
 
   componentDidMount() {
-    if (document.documentElement.clientWidth > 600) {
+    if (this.props.disableBodyScroll && document.documentElement.clientWidth > 600) {
       document.querySelector('body').style.overflow = 'hidden'
     }
   }

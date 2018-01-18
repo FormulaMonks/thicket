@@ -82,6 +82,7 @@ export default class Example extends React.Component {
         <Icon src={Icons.shareSvg} size="50" />
         <Icon src={Icons.facebookSvg} size="50" />
         <Icon src={Icons.twitterSvg} size="50" />
+        <Icon src={Icons.addSvg} size="50" iconSize="30" />
       </div>
     )
   }
