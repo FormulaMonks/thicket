@@ -4,7 +4,7 @@ import { linearGradient } from '../sharedStyles'
 import ReactSVG from 'react-svg'
 
 const getSize = ({ size = 50 }) => `${size}px`
-const getHalfSize = ({ size = 50 }) => `${size / 2}px`
+const getIconSize = ({ iconSize = 25 }) => `${iconSize}px`
 
 const Icon = styled.div`
   background-image: ${linearGradient};
@@ -18,15 +18,14 @@ const Icon = styled.div`
     border-radius: 50%;
     height: 100%;
     width: 100%;
-    background: #FFF;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   & .svg{
-    height: ${getHalfSize};
-    width: ${getHalfSize};
+    height: ${getIconSize};
+    width: ${getIconSize};
   }
 
   &:hover div{
@@ -37,8 +36,8 @@ const Icon = styled.div`
   }
 `
 
-export default ({ src, size }) => <Icon size={size}>
-  <div>
+export default ({ src, bgColor='#FFF', ...props }) => <Icon {...props}>
+  <div style={{ backgroundColor: bgColor }}>
     <ReactSVG path={src} className="svg" />
   </div>
 </Icon>
