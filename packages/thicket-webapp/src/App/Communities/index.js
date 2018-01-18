@@ -29,7 +29,7 @@ class Communities extends Component {
       (!creating || document.documentElement.clientWidth > 600) &&
         <div key="communities" className="communities">
           <div className="communities__header">
-            <h2 className="communities__title">Your communities</h2>
+            <h3 className="communities__title">Your communities</h3>
             <div className="communities__wrap">
               <div className="communities__count">{data.length} communities</div>
               <button
