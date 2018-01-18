@@ -62,7 +62,7 @@
   height: 1px;
   background: #677897;
   position: relative;
-  top: 0.75em;
+  top: 0.5em;
 }
 
 .onlinePeers-list{
@@ -82,8 +82,9 @@
   .onlinePeers{
     grid-column: 10 / -1;
     grid-row: 1 / 4;
-    margin: 0 0.5em;
+    margin: 0 1em;
     align-self: flex-start;
+    width: 100%;
   }
 
   .onlinePeers-wrap{
@@ -93,6 +94,7 @@
     color: #FFF;
     position: initial;
     top: initial;
+    width: 100%;
   }
 
   .onlinePeers-count{
@@ -105,7 +107,6 @@
 
   .onlinePeers-title{
     text-align: left;
-    margin-top: 0;
   }
 
   .onlinePeers-list{

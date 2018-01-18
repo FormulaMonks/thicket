@@ -11,8 +11,12 @@
 }
 
 .community__back{
-  display: flex;
   grid-column: 1 / -1;
+}
+
+.community__back h3{
+  display: flex;
+  align-items: center;
 }
 
 .community__arrow{
@@ -133,7 +137,7 @@
   }
 
   .community__arrow--right{
-    display: block;
+    display: inline-block;
   }
 
   .community__leave-label{
@@ -147,8 +151,8 @@
   .community__size,
   .community__new,
   .community__invite{
-    grid-row: initial;
-    grid-column: initial;
+    grid-row: unset;
+    grid-column: unset;
   }
 
   .community__back,
