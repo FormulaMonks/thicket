@@ -7,8 +7,6 @@ import twoNodes from './twoNodes.svg'
 import threeNodes from './threeNodes.svg'
 import manyNodes from './manyNodes.svg'
 import Carousel from './Carousel'
-import harper from './harper.gif'
-import anne from './anne.gif'
 import './Welcome.css'
 import localForage from 'localforage'
 import { COMPLETED, WELCOME_STATUS } from '../utils/constants'
@@ -26,8 +24,6 @@ export default class Welcome extends React.Component {
       <main className="Welcome">
         <div className="Welcome-top">
           <div className="Welcome-bgGifs">
-            <div><img alt="" src={harper} /></div>
-            <div><img alt="" src={anne} /></div>
           </div>
           <header className="Welcome-header"><Logo /></header>
           <div className="Welcome-container">
