@@ -96,6 +96,8 @@ class Community extends Component {
     community.on('update', this.fetchMetadata)
     community.on('peer', this.fetchOnlinePeers)
     publications.on('update', this.fetchPublications)
+    // fix scroll when coming from communities
+    window.scrollTo(0, 0)
   }
 
   async componentWillUnmount() {
