@@ -13,6 +13,7 @@ import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
 import AddButton from '../../components/AddButton'
 import { formatBytes } from '../../utils/sizeFormat'
+import NotFound from '../404'
 import './Community.css'
 
 const { user, communities } = store
@@ -106,7 +107,7 @@ class Community extends Component {
     const { c } = match.params
 
     if (mode === UNINVITED) {
-      return <div>404</div>
+      return <NotFound history={this.props.history} />
     }
 
     return [

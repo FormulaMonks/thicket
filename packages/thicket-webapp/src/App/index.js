@@ -3,6 +3,7 @@ import {
   Route,
   Switch,
   Link,
+  Redirect,
 } from 'react-router-dom'
 import Setup from '../components/Setup'
 import Logo from '../components/Logo'
@@ -10,6 +11,7 @@ import UserProfile from '../components/UserProfile'
 import Profile from './Profile'
 import Communities from './Communities'
 import Community from './Community'
+import NotFound from './404'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
 import store from '../database/store'
@@ -57,6 +59,8 @@ class App extends Component {
           />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Route exact path="/setup" render={props => <Setup nickname={nickname} {...props} />} />
+          <Route path='/404' component={NotFound} />
+          <Redirect from='*' to='/404' />
         </Switch>
       </div>
   }
