@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { glow } from '../sharedStyles'
+import onClickOutside from "react-onclickoutside"
 
 const Background = styled.div`
   /* mobile
@@ -38,10 +39,12 @@ const Wrap = styled.div`
   /* desktop
    * centered container
    * */
-  @media (min-width: 600px){
+  @media (min-width: 600px) {
     width: auto;
   }
 `
+
+const Wrapper = onClickOutside(Wrap)
 
 class Modal extends Component {
 
@@ -56,11 +59,11 @@ class Modal extends Component {
   }
 
   render() {
-    const { children, ...props } = this.props
+    const { children, onClose=()=>{}, ...props } = this.props
     return <Background>
-      <Wrap {...props}>
+      <Wrapper {...props} handleClickOutside={onClose}>
         {children}
-      </Wrap>
+      </Wrapper>
     </Background>
   }
 }

@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "react-copy-to-clipboard": "^5.0.1",
+    "react-onclickoutside": "^6.7.1",
     "react-router-dom": "^4.2.2",
     "react-svg": "^2.2.5",
     "styled-components": "^2.2.1"
