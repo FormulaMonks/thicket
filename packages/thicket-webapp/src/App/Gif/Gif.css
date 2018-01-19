@@ -14,6 +14,15 @@
 }
 
 .individualGif__message{
+  background: transparent;
   padding: 1em;
   text-align: center;
+}
+
+/* desktop */
+@media (min-width: 600px){
+  .individualGif__wrap{
+    margin: 0 auto;
+    max-width: 80%;
+  }
 }
