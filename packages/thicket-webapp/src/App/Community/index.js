@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Styles, Input, Modal, Spinner } from 'thicket-elements'
+import { Input, Modal, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -14,7 +14,6 @@ import randomColor from 'randomcolor'
 import AddButton from '../../components/AddButton'
 import './Community.css'
 
-const { linearGradient } = Styles
 const { user, communities } = store
 const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
