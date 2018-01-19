@@ -1,29 +1,35 @@
-<svg width="49" height="49" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="53" height="53" viewBox="0 0 53 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>Group 3</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(21396 -23048)">
+<g id="Canvas" transform="translate(-24484 -42324)">
 <g id="Group 3">
+<g id="Group 3">
+<g id="Community Star Button - Default">
+<g id="Community Star Button - Default">
 <g id="Ellipse" opacity="0.8" filter="url(#filter0_d)">
-<use xlink:href="#path0_fill" transform="translate(-21393 23050.9)" fill="#FFFFFF"/>
+<use xlink:href="#path0_fill" transform="translate(24489.4 42327.7)" fill="#FFFFFF"/>
 </g>
-<g id="Star">
-<g id="Vector" opacity="0.8">
-<use xlink:href="#path1_fill" transform="translate(-21383.5 23060.9)" fill="#F7618B"/>
+<g id="thumbtack">
+<g id="Vector">
+<use xlink:href="#path1_fill" transform="matrix(0.707107 -0.707107 0.707107 0.707107 24496.4 42348)" fill="#F880A1"/>
+</g>
+</g>
+</g>
 </g>
 </g>
 </g>
 </g>
 <defs>
-<filter id="filter0_d" filterUnits="userSpaceOnUse" x="-21396" y="23048" width="49" height="49" color-interpolation-filters="sRGB">
+<filter id="filter0_d" filterUnits="userSpaceOnUse" x="24484" y="42324" width="53" height="53" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 255 0"/>
-<feOffset dx="0" dy="1"/>
-<feGaussianBlur stdDeviation="1.5"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0"/>
+<feOffset dx="0" dy="2"/>
+<feGaussianBlur stdDeviation="2.5"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
 <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
 </filter>
 <path id="path0_fill" d="M 42 21C 42 32.598 32.598 42 21 42C 9.40202 42 0 32.598 0 21C 0 9.40202 9.40202 0 21 0C 32.598 0 42 9.40202 42 21Z"/>
-<path id="path1_fill" d="M 23.0674 8.52552C 23.0674 8.72884 22.9473 8.95064 22.707 9.19093L 17.6749 14.0983L 18.867 21.0296C 18.8763 21.0943 18.8809 21.1867 18.8809 21.3069C 18.8809 21.5009 18.8324 21.665 18.7354 21.799C 18.6383 21.933 18.4974 22 18.3125 22C 18.1369 22 17.9521 21.9445 17.758 21.8336L 11.5337 18.5621L 5.30939 21.8336C 5.10607 21.9445 4.92124 22 4.75488 22C 4.56081 22 4.41525 21.933 4.31821 21.799C 4.22117 21.665 4.17265 21.5009 4.17265 21.3069C 4.17265 21.2514 4.18189 21.159 4.20038 21.0296L 5.39257 14.0983L 0.346566 9.19093C 0.115521 8.9414 0 8.7196 0 8.52552C 0 8.18357 0.258767 7.97102 0.776308 7.88784L 7.73535 6.87587L 10.8544 0.568368C 11.03 0.189454 11.2565 0 11.5337 0C 11.811 0 12.0374 0.189454 12.213 0.568368L 15.3321 6.87587L 22.2911 7.88784C 22.8087 7.97102 23.0674 8.18357 23.0674 8.52552Z"/>
+<path id="path1_fill" d="M 14.6344 10.6529L 14.0336 4.77292L 16.1061 4.77292C 16.757 4.77292 17.2846 4.2387 17.2846 3.57969L 17.2846 1.19323C 17.2846 0.534219 16.757 0 16.1061 0L 2.74983 0C 2.09895 0 1.57133 0.534219 1.57133 1.19323L 1.57133 3.57969C 1.57133 4.2387 2.09895 4.77292 2.74983 4.77292L 4.82236 4.77292L 4.22157 10.6529C 1.83968 11.7742 0 13.7848 0 16.3075C 0 16.9665 0.527623 17.5007 1.1785 17.5007L 7.85665 17.5007L 7.85665 22.6717C 7.85665 22.7335 7.87084 22.7944 7.89814 22.8496L 9.07664 25.2361C 9.22105 25.5285 9.63465 25.5291 9.77936 25.2361L 10.9579 22.8496C 10.9851 22.7944 10.9993 22.7335 10.9994 22.6717L 10.9994 17.5007L 17.6775 17.5007C 18.3284 17.5007 18.856 16.9665 18.856 16.3075C 18.856 13.7628 16.9909 11.7623 14.6344 10.6529Z"/>
 </defs>
 </svg>
