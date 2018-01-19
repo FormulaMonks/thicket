@@ -31,7 +31,7 @@ class Communities extends Component {
           <div className="communities__header">
             <h3 className="communities__title">Your communities</h3>
             <div className="communities__wrap">
-              <div className="communities__count">{data.length} communities</div>
+              <div className="communities__count">{data.length ? data.length === 1 ? '1 community' : `${data.length} communities` : ''}</div>
               <AddButton onClick={() => this.setState({ creating: true })} />
             </div>
           </div>
