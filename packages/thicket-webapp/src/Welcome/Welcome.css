@@ -183,6 +183,7 @@
   }
   .Welcome-heartGif img {
     height: 80%;
+    width: auto;
   }
   .Welcome-whyGifsText {
     flex: 2;
