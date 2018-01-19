@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import { Modal, Button, Input, Icons, Icon } from 'thicket-elements'
+import { Modal, Button, Input } from 'thicket-elements'
+import AddButton from '../../components/AddButton'
 import './Communities.css'
 import store from '../../database/store'
 import Card from './Card'
 
 const { communities } = store
-const { addSvg } = Icons
 
 class Communities extends Component {
 
@@ -32,12 +32,7 @@ class Communities extends Component {
             <h3 className="communities__title">Your communities</h3>
             <div className="communities__wrap">
               <div className="communities__count">{data.length} communities</div>
-              <button
-                className="communities__new"
-                onClick={() => this.setState({ creating: true })}
-              >
-                <Icon src={addSvg} bgColor="inherit" />
-              </button>
+              <AddButton onClick={() => this.setState({ creating: true })} />
             </div>
           </div>
           <ul className="communities__list">

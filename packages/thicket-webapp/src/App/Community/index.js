@@ -11,6 +11,7 @@ import queryString from 'query-string'
 import { getCommunityInviteLink } from '../../utils/links'
 import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
+import AddButton from '../../components/AddButton'
 import './Community.css'
 
 const { linearGradient } = Styles
@@ -129,12 +130,7 @@ class Community extends Component {
           <img src={leaveSvg} alt="Leave community" /><span className="community__leave-label">Leave</span>
         </button>
         <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
-        <button className="community__new community__btn community__new--aligned-right" style={{ background: linearGradient }} onClick={() => this.setState({ mode: CREATE })}>
-          <div className="community__cross">
-            <div className="community__cross-vertical"></div>
-            <div className="community__cross-horizontal"></div>
-          </div>
-        </button>
+        <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
         <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
         {loading ? <Spinner className="community__spinner" /> : <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />}
       </div>,
