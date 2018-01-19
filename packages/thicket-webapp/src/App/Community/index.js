@@ -12,6 +12,7 @@ import { getCommunityInviteLink } from '../../utils/links'
 import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
 import AddButton from '../../components/AddButton'
+import { formatBytes } from '../../utils/sizeFormat'
 import './Community.css'
 
 const { user, communities } = store
@@ -19,16 +20,6 @@ const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
 const LEAVE = 'user is displayed the confirm box to leave the community'
 const isItMobile = document.documentElement.clientWidth < 600
-
-const formatBytes = a => {
-  if (0 === a) return ''
-  const c = 1024
-  const d = 2
-  const e = ['B','KB','MB','GB','TB','PB','EB','ZB','YB']
-  const f = Math.floor(Math.log(a) / Math.log(c))
-  const v = parseFloat((a / Math.pow(c, f)).toFixed(d))
-  return (v > 0) ? `${v}${e[f]}` : ''
-}
 
 class Title extends Component {
   constructor(props) {
