@@ -1,0 +1,10 @@
+.noContent{
+  max-width: 38em;
+  margin: 0 auto;
+  text-align: center;
+  padding: 1em;
+}
+
+.noContent__text{
+  margin-bottom: 1em;
+}

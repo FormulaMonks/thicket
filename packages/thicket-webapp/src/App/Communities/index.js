@@ -5,6 +5,7 @@ import { Modal, Button, Input } from 'thicket-elements'
 import AddButton from '../../components/AddButton'
 import './Communities.css'
 import store from '../../database/store'
+import NoContent from './NoContent'
 import Card from './Card'
 
 const { communities } = store
@@ -35,13 +36,16 @@ class Communities extends Component {
               <AddButton onClick={() => this.setState({ creating: true })} />
             </div>
           </div>
-          <ul className="communities__list">
+          {data.length 
+            ? <ul className="communities__list">
             {data.map(communityId => <li key={communityId} className="communities__element">
               <Link to={`/c/${communityId}`} className="communities__link">
                 <Card communityId={communityId} />
               </Link>
             </li>)}
           </ul>
+            : <NoContent onCreate={() => this.onCreateNew({ newId: uuid(), createdBy: this.props.nickname})} />
+          }
         </div>,
       creating && <Modal key="modal" disableBodyScroll className="communities__new">
         <h3 className="communities__title">Create New Community</h3>
@@ -71,12 +75,19 @@ class Communities extends Component {
     this.setState({ data })
   }
 
-  onSubmit = async e => {
+  onSubmit =  e => {
     e.preventDefault()
-    const newId = uuid()
-    const community = await communities.post(newId)
-    community.post({ title: this.form.elements.title.value, createdBy: this.props.nickname })
+    this.onCreateNew({
+      newId: uuid(),
+      title: this.form.elements.title.value,
+      createdBy: this.props.nickname
+    })
     this.setState({ creating: false })
+  }
+
+  onCreateNew = async ({ newId, ...data }) => {
+    const community = await communities.post(newId)
+    community.post({ ...data })
   }
 
 }
