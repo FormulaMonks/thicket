@@ -43,6 +43,7 @@ class App extends Component {
       <div className="app app--with-fixed-header">
         <header className="app__header">
           <Link to="/communities"><Logo /></Link>
+          <small className="app__about">peer 2 peer gif app, uncensorable, based on IPFS... <Link to="/welcome">read more</Link></small>
           <Link to="/profile"><UserProfile nickname={nickname} /></Link>
         </header>
         <Switch>

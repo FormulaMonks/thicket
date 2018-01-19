@@ -24,9 +24,20 @@
   background-color: unset;
 }
 
+.app__about{
+  display: none;
+  flex: 1;
+  background: inherit;
+  margin-left: 1em;
+}
+
 @media (min-width: 600px){
   .app__header{
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) 100%);
     background-color: #102131;
+  }
+
+  .app__about{
+    display: block;
   }
 }
