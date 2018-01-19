@@ -17,6 +17,8 @@ class Communities extends Component {
   componentDidMount() {
     this.fetch()
     communities.on('update', this.fetch)
+    // fix scroll when coming from communities
+    window.scrollTo(0, 0)
   }
 
   componentWillUnmount() {
