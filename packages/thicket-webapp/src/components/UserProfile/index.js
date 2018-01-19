@@ -5,6 +5,6 @@ import './UserProfile.css'
 
 export default ({ nickname }) => (
   <div className="userProfile">
-    <UserName str={nickname} /> <img src={editSvg} alt="Edit profile" />
+    <UserName str={nickname} /> <img src={editSvg} alt="Edit profile" className="userProfile__img" />
   </div>
 )

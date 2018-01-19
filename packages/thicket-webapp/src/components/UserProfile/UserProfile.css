@@ -1,4 +1,9 @@
 .userProfile{
   display: flex;
   align-items: center;
+  margin-right: 0.5em;
+}
+
+.userProfile__img{
+  margin-left: 0.5em;
 }
