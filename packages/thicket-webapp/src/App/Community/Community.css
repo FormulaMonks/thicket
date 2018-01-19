@@ -40,6 +40,10 @@
   margin: 1em;
 }
 
+.community__btn img{
+  max-width: unset;
+}
+
 .community__leave{
   border: none;
   display: flex;
