@@ -182,8 +182,7 @@
     padding-right: 2em;
   }
   .Welcome-heartGif img {
-    height: 80%;
-    width: auto;
+    width:80%;
   }
   .Welcome-whyGifsText {
     flex: 2;
