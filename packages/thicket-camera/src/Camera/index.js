@@ -73,10 +73,13 @@ export default class Camera extends Component {
   }
 
   capture = () => {
+    const { onShooting=()=>{} } = this.props
     if (this.state.stream) {
+      onShooting(true)
       setTimeout(() => {
         this.stopVideo()
         this.setState({ mode: LOADING })
+        onShooting(false)
       }, GIF_DURATION + 500);
       this.setState({ mode: SHOOTING }, () => {
         gifshot.createGIF({
