@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Camera from 'thicket-camera'
 import Customize from './Customize'
 import CameraAccess from '../CameraAccess'
+import './CreateGif.css'
 
 const ACCESS = 'request access to the camera'
 const CAMERA = 'user is interacting with the camera process'
@@ -14,9 +15,26 @@ class CreateGif extends Component {
   render() {
     const { mode } = this.state
     return [
-      mode === ACCESS && <CameraAccess key="access" onGranted={() => this.setState({ mode: CAMERA })} />,
-      mode === CAMERA && <Camera key="camera" onSave={src => this.setState({ src, mode: CUSTOMIZE})} />,
-      mode === CUSTOMIZE && <Customize key="customizing" onSubmit={this.props.onSave} nickname={this.props.nickname} src={this.state.src} onCancel={this.reset} />,
+      mode === ACCESS && <CameraAccess
+        key="access"
+        onGranted={() => this.setState({ mode: CAMERA })}
+      />,
+      mode === CAMERA && <Camera
+        key="camera"
+        onSave={src => this.setState({ src, mode: CUSTOMIZE})}
+        classNames={{
+          controlsWrap: 'createGif__wrap',
+          controlsTitle: 'createGif__controlsTitle',
+          controlsButton: 'createGif__controlsButton',
+        }}
+      />,
+      mode === CUSTOMIZE && <Customize
+        key="customizing"
+        onSubmit={this.props.onSave}
+        nickname={this.props.nickname}
+        src={this.state.src}
+        onCancel={this.reset}
+      />,
     ]
   }
 
