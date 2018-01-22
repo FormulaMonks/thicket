@@ -61,6 +61,7 @@ class Community extends Component {
     onlinePeers: [],
     size: 0,
     colors: [],
+    shooting: false,
   }
 
   async componentDidMount() {
@@ -132,8 +133,16 @@ class Community extends Component {
         <button onClick={this.onLeave}>Leave Community</button>
         <button onClick={() => this.setState({ mode: null })}>Cancel</button>
       </Modal>,
-      mode === CREATE && <div key="create" className="community__create">
-          <CreateGif community={c} nickname={nickname} onSave={this.onSave} />
+      mode === CREATE && <div
+          key="create"
+          className={`community__create${this.state.shooting ? ' community__create-onTop' : ''}`}
+        >
+          <CreateGif
+            community={c}
+            nickname={nickname}
+            onSave={this.onSave}
+            onShooting={shooting => this.setState({ shooting }) }
+          />
         </div>,
       <Route
         key="publication"
