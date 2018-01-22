@@ -12,7 +12,6 @@ const Wrap = styled.div`
   height: 100%;
   display: flex;
   position: relative;
-  overflow: hidden;
   flex-direction: column;
   justify-content: center;
   align-items: center;
