@@ -60,3 +60,35 @@
   background: unset;
   z-index: 2;
 }
+
+.createGif__reviewWrap{
+  text-align: center;
+}
+
+.createGif__reviewPreview{
+  margin-top: 1em;
+}
+
+.createGif__reviewControlsWrap{
+  display: block;
+}
+
+.createGif__reviewApprove{
+  margin-bottom: 1em;
+}
+
+@media(min-width: 600px) {
+  .createGif__reviewWrap{
+    width: 50%;
+  }
+
+  .createGif__reviewControlsWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .createGif__reviewApprove{
+    order: 1;
+  }
+}

@@ -12,6 +12,14 @@ class CreateGif extends Component {
 
   state = { mode: ACCESS, src: null, caption: '', nickname: '' }
 
+  componentDidMount() {
+    document.querySelector('body').style.overflow = 'hidden'
+  }
+
+  componentWillUnMount() {
+    document.querySelector('body').style.overflow = 'auto'
+  }
+
   render() {
     const { mode } = this.state
     return [
@@ -29,6 +37,10 @@ class CreateGif extends Component {
           progressBarWrap: 'createGif__progressBarWrap',
           progressBarBar: 'createGif__progressBarBar',
           progressLabel: 'createGif__progressLabel',
+          reviewWrap: 'createGif__reviewWrap',
+          reviewPreview: 'createGif__reviewPreview',
+          reviewControlsWrap: 'createGif__reviewControlsWrap',
+          reviewApprove: 'createGif__reviewApprove',
         }}
         onShooting={this.props.onShooting}
       />,
