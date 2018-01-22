@@ -26,7 +26,11 @@ class CreateGif extends Component {
           controlsWrap: 'createGif__wrap',
           controlsTitle: 'createGif__controlsTitle',
           controlsButton: 'createGif__controlsButton',
+          progressBarWrap: 'createGif__progressBarWrap',
+          progressBarBar: 'createGif__progressBarBar',
+          progressLabel: 'createGif__progressLabel',
         }}
+        onShooting={this.props.onShooting}
       />,
       mode === CUSTOMIZE && <Customize
         key="customizing"

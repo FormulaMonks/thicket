@@ -36,4 +36,27 @@
   background: rgba(246, 249, 253, 0.3);
 }
 
-.createGif__{}
+.createGif__progressBarWrap{
+  background: unset;
+}
+
+.createGif__progressBarWrap::after{
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: rgba(246,249,253,0.6);
+}
+
+.createGif__progressBarBar{
+  background: linear-gradient(36.85deg, #F7618B -6.19%, #2A7AFF 135.42%);
+  z-index: 1;
+}
+
+.createGif__progressLabel{
+  background: unset;
+  z-index: 2;
+}
