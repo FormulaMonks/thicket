@@ -52,7 +52,7 @@ const ShootBtn = styled.button`
 const Controls = props => {
   const { controlsWrap, controlsTitle, controlsButton } = props.classNames
   return <Wrap className={controlsWrap}>
-    <Title className={controlsTitle}>Create a GIF</Title>
+    <Title className={controlsTitle}>Create a GIF!</Title>
     <ShootBtn className={controlsButton} onClick={props.onClick}>Shoot</ShootBtn>
   </Wrap>
 }
