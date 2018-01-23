@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Input, Modal, Spinner } from 'thicket-elements'
+import { Input, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -14,6 +14,7 @@ import randomColor from 'randomcolor'
 import AddButton from '../../components/AddButton'
 import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
+import Leave from './Leave'
 import './Community.css'
 
 const { user, communities } = store
@@ -126,13 +127,7 @@ class Community extends Component {
         <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
         {loading ? <Spinner className="community__spinner" /> : <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />}
       </div>,
-      mode === LEAVE && <Modal key="leave" disableBodyScroll>
-        <h3>Leave Community?</h3>
-        <div>Are you sure you want to leave the "{title}" Community?</div>
-        <div>Note: You will no longer be able to view or contribute content to this Community. Content will remain in the Community, but you will need to be reinvited to rejoin.</div>
-        <button onClick={this.onLeave}>Leave Community</button>
-        <button onClick={() => this.setState({ mode: null })}>Cancel</button>
-      </Modal>,
+      mode === LEAVE && <Leave title={title} onLeave={this.onLeave} onCancel={() => this.setState({ mode: null })} />,
       mode === CREATE && <div
           key="create"
           className={`community__create${this.state.shooting ? ' community__create-onTop' : ''}`}
