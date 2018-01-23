@@ -125,7 +125,20 @@ class Community extends Component {
         <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
         <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
         <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
-        {loading ? <Spinner className="community__spinner" /> : <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />}
+        {loading
+          ? <div
+              key="spinner"
+              className="community__spinner"
+            >
+              <Spinner />
+            </div>
+          : <Grid
+              key="grid"
+              community={c}
+              list={list}
+              onNew={() => this.setState({ mode: CREATE })}
+            />
+        }
       </div>,
       mode === LEAVE && <Leave title={title} onLeave={this.onLeave} onCancel={() => this.setState({ mode: null })} />,
       mode === CREATE && <div
