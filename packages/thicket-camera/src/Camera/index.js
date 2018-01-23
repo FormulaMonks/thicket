@@ -99,7 +99,7 @@ export default class Camera extends Component {
 
   startVideo = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-    this.video.src = window.URL.createObjectURL(stream)
+    this.video.srcObject = stream
     await this.video.play()
     this.setState({ stream })
   }

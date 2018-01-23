@@ -4509,9 +4509,9 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-gifshot@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/gifshot/-/gifshot-0.3.2.tgz#fd3f040f2184cee22dd95242c69d86d83fb27aa3"
+gifshot@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/gifshot/-/gifshot-0.4.5.tgz#e3cb570203a3b139ff3069d7578098a29c03b0f8"
 
 git-raw-commits@^1.2.0:
   version "1.2.0"
