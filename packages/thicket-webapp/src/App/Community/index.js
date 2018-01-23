@@ -126,7 +126,10 @@ class Community extends Component {
         </button>
         <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
         <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
-        <div className="community__invite-wrap">
+        <div
+          className="community__invite-wrap"
+          title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
+        >
           <input
             className="community__invite"
             type="text"
