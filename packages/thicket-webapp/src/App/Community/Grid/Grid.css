@@ -83,6 +83,7 @@
   .communityGrid{
     grid-column: 1 / 10;
     grid-row: 3;
-    justify-content: start;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
