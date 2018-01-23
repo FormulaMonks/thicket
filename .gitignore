@@ -11,3 +11,5 @@ yarn-error.log*
 # use `yarn` to install packages, not `npm`
 # and thus ignore any locks accidentally created with npm >= 5
 package-lock.json
+
+.env

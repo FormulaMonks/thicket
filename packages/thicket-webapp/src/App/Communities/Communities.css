@@ -13,13 +13,6 @@
   align-items: center;
 }
 
-.communities__new{
-  border: 0;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
 .communities__count{
   display: none;
   margin-right: 0.5em;

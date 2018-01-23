@@ -11,8 +11,12 @@
 }
 
 .community__back{
-  display: flex;
   grid-column: 1 / -1;
+}
+
+.community__back h3{
+  display: flex;
+  align-items: center;
 }
 
 .community__arrow{
@@ -34,6 +38,10 @@
   grid-row-start: 3;
   align-items: center;
   margin: 1em;
+}
+
+.community__btn img{
+  max-width: unset;
 }
 
 .community__leave{
@@ -60,50 +68,29 @@
 .community__new{
   grid-column: 12;
   border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.community__size--aligned-right,
-.community__new--aligned-right{
-  margin-right: 0;
-}
-
-.community__cross{
-  height: 30px;
-  width: 30px;
+.community__invite-wrap{
   position: relative;
-}
-
-.community__cross-vertical{
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 2px;
-  left: calc(50% - 1px);
-  background: #FFF;
-}
-
-.community__cross-horizontal{
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  top: calc(50% - 1px);
-  background: #FFF;
+  grid-row: 4;
+  grid-column: 1 / -1;
 }
 
 .community__invite{
-  grid-row: 4;
-  grid-column: 1 / -1;
   background: #FFF;
-  padding: 1em;
+  padding: 1.5em;
+  padding-left: 3.5em;
   width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.community__invite-img{
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 13.5px);
+  left: 8px;
+  background: unset;
 }
 
 .community__spinner{
@@ -114,26 +101,35 @@
 
 .community__create{
   position: absolute;
-  z-index: 12;
-  top: 0;
+  top: 55px;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1;
+  overflow: auto;
+}
+
+.community__create-onTop{
+  top: 0;
+  z-index: 12;
 }
 
 /* desktop */
 @media (min-width: 600px){
-  .community__new:hover .community__cross-vertical,
-  .community__new:hover .community__cross-horizontal{
-    background: #102131;
+  .community__create{
+    top: 69px;
   }
 
+  .community__create-onTop{
+    top: 0;
+    z-index: 12;
+  }
   .community__arrow{
     display: none;
   }
 
   .community__arrow--right{
-    display: block;
+    display: inline-block;
   }
 
   .community__leave-label{
@@ -146,9 +142,9 @@
   .community__leave,
   .community__size,
   .community__new,
-  .community__invite{
-    grid-row: initial;
-    grid-column: initial;
+  .community__invite-wrap{
+    grid-row: unset;
+    grid-column: unset;
   }
 
   .community__back,
@@ -164,11 +160,11 @@
 
   .community__size,
   .community__new,
-  .community__invite{
+  .community__invite-wrap{
     grid-row: 2;
   }
 
-  .community__invite{
+  .community__invite-wrap{
     grid-column: 1 / 7;
   }
 
@@ -184,6 +180,9 @@
 
   .community__spinner{
     grid-column: 1 / 10;
-    max-width: 60%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

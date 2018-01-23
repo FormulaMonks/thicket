@@ -65,11 +65,25 @@ const Meta = styled.div`
   z-index: 2;
 `
 
+const Title = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 16em;
+`
+
 const Extra = styled.div`
   color: #677897;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+`
+
+const CreatedBy = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 75%;
 `
 
 const Hover = styled.div`
@@ -89,9 +103,9 @@ const CommunityCard = ({
   <Card {...rest}>
     <Favorite src={src} alt="" />
     <Meta className="communityCard__meta">
-      <div>{title}</div>
+      <Title>{title}</Title>
       <Extra className="communityCard__extra">
-        <div>{createdBy}</div>
+        <CreatedBy>{createdBy}</CreatedBy>
         <small>{usage}</small>
       </Extra>
     </Meta>

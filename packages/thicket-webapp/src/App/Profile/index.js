@@ -24,7 +24,7 @@ class Profile extends Component {
     if (history.length > 2) {
       history.goBack()
     }
-    history.push('/')
+    history.push('/communities')
   }
 
   onSubmit = e => {

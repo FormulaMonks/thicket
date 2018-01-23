@@ -3,6 +3,10 @@
   display: flex;
 }
 
+.publication__link h3{
+  margin-bottom: 0;
+}
+
 .publication__title{
   margin-left: 0.5em;
 }

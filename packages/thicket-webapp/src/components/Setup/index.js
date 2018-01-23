@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
-import { DEFAULT_PUBLICATIONS } from '../../utils/constants'
+import { DEFAULT_PUBLICATIONS, DEFAULT_PUBLICATIONS_SIZE } from '../../utils/constants'
 import { Spinner } from 'thicket-elements'
 import store from '../../database/store'
 import './Setup.css'
@@ -14,7 +14,7 @@ export default class Setup extends Component {
     // new community
     const id = uuid()
     const community = await communities.post(id)
-    community.post({ createdBy: nickname })
+    community.post({ createdBy: nickname, size: DEFAULT_PUBLICATIONS_SIZE })
     const { publications } = community
     for(let p of DEFAULT_PUBLICATIONS) {
       await publications.postByHash({ ...p, nickname })

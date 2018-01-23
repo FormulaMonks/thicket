@@ -1,26 +1,27 @@
 import React, { Component } from 'react'
 import store from '../../../database/store'
 import { CommunityCard } from 'thicket-elements'
+import { formatBytes } from '../../../utils/sizeFormat'
 
 const { communities } = store
 
 class Card extends Component {
 
-  state = { title: '...', createdBy: '...', usage: '' }
+  state = { title: '...', createdBy: '...', size: '' }
 
   async componentDidMount() {
     const community = await communities.get(this.props.communityId)
-    const { title, createdBy } = await community.get()
-    this.setState({ title, createdBy: `Created by ${createdBy}` })
+    const { title, createdBy, size } = await community.get()
+    this.setState({ title, createdBy: `Created by ${createdBy}`, size })
   }
 
   render() {
-    const { title, createdBy, usage } = this.state
+    const { title, createdBy, size } = this.state
 
     return <CommunityCard
       title={title}
       createdBy={createdBy}
-      usage={usage}
+      usage={formatBytes(size)}
     />
   }
 }

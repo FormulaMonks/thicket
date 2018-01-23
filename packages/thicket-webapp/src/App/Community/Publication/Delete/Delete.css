@@ -1,0 +1,38 @@
+.delete{
+  color: #102131;
+  text-align: center;
+  padding: 2em;
+}
+
+.delete__title{
+  color: #46569F;
+}
+
+.delete__btns{
+  margin-top: 1em;
+}
+
+.delete__confirm{
+  margin-bottom: 1em;
+}
+
+.delete__msgs{
+  margin: 1em 0;
+}
+
+.delete__caption{
+  color: #F7618B;
+}
+
+@media (min-width: 600px) {
+  .delete__btns{
+    display: flex;
+    justify-content: center;
+  }
+
+  .delete__confirm{
+    order: 1;
+    margin: 0;
+    margin-left: 1em;
+  }
+}

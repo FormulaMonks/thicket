@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Styles, Input, Modal, Spinner } from 'thicket-elements'
+import { Input, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -11,24 +11,19 @@ import queryString from 'query-string'
 import { getCommunityInviteLink } from '../../utils/links'
 import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
+import AddButton from '../../components/AddButton'
+import { formatBytes } from '../../utils/sizeFormat'
+import NotFound from '../404'
+import NoContent from './NoContent'
+import Leave from './Leave'
+import shareSvg from './share.svg'
 import './Community.css'
 
-const { linearGradient } = Styles
 const { user, communities } = store
 const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
 const LEAVE = 'user is displayed the confirm box to leave the community'
 const isItMobile = document.documentElement.clientWidth < 600
-
-const formatBytes = a => {
-  if (0 === a) return ''
-  const c = 1024
-  const d = 2
-  const e = ['B','KB','MB','GB','TB','PB','EB','ZB','YB']
-  const f = Math.floor(Math.log(a) / Math.log(c))
-  const v = parseFloat((a / Math.pow(c, f)).toFixed(d))
-  return (v > 0) ? `${v}${e[f]}` : ''
-}
 
 class Title extends Component {
   constructor(props) {
@@ -69,6 +64,7 @@ class Community extends Component {
     onlinePeers: [],
     size: 0,
     colors: [],
+    shooting: false,
   }
 
   async componentDidMount() {
@@ -96,6 +92,8 @@ class Community extends Component {
     community.on('update', this.fetchMetadata)
     community.on('peer', this.fetchOnlinePeers)
     publications.on('update', this.fetchPublications)
+    // fix scroll when coming from communities
+    window.scrollTo(0, 0)
   }
 
   async componentWillUnmount() {
@@ -113,13 +111,13 @@ class Community extends Component {
     const { c } = match.params
 
     if (mode === UNINVITED) {
-      return <div>404</div>
+      return <NotFound history={this.props.history} />
     }
 
     return [
       ((isItMobile && !mode && match.isExact) || !isItMobile) && <div key="community" className="community">
         <Link to="/communities" className="community__back">
-          <img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /> 
+          <h3><img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /></h3>
         </Link>
         <Title title={title} onSubmit={this.onSaveTitle} />
         <OnlinePeers onlinePeers={onlinePeers} colors={colors} />
@@ -127,24 +125,52 @@ class Community extends Component {
           <img src={leaveSvg} alt="Leave community" /><span className="community__leave-label">Leave</span>
         </button>
         <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
-        <button className="community__new community__btn community__new--aligned-right" style={{ background: linearGradient }} onClick={() => this.setState({ mode: CREATE })}>
-          <div className="community__cross">
-            <div className="community__cross-vertical"></div>
-            <div className="community__cross-horizontal"></div>
-          </div>
-        </button>
-        <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
-        {loading ? <Spinner className="community__spinner" /> : <Grid key="grid" community={c} list={list} onNew={() => this.setState({ mode: CREATE })} />}
+        <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
+        <div
+          className="community__invite-wrap"
+          title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
+        >
+          <input
+            className="community__invite"
+            type="text"
+            readOnly
+            value={getCommunityInviteLink(c)}
+            onClick={e => e.target.select()}
+          />
+          <img
+            src={shareSvg}
+            alt="Share this community"
+            className="community__invite-img"
+          />
+        </div>
+        {loading
+          ? <div
+              key="spinner"
+              className="community__spinner"
+            >
+              <Spinner />
+            </div>
+          : list.length
+            ? <Grid
+                key="grid"
+                community={c}
+                list={list}
+                onNew={() => this.setState({ mode: CREATE })}
+              />
+            : <NoContent onCreate={() => this.setState({ mode: CREATE })} />
+        }
       </div>,
-      mode === LEAVE && <Modal key="leave" disableBodyScroll>
-        <h3>Leave Community?</h3>
-        <div>Are you sure you want to leave the "{title}" Community?</div>
-        <div>Note: You will no longer be able to view or contribute content to this Community. Content will remain in the Community, but you will need to be reinvited to rejoin.</div>
-        <button onClick={this.onLeave}>Leave Community</button>
-        <button onClick={() => this.setState({ mode: null })}>Cancel</button>
-      </Modal>,
-      mode === CREATE && <div key="create" className="community__create">
-          <CreateGif community={c} nickname={nickname} onSave={this.onSave} />
+      mode === LEAVE && <Leave title={title} onLeave={this.onLeave} onCancel={() => this.setState({ mode: null })} />,
+      mode === CREATE && <div
+          key="create"
+          className={`community__create${this.state.shooting ? ' community__create-onTop' : ''}`}
+        >
+          <CreateGif
+            community={c}
+            nickname={nickname}
+            onSave={this.onSave}
+            onShooting={shooting => this.setState({ shooting }) }
+          />
         </div>,
       <Route
         key="publication"

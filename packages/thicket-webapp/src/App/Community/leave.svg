@@ -1,13 +1,13 @@
 <svg width="23" height="23" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <title>angle-right-circle</title>
 <desc>Created using Figma</desc>
-<g id="Canvas" transform="translate(-24849 -25865)">
+<g id="Canvas" transform="translate(-23762 -25780)">
 <g id="angle-right-circle">
 <g id="Vector">
-<use xlink:href="#path0_fill" transform="translate(24849 25865)" fill="#CFD3D6"/>
+<use xlink:href="#path0_fill" transform="translate(23762 25780)" fill="#FFFFFF" fill-opacity="0.8"/>
 </g>
 <g id="Vector">
-<use xlink:href="#path1_fill" transform="translate(24858 25871.3)" fill="#CFD3D6"/>
+<use xlink:href="#path1_fill" transform="translate(23771 25786.3)" fill="#FFFFFF" fill-opacity="0.8"/>
 </g>
 </g>
 </g>

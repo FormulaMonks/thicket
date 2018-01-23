@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import uuid from 'uuid'
-import { Modal, Button, Input, Icons, Icon } from 'thicket-elements'
+import { Modal, Button, Input } from 'thicket-elements'
+import AddButton from '../../components/AddButton'
 import './Communities.css'
 import store from '../../database/store'
+import NoContent from './NoContent'
 import Card from './Card'
 
 const { communities } = store
-const { addSvg } = Icons
 
 class Communities extends Component {
 
@@ -16,6 +17,8 @@ class Communities extends Component {
   componentDidMount() {
     this.fetch()
     communities.on('update', this.fetch)
+    // fix scroll when coming from communities
+    window.scrollTo(0, 0)
   }
 
   componentWillUnmount() {
@@ -29,24 +32,22 @@ class Communities extends Component {
       (!creating || document.documentElement.clientWidth > 600) &&
         <div key="communities" className="communities">
           <div className="communities__header">
-            <h2 className="communities__title">Your communities</h2>
+            <h3 className="communities__title">Your communities</h3>
             <div className="communities__wrap">
-              <div className="communities__count">{data.length} communities</div>
-              <button
-                className="communities__new"
-                onClick={() => this.setState({ creating: true })}
-              >
-                <Icon src={addSvg} bgColor="inherit" />
-              </button>
+              <div className="communities__count">{data.length ? data.length === 1 ? '1 community' : `${data.length} communities` : ''}</div>
+              <AddButton onClick={() => this.setState({ creating: true })} />
             </div>
           </div>
-          <ul className="communities__list">
+          {data.length 
+            ? <ul className="communities__list">
             {data.map(communityId => <li key={communityId} className="communities__element">
               <Link to={`/c/${communityId}`} className="communities__link">
                 <Card communityId={communityId} />
               </Link>
             </li>)}
           </ul>
+            : <NoContent onCreate={() => this.onCreateNew({ newId: uuid(), createdBy: this.props.nickname})} />
+          }
         </div>,
       creating && <Modal key="modal" disableBodyScroll className="communities__new">
         <h3 className="communities__title">Create New Community</h3>
@@ -76,12 +77,19 @@ class Communities extends Component {
     this.setState({ data })
   }
 
-  onSubmit = async e => {
+  onSubmit =  e => {
     e.preventDefault()
-    const newId = uuid()
-    const community = await communities.post(newId)
-    community.post({ title: this.form.elements.title.value, createdBy: this.props.nickname })
+    this.onCreateNew({
+      newId: uuid(),
+      title: this.form.elements.title.value,
+      createdBy: this.props.nickname
+    })
     this.setState({ creating: false })
+  }
+
+  onCreateNew = async ({ newId, ...data }) => {
+    const community = await communities.post(newId)
+    community.post({ ...data })
   }
 
 }

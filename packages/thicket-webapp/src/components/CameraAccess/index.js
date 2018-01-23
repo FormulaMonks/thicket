@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
-import { Button } from 'thicket-elements'
+import { Button, Spinner } from 'thicket-elements'
 import DetectRTC from 'detectrtc'
+import './CameraAccess.css'
+import cameraSvg from './camera.svg'
 
 class CameraAccess extends Component {
 
-  state = { accepted: false, rejected: false }
+  state = { accepted: false, rejected: false, loading: true }
 
   componentDidMount() {
     DetectRTC.load(() =>
       this.setState(
-        { accepted: DetectRTC.isWebsiteHasWebcamPermissions },
+        {
+          loading: false,
+          accepted: DetectRTC.isWebsiteHasWebcamPermissions
+        },
         () => {
           if (this.state.accepted) {
             this.props.onGranted()
@@ -20,13 +25,20 @@ class CameraAccess extends Component {
 
   render() {
     if (this.state.rejected) {
-      return <h2>To begin creating GIFs please grant us access to your camera.</h2>
+      return <div className="cameraAccess">
+        <h2>To begin creating GIFs please grant us access to your camera.</h2>
+      </div>
     }
 
-    return [
-      <h2 key="title">We’re going to need to access your camera to begin creating GIFs.</h2>,
-      <Button onClick={this.requestAccess} key="done">Camera Permissions</Button>,
-    ]
+    if (this.state.loading) {
+      return <div className="cameraAccess"><Spinner /></div>
+    }
+
+    return <div className="cameraAccess">
+      <img src={cameraSvg} alt="Camera" />
+      <h3>Thicket is going to need to access your camera to begin creating GIFs.</h3>
+      <Button onClick={this.requestAccess}>Enable Camera Access</Button>
+    </div>
   }
 
   requestAccess = () =>

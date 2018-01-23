@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import UserName from '../../../components/UserName'
 import usersSvg from './users.svg'
+import randomColor from 'randomcolor'
 import './OnlinePeers.css'
 
 class OnlinePeers extends Component {
@@ -18,6 +19,8 @@ class OnlinePeers extends Component {
       p.set(c, p.get(c) + 1)
       return p
     }, new Map())
+    // (you) color same as header
+    colors[0] = randomColor({ luminosity: 'dark', seed: onlinePeers[0] })
 
     return <div className="onlinePeers onlinePeers--aligned-left">
      <div className="onlinePeers-count">

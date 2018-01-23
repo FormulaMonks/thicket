@@ -1,0 +1,28 @@
+<svg width="491" height="214" viewBox="0 0 491 214" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Welcome to Thicket, a simple web app for creating and sharing GIFs!</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-60724 -24310)">
+<g id="Welcome to Thicket, a simple web app for creating and sharing GIFs!">
+<use xlink:href="#path0_fill" transform="translate(60724.4 24310.1)" fill="url(#paint0_linear)"/>
+<use xlink:href="#path1_fill" transform="translate(60724.4 24310.1)" fill="url(#paint1_linear)"/>
+<use xlink:href="#path2_fill" transform="translate(60724.4 24310.1)" fill="url(#paint2_linear)"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1560.39 -693.16 1592.88 -679.023 1064.67 436.777)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1560.39 -693.16 1592.88 -679.023 1064.67 436.777)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<linearGradient id="paint2_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-1560.39 -693.16 1592.88 -679.023 1064.67 436.777)">
+<stop offset="0" stop-color="#F7618B"/>
+<stop offset="1" stop-color="#2A7AFF"/>
+</linearGradient>
+<path id="path0_fill" d="M 155.555 157.538L 119.854 157.538L 119.854 210.381L 106.537 210.381L 106.537 157.538L 0 157.538L 0 148.046L 102.711 2.12507L 119.854 2.12507L 119.854 145.354L 155.555 145.354L 155.555 157.538ZM 106.537 145.354L 106.537 86.136C 106.537 57.6129 107.198 33.6705 108.52 14.3088L 107.387 14.3088C 105.498 17.8033 99.6892 26.6814 89.9611 40.9429L 16.8589 145.354L 106.537 145.354Z"/>
+<path id="path1_fill" d="M 310.577 106.253C 310.577 142.615 305.004 169.533 293.86 187.006C 282.809 204.478 266.045 213.215 243.566 213.215C 221.938 213.215 205.504 204.242 194.265 186.297C 183.026 168.258 177.406 141.577 177.406 106.253C 177.406 70.1744 182.837 43.4458 193.698 26.0675C 204.654 8.68916 221.277 0 243.566 0C 265.384 0 282.007 9.01972 293.435 27.0592C 304.863 45.0042 310.577 71.4022 310.577 106.253ZM 192.707 106.253C 192.707 138.365 196.909 162.119 205.315 177.514C 213.721 192.814 226.471 200.464 243.566 200.464C 261.417 200.464 274.404 192.531 282.526 176.664C 290.743 160.797 294.851 137.326 294.851 106.253C 294.851 75.6523 290.743 52.4183 282.526 36.5511C 274.404 20.684 261.417 12.7504 243.566 12.7504C 225.716 12.7504 212.777 20.684 204.749 36.5511C 196.721 52.4183 192.707 75.6523 192.707 106.253Z"/>
+<path id="path2_fill" d="M 489.966 157.538L 454.265 157.538L 454.265 210.381L 440.948 210.381L 440.948 157.538L 334.412 157.538L 334.412 148.046L 437.123 2.12507L 454.265 2.12507L 454.265 145.354L 489.966 145.354L 489.966 157.538ZM 440.948 145.354L 440.948 86.136C 440.948 57.6129 441.609 33.6705 442.932 14.3088L 441.798 14.3088C 439.909 17.8033 434.101 26.6814 424.373 40.9429L 351.27 145.354L 440.948 145.354Z"/>
+</defs>
+</svg>

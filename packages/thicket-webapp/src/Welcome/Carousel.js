@@ -4,7 +4,6 @@ import './Carousel.css'
 const clampTo = ([min, max], val) =>
   val <= min ? min : val >= max ? max : val;
 
-
 export default class Carousel extends React.Component {
   state = {
     currentSlide: 0,
@@ -47,12 +46,14 @@ export default class Carousel extends React.Component {
       [0, slideCount - 1],
       -Math.round(left / screenWidth)
     )
-    this.setState({beingTouched: false}, () =>
-      this.setState({
-        currentSlide: nearestSlide,
-        left: `${nearestSlide * -100}vw`,
-      })
-    )
+    this.setState({beingTouched: false}, () => {
+      if (!isNaN(nearestSlide)) {
+        this.setState({
+          currentSlide: nearestSlide,
+          left: `${nearestSlide * -100}vw`,
+        })
+      }
+    })
   }
 
   render() {

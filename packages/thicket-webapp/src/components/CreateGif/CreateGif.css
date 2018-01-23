@@ -1,0 +1,94 @@
+.createGif__wrap{
+  background: rgba(16, 33, 49, 0.5);
+}
+
+.createGif__controlsTitle{
+  background-color: unset;
+}
+
+.createGif__controlsButton{
+  text-indent: -9999em;
+  height: 4em;
+  width: 4em;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  position: relative;
+  margin-top: unset;
+  background: linear-gradient(36.85deg, #F7618B -6.19%, #2A7AFF 135.42%);
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25), 0px -1px 6px rgba(0, 0, 0, 0.25);
+}
+
+.createGif__controlsButton::after{
+  display: none;
+}
+
+.createGif__controlsButton::before{
+  position: absolute;
+  left: -1em;
+  top: -1em;
+  padding: 1em;
+  height: 4em;
+  width: 4em;
+  border: unset;
+  border-radius: 50%;
+  content: '';
+  background: rgba(246, 249, 253, 0.3);
+}
+
+.createGif__progressBarWrap{
+  background: unset;
+}
+
+.createGif__progressBarWrap::after{
+  display: block;
+  content: '';
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background: rgba(246,249,253,0.6);
+}
+
+.createGif__progressBarBar{
+  background: linear-gradient(36.85deg, #F7618B -6.19%, #2A7AFF 135.42%);
+  z-index: 1;
+}
+
+.createGif__progressLabel{
+  background: unset;
+  z-index: 2;
+}
+
+.createGif__reviewWrap{
+  text-align: center;
+}
+
+.createGif__reviewPreview{
+  margin-top: 1em;
+}
+
+.createGif__reviewControlsWrap{
+  display: block;
+}
+
+.createGif__reviewApprove{
+  margin-bottom: 1em;
+}
+
+@media(min-width: 600px) {
+  .createGif__reviewWrap{
+    width: 50%;
+  }
+
+  .createGif__reviewControlsWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .createGif__reviewApprove{
+    order: 1;
+  }
+}

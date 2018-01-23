@@ -37,7 +37,7 @@ class IndividualGif extends Component {
       <div className="individualGif__message">
       {newUser && [
         <h3 key="subtitle">{nickname} and lots of other users are using Thicket to create and share GIFs. Get started for yourself today!</h3>,
-        <Button key="action" onClick={() => history.push('/welcome')}>Check out Thicket</Button>,
+        <Button key="action" onClick={() => history.push('/setup')}>Check out Thicket</Button>,
       ]}
       {!newUser && [
         <h3 key="subtitle">Hope you enjoyed this GIF. Head back to Your Communities to create and add content!</h3>,

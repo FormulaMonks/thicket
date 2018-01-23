@@ -12,7 +12,6 @@ const Wrap = styled.div`
   height: 100%;
   display: flex;
   position: relative;
-  overflow: hidden;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -73,10 +72,13 @@ export default class Camera extends Component {
   }
 
   capture = () => {
+    const { onShooting=()=>{} } = this.props
     if (this.state.stream) {
+      onShooting(true)
       setTimeout(() => {
         this.stopVideo()
         this.setState({ mode: LOADING })
+        onShooting(false)
       }, GIF_DURATION + 500);
       this.setState({ mode: SHOOTING }, () => {
         gifshot.createGIF({
@@ -97,7 +99,7 @@ export default class Camera extends Component {
 
   startVideo = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-    this.video.src = window.URL.createObjectURL(stream)
+    this.video.srcObject = stream
     await this.video.play()
     this.setState({ stream })
   }
@@ -108,7 +110,7 @@ export default class Camera extends Component {
       video.pause()
       video.src = ''
     }
-    this.state.stream.getTracks().forEach(t => t.stop())
+    this.state.stream && this.statestream.getTracks && this.state.stream.getTracks().forEach(t => t.stop())
   }
 
 }
