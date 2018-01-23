@@ -14,6 +14,7 @@ import randomColor from 'randomcolor'
 import AddButton from '../../components/AddButton'
 import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
+import NoContent from './NoContent'
 import Leave from './Leave'
 import './Community.css'
 
@@ -132,12 +133,14 @@ class Community extends Component {
             >
               <Spinner />
             </div>
-          : <Grid
-              key="grid"
-              community={c}
-              list={list}
-              onNew={() => this.setState({ mode: CREATE })}
-            />
+          : list.length
+            ? <Grid
+                key="grid"
+                community={c}
+                list={list}
+                onNew={() => this.setState({ mode: CREATE })}
+              />
+            : <NoContent onCreate={() => this.setState({ mode: CREATE })} />
         }
       </div>,
       mode === LEAVE && <Leave title={title} onLeave={this.onLeave} onCancel={() => this.setState({ mode: null })} />,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
-import sadSvg from './sad.svg'
+import sadSvg from '../../../images/sad.svg'
 import './NoContent.css'
 
 export default ({ onCreate }) => {
