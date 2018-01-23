@@ -70,12 +70,26 @@
   border: none;
 }
 
-.community__invite{
+.community__invite-wrap{
+  position: relative;
   grid-row: 4;
   grid-column: 1 / -1;
+}
+
+.community__invite{
   background: #FFF;
-  padding: 1em;
+  padding: 1.5em;
+  padding-left: 3.5em;
   width: 100%;
+  cursor: pointer;
+}
+
+.community__invite-img{
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - 13.5px);
+  left: 5px;
+  background: unset;
 }
 
 .community__spinner{
@@ -127,7 +141,7 @@
   .community__leave,
   .community__size,
   .community__new,
-  .community__invite{
+  .community__invite-wrap{
     grid-row: unset;
     grid-column: unset;
   }
@@ -145,11 +159,11 @@
 
   .community__size,
   .community__new,
-  .community__invite{
+  .community__invite-wrap{
     grid-row: 2;
   }
 
-  .community__invite{
+  .community__invite-wrap{
     grid-column: 1 / 7;
   }
 

@@ -16,6 +16,7 @@ import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
 import NoContent from './NoContent'
 import Leave from './Leave'
+import shareSvg from './share.svg'
 import './Community.css'
 
 const { user, communities } = store
@@ -125,7 +126,20 @@ class Community extends Component {
         </button>
         <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
         <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
-        <input className="community__invite" type="text" readOnly value={getCommunityInviteLink(c)} />
+        <div className="community__invite-wrap">
+          <input
+            className="community__invite"
+            type="text"
+            readOnly
+            value={getCommunityInviteLink(c)}
+            onClick={e => e.target.select()}
+          />
+          <img
+            src={shareSvg}
+            alt="Share this community"
+            className="community__invite-img"
+          />
+        </div>
         {loading
           ? <div
               key="spinner"
