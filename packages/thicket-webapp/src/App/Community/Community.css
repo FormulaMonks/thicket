@@ -82,13 +82,14 @@
   padding-left: 3.5em;
   width: 100%;
   cursor: pointer;
+  border-radius: 4px;
 }
 
 .community__invite-img{
   position: absolute;
   z-index: 1;
   top: calc(50% - 13.5px);
-  left: 5px;
+  left: 8px;
   background: unset;
 }
 
