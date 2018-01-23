@@ -49,7 +49,7 @@ class Publication extends Component {
 
     return [
       <Link key="link" className="publication__link" to={`/c/${c}`}>
-        <img src={backSvg} alt={`Back to ${title}`} /> <span className="publication__title">{title}</span>
+        <h3><img src={backSvg} alt={`Back to ${title}`} /> <span className="publication__title">{title}</span></h3>
       </Link>,
       <Modal
         key="modal"
