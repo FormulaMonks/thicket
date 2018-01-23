@@ -4,6 +4,7 @@ import Gif from '../../../components/Gif'
 import { Modal, Button } from 'thicket-elements'
 import store from '../../../database/store'
 import backSvg from '../../../images/arrow-left.svg'
+import Delete from './Delete'
 import './Publication.css'
 
 const { user, communities } = store
@@ -38,14 +39,11 @@ class Publication extends Component {
         disableBodyScroll
         onClose={() =>this.setState({ showDeleteConfimation: false })}
       >
-        <div>Confirm Delete GIF</div>
-        <div>Are you sure you want to delete this GIF:</div>
-        <div>{gif.caption}</div>
-        <div>NOTE: this action cannot be undone</div>
-        <div>
-          <Button onClick={() => this.setState({ showDeleteConfimation: false })}>Cancel</Button>
-          <Button onClick={this.onDelete}>Confirm</Button>
-        </div>
+        <Delete
+          caption={gif.caption}
+          onDelete={this.onDelete}
+          onCancel={() => this.setState({ showDeleteConfimation: false })}
+        />
       </Modal>
     }
 
