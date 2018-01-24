@@ -48,7 +48,7 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedSrcCat = async (node, id) => Promise.race([
-  new Promise(r => setTimeout(() => r(`http://ipfs.io/ipfs/${id}`), 3000)),
+  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 3000)),
   new Promise(async r => {
     const stream = await node.files.cat(id)
     r(toBase64(stream))
