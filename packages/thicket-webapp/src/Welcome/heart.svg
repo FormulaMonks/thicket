@@ -1,0 +1,40 @@
+<svg width="84" height="87" viewBox="0 0 84 87" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Group 8.4</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(1290 -22366)">
+<g id="Group 8.4">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(-1279.22 22383.5)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path1_stroke" transform="matrix(0.709585 0.704619 -0.709585 0.704619 -1290 22374.5)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(0.421057 0.907034 -0.90927 0.416208 -1278.94 22368)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path1_stroke" transform="matrix(-0.709585 0.704619 0.709585 0.704619 -1206 22374.5)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(-0.421057 0.907034 0.90927 0.416208 -1217.06 22368)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path1_stroke" transform="matrix(-0.709585 -0.704619 0.709585 -0.704619 -1217.98 22444.5)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(-0.421057 -0.907034 0.90927 -0.416208 -1229.04 22451)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path1_stroke" transform="matrix(0.709585 -0.704619 -0.709585 -0.704619 -1278.02 22444.5)" fill="#FFFFFF"/>
+</g>
+<g id="Line">
+<use xlink:href="#path2_stroke" transform="matrix(0.421057 -0.907034 -0.90927 -0.416208 -1266.96 22451)" fill="#FFFFFF"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 45.7765 2.494C 54.1651 2.494 60.967 9.17351 60.967 17.4112C 60.967 21.6435 59.1706 25.457 56.2878 28.1733L 31.7557 52.3856L 6.77808 27.7358C 4.15738 25.0546 2.54208 21.4212 2.54208 17.4112C 2.54208 9.17117 9.34398 2.494 17.7326 2.494C 24.0509 2.494 29.4662 6.28412 31.7557 11.6745C 34.0453 6.28412 39.4606 2.494 45.7788 2.494L 45.7765 2.494ZM 45.7765 -4.99789e-07C 40.1896 -4.99789e-07 35.0578 2.54781 31.7533 6.74736C 28.4513 2.54781 23.3195 -4.99789e-07 17.7302 -4.99789e-07C 7.95263 -4.99789e-07 -1.6359e-07 7.81187 -1.6359e-07 17.4112C -1.6359e-07 21.9219 1.75587 26.2034 4.94359 29.4647L 31.7533 55.9231L 58.0866 29.935C 61.565 26.6549 63.5067 22.1956 63.5067 17.4135C 63.5067 7.81187 55.5517 0.00234003 45.7765 0.00234003L 45.7765 -4.99789e-07Z"/>
+<path id="path1_stroke" d="M 0 0L 12.9463 0L 12.9463 -3L 0 -3L 0 0Z"/>
+<path id="path2_stroke" d="M 0 0L 12.9167 0L 12.9167 -3L 0 -3L 0 0Z"/>
+</defs>
+</svg>

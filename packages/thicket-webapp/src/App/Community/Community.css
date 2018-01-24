@@ -75,6 +75,7 @@
   z-index: 0;
   grid-row: 4;
   grid-column: 1 / -1;
+  z-index: 0;
 }
 
 .community__invite{
