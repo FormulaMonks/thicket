@@ -116,7 +116,7 @@ class Community extends Component {
 
     return [
       ((isItMobile && !mode && match.isExact) || !isItMobile) && <div key="community" className="community">
-        <Link to="/communities" className="community__back">
+        <Link key="link" to="/communities" className="community__back">
           <h3><img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /></h3>
         </Link>
         <Title title={title} onSubmit={this.onSaveTitle} />
