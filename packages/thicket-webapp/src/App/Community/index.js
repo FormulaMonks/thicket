@@ -160,7 +160,12 @@ class Community extends Component {
             : <NoContent onCreate={() => this.setState({ mode: CREATE })} />
         }
       </div>,
-      mode === LEAVE && <Leave title={title} onLeave={this.onLeave} onCancel={() => this.setState({ mode: null })} />,
+      mode === LEAVE && <Leave
+          key="leave"
+          title={title}
+          onLeave={this.onLeave}
+          onCancel={() => this.setState({ mode: null })}
+        />,
       mode === CREATE && <div
           key="create"
           className={`community__create${this.state.shooting ? ' community__create-onTop' : ''}`}
