@@ -55,7 +55,7 @@
     "fs-extra": "3.0.1",
     "gifshot": "0.4.5",
     "html-webpack-plugin": "2.29.0",
-    "ipfs": "^0.26.0",
+    "ipfs": "0.27.7",
     "ipfs-pubsub-room": "^0.3.0",
     "jest": "20.0.4",
     "localforage": "^1.5.0",

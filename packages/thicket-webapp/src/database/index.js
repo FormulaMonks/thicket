@@ -8,7 +8,6 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
-import concat from 'concat-stream'
 
 const ipfsConfig = {
   repo: 'thicket',
@@ -57,9 +56,12 @@ const toBase64 = src =>
 // if we try to fetch a file that is not in the reach of this node/peer this call will never finish/complete
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
-const timedPromiseConcatStream = async ({ hash, stream }) => Promise.race([
-  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${hash}`), 1000)),
-  new Promise(r => stream.pipe(concat(src => r(toBase64(src)))))
+const timedSrcCat = async (node, id) => Promise.race([
+  new Promise(r => setTimeout(() => r(`http://ipfs.io/ipfs/${id}`), 3000)),
+  new Promise(async r => {
+    const stream = await node.files.cat(id)
+    r(toBase64(stream))
+  })
 ])
 
 const mapIPFSIdstoNicknames = async(node, y) => {
@@ -141,8 +143,7 @@ class Database extends EventEmitter {
   publicationsGet = async (communityId, id) => {
     const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
-    const stream = await node.files.cat(id)
-    const src = await timedPromiseConcatStream({ hash: id, stream })
+    const src = await timedSrcCat(node, id)
     return { id, src, ...y.share.publicationsMetadata.get(id) }
   }
 
