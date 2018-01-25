@@ -28,11 +28,11 @@ const AsyncWelcome = Loadable({
   loading: Wrap
 })
 
-export default () => <Router>
+export default props => <Router>
   <Switch>
     <Redirect exact from="/" to="welcome" />
     <Route exact path="/welcome" render={props =>
       <AsyncWelcome {...props} />} />
-    <Route path="/" component={AsyncApp} />
+    <Route path="/" render={() => <AsyncApp {...props} />} />
   </Switch>
 </Router>

@@ -107,7 +107,7 @@ class Community extends Component {
 
   render() {
     const { list, mode, title, loading, onlinePeers, size, colors } = this.state
-    const { nickname, match } = this.props
+    const { nickname, match, onInviteHook=()=>{} } = this.props
     const { c } = match.params
 
     if (mode === UNINVITED) {
@@ -116,7 +116,7 @@ class Community extends Component {
 
     return [
       ((isItMobile && !mode && match.isExact) || !isItMobile) && <div key="community" className="community">
-        <Link key="link" to="/communities" className="community__back">
+        <Link to="/communities" className="community__back">
           <h3><img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /></h3>
         </Link>
         <Title title={title} onSubmit={this.onSaveTitle} />
@@ -135,7 +135,10 @@ class Community extends Component {
             type="text"
             readOnly
             value={getCommunityInviteLink(c)}
-            onClick={e => e.target.select()}
+            onClick={e => {
+              onInviteHook()
+              e.target.select()
+            }}
           />
           <img
             src={shareSvg}
@@ -181,7 +184,12 @@ class Community extends Component {
         key="publication"
         exact
         path="/c/:c/:id"
-        render={props => <Publication {...props} title={title} />}
+        render={props =>
+          <Publication
+            {...props}
+            title={title}
+            onShareHook={this.props.onShareHook}
+          />}
       />,
     ]
   }
