@@ -39,3 +39,9 @@ a:focus, a:hover, a:active {
 img {
   max-width: 100%;
 }
+
+@media (min-width: 600px) {
+  html {
+    font-size: unset;
+  }
+}
