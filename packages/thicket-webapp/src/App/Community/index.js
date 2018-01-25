@@ -124,11 +124,12 @@ class Community extends Component {
       nickname,
       match,
       onInviteHook=()=>{},
+      blacklistedCommunities=[],
       communityBtns,
     } = this.props
     const { c } = match.params
 
-    if (mode === UNINVITED) {
+    if (mode === UNINVITED || blacklistedCommunities.includes(c)) {
       return <NotFound history={this.props.history} />
     }
 

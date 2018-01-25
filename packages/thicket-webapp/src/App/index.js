@@ -56,6 +56,7 @@ class App extends Component {
               onInviteHook={this.props.onInviteHook}
               onShareHook={this.props.onShareHook}
               communityBtnsHook={this.props.communityBtnsHook}
+              blacklistedCommunities={this.props.blacklistedCommunities}
             />}
           />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
