@@ -53,8 +53,10 @@ class App extends Component {
             <Community
               {...props}
               nickname={nickname}
-              canJoinWorkflow={this.props.canJoinWorkflow}
-              canJoinOptions={this.props.canJoinOptions}
+              onInviteHook={this.props.onInviteHook}
+              onShareHook={this.props.onShareHook}
+              communityBtnsHook={this.props.communityBtnsHook}
+              blacklistedCommunities={this.props.blacklistedCommunities}
             />}
           />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />

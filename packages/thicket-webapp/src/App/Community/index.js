@@ -25,6 +25,19 @@ const UNINVITED = 'user has not been invited to the community or the community d
 const LEAVE = 'user is displayed the confirm box to leave the community'
 const isItMobile = document.documentElement.clientWidth < 600
 
+const LeaveBtn = ({ ctx }) => <button
+  className="community__leave"
+  onClick={() => ctx.setState({ mode: LEAVE })}
+>
+  <img
+    src={leaveSvg}
+    alt="Leave community"
+  />
+  <span className="community__leave-label">
+      Leave
+  </span>
+</button>
+
 class Title extends Component {
   constructor(props) {
     super(props)
@@ -107,25 +120,54 @@ class Community extends Component {
 
   render() {
     const { list, mode, title, loading, onlinePeers, size, colors } = this.state
-    const { nickname, match } = this.props
+    const {
+      nickname,
+      match,
+      onInviteHook=()=>{},
+      blacklistedCommunities=[],
+      communityBtns,
+    } = this.props
     const { c } = match.params
 
-    if (mode === UNINVITED) {
+    if (mode === UNINVITED || blacklistedCommunities.includes(c)) {
       return <NotFound history={this.props.history} />
     }
 
     return [
       ((isItMobile && !mode && match.isExact) || !isItMobile) && <div key="community" className="community">
-        <Link key="link" to="/communities" className="community__back">
-          <h3><img className="community__arrow" src={back} alt="Your Communities" /> Your communities <img className="community__arrow--right" src={back} alt="Your Communities" /></h3>
+        <Link to="/communities" className="community__back">
+          <h3>
+            <img
+              className="community__arrow"
+              src={back}
+              alt="Your Communities"
+            />
+            Your communities
+            <img
+              className="community__arrow--right"
+              src={back}
+              alt="Your Communities"
+            />
+          </h3>
         </Link>
-        <Title title={title} onSubmit={this.onSaveTitle} />
-        <OnlinePeers onlinePeers={onlinePeers} colors={colors} />
-        <button className="community__leave community__btn" onClick={() => this.setState({ mode: LEAVE })}>
-          <img src={leaveSvg} alt="Leave community" /><span className="community__leave-label">Leave</span>
-        </button>
-        <div className="community__size community__btn community__size--aligned-right">{formatBytes(size)}</div>
-        <AddButton onClick={() => this.setState({ mode: CREATE })} className="community__new" />
+        <Title
+          title={title}
+          onSubmit={this.onSaveTitle}
+        />
+        <OnlinePeers
+          onlinePeers={onlinePeers}
+          colors={colors}
+        />
+        <div className="community__btns">
+          {communityBtns.map((B, i) => <B key={i} ctx={this} />)}
+        </div>
+        <div className="community__size">
+          {formatBytes(size)}
+        </div>
+        <AddButton
+          onClick={() => this.setState({ mode: CREATE })}
+          className="community__new"
+        />
         <div
           className="community__invite-wrap"
           title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
@@ -135,7 +177,10 @@ class Community extends Component {
             type="text"
             readOnly
             value={getCommunityInviteLink(c)}
-            onClick={e => e.target.select()}
+            onClick={e => {
+              onInviteHook()
+              e.target.select()
+            }}
           />
           <img
             src={shareSvg}
@@ -181,7 +226,12 @@ class Community extends Component {
         key="publication"
         exact
         path="/c/:c/:id"
-        render={props => <Publication {...props} title={title} />}
+        render={props =>
+          <Publication
+            {...props}
+            title={title}
+            onShareHook={this.props.onShareHook}
+          />}
       />,
     ]
   }
@@ -230,4 +280,8 @@ class Community extends Component {
 
 }
 
-export default Community
+export default ({ communityBtnsHook=x => x, ...props  }) =>
+  <Community
+    communityBtns={communityBtnsHook([LeaveBtn])}
+    {...props}
+  />

@@ -17,7 +17,15 @@ const downloadFile = gif => {
   writer.close()
 }
 
-export default ({ gif, header, editable, onChange, communityId, children }) => {
+export default ({
+  onShareHook=()=>{},
+  gif,
+  header,
+  editable,
+  onChange,
+  communityId,
+  children
+}) => {
   if (!gif) {
     return <div className="gif__loading"><Spinner /></div>
   }
@@ -45,7 +53,13 @@ export default ({ gif, header, editable, onChange, communityId, children }) => {
         <button className="gif__button" onClick={() => downloadFile(gif)}>
           <Icon src={downloadSvg} />
         </button>
-        <button className="gif__button" onClick={() => {}}>
+        <button
+          className="gif__button"
+          onClick={() => {
+            onShareHook()
+            // share box
+          }}
+        >
           <Icon src={shareSvg} />
         </button>
         <a href={`https://www.facebook.com/sharer.php?u=${window.location.href}`} target="_blank"><Icon src={facebookSvg} /></a>

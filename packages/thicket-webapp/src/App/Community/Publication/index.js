@@ -61,6 +61,7 @@ class Publication extends Component {
           gif={this.state.gif}
           editable
           onChange={gif => this.setState({ gif, modified: true })}
+          onShareHook={this.props.onShareHook}
         >
           <div className="publication__btns">
             <Button className="publication__save" onClick={this.onSave}>Save Changes</Button>
