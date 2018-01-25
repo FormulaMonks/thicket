@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'thicket-elements'
 import Logo from '../components/Logo'
-import heart from './heart.gif'
+import heart from './heart.svg'
 import singleNode from './singleNode.svg'
 import twoNodes from './twoNodes.svg'
 import threeNodes from './threeNodes.svg'
