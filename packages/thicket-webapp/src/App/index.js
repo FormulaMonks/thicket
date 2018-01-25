@@ -55,6 +55,7 @@ class App extends Component {
               nickname={nickname}
               onInviteHook={this.props.onInviteHook}
               onShareHook={this.props.onShareHook}
+              communityBtnsHook={this.props.communityBtnsHook}
             />}
           />
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
