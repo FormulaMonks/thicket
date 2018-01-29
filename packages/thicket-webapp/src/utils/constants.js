@@ -1,6 +1,6 @@
 export const DEFAULT_PUBLICATIONS = [
-  { hash: 'QmPPZYnMN3nsbTrJS2Gc2Zp2S4hfcUoLrbtSYHsxCXtwa1', caption: 'Welcome to Thicket' },
-  { hash: 'QmVwFmLyWrt51yze2DRcBG6jvkLcX7BUBudDeB51RRkvWp', caption: 'Create New GIF' },
-  { hash: 'QmZsSHtGURj6W3iUuXEJ4jKGxYa3oB8AMpxKAptyK2e7Av', caption: 'Share Community' },
+  { hash: 'QmcQhBbhFpPdCze5iJ6faws57gYwtRYsuNQLhEdmN6khej', caption: 'Welcome to Thicket' },
+  { hash: 'Qmd9YskGYAbo8rnpaDyXdoCVgS1oZFLSERwbT5vdE8rTxp', caption: 'Create New GIF' },
+  { hash: 'QmZmq3cKBZMTrPfH3dgmffsjvgidyC7eVLvZHLNxjX5g9C', caption: 'Share Your Community' },
 ]
 export const DEFAULT_PUBLICATIONS_SIZE = 9211594
