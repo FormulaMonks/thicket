@@ -82,8 +82,13 @@ class Community extends Component {
 
   async componentDidMount() {
     const { c } = this.props.match.params
+    const { token = '', leave = false } = queryString.parse(window.location.search);
+    // leave & redirect
+    if (leave) {
+      this.onLeave()
+      return
+    }
     // is the user coming from an invite link?
-    const { token = '' } = queryString.parse(window.location.search);
     const canJoin = atob(token) === c
     const member = await communities.has(c)
     if (!member && canJoin) {
