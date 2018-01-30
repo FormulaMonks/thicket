@@ -59,7 +59,7 @@ const timedSrcCat = async (node, id) => Promise.race([
 
 const mapIPFSIdstoNicknames = async(node, y) => {
   const { id } = await node.id()
-  const nickname = y.share.nicknames.get(id)
+  const nickname = (y.share.nicknames && y.share.nicknames.get(id)) || ''
   const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
       if (y.share.nicknames.get(c)) {
         p.push(y.share.nicknames.get(c))
