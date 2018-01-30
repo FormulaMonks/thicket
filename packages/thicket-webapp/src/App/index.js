@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {
+  BrowserRouter as Router,
   Route,
   Switch,
   Link,
@@ -40,7 +41,8 @@ class App extends Component {
       return <div className="app__index"><Spinner /></div>
     }
 
-    return <div className="app app--with-fixed-header">
+    return <Router>
+      <div className="app app--with-fixed-header">
         <header className="app__header">
           <Link to="/communities"><Logo /></Link>
           <small className="app__about">peer 2 peer gif app, uncensorable, based on IPFS... <Link to="/welcome">read more</Link></small>
@@ -65,6 +67,7 @@ class App extends Component {
           <Redirect from='*' to='/404' />
         </Switch>
       </div>
+    </Router>
   }
 
   fetchUser = async () => {

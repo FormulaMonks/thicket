@@ -31,6 +31,8 @@ const yConfig = (node, id) => ({
     name: 'ipfs',
     room: `thicket:${id}`,
     ipfs: node,
+    role: 'slave',
+    syncMethod: 'syncAll',
   },
   share: {
     publications: 'Array',
@@ -57,7 +59,7 @@ const timedSrcCat = async (node, id) => Promise.race([
 
 const mapIPFSIdstoNicknames = async(node, y) => {
   const { id } = await node.id()
-  const nickname = y.share.nicknames.get(id)
+  const nickname = (y.share.nicknames && y.share.nicknames.get(id)) || ''
   const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
       if (y.share.nicknames.get(c)) {
         p.push(y.share.nicknames.get(c))
@@ -107,6 +109,11 @@ class Database extends EventEmitter {
         // online peers
         y.connector.roomEmitter.on('peer joined', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
         y.connector.roomEmitter.on('peer left', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
+
+        y.connector.whenSynced(async () => {
+          const data = await this.publicationsGetAll(communityId)
+          this.emit(`peer-${communityId}-publications`, data)
+        })
 
         resolve(y)
       })
