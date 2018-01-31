@@ -23,7 +23,7 @@ const ipfsConfig = {
   },
 }
 
-const yConfig = (node, id) => ({
+const yConfig = (node, user_id, id) => ({
   db: {
     name: 'indexeddb'
   },
@@ -33,6 +33,7 @@ const yConfig = (node, id) => ({
     ipfs: node,
     role: 'slave',
     syncMethod: 'syncAll',
+    user_id,
   },
   share: {
     publications: 'Array',
@@ -41,6 +42,12 @@ const yConfig = (node, id) => ({
     nicknames: 'Map',
   }
 })
+
+const isSynced = y =>
+  // if there are peers and they have all been synced
+  y.connector.isSynced
+  // no connections, only node/peer in this Community
+  || (!Object.keys(y.connector.connections).length && y.connected)
 
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
@@ -94,25 +101,46 @@ class Database extends EventEmitter {
     if (!this._communities.has(communityId)) {
       const promise = new Promise(async resolve => {
         const node = await this._initIPFS()
-        const y = await Y(yConfig(node, communityId))
+        const { id: peerId } = await node.id()
+        const y = await Y(yConfig(node, peerId, communityId))
         // updates to the community metadata (eg change community title)
-        y.share.metadata.observe(({ value }) => this.emit(`update-${communityId}`, value))
+        y.share.metadata.observe(({ value }) => {
+          if (isSynced(y)) {
+            this.emit(`update-${communityId}`, value)
+          }
+        })
         // updates to the publications (eg new publication)
         y.share.publications.observe(async () => {
-          const data = await this.publicationsGetAll(communityId)
-          this.emit(`update-${communityId}-publications`, data)
+          if (isSynced(y)) {
+            this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
+          }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(({ value }) => this.emit(`update-${communityId}-publicationsMetadata`, value))
+        y.share.publicationsMetadata.observe(({ value }) => {
+          if (isSynced(y)) {
+            this.emit(`update-${communityId}-publicationsMetadata`, value)
+          }
+        })
         // nicknames: IPFS node id <-> nickname
-        y.share.nicknames.observe(async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
+        y.share.nicknames.observe(async () => {
+          if (isSynced(y)) {
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          }
+        })
         // online peers
-        y.connector.roomEmitter.on('peer joined', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
-        y.connector.roomEmitter.on('peer left', async () => this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y)))
-
+        y.connector.roomEmitter.on('peer joined', async () => {
+          if (isSynced(y)) {
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          }
+        })
+        y.connector.roomEmitter.on('peer left', async () => {
+          if (isSynced(y)) {
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          }
+        })
+        // syncing
         y.connector.whenSynced(async () => {
-          const data = await this.publicationsGetAll(communityId)
-          this.emit(`peer-${communityId}-publications`, data)
+          this.emit(`sync-${communityId}`, y.share.metadata.get(communityId))
         })
 
         resolve(y)
