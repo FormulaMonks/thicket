@@ -32,7 +32,7 @@ class Publications extends EventEmitter {
       this.emit('update')
     })
     db.on(`update-${communityId}-publicationsMetadata`, data => {
-      this.list = this.list.map(p => p.id !== data.id ? p : data)
+      this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
       this.emit('update')
     })
   }

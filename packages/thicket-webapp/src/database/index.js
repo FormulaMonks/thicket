@@ -186,16 +186,16 @@ class Database extends EventEmitter {
     const id = res[0].hash
     const y = await this._initCommunity(communityId)
     y.share.publications.push([id])
-    y.share.publicationsMetadata.set(id, { ...data, createdAt: Date.now() })
+    y.share.publicationsMetadata.set(id, { id, ...data, createdAt: Date.now() })
   }
 
   publicationsPostByHash = async(communityId, { hash, ...data }) => {
     const y = await this._initCommunity(communityId)
     y.share.publications.push([hash])
-    y.share.publicationsMetadata.set(hash, { ...data, createdAt: Date.now() })
+    y.share.publicationsMetadata.set(hash, { id: hash, ...data, createdAt: Date.now() })
   }
 
-  publicationsPut = async (communityId, id, data) => {
+  publicationsPut = async (communityId, id, { src, ...data }) => {
     const y = await this._initCommunity(communityId)
     y.share.publicationsMetadata.set(id, { ...y.share.publicationsMetadata.get(id), ...data })
   }
