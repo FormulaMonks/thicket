@@ -116,9 +116,9 @@ class Database extends EventEmitter {
           }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(({ value }) => {
+        y.share.publicationsMetadata.observe(({ value: { id, ...data } }) => {
           if (isSynced(y)) {
-            this.emit(`update-${communityId}-publicationsMetadata`, value)
+            this.emit(`update-${communityId}-publicationsMetadata`, { ...y.share.publicationsMetadata.get(id), ...data })
           }
         })
         // nicknames: IPFS node id <-> nickname
