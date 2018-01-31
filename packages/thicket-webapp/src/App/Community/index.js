@@ -101,12 +101,11 @@ class Community extends Component {
       return
     }
     // get data
-    this.fetchMetadata()
-    this.fetchPublications()
-    this.fetchOnlinePeers()
+    this.fetchAll()
     // subscribe
     const community = await communities.get(c)
     const { publications } = community
+    community.synced.then(this.fetchAll)
     community.on('update', this.fetchMetadata)
     community.on('peer', this.fetchOnlinePeers)
     publications.on('update', this.fetchPublications)
@@ -124,7 +123,15 @@ class Community extends Component {
   }
 
   render() {
-    const { list, mode, title, loading, onlinePeers, size, colors } = this.state
+    const {
+      list,
+      mode,
+      title,
+      loading,
+      onlinePeers,
+      size,
+      colors,
+    } = this.state
     const {
       nickname,
       match,
@@ -239,6 +246,12 @@ class Community extends Component {
           />}
       />,
     ]
+  }
+
+  fetchAll = () => {
+    this.fetchMetadata()
+    this.fetchPublications()
+    this.fetchOnlinePeers()
   }
 
   fetchPublications = async () => {

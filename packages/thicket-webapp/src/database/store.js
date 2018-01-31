@@ -32,7 +32,7 @@ class Publications extends EventEmitter {
       this.emit('update')
     })
     db.on(`update-${communityId}-publicationsMetadata`, data => {
-      this.list = this.list.map(p => p.id !== data.id ? p : data)
+      this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
       this.emit('update')
     })
   }
@@ -79,6 +79,7 @@ class Community extends EventEmitter {
     this.communityId = communityId
     this.data = null
     this.onlinePeers = null
+    this.synced = new Promise(r => db.on(`sync-${communityId}`, r))
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
