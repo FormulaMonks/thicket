@@ -106,6 +106,7 @@ class Community extends Component {
     const community = await communities.get(c)
     const { publications } = community
     community.synced.then(this.fetchAll)
+    community.on('sync', this.fetchAll)
     community.on('update', this.fetchMetadata)
     community.on('peer', this.fetchOnlinePeers)
     publications.on('update', this.fetchPublications)
@@ -117,6 +118,7 @@ class Community extends Component {
     const { c } = this.props.match.params
     const community = await communities.get(c)
     const { publications } = community
+    community.off('sync', this.fetchAll)
     community.off('update', this.fetchMetadata)
     community.off('peer', this.fetchOnlinePeers)
     publications.off('update', this.fetchPublications)

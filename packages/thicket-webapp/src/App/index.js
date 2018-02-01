@@ -45,7 +45,7 @@ class App extends Component {
       <div className="app app--with-fixed-header">
         <header className="app__header">
           <Link to="/communities"><Logo /></Link>
-          <small className="app__about">peer 2 peer gif app, uncensorable, based on IPFS... <Link to="/welcome">read more</Link></small>
+          {this.props.header}
           <Link to="/profile"><UserProfile nickname={nickname} /></Link>
         </header>
         <Switch>
@@ -64,6 +64,7 @@ class App extends Component {
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Route exact path="/setup" render={props => <Setup nickname={nickname} {...props} />} />
           <Route path='/404' component={NotFound} />
+          <Redirect exact from='/' to='/communities' />
           <Redirect from='*' to='/404' />
         </Switch>
       </div>
