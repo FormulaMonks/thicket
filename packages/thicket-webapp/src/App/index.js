@@ -27,6 +27,8 @@ class App extends Component {
   async componentDidMount() {
     user.on('update', this.fetchUser)
     await this.fetchUser()
+    const { blacklistedCommunities=[] } = this.props
+    await user.removeBlacklistedCommunities(blacklistedCommunities)
     this.setState({ loading: false })
   }
 
@@ -50,7 +52,16 @@ class App extends Component {
         </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-          <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
+          <Route
+            exact
+            path="/communities"
+            render={() =>
+              <Communities
+                nickname={nickname}
+                blacklistedCommunities={this.props.blacklistedCommunities}
+              />
+            }
+          />
           <Route path="/c/:c" render={props =>
             <Community
               {...props}

@@ -49,11 +49,13 @@ class Title extends Component {
   }
 
   render() {
+    const { syncing } = this.props
     const { title } = this.state
     return <form onSubmit={this.onSubmit} className="community__form">
       <Input
+        className={syncing ? 'community__form-syncing' : ''}
         type="text"
-        placeholder="Name this Community"
+        placeholder={syncing ? 'Suncing Community...' : 'Name this Community'}
         value={title}
         onChange={e => this.setState({ title: e.currentTarget.value })}
         onBlur={this.onSubmit}
@@ -72,6 +74,7 @@ class Community extends Component {
   state = {
     mode: null,
     loading: true,
+    syncing: false,
     list: [],
     title: '',
     onlinePeers: [],
@@ -105,11 +108,11 @@ class Community extends Component {
     // subscribe
     const community = await communities.get(c)
     const { publications } = community
-    community.synced.then(this.fetchAll)
-    community.on('sync', this.fetchAll)
     community.on('update', this.fetchMetadata)
     community.on('peer', this.fetchOnlinePeers)
-    publications.on('update', this.fetchPublications)
+    community.on('syncing', this.onSyncing)
+    community.on('synced', this.onSynced)
+    publications.on('update', this.fetchPublicationsMetadata)
     // fix scroll when coming from communities
     window.scrollTo(0, 0)
   }
@@ -121,7 +124,7 @@ class Community extends Component {
     community.off('sync', this.fetchAll)
     community.off('update', this.fetchMetadata)
     community.off('peer', this.fetchOnlinePeers)
-    publications.off('update', this.fetchPublications)
+    publications.off('update', this.fetchPublicationsMetadata)
   }
 
   render() {
@@ -133,6 +136,7 @@ class Community extends Component {
       onlinePeers,
       size,
       colors,
+      syncing,
     } = this.state
     const {
       nickname,
@@ -165,6 +169,7 @@ class Community extends Component {
           </h3>
         </Link>
         <Title
+          syncing={syncing}
           title={title}
           onSubmit={this.onSaveTitle}
         />
@@ -176,7 +181,10 @@ class Community extends Component {
           {communityBtns.map((B, i) => <B key={i} ctx={this} />)}
         </div>
         <div className="community__size">
-          {formatBytes(size)}
+          {syncing
+            ? <small className="community__size-syncing">Syncing Data...</small>
+            : formatBytes(size)
+          }
         </div>
         <AddButton
           onClick={() => this.setState({ mode: CREATE })}
@@ -216,7 +224,10 @@ class Community extends Component {
                 list={list}
                 onNew={() => this.setState({ mode: CREATE })}
               />
-            : <NoContent onCreate={() => this.setState({ mode: CREATE })} />
+            : <NoContent
+                syncing={syncing}
+                onCreate={() => this.setState({ mode: CREATE })}
+              />
         }
       </div>,
       mode === LEAVE && <Leave
@@ -252,20 +263,30 @@ class Community extends Component {
 
   fetchAll = () => {
     this.fetchMetadata()
-    this.fetchPublications()
     this.fetchOnlinePeers()
-  }
-
-  fetchPublications = async () => {
-    const { publications } = await communities.get(this.props.match.params.c)
-    const list = await publications.getAll()
-    this.setState({ list, loading: false })
+    this.fetchPublicationsMetadata()
   }
 
   fetchMetadata = async () => {
     const community = await communities.get(this.props.match.params.c)
     const { title, size } = await community.get()
     this.setState({ title, size })
+  }
+
+  fetchPublications = async () => {
+    const { publications } = await communities.get(this.props.match.params.c)
+    const list = await publications.getAll()
+    this.setState({ list })
+  }
+
+  fetchPublicationsMetadata = async () => {
+    const { publications } = await communities.get(this.props.match.params.c)
+    const list = await publications.getMetadata()
+    const mergedList = list.map(item => {
+      const exists = this.state.list.find(i => i.id === item.id)
+      return exists ? { ...exists, ...item } : item
+    })
+    this.setState({ list: mergedList, loading: false }, this.fetchPublications)
   }
 
   fetchOnlinePeers = async () => {
@@ -290,6 +311,15 @@ class Community extends Component {
   onSaveTitle = async title => {
     const community = await communities.get(this.props.match.params.c)
     community.put({ title })
+  }
+
+  onSyncing = () => {
+    this.setState({ syncing: true })
+  }
+
+  onSynced = async () => {
+    this.fetchAll()
+    this.setState({ syncing: false })
   }
 
   onLeave = async () => {

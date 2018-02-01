@@ -73,8 +73,9 @@ class Communities extends Component {
   }
 
   fetch = async () => {
+    const { blacklistedCommunities=[] } = this.props
     const data = await communities.getAll()
-    this.setState({ data })
+    this.setState({ data: data.filter(i => !blacklistedCommunities.includes(i)) })
   }
 
   onSubmit =  e => {

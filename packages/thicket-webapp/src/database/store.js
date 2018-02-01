@@ -35,7 +35,7 @@ class Publications extends EventEmitter {
       this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
       this.emit('update')
     })
-    db.on(`sync-${communityId}`, () => {
+    db.on(`synced-${communityId}`, () => {
       // bust cache - not actually busting the list but making sure
       // next fetch goes to db
       this._fetchedAll = false
@@ -64,6 +64,10 @@ class Publications extends EventEmitter {
     return this.list
   }
 
+  getMetadata = async () => {
+    return await db.publicationsGetMetadata(this.communityId)
+  }
+
   post = data => db.publicationsPost(this.communityId, data)
 
   postByHash = data => db.publicationsPostByHash(this.communityId, data)
@@ -84,7 +88,6 @@ class Community extends EventEmitter {
     this.communityId = communityId
     this.data = null
     this.onlinePeers = null
-    this.synced = new Promise(r => db.once(`sync-${communityId}`, r))
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
@@ -95,12 +98,13 @@ class Community extends EventEmitter {
       this.onlinePeers = peers
       this.emit('peer')
     })
-    db.on(`sync-${communityId}`, () => {
+    db.on(`synced-${communityId}`, () => {
       // bust local cache
       this.onlinePeers = null
       this.data = null
-      this.emit('sync')
+      this.emit('synced')
     })
+    db.on(`syncing-${communityId}`, () => this.emit('syncing'))
 
     // publications
     this.publications = new Publications(communityId)
@@ -198,7 +202,6 @@ class User extends EventEmitter {
     super()
     this._initUser()
     this._initCommunities()
-    this._subscribe()
   }
 
   // user
@@ -267,6 +270,19 @@ class User extends EventEmitter {
       // and in memory (state cache keeps the data source for gifs)
       publications.getAll()
     }
+  }
+
+  removeBlacklistedCommunities = async blacklist => {
+    await this._initUser()
+    await this._initCommunities()
+    for (const communityId of state.userCommunities) {
+      if (blacklist.includes(communityId)) {
+        await this.communities.delete(communityId)
+      }
+    }
+    // once we've finished removing malicious communities
+    // let's subscribe, fetch and redistribute the rest
+    this._subscribe()
   }
 
 }
