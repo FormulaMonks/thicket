@@ -110,7 +110,7 @@ export default class Camera extends Component {
       video.pause()
       video.src = ''
     }
-    this.state.stream && this.statestream.getTracks && this.state.stream.getTracks().forEach(t => t.stop())
+    this.state.stream && this.state.stream.getTracks && this.state.stream.getTracks().forEach(t => t.stop())
   }
 
 }
