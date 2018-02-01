@@ -10,6 +10,10 @@
   grid-column: 1 / -1;
 }
 
+.community__form-syncing{
+  font-style: italic;
+}
+
 .community__back{
   grid-column: 1 / -1;
 }
@@ -68,6 +72,11 @@
   grid-column: 11;
   margin-right: 0.5em;
   text-align: right;
+}
+
+.community__size-syncing{
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .community__new{

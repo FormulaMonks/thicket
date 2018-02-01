@@ -116,9 +116,13 @@ class Database extends EventEmitter {
           }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(({ value: { id, ...data } }) => {
-          if (isSynced(y)) {
-            this.emit(`update-${communityId}-publicationsMetadata`, { ...y.share.publicationsMetadata.get(id), ...data })
+        y.share.publicationsMetadata.observe(({ value: { id, ...data }, type }) => {
+          if (type === 'add' && isSynced(y)) {
+            this.emit(`update-${communityId}-publicationsMetadata`, {
+              id,
+              ...y.share.publicationsMetadata.get(id),
+              ...data
+            })
           }
         })
         // nicknames: IPFS node id <-> nickname
@@ -128,20 +132,14 @@ class Database extends EventEmitter {
           }
         })
         // online peers
-        y.connector.roomEmitter.on('peer joined', async () => {
+        y.connector.onUserEvent(async ({ action }) => {
           this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          // syncing
+          if (action === 'userJoined') {
+            this.emit(`syncing-${communityId}`)
+            y.connector.whenSynced(() => this.emit(`synced-${communityId}`))
+          }
         })
-        y.connector.roomEmitter.on('peer left', async () => {
-          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
-        })
-        // syncing
-        y.connector.whenSynced(async () => {
-          this.emit(`sync-${communityId}`)
-        })
-        // emit event if no syncing is going to happen
-        if (!Object.keys(y.connector.connections).length) {
-          setTimeout(() => this.emit(`sync-${communityId}`), 0)
-        }
 
         resolve(y)
       })
@@ -163,6 +161,7 @@ class Database extends EventEmitter {
   publicationsDelete = async (communityId, id) => {
     const y = await this._initCommunity(communityId)
     y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
+    y.share.publicationsMetadata.delete(id)
     this._unlink(id)
   }
 
@@ -178,6 +177,14 @@ class Database extends EventEmitter {
     const data = y.share.publications.toArray()
     const publications = await Promise.all(data.map(async id => this.publicationsGet(communityId, id)))
     return publications.sort((a, b) => b.createdAt - a.createdAt)
+  }
+
+  publicationsGetMetadata = async communityId => {
+    const y = await this._initCommunity(communityId)
+    return y.share.publications.toArray().map(id => ({
+      id,
+      ...y.share.publicationsMetadata.get(id)
+    }))
   }
 
   publicationsPost = async (communityId, { src, ...data }) => {
