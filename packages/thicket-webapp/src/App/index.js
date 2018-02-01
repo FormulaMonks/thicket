@@ -50,7 +50,16 @@ class App extends Component {
         </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
-          <Route exact path="/communities" render={() => <Communities nickname={nickname} />} />
+          <Route
+            exact
+            path="/communities"
+            render={() =>
+              <Communities
+                nickname={nickname}
+                blacklistedCommunities={this.props.blacklistedCommunities}
+              />
+            }
+          />
           <Route path="/c/:c" render={props =>
             <Community
               {...props}
