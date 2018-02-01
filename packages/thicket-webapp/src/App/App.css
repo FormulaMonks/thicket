@@ -24,16 +24,3 @@
 .app__header a{
   background-color: unset;
 }
-
-.app__about{
-  display: none;
-  flex: 1;
-  background: inherit;
-  margin-left: 1em;
-}
-
-@media (min-width: 600px){
-  .app__about{
-    display: block;
-  }
-}
