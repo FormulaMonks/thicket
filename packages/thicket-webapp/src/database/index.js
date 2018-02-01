@@ -184,7 +184,7 @@ class Database extends EventEmitter {
     return y.share.publications.toArray().map(id => ({
       id,
       ...y.share.publicationsMetadata.get(id)
-    }))
+    })).reverse()
   }
 
   publicationsPost = async (communityId, { src, ...data }) => {
