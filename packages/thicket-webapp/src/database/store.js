@@ -35,6 +35,11 @@ class Publications extends EventEmitter {
       this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
       this.emit('update')
     })
+    db.on(`sync-${communityId}`, () => {
+      // bust cache - not actually busting the list but making sure
+      // next fetch goes to db
+      this._fetchedAll = false
+    })
   }
 
   delete = id => db.publicationsDelete(this.communityId, id)
@@ -89,6 +94,12 @@ class Community extends EventEmitter {
     db.on(`peer-${communityId}`, peers => {
       this.onlinePeers = peers
       this.emit('peer')
+    })
+    db.on(`sync-${communityId}`, () => {
+      // bust local cache
+      this.onlinePeers = null
+      this.data = null
+      this.emit('sync')
     })
 
     // publications
