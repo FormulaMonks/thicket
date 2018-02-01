@@ -79,7 +79,7 @@ class Community extends EventEmitter {
     this.communityId = communityId
     this.data = null
     this.onlinePeers = null
-    this.synced = new Promise(r => db.on(`sync-${communityId}`, r))
+    this.synced = new Promise(r => db.once(`sync-${communityId}`, r))
 
     // listen to updates from db
     db.on(`update-${communityId}`, data => {
