@@ -54,7 +54,7 @@ class Publication extends Component {
       <Modal
         key="modal"
         disableBodyScroll
-        onClose={this.close}
+        onClose={document.documentElement.clientWidth > 600 ? this.close : ()=>{} }
       >
         <Gif
           communityId={c}
