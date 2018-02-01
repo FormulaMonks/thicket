@@ -64,6 +64,7 @@ class App extends Component {
           <Route exact path="/g/:c/:g" render={props => <Gif {...props} />} />
           <Route exact path="/setup" render={props => <Setup nickname={nickname} {...props} />} />
           <Route path='/404' component={NotFound} />
+          <Redirect exact from='/' to='/communities' />
           <Redirect from='*' to='/404' />
         </Switch>
       </div>
