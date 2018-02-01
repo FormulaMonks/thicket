@@ -43,12 +43,6 @@ const yConfig = (node, user_id, id) => ({
   }
 })
 
-const isSynced = y =>
-  // if there are peers and they have all been synced
-  y.connector.isSynced
-  // no connections, only node/peer in this Community
-  || (!Object.keys(y.connector.connections).length && y.connected)
-
 const toBase64 = src =>
   `data:image/gif;base64,${btoa(new Uint8Array(src).reduce((data, byte) => data + String.fromCharCode(byte), ''))}`
 
@@ -82,6 +76,7 @@ class Database extends EventEmitter {
     this._ipfs = null
     this._communities = new Map()
     this._initIPFS()
+    this._syncing = false
   }
 
   _initIPFS() {
@@ -105,19 +100,20 @@ class Database extends EventEmitter {
         const y = await Y(yConfig(node, peerId, communityId))
         // updates to the community metadata (eg change community title)
         y.share.metadata.observe(({ value }) => {
-          if (isSynced(y)) {
+          if (!this._syncing) {
             this.emit(`update-${communityId}`, value)
           }
         })
         // updates to the publications (eg new publication)
         y.share.publications.observe(async () => {
-          if (isSynced(y)) {
+          if (!this._syncing) {
             this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
           }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(({ value: { id, ...data }, type }) => {
-          if (type === 'add' && isSynced(y)) {
+        y.share.publicationsMetadata.observe(({ value, type }) => {
+          if (type === 'add' && !this._syncing) {
+            const { id, ...data } = value
             this.emit(`update-${communityId}-publicationsMetadata`, {
               id,
               ...y.share.publicationsMetadata.get(id),
@@ -127,7 +123,7 @@ class Database extends EventEmitter {
         })
         // nicknames: IPFS node id <-> nickname
         y.share.nicknames.observe(async () => {
-          if (isSynced(y)) {
+          if (!this._syncing) {
             this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
           }
         })
@@ -136,8 +132,14 @@ class Database extends EventEmitter {
           this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
           // syncing
           if (action === 'userJoined') {
+            this._syncing = true
             this.emit(`syncing-${communityId}`)
-            y.connector.whenSynced(() => this.emit(`synced-${communityId}`))
+            y.connector.whenSynced(() => {
+              setTimeout(() => {
+                this._syncing = false
+                this.emit(`synced-${communityId}`)
+              }, 1000)
+            })
           }
         })
 
