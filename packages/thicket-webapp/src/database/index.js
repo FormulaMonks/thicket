@@ -136,12 +136,11 @@ class Database extends EventEmitter {
         })
         // syncing
         y.connector.whenSynced(async () => {
-          this.emit(`sync-${communityId}`, y.share.metadata.get(communityId))
+          this.emit(`sync-${communityId}`)
         })
         // emit event if no syncing is going to happen
         if (!Object.keys(y.connector.connections).length) {
-          setTimeout(() =>
-            this.emit(`sync-${communityId}`, y.share.metadata.get(communityId)), 100)
+          setTimeout(() => this.emit(`sync-${communityId}`), 0)
         }
 
         resolve(y)
