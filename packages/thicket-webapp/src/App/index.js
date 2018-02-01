@@ -27,6 +27,8 @@ class App extends Component {
   async componentDidMount() {
     user.on('update', this.fetchUser)
     await this.fetchUser()
+    const { blacklistedCommunities=[] } = this.props
+    await user.removeBlacklistedCommunities(blacklistedCommunities)
     this.setState({ loading: false })
   }
 

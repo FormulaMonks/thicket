@@ -198,7 +198,6 @@ class User extends EventEmitter {
     super()
     this._initUser()
     this._initCommunities()
-    this._subscribe()
   }
 
   // user
@@ -267,6 +266,20 @@ class User extends EventEmitter {
       // and in memory (state cache keeps the data source for gifs)
       publications.getAll()
     }
+  }
+
+  removeBlacklistedCommunities = async blacklist => {
+    await this._initUser()
+    await this._initCommunities()
+    for (const communityId of state.userCommunities) {
+      console.log(communityId, )
+      if (blacklist.includes(communityId)) {
+        await this.communities.delete(communityId)
+      }
+    }
+    // once we've finished removing malicious communities
+    // let's subscribe, fetch and redistribute the rest
+    this._subscribe()
   }
 
 }
