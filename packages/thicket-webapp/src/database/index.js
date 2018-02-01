@@ -129,14 +129,10 @@ class Database extends EventEmitter {
         })
         // online peers
         y.connector.roomEmitter.on('peer joined', async () => {
-          if (isSynced(y)) {
-            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
-          }
+          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
         })
         y.connector.roomEmitter.on('peer left', async () => {
-          if (isSynced(y)) {
-            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
-          }
+          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
         })
         // syncing
         y.connector.whenSynced(async () => {
