@@ -22,9 +22,10 @@ class Profile extends Component {
   close = () => {
     const { history } = this.props
     if (history.length > 2) {
-      history.goBack()
+      window.history.back()
+    } else {
+      history.push('/communities')
     }
-    history.push('/communities')
   }
 
   onSubmit = e => {
