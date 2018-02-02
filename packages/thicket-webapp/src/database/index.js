@@ -51,7 +51,7 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedSrcCat = async (node, id) => Promise.race([
-  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 3000)),
+  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 10000)),
   new Promise(async r => {
     const stream = await node.files.cat(id)
     r(toBase64(stream))
@@ -112,7 +112,7 @@ class Database extends EventEmitter {
         })
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value, type }) => {
-          if (type === 'add' && !this._syncing) {
+          if (type !== 'delete' && !this._syncing) {
             const { id, ...data } = value
             this.emit(`update-${communityId}-publicationsMetadata`, {
               id,
@@ -226,7 +226,6 @@ class Database extends EventEmitter {
       ...y.share.metadata.get(communityId)
     }
   }
-
 
   communityGetOnlinePeers = async communityId => {
     const node = await this._initIPFS()

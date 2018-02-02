@@ -32,6 +32,9 @@ class Publications extends EventEmitter {
       this.emit('update')
     })
     db.on(`update-${communityId}-publicationsMetadata`, data => {
+      if (!this.list.find(i => i.id === data.id)) {
+        this.list = [...this.list, data]
+      }
       this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
       this.emit('update')
     })
@@ -62,6 +65,10 @@ class Publications extends EventEmitter {
       this._fetchedAll = true
     }
     return this.list
+  }
+
+  getSize = () => {
+    return this.list.reduce((p, c) => p + ((c.src && c.src.length) || 0), 0)
   }
 
   getMetadata = async () => {
@@ -112,11 +119,12 @@ class Community extends EventEmitter {
 
   delete = () => db.communityDelete(this.communityId)
 
+  // passthrough method
   deletePublication = async id => {
     // side effect
     // when a GIF gets deleted we need to update the Community size
     const { src } = await this.publications.get(id)
-    this.put({ ...this.data, size: this.data.size - src.length})
+    this.data.size = this.publications.getSize() - src.length
     // delete
     return this.publications.delete(id)
   }
@@ -124,8 +132,17 @@ class Community extends EventEmitter {
   get = async () => {
     if (!this.data) {
       this.data = await db.communityGet(this.communityId)
+      this.data.size = this.publications.getSize()
     }
     return this.data
+  }
+
+  // passthrough method to calculate community size based on sum of
+  // publications individual sizes
+  getAllPublications = async () => {
+    const list = await this.publications.getAll()
+    this.data.size = this.publications.getSize()
+    return list
   }
 
   getOnlinePeers = async () => {
@@ -137,10 +154,11 @@ class Community extends EventEmitter {
 
   post = data => db.communityPost(this.communityId, data)
 
+  // passthrough method
   postPublication = data => {
     // side effect
     // when a new gif is posted we calculate its size and add it to the Community size
-    this.put({ ...this.data, size: this.data.size + data.src.length })
+    this.data.size = this.publications.getSize() + data.src.length
     // post
     return this.publications.post(data)
   }
