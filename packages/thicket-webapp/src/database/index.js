@@ -112,7 +112,7 @@ class Database extends EventEmitter {
         })
         // updates to publications metadata (eg change publication caption)
         y.share.publicationsMetadata.observe(({ value, type }) => {
-          if (type === 'add' && !this._syncing) {
+          if (type !== 'delete' && !this._syncing) {
             const { id, ...data } = value
             this.emit(`update-${communityId}-publicationsMetadata`, {
               id,
@@ -226,7 +226,6 @@ class Database extends EventEmitter {
       ...y.share.metadata.get(communityId)
     }
   }
-
 
   communityGetOnlinePeers = async communityId => {
     const node = await this._initIPFS()

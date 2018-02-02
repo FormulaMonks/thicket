@@ -274,9 +274,13 @@ class Community extends Component {
   }
 
   fetchPublications = async () => {
-    const { publications } = await communities.get(this.props.match.params.c)
-    const list = await publications.getAll()
+    const community = await communities.get(this.props.match.params.c)
+    const list = await community.getAllPublications()
     this.setState({ list })
+    // side effect
+    // size changed, and we only know the new size
+    // after receiving the publications
+    this.fetchMetadata()
   }
 
   fetchPublicationsMetadata = async () => {
