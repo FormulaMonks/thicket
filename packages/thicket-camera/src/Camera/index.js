@@ -55,7 +55,12 @@ export default class Camera extends Component {
     return <Wrap className={cameraWrap}>
       {(mode === STANDBY || mode === SHOOTING) &&
         <Vid key="video" className={videoWrap}>
-          <video ref={v => this.video = v} autoPlay style={videoStyles} />
+          <video
+            ref={v => this.video = v}
+            autoPlay
+            playsInline
+            style={videoStyles}
+          />
         </Vid>
       }
       {mode === STANDBY && <Controls classNames={classes} key="controls" onClick={this.capture} />}
