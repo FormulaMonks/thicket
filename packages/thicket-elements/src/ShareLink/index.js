@@ -24,6 +24,7 @@ const ControlsWrap = styled.div`
   display: flex;
   width: 100%;
   margin-top: 0.5em;
+  align-items: center;
 `
 
 const InputWrap = styled.div`
@@ -31,6 +32,7 @@ const InputWrap = styled.div`
   border-radius: 4px;
   padding: 1px;
   margin-right: 0.25em;
+  width: 100%;
 `
 
 const Input = styled.input`
@@ -39,13 +41,21 @@ const Input = styled.input`
   border-radius: 4px;
   font-size: inherit;
   flex: 1;
-  padding: 0.25em 0.5em;
+  padding: 0.5em;
+  width: 100%;
+
+  @media (max-width: 600px) {
+    padding: 0.375em 0.5em;
+  }
 `
 
 const ButtonWrap = styled.div`
   background: ${linearGradient};
   border-radius: 4px;
   padding: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Button = styled.button`
@@ -53,7 +63,7 @@ const Button = styled.button`
   background-color: white;
   border-radius: 4px;
   cursor: pointer;
-  height: 100%;
+  height: 34px;
   &:focus, &:hover {
     background: ${linearGradient};
     outline: none;
@@ -96,12 +106,15 @@ export default class ShareLink extends React.Component {
       title = <span>the <code>title</code> prop</span>,
       body = <span>the <code>body</code> prop</span>,
       toCopy = window.location.href,
+      onBlur,
+      ...rest,
     } = this.props
     return (
       <Box
         tabIndex="0"
         onBlur={this.maybeBlur}
         innerRef={box => this.box = box}
+        {...rest}
       >
         <div><strong>{title}</strong></div>
         <label htmlFor="url">{body}</label>
