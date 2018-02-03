@@ -11,7 +11,8 @@
 }
 
 .gif__img{
-  max-width: 100%;
+  width: 100%;
+  height: auto;
   border-radius: 4px;
   box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
   margin-bottom: 1em;
@@ -21,38 +22,75 @@
   margin-top: 60px;
 }
 
-@media (min-width: 600px){
-  .gif__wrap{
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 65% 35%;
-    grid-column-gap: 0.5em;
-    justify-content: center;
-  }
-  .gif__img{
-    width: 100%;
-    height: 100%;
-    margin-bottom: 0;
-    object-fit: cover;
-    object-position: center center;
-  }
-}
-
 .gif__inner{
   padding: 1em;
   background: #F6F9FD;
   border-radius: 4px;
   color: #46569F;
   box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gif__inner .editable{
+  max-height: 8em;
+  overflow: auto;
 }
 
 .gif__buttons{
   display: flex;
   text-align: center;
-  justify-content: space-around;
+  justify-content: center;
+  background: unset;
 }
 
 .gif__button{
   cursor: pointer;
   border: none;
+}
+
+@media (min-width: 600px){
+  .gif__wrap{
+    margin: 0 auto;
+    display: inline-grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 0.5em;
+    justify-content: center;
+    text-align: initial;
+  }
+
+  .gif__img{
+    width: auto;
+    height: 100%;
+    margin: 0;
+  }
+
+  .gif__img--safari{
+    height: unset;
+  }
+
+  .gif__inner{
+    max-width: 400px;
+    max-height: 400px;
+    overflow: auto;
+  }
+
+  @media (min-height: 800px) {
+    .gif__img{
+      min-height: 500px;
+    }
+    .gif__inner{
+      max-height: 500px;
+    }
+
+    @media (min-width: 1200px) {
+      .gif__img{
+        min-height: 600px;
+      }
+      .gif__inner{
+        max-height: 600px;
+      }
+    }
+  }
 }

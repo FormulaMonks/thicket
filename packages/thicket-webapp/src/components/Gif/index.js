@@ -9,6 +9,7 @@ import { getGIFLink } from '../../utils/links'
 
 const { linearGradient, glow } = Styles
 const { downloadSvg, shareSvg, facebookSvg, twitterSvg } = Icons
+const isSafari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1
 
 const getFilename = ({ nickname, caption }) => `thicket${nickname ? `-${nickname}` : ''}${caption ? `-${caption}` : ''}.gif`
 
@@ -72,7 +73,7 @@ export default class Gif extends Component {
     const publicURL = getGIFLink(communityId, id)
 
     return <div className="gif__wrap" style={{ background: linearGradient, boxShadow: glow }}>
-      <img className="gif__img" src={src} alt={caption} />
+      <img className={`gif__img${isSafari ? ' gif__img--safari' : ''}`} src={src} alt={caption} />
       <div className="gif__inner">
         {header}
         {(nickname || editable) && [
