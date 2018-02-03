@@ -183,8 +183,9 @@ class Database extends EventEmitter {
 
   publicationsGet = async (communityId, id) => {
     // onboarding gifs
-    const { hash, path, ...rest } = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
-    if (hash) {
+    const exists = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
+    if (exists) {
+      const { hash, path, ...rest } = exists
       return { id, src: await getDataSrcFromURL(path), ...rest }
     }
     // ipfs
