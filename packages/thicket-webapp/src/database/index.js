@@ -8,6 +8,7 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
+import { DEFAULT_PUBLICATIONS } from '../utils/constants'
 
 const ipfsConfig = {
   repo: 'thicket',
@@ -69,6 +70,19 @@ const mapIPFSIdstoNicknames = async(node, y) => {
   }, [])
   return [nickname, ...peers]
 }
+
+const getDataSrcFromURL = async path => new Promise(r => {
+  const request = new XMLHttpRequest()
+  request.open('GET', path, true)
+  request.responseType = 'blob'
+  request.onload = () => {
+    const reader = new FileReader()
+    reader.readAsDataURL(request.response)
+    reader.onload = e => r(e.target.result)
+  }
+  request.send()
+})
+
 
 class Database extends EventEmitter {
   constructor() {
@@ -168,6 +182,12 @@ class Database extends EventEmitter {
   }
 
   publicationsGet = async (communityId, id) => {
+    // onboarding gifs
+    const { hash, path, ...rest } = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
+    if (hash) {
+      return { id, src: await getDataSrcFromURL(path), ...rest }
+    }
+    // ipfs
     const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
     const src = await timedSrcCat(node, id)
