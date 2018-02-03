@@ -23,6 +23,6 @@
 @media (min-width: 600px){
   .individualGif__wrap{
     margin: 0 auto;
-    max-width: 80%;
+    width: 80%;
   }
 }
