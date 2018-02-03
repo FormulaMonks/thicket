@@ -10,13 +10,42 @@ import { getGIFLink } from '../../utils/links'
 const { linearGradient, glow } = Styles
 const { downloadSvg, shareSvg, facebookSvg, twitterSvg } = Icons
 
+const getFilename = ({ nickname, caption }) => `thicket${nickname ? `-${nickname}` : ''}${caption ? `-${caption}` : ''}.gif`
+
 const downloadFile = gif => {
-  const filename = `thicket${gif.nickname ? `-${gif.nickname}` : ''}${gif.caption ? `-${gif.caption}` : ''}.gif`
-  const fileStream = streamSaver.createWriteStream(filename)
+  const filename = getFilename(gif)
+  const fileStream = streamSaver.createWriteStream(filename, gif.src.length)
   const writer = fileStream.getWriter()
   const data = new ImageDataConverter(gif.src).convertToTypedArray()
   writer.write(data)
   writer.close()
+}
+
+const Download = ({ gif, onShareHook }) => {
+
+    if (document.documentElement.clientWidth < 600) {
+      return null
+    }
+
+    // chrome
+    if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
+      return <button
+        className="gif__button"
+        onClick={() => onShareHook(() => downloadFile(gif))}
+      >
+        <Icon src={downloadSvg} />
+      </button>
+    }
+
+    // safari & firefox
+    return <a
+      className="gif__button"
+      download={getFilename(gif)}
+      href={gif.src}
+    >
+      <Icon src={downloadSvg} />
+    </a>
+
 }
 
 export default class Gif extends Component {
@@ -60,16 +89,7 @@ export default class Gif extends Component {
         ]}
         <h3>Save & Share GIF</h3>
         <div className="gif__buttons">
-          <button
-            className="gif__button"
-            onClick={() => {
-              if (onShareHook()) {
-                downloadFile(gif)
-              }
-            }}
-          >
-            <Icon src={downloadSvg} />
-          </button>
+          <Download gif={gif} onShareHook={onShareHook} />
           <Trigger active={sharing}>
             <button
               className="gif__button"

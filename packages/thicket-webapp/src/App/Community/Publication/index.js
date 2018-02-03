@@ -53,6 +53,7 @@ class Publication extends Component {
       </Link>,
       <Modal
         key="modal"
+        className="publication__modal"
         disableBodyScroll
         onClose={document.documentElement.clientWidth > 600 ? this.close : ()=>{} }
       >

@@ -47,9 +47,9 @@
 }
 
 .gif__buttons{
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
+  display: flex;
   text-align: center;
+  justify-content: space-around;
 }
 
 .gif__button{
