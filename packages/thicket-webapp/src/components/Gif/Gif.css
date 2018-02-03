@@ -17,6 +17,10 @@
   margin-bottom: 1em;
 }
 
+.gif__share{
+  margin-top: 60px;
+}
+
 @media (min-width: 600px){
   .gif__wrap{
     margin: 0 auto;
