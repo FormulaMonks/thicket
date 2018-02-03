@@ -6,7 +6,7 @@
   padding: 0;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 18em);
+  grid-template-columns: 1fr;
   justify-content: center;
   grid-gap: 1em;
 }
@@ -24,8 +24,9 @@
 }
 
 .communityGrid__img{
-  min-width: 100%;
-  max-width: 100%;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
@@ -41,10 +42,6 @@
 .communityGrid__caption{
   color: #46569F;
   padding-left: 0.5em;
-  height: 2.5em;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
   position: relative;
 }
 
@@ -53,8 +50,8 @@
   display: block;
   height: 1px;
   background: #DADADA;
-  position: absolute;
-  top: 2em;
+  position: relative;
+  top: 0.5em;
   left: -0.5em;
   width: calc(100% + 0.5em);
 }
@@ -81,9 +78,20 @@
 /* desktop */
 @media (min-width: 600px){
   .communityGrid{
+    grid-template-columns: repeat(auto-fill, 18em);
     grid-column: 1 / 10;
     grid-row: 3;
     justify-content: flex-start;
     align-items: flex-start;
+  }
+  .communityGrid__caption{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 2.5em;
+  }
+  .communityGrid__caption::after{
+    position: absolute;
+    top: 2em;
   }
 }
