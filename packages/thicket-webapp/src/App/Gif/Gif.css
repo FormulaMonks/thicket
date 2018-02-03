@@ -23,6 +23,9 @@
 @media (min-width: 600px){
   .individualGif__wrap{
     margin: 0 auto;
-    width: 80%;
+  }
+
+  .individualGif__wrap .gif__buttons{
+    margin-bottom: 1em;
   }
 }

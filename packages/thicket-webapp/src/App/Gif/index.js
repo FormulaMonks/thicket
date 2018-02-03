@@ -26,6 +26,7 @@ class IndividualGif extends Component {
     return <div className="individualGif">
       <div className="individualGif__wrap">
         <Gif
+          className="individualGif__wrapper"
           gif={gif}
           communityId={match.params.c}
           header={<div className="individualGif__header">

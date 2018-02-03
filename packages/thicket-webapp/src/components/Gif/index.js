@@ -61,7 +61,8 @@ export default class Gif extends Component {
       editable,
       onChange,
       communityId,
-      children
+      children,
+      className,
     } = this.props
     const { sharing } = this.state
 
@@ -72,52 +73,60 @@ export default class Gif extends Component {
     const { src, nickname, caption, id } = gif
     const publicURL = getGIFLink(communityId, id)
 
-    return <div className="gif__wrap" style={{ background: linearGradient, boxShadow: glow }}>
+    return <div className={`gif__wrap${className ? ` ${className}` : ''}`} style={{ background: linearGradient, boxShadow: glow }}>
       <img className={`gif__img${isSafari ? ' gif__img--safari' : ''}`} src={src} alt={caption} />
       <div className="gif__inner">
         {header}
-        {(nickname || editable) && [
-          <h3 key="nickname_label">GIF created by:</h3>,
-          editable
-            ? <Editable key="nickname_input" value={nickname} onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })} />
-            : <div key="nickname_value">{nickname}</div>
-        ]}
-        {(caption || editable) && [
-          <h3 key="caption_label">GIF caption:</h3>,
-          editable
-            ? <Editable key="caption_input" value={caption} onChange={e => onChange({ ...gif, caption: e.currentTarget.value })} />
-            : <div key="caption_value">{caption}</div>
-        ]}
-        <h3>Save & Share GIF</h3>
-        <div className="gif__buttons">
-          <Download gif={gif} onShareHook={onShareHook} />
-          <Trigger active={sharing}>
+        {(nickname || editable) && <div key="nickname">
+          <h3>GIF created by:</h3>
+          {editable
+            ? <Editable
+                value={nickname}
+                onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })}
+              />
+            : <div>{nickname}</div>}
+        </div>}
+        {(caption || editable) && <div key="caption">
+          <h3>GIF caption:</h3>
+          {editable
+            ? <Editable
+                value={caption}
+                onChange={e => onChange({ ...gif, caption: e.currentTarget.value })}
+              />
+            : <div>{caption}</div>}
+        </div>}
+        <div>
+          <h3>Save & Share GIF</h3>
+          <div className="gif__buttons">
+            <Download gif={gif} onShareHook={onShareHook} />
+            <Trigger active={sharing}>
+              <button
+                className="gif__button"
+                onClick={() => onShareHook(() => this.setState({ sharing: true }))}
+              >
+                <Icon src={shareSvg} />
+              </button>
+            </Trigger>
+            {sharing && <ShareLink
+              className="gif__share"
+              title={"GIF Share Link"}
+              body={"Share the link with friends so they view this GIF."}
+              toCopy={publicURL}
+              onBlur={() => this.setState({ sharing: false })}
+            />}
             <button
               className="gif__button"
-              onClick={() => onShareHook(() => this.setState({ sharing: true }))}
+              onClick={() => onShareHook(() => window.open(`https://www.facebook.com/sharer.php?u=${publicURL}`, '_blank'))}
             >
-              <Icon src={shareSvg} />
+              <Icon src={facebookSvg} />
             </button>
-          </Trigger>
-          {sharing && <ShareLink
-            className="gif__share"
-            title={"GIF Share Link"}
-            body={"Share the link with friends so they view this GIF."}
-            toCopy={publicURL}
-            onBlur={() => this.setState({ sharing: false })}
-          />}
-          <button
-            className="gif__button"
-            onClick={() => onShareHook(() => window.open(`https://www.facebook.com/sharer.php?u=${publicURL}`, '_blank'))}
-          >
-            <Icon src={facebookSvg} />
-          </button>
-          <button
-            className="gif__button"
-            onClick={() => onShareHook(() => window.open(`https://www.twitter.com/intent/tweet?url=${publicURL}`, '_blank'))}
-          >
-            <Icon src={twitterSvg} />
-          </button>
+            <button
+              className="gif__button"
+              onClick={() => onShareHook(() => window.open(`https://www.twitter.com/intent/tweet?url=${publicURL}`, '_blank'))}
+            >
+              <Icon src={twitterSvg} />
+            </button>
+          </div>
         </div>
         {children}
       </div>
