@@ -18,4 +18,3 @@ export const DEFAULT_PUBLICATIONS = [
     nickname: 'Thicket',
   }
 ]
-export const DEFAULT_PUBLICATIONS_SIZE = 9211594
