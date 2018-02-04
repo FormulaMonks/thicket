@@ -49,7 +49,8 @@ class CreateGif extends Component {
         onSubmit={this.props.onSave}
         nickname={this.props.nickname}
         src={this.state.src}
-        onCancel={this.reset}
+        onRetake={this.reset}
+        onCancel={this.props.onCancel}
       />,
     ]
   }

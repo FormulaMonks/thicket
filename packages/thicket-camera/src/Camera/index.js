@@ -96,10 +96,18 @@ export default class Camera extends Component {
             this.setState({ mode: STANDBY })
             return
           }
-          this.setState({ mode: REVIEW, gif: obj.image })
+          this.setState({ gif: obj.image}, this.onCaptured)
         })
       })
     }
+  }
+
+  onCaptured = () => {
+    if (this.props.review) {
+      this.setState({ mode: REVIEW })
+      return
+    }
+    this.props.onSave(this.state.gif)
   }
 
   startVideo = async () => {

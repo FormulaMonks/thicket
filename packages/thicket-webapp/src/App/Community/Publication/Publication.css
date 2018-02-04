@@ -19,3 +19,11 @@
 .publication__save{
   margin-bottom: 1em;
 }
+
+@media (min-width: 600px) {
+  .publication__modal{
+    display: inline-block;
+    background: unset;
+    text-align: center;
+  }
+}

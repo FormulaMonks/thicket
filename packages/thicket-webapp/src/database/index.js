@@ -8,6 +8,7 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
+import { DEFAULT_PUBLICATIONS } from '../utils/constants'
 
 const ipfsConfig = {
   repo: 'thicket',
@@ -51,7 +52,7 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedSrcCat = async (node, id) => Promise.race([
-  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 10000)),
+  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 100000)),
   new Promise(async r => {
     const stream = await node.files.cat(id)
     r(toBase64(stream))
@@ -69,6 +70,19 @@ const mapIPFSIdstoNicknames = async(node, y) => {
   }, [])
   return [nickname, ...peers]
 }
+
+const getDataSrcFromURL = async path => new Promise(r => {
+  const request = new XMLHttpRequest()
+  request.open('GET', path, true)
+  request.responseType = 'blob'
+  request.onload = () => {
+    const reader = new FileReader()
+    reader.readAsDataURL(request.response)
+    reader.onload = e => r(e.target.result)
+  }
+  request.send()
+})
+
 
 class Database extends EventEmitter {
   constructor() {
@@ -168,6 +182,13 @@ class Database extends EventEmitter {
   }
 
   publicationsGet = async (communityId, id) => {
+    // onboarding gifs
+    const exists = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
+    if (exists) {
+      const { hash, path, ...rest } = exists
+      return { id, src: await getDataSrcFromURL(path), ...rest }
+    }
+    // ipfs
     const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
     const src = await timedSrcCat(node, id)

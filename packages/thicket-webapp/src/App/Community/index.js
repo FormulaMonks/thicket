@@ -55,7 +55,7 @@ class Title extends Component {
       <Input
         className={syncing ? 'community__form-syncing' : ''}
         type="text"
-        placeholder={syncing ? 'Suncing Community...' : 'Name this Community'}
+        placeholder={syncing ? 'Syncing Community...' : 'Name this Community'}
         value={title}
         onChange={e => this.setState({ title: e.currentTarget.value })}
         onBlur={this.onSubmit}
@@ -245,6 +245,7 @@ class Community extends Component {
             nickname={nickname}
             onSave={this.onSave}
             onShooting={shooting => this.setState({ shooting }) }
+            onCancel={() => this.setState({ mode: null })}
           />
         </div>,
       <Route
