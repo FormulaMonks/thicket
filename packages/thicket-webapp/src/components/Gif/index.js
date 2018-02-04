@@ -6,13 +6,12 @@ import Editable from '../Editable'
 import streamSaver from 'streamsaver'
 import ImageDataConverter from '../../utils/imageDataConverter'
 import { getGIFLink } from '../../utils/links'
+import { PLACEHOLDER } from '../../utils/constants'
 
 const { linearGradient, glow } = Styles
 const { downloadSvg, shareSvg, facebookSvg, twitterSvg } = Icons
 const isSafari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1
-
 const getFilename = ({ nickname, caption }) => `thicket${nickname ? `-${nickname}` : ''}${caption ? `-${caption}` : ''}.gif`
-
 const downloadFile = gif => {
   const filename = getFilename(gif)
   const fileStream = streamSaver.createWriteStream(filename, gif.src.length)
@@ -74,7 +73,7 @@ export default class Gif extends Component {
     const publicURL = getGIFLink(communityId, id)
 
     return <div className={`gif__wrap${className ? ` ${className}` : ''}`} style={{ background: linearGradient, boxShadow: glow }}>
-      <img className={`gif__img${isSafari ? ' gif__img--safari' : ''}`} src={src} alt={caption} />
+      <img className={`gif__img${isSafari ? ' gif__img--safari' : ''}`} src={src ? src : PLACEHOLDER} alt={caption} />
       <div className="gif__inner">
         {header}
         {(nickname || editable) && <div key="nickname">
