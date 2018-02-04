@@ -245,6 +245,7 @@ class Community extends Component {
             nickname={nickname}
             onSave={this.onSave}
             onShooting={shooting => this.setState({ shooting }) }
+            onCancel={() => this.setState({ mode: null })}
           />
         </div>,
       <Route

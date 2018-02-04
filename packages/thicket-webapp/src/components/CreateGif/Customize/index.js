@@ -41,6 +41,12 @@ class Customize extends Component {
             </Button>
             <Button
               secondary
+              onClick={this.props.onRetake}
+            >
+              Retake
+            </Button>
+            <Button
+              secondary
               onClick={this.props.onCancel}
             >
               Cancel
