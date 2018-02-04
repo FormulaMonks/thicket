@@ -33,25 +33,31 @@ class Customize extends Component {
             />
           </label>
           <div className="customize__controls">
-            <Button
-              className="customize__submit"
-              onClick={this.onSubmit}
-            >
-              Save
-            </Button>
-            <Button
-              secondary
-              onClick={this.props.onRetake}
-            >
-              Retake
-            </Button>
-            <Button
-              secondary
-              onClick={this.props.onCancel}
-            >
-              Cancel
-            </Button>
-        </div>
+            <div className="customize__btn">
+              <Button
+                className="customize__submit"
+                onClick={this.onSubmit}
+              >
+                Save
+              </Button>
+            </div>
+            <div className="customize__btn">
+              <Button
+                secondary
+                onClick={this.props.onRetake}
+              >
+                Retake
+              </Button>
+            </div>
+            <div className="customize__btn">
+              <Button
+                secondary
+                onClick={this.props.onCancel}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </Modal>
