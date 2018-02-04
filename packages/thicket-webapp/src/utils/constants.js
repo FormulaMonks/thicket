@@ -18,3 +18,4 @@ export const DEFAULT_PUBLICATIONS = [
     nickname: 'Thicket',
   }
 ]
+export const PLACEHOLDER = '/images/placeholder.png'
