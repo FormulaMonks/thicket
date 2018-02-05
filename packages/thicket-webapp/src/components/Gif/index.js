@@ -73,7 +73,14 @@ export default class Gif extends Component {
     const publicURL = getGIFLink(communityId, id)
 
     return <div className={`gif__wrap${className ? ` ${className}` : ''}`} style={{ background: linearGradient, boxShadow: glow }}>
-      <img className={`gif__img${isSafari ? ' gif__img--safari' : ''}`} src={src ? src : PLACEHOLDER} alt={caption} />
+      <div className="gif__img-wrap">
+        <img
+          className={`gif__img${isSafari ? ' gif__img--safari' : ''}`}
+          src={src ? src : PLACEHOLDER}
+          alt={caption}
+        />
+        {!src && <div className="gif__spin"><Spinner backgroundColor="#09131D" /></div>}
+      </div>
       <div className="gif__inner">
         {header}
         {(nickname || editable) && <div key="nickname">
