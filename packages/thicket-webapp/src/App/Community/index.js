@@ -141,7 +141,7 @@ class Community extends Component {
     const {
       nickname,
       match,
-      onInviteHook=()=>{},
+      onInviteHook=cb=>cb(),
       blacklistedCommunities=[],
       communityBtns,
     } = this.props
@@ -199,10 +199,7 @@ class Community extends Component {
             type="text"
             readOnly
             value={getCommunityInviteLink(c)}
-            onClick={e => {
-              onInviteHook()
-              e.target.select()
-            }}
+            onClick={e => onInviteHook(() => e.target.select())}
           />
           <img
             src={shareSvg}

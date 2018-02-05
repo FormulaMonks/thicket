@@ -25,6 +25,7 @@
 
 .communityGrid__wrap{
   position: relative;
+  overflow: hidden;
 }
 
 .communityGrid__spin{
