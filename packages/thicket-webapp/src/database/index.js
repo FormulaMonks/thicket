@@ -182,15 +182,15 @@ class Database extends EventEmitter {
   }
 
   publicationsGet = async (communityId, id) => {
+    const y = await this._initCommunity(communityId)
     // onboarding gifs
     const exists = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
     if (exists) {
       const { hash, path, ...rest } = exists
-      return { id, src: await getDataSrcFromURL(path), ...rest }
+      return { id, ...y.share.publicationsMetadata.get(id), src: await getDataSrcFromURL(path), ...rest }
     }
     // ipfs
     const node = await this._initIPFS()
-    const y = await this._initCommunity(communityId)
     const src = await timedSrcCat(node, id)
     return { id, src, ...y.share.publicationsMetadata.get(id) }
   }
