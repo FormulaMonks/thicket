@@ -5486,9 +5486,9 @@ ipfs-pubsub-room@^0.3.0:
     pull-pushable "^2.1.1"
     pull-stream "^3.6.1"
 
-ipfs-pubsub-room@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/ipfs-pubsub-room/-/ipfs-pubsub-room-0.4.0.tgz#3f31ca795baf49c0fb223c17858fb350b9159850"
+ipfs-pubsub-room@^1.1.2:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/ipfs-pubsub-room/-/ipfs-pubsub-room-1.1.5.tgz#7a05069ee9f7ea35349824e450c5e1cf64d44fa5"
   dependencies:
     hyperdiff "^2.0.3"
     lodash.clonedeep "^4.5.0"
@@ -12318,13 +12318,13 @@ y-indexeddb@^8.1.9:
   version "8.1.9"
   resolved "https://registry.yarnpkg.com/y-indexeddb/-/y-indexeddb-8.1.9.tgz#0cb8ab72fc0e6a5345d3c628964659175b50c9c7"
 
-y-ipfs-connector@^1.3.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/y-ipfs-connector/-/y-ipfs-connector-1.4.0.tgz#5e7cb1eba7e9d1a1c3f1a280bf5a0200c19ed79e"
+y-ipfs-connector@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/y-ipfs-connector/-/y-ipfs-connector-2.1.2.tgz#79d2bd3633c1e8c18676513fa688cc32457e81e8"
   dependencies:
     async "^2.4.1"
     debug "^3.1.0"
-    ipfs-pubsub-room "^0.4.0"
+    ipfs-pubsub-room "^1.1.2"
     safe-buffer "^5.1.1"
 
 y-map@^10.1.3:
