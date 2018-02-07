@@ -32,9 +32,7 @@ const yConfig = (node, user_id, id) => ({
     name: 'ipfs',
     room: `thicket:${id}`,
     ipfs: node,
-    role: 'slave',
     syncMethod: 'syncAll',
-    user_id,
   },
   share: {
     publications: 'Array',
