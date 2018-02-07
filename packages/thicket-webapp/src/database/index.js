@@ -270,7 +270,10 @@ class Database extends EventEmitter {
       const y = await this._initCommunity(communityId)
       const node = await this._initIPFS()
       const { id } = await node.id()
-      y.share.nicknames.set(id, data)
+      const current = y.share.nicknames.get(id)
+      if (data !== current) {
+        y.share.nicknames.set(id, data)
+      }
     }
   }
 
