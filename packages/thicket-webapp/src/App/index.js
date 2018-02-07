@@ -68,6 +68,7 @@ class App extends Component {
               nickname={nickname}
               onInviteHook={this.props.onInviteHook}
               onShareHook={this.props.onShareHook}
+              onCreateGif={this.props.onCreateGif}
               communityBtnsHook={this.props.communityBtnsHook}
               blacklistedCommunities={this.props.blacklistedCommunities}
             />}

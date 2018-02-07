@@ -139,16 +139,17 @@ class Community extends Component {
       syncing,
     } = this.state
     const {
+      history,
       nickname,
       match,
-      onInviteHook=()=>{},
+      onInviteHook=cb=>cb(),
       blacklistedCommunities=[],
       communityBtns,
     } = this.props
     const { c } = match.params
 
     if (mode === UNINVITED || blacklistedCommunities.includes(c)) {
-      return <NotFound history={this.props.history} />
+      return <NotFound history={history} />
     }
 
     return [
@@ -187,7 +188,7 @@ class Community extends Component {
           }
         </div>
         <AddButton
-          onClick={() => this.setState({ mode: CREATE })}
+          onClick={this.onCreateGif}
           className="community__new"
         />
         <div
@@ -199,10 +200,7 @@ class Community extends Component {
             type="text"
             readOnly
             value={getCommunityInviteLink(c)}
-            onClick={e => {
-              onInviteHook()
-              e.target.select()
-            }}
+            onClick={e => onInviteHook(() => e.target.select())}
           />
           <img
             src={shareSvg}
@@ -222,11 +220,11 @@ class Community extends Component {
                 key="grid"
                 community={c}
                 list={list}
-                onNew={() => this.setState({ mode: CREATE })}
+                onNew={this.onCreateGif}
               />
             : <NoContent
                 syncing={syncing}
-                onCreate={() => this.setState({ mode: CREATE })}
+                onCreate={this.onCreateGif}
               />
         }
       </div>,
@@ -245,7 +243,7 @@ class Community extends Component {
             nickname={nickname}
             onSave={this.onSave}
             onShooting={shooting => this.setState({ shooting }) }
-            onCancel={() => this.setState({ mode: null })}
+            onCancel={this.onStopCreateGif}
           />
         </div>,
       <Route
@@ -306,11 +304,23 @@ class Community extends Component {
     this.setState({ onlinePeers, colors })
   }
 
+  onCreateGif = () => {
+    const { onCreateGif=()=>{} } = this.props
+    onCreateGif(true)
+    this.setState({ mode: CREATE })
+  }
+
+  onStopCreateGif = () => {
+    const { onCreateGif=()=>{} } = this.props
+    onCreateGif(false)
+    this.setState({ mode: null })
+  }
+
   onSave = async data => {
     const community = await communities.get(this.props.match.params.c)
     await community.postPublication(data)
     await user.put({ nickname: data.nickname })
-    this.setState({ mode: null })
+    this.onStopCreateGif()
   }
 
   onSaveTitle = async title => {
