@@ -112,8 +112,10 @@ class Database extends EventEmitter {
         const y = await Y(yConfig(node, peerId, communityId))
         // updates to the community metadata (eg change community title)
         y.share.metadata.observe(({ value }) => {
-          if (!this._syncing) {
-            this.emit(`update-${communityId}`, value)
+          if (value) {
+            if (!this._syncing) {
+              this.emit(`update-${communityId}`, value)
+            }
           }
         })
         // updates to the publications (eg new publication)
