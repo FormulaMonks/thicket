@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Input, Spinner } from 'thicket-elements'
+import { Button, Input, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -11,7 +11,6 @@ import queryString from 'query-string'
 import { getCommunityInviteLink } from '../../utils/links'
 import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
-import AddButton from '../../components/AddButton'
 import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
 import NoContent from './NoContent'
@@ -187,10 +186,12 @@ class Community extends Component {
             : formatBytes(size)
           }
         </div>
-        <AddButton
+        <Button
           onClick={this.onCreateGif}
           className="community__new"
-        />
+        >
+          Create GIF
+        </Button>
         <div
           className="community__invite-wrap"
           title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
