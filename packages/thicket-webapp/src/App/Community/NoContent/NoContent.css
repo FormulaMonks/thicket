@@ -8,3 +8,7 @@
 .noContent__spinner{
   margin: auto;
 }
+
+.noContent__text{
+  margin-bottom: 2em;
+}
