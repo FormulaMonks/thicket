@@ -1,8 +1,8 @@
 .communityGrid{
-  grid-row: 5;
+  grid-row: 6;
   grid-column: 1 / -1;
   list-style: none;
-  margin: 1em 0;
+  margin: 0.5em 0;
   padding: 0;
   width: 100%;
   display: grid;
@@ -100,6 +100,7 @@
     grid-row: 3;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 1em 0;
   }
   .communityGrid__caption{
     text-overflow: ellipsis;

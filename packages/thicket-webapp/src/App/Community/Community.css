@@ -41,7 +41,7 @@
 .community__btns{
   grid-row-start: 3;
   align-items: center;
-  margin: 1em;
+  margin: 1.5em 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,9 +69,12 @@
 }
 
 .community__size{
-  grid-column: 11;
-  margin-right: 0.5em;
+  color: rgba(255, 255, 255, 0.7);
+  grid-row: 5;
   text-align: right;
+  grid-column: 1/-1;
+  font-size: 0.9em;
+  margin: 0.5em 0.3em;
 }
 
 .community__size-syncing{
@@ -80,8 +83,8 @@
 }
 
 .community__new{
-  grid-column: 12;
-  border: none;
+  grid-column: 6 / -1;
+  padding: 0.75em 2em;
 }
 
 .community__invite-wrap{
@@ -172,6 +175,7 @@
   .community__btns{
     grid-column: 6;
     justify-self: end;
+    margin: 0;
   }
 
   .community__size,
