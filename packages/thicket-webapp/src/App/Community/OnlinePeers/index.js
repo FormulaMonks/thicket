@@ -29,7 +29,7 @@ class OnlinePeers extends Component {
         </button>
      </div>
      <div className={`onlinePeers-wrap${this.state.active ? ' onlinePeers-wrap--active' : ''}`}>
-       <h4 className="onlinePeers-title">Browsers Online</h4>
+       <h4 className="onlinePeers-title">Devices Online</h4>
        <ul className="onlinePeers-list">
          {onlinePeers.map((peer, index) => {
            const count = onlinePeersNicknameCount.get(peer)
