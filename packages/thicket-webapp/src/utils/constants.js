@@ -1,6 +1,6 @@
 export const DEFAULT_PUBLICATIONS = [
   {
-    hash: 'QmQKooJPWpYY2v7CB4shGKa7UVcbE3Z61sGjibb3aFkXb1',
+    hash: 'QmXKShp8tQd8jmFD5bQzJNeoDL3CUWgoSbYrueJHSiHoTh',
     caption: 'Create New GIF',
     path: '/onboarding-gifs/create-new-gif.gif',
     nickname: 'Thicket',
