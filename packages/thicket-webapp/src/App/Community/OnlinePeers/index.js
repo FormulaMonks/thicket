@@ -9,7 +9,7 @@ class OnlinePeers extends Component {
   state = { active: false }
 
   render() {
-    const { onlinePeers, colors } = this.props
+    const { onlinePeers, colors, className } = this.props
     const innerCount = new Map()
     const onlinePeersNicknameCount = onlinePeers.reduce((p, c) => {
       if (!p.has(c)) {
@@ -22,7 +22,7 @@ class OnlinePeers extends Component {
     // (you) color same as header
     colors[0] = randomColor({ luminosity: 'dark', seed: onlinePeers[0] })
 
-    return <div className="onlinePeers onlinePeers--aligned-left">
+    return <div className={`${className} onlinePeers onlinePeers--aligned-left`}>
      <div className="onlinePeers-count">
         <button className="onlinePeers-btn" onClick={() => this.setState({ active: !this.state.active })}>
           {onlinePeers.length} <img src={usersSvg} alt="Online Peers" />

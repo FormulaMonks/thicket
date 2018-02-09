@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: none;
   position: relative;
-  grid-row-start: 3;
   align-items: center;
   margin: 1em;
 }
@@ -80,8 +79,6 @@
 /* desktop */
 @media (min-width: 600px){
   .onlinePeers{
-    grid-column: 10 / -1;
-    grid-row: 1 / 6;
     margin: 0 1em;
     align-self: flex-start;
     width: 100%;

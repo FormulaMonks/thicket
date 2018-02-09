@@ -174,6 +174,7 @@ class Community extends Component {
           onSubmit={this.onSaveTitle}
         />
         <OnlinePeers
+          className="community__onlinePeers"
           onlinePeers={onlinePeers}
           colors={colors}
         />
