@@ -2,7 +2,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 12em;
+  max-width: 12em;
 }
 
 .userName__initial{
