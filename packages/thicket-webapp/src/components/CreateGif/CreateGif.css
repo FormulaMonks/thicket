@@ -1,12 +1,12 @@
-.createGif__wrap{
+.createGif .createGif__wrap{
   background: rgba(16, 33, 49, 0.5);
 }
 
-.createGif__controlsTitle{
+.createGif .createGif__controlsTitle{
   background-color: unset;
 }
 
-.createGif__controlsButton{
+.createGif .createGif__controlsButton{
   text-indent: -9999em;
   height: 4em;
   width: 4em;
@@ -19,11 +19,11 @@
   box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.25), 0px -1px 6px rgba(0, 0, 0, 0.25);
 }
 
-.createGif__controlsButton::after{
+.createGif .createGif__controlsButton::after{
   display: none;
 }
 
-.createGif__controlsButton::before{
+.createGif .createGif__controlsButton::before{
   position: absolute;
   left: -1em;
   top: -1em;
@@ -36,11 +36,11 @@
   background: rgba(246, 249, 253, 0.3);
 }
 
-.createGif__progressBarWrap{
+.createGif .createGif__progressBarWrap{
   background: unset;
 }
 
-.createGif__progressBarWrap::after{
+.createGif .createGif__progressBarWrap::after{
   display: block;
   content: '';
   position: absolute;
@@ -51,44 +51,44 @@
   background: rgba(246,249,253,0.6);
 }
 
-.createGif__progressBarBar{
+.createGif .createGif__progressBarBar{
   background: linear-gradient(36.85deg, #F7618B -6.19%, #2A7AFF 135.42%);
   z-index: 1;
 }
 
-.createGif__progressLabel{
+.createGif .createGif__progressLabel{
   background: unset;
   z-index: 2;
 }
 
-.createGif__reviewWrap{
+.createGif .createGif__reviewWrap{
   text-align: center;
 }
 
-.createGif__reviewPreview{
+.createGif .createGif__reviewPreview{
   margin-top: 1em;
 }
 
-.createGif__reviewControlsWrap{
+.createGif .createGif__reviewControlsWrap{
   display: block;
 }
 
-.createGif__reviewApprove{
+.createGif .createGif__reviewApprove{
   margin-bottom: 1em;
 }
 
 @media(min-width: 600px) {
-  .createGif__reviewWrap{
+  .createGif .createGif__reviewWrap{
     width: 50%;
   }
 
-  .createGif__reviewControlsWrap{
+  .createGif .createGif__reviewControlsWrap{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
   }
 
-  .createGif__reviewApprove{
+  .createGif .createGif__reviewApprove{
     order: 1;
   }
 }

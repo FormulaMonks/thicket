@@ -31,6 +31,7 @@ class CreateGif extends Component {
         key="camera"
         onSave={src => this.setState({ src, mode: CUSTOMIZE})}
         classNames={{
+          cameraWrap: 'createGif',
           controlsWrap: 'createGif__wrap',
           controlsTitle: 'createGif__controlsTitle',
           controlsButton: 'createGif__controlsButton',
