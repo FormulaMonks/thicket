@@ -209,25 +209,27 @@ class Community extends Component {
             className="community__invite-img"
           />
         </div>
-        {loading
-          ? <div
-              key="spinner"
-              className="community__spinner"
-            >
-              <Spinner />
-            </div>
-          : list.length
-            ? <Grid
-                key="grid"
-                community={c}
-                list={list}
-                onNew={this.onCreateGif}
-              />
-            : <NoContent
-                syncing={syncing}
-                onCreate={this.onCreateGif}
-              />
-        }
+        <div className="community__content-wrap">
+          {loading
+            ? <div
+                key="spinner"
+                className="community__spinner"
+              >
+                <Spinner />
+              </div>
+            : list.length
+              ? <Grid
+                  key="grid"
+                  community={c}
+                  list={list}
+                  onNew={this.onCreateGif}
+                />
+              : <NoContent
+                  syncing={syncing}
+                  onCreate={this.onCreateGif}
+                />
+          }
+        </div>
       </div>,
       mode === LEAVE && <Leave
           key="leave"

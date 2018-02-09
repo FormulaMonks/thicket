@@ -112,9 +112,12 @@
   background: unset;
 }
 
-.community__spinner{
+.community__content-wrap{
   grid-row: 5;
-  grid-column: 1 / -1;
+  grid-column: 1 / 13;
+}
+
+.community__spinner{
   margin: 2em auto;
 }
 
@@ -193,13 +196,17 @@
     justify-self: end;
   }
 
+  .community__content-wrap{
+    grid-row: 5;
+    grid-column: 1 / 10;
+  }
+
   .community__new{
     grid-column: 9;
     justify-self: end;
   }
 
   .community__spinner{
-    grid-column: 1 / 10;
     width: 100%;
     display: flex;
     align-items: center;
