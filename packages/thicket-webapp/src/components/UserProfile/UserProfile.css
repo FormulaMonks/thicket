@@ -9,3 +9,9 @@
   width: 20px;
   height: 20px;
 }
+
+@media (min-width: 600px) {
+  .userProfile{
+    max-width: unset;
+  }
+}
