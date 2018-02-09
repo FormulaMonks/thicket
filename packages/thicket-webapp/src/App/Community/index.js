@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Input, Spinner } from 'thicket-elements'
+import { Button, Input, Spinner } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -11,7 +11,6 @@ import queryString from 'query-string'
 import { getCommunityInviteLink } from '../../utils/links'
 import back from '../../images/arrow-left.svg'
 import randomColor from 'randomcolor'
-import AddButton from '../../components/AddButton'
 import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
 import NoContent from './NoContent'
@@ -175,6 +174,7 @@ class Community extends Component {
           onSubmit={this.onSaveTitle}
         />
         <OnlinePeers
+          className="community__onlinePeers"
           onlinePeers={onlinePeers}
           colors={colors}
         />
@@ -187,10 +187,12 @@ class Community extends Component {
             : formatBytes(size)
           }
         </div>
-        <AddButton
+        <Button
           onClick={this.onCreateGif}
           className="community__new"
-        />
+        >
+          Create GIF
+        </Button>
         <div
           className="community__invite-wrap"
           title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
@@ -208,25 +210,27 @@ class Community extends Component {
             className="community__invite-img"
           />
         </div>
-        {loading
-          ? <div
-              key="spinner"
-              className="community__spinner"
-            >
-              <Spinner />
-            </div>
-          : list.length
-            ? <Grid
-                key="grid"
-                community={c}
-                list={list}
-                onNew={this.onCreateGif}
-              />
-            : <NoContent
-                syncing={syncing}
-                onCreate={this.onCreateGif}
-              />
-        }
+        <div className="community__content-wrap">
+          {loading
+            ? <div
+                key="spinner"
+                className="community__spinner"
+              >
+                <Spinner />
+              </div>
+            : list.length
+              ? <Grid
+                  key="grid"
+                  community={c}
+                  list={list}
+                  onNew={this.onCreateGif}
+                />
+              : <NoContent
+                  syncing={syncing}
+                  onCreate={this.onCreateGif}
+                />
+          }
+        </div>
       </div>,
       mode === LEAVE && <Leave
           key="leave"

@@ -13,6 +13,8 @@
 .gif__img-wrap{
   position: relative;
   overflow: hidden;
+  box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
+  margin-bottom: 1em;
 }
 
 .gif__spin{
@@ -30,8 +32,6 @@
   width: 100%;
   height: auto;
   border-radius: 4px;
-  box-shadow: 0px 8px 14px rgba(39, 64, 88, 0.4);
-  margin-bottom: 1em;
   display: block;
 }
 
@@ -76,10 +76,13 @@
     text-align: initial;
   }
 
+  .gif__img-wrap{
+    margin: 0;
+  }
+
   .gif__img{
     width: auto;
     height: 100%;
-    margin: 0;
   }
 
   .gif__img--safari{

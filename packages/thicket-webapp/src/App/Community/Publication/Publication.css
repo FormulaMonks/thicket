@@ -1,6 +1,7 @@
 .publication__link{
   margin-left: 1.375em;
   display: flex;
+  background: unset;
 }
 
 .publication__link h3{

@@ -9,7 +9,7 @@ class OnlinePeers extends Component {
   state = { active: false }
 
   render() {
-    const { onlinePeers, colors } = this.props
+    const { onlinePeers, colors, className } = this.props
     const innerCount = new Map()
     const onlinePeersNicknameCount = onlinePeers.reduce((p, c) => {
       if (!p.has(c)) {
@@ -22,27 +22,27 @@ class OnlinePeers extends Component {
     // (you) color same as header
     colors[0] = randomColor({ luminosity: 'dark', seed: onlinePeers[0] })
 
-    return <div className="onlinePeers onlinePeers--aligned-left">
-     <div className="onlinePeers-count">
+    return <div className={`${className} onlinePeers onlinePeers--aligned-left`}>
+      <div className="onlinePeers-count">
         <button className="onlinePeers-btn" onClick={() => this.setState({ active: !this.state.active })}>
           {onlinePeers.length} <img src={usersSvg} alt="Online Peers" />
         </button>
-     </div>
-     <div className={`onlinePeers-wrap${this.state.active ? ' onlinePeers-wrap--active' : ''}`}>
-       <h4 className="onlinePeers-title">Browsers Online</h4>
-       <ul className="onlinePeers-list">
-         {onlinePeers.map((peer, index) => {
-           const count = onlinePeersNicknameCount.get(peer)
-           innerCount.set(peer, innerCount.get(peer) + 1)
-           return <li key={`online-peer-${peer}-${index}`} className="onlinePeers-item">
-             <UserName str={peer} bgColor={colors[index]} /> {index === 0
-               ? '(you)'
-               : count > 1 ? `(${innerCount.get(peer)})` : ''}
-           </li>
-         })}
-       </ul>
-     </div>
-   </div>
+      </div>
+      <div className={`onlinePeers-wrap${this.state.active ? ' onlinePeers-wrap--active' : ''}`}>
+        <h4 className="onlinePeers-title">Devices Online</h4>
+        <ul className="onlinePeers-list">
+          {onlinePeers.map((peer, index) => {
+            const count = onlinePeersNicknameCount.get(peer)
+            innerCount.set(peer, innerCount.get(peer) + 1)
+            return <li key={`online-peer-${peer}-${index}`} className="onlinePeers-item">
+              <UserName str={peer} bgColor={colors[index]} /> {index === 0
+                ? '(you)'
+                : count > 1 ? `(${innerCount.get(peer)})` : ''}
+            </li>
+          })}
+        </ul>
+      </div>
+    </div>
   }
 }
 
