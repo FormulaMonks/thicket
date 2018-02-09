@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
-import { DEFAULT_PUBLICATIONS } from '../../utils/constants'
+import { DEFAULT_PUBLICATIONS, COMMUNITY_NAMES } from '../../utils/constants'
 import { Spinner } from 'thicket-elements'
 import store from '../../database/store'
 import './Setup.css'
 
 const { communities } = store
+const randomName = COMMUNITY_NAMES[Math.floor(Math.random() * COMMUNITY_NAMES.length)]
 
 export default class Setup extends Component {
 
@@ -14,7 +15,7 @@ export default class Setup extends Component {
     // new community
     const id = uuid()
     const community = await communities.post(id)
-    community.put({ createdBy: 'Thicket' })
+    community.put({ createdBy: 'Thicket', title: randomName })
     const { publications } = community
     for(let p of DEFAULT_PUBLICATIONS) {
       await publications.postByHash({ ...p, nickname })

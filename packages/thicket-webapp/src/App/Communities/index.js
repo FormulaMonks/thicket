@@ -6,6 +6,7 @@ import './Communities.css'
 import store from '../../database/store'
 import NoContent from './NoContent'
 import Card from './Card'
+import { COMMUNITY_NAMES } from '../../utils/constants'
 
 const { communities } = store
 
@@ -56,7 +57,8 @@ class Communities extends Component {
 
   onCreateNew = async () => {
     const community = await communities.post(uuid())
-    community.put({ createdBy: this.props.nickname })
+    const title = COMMUNITY_NAMES[Math.floor(Math.random() * COMMUNITY_NAMES.length)]
+    community.put({ createdBy: this.props.nickname, title })
   }
 
 }
