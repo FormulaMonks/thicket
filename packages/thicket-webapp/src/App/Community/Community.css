@@ -101,19 +101,39 @@
 }
 
 .community__invite{
+  position: relative;
   background: #FFF;
-  padding: 1.5em;
-  padding-left: 3.5em;
+  padding: 1em;
+  padding-left: 96px;
   width: 100%;
   cursor: pointer;
   border-radius: 4px;
+  font-size: initial;
+  font-weight: initial;
+  color: #274058;
+  text-overflow: ellipsis;
+  /* odd fix for vertical align */
+  top: 1px;
+}
+
+.community__invite-wrap::after{
+  content: 'Share: ';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 42px;
+  z-index: 1;
+  color: #9FA6AD;
 }
 
 .community__invite-img{
   position: absolute;
   z-index: 1;
   top: calc(50% - 13.5px);
-  left: 8px;
+  left: 10px;
   background: unset;
 }
 
