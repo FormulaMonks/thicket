@@ -36,6 +36,10 @@
   transform: rotate(180deg);
   margin-left: 0.5em;
   margin-right: 1em;
+  height: 12px;
+  /* odd vertical align fix */
+  position: relative;
+  top: 1.5px;
 }
 
 .community__title{
