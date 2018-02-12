@@ -6,7 +6,7 @@ import Editable from '../Editable'
 import streamSaver from 'streamsaver'
 import ImageDataConverter from '../../utils/imageDataConverter'
 import { getGIFLink } from '../../utils/links'
-import { PLACEHOLDER } from '../../utils/constants'
+import TimedGif from '../TimedGif'
 
 const { linearGradient, glow } = Styles
 const { downloadSvg, shareSvg, facebookSvg, twitterSvg } = Icons
@@ -22,30 +22,26 @@ const downloadFile = gif => {
 }
 
 const Download = ({ gif, onShareHook }) => {
-
-    if (document.documentElement.clientWidth < 600) {
-      return null
-    }
-
-    // chrome
-    if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
-      return <button
-        className="gif__button"
-        onClick={() => onShareHook(() => downloadFile(gif))}
-      >
-        <Icon src={downloadSvg} />
-      </button>
-    }
-
-    // safari & firefox
-    return <a
+  if (document.documentElement.clientWidth < 600) {
+    return null
+  }
+  // chrome
+  if (/Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor)) {
+    return <button
       className="gif__button"
-      download={getFilename(gif)}
-      href={gif.src}
+      onClick={() => onShareHook(() => downloadFile(gif))}
     >
       <Icon src={downloadSvg} />
-    </a>
-
+    </button>
+  }
+  // safari & firefox
+  return <a
+    className="gif__button"
+    download={getFilename(gif)}
+    href={gif.src}
+  >
+    <Icon src={downloadSvg} />
+  </a>
 }
 
 export default class Gif extends Component {
@@ -74,12 +70,11 @@ export default class Gif extends Component {
 
     return <div className={`gif__wrap${className ? ` ${className}` : ''}`} style={{ background: linearGradient, boxShadow: glow }}>
       <div className="gif__img-wrap">
-        <img
+        <TimedGif
           className={`gif__img${isSafari ? ' gif__img--safari' : ''}`}
-          src={src ? src : PLACEHOLDER}
+          src={src}
           alt={caption}
         />
-        {!src && <div className="gif__spin"><Spinner backgroundColor="#09131D" /></div>}
       </div>
       <div className="gif__inner">
         {header}
@@ -101,7 +96,7 @@ export default class Gif extends Component {
               />
             : <div>{caption}</div>}
         </div>}
-        <div>
+        {src && <div>
           <h3>Save & Share GIF</h3>
           <div className="gif__buttons">
             <Download gif={gif} onShareHook={onShareHook} />
@@ -133,7 +128,7 @@ export default class Gif extends Component {
               <Icon src={twitterSvg} />
             </button>
           </div>
-        </div>
+        </div>}
         {children}
       </div>
     </div>
