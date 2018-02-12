@@ -62,3 +62,4 @@ export const COMMUNITY_NAMES = [
   'Home is where the GIFs are',
   'Kitchen sink',
 ]
+export const TIMEOUT = 120000

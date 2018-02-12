@@ -8,7 +8,7 @@ import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
-import { DEFAULT_PUBLICATIONS } from '../utils/constants'
+import { DEFAULT_PUBLICATIONS, TIMEOUT } from '../utils/constants'
 
 const ipfsConfig = {
   repo: 'thicket',
@@ -50,7 +50,7 @@ const toBase64 = src =>
 // read more here
 // https://github.com/ipfs/js-ipfs/issues/800#issuecomment-290988388
 const timedSrcCat = async (node, id) => Promise.race([
-  new Promise(r => setTimeout(() => r(`https://ipfs.io/ipfs/${id}`), 100000)),
+  new Promise(r => setTimeout(() => r(''), TIMEOUT)),
   new Promise(async r => {
     const stream = await node.files.cat(id)
     r(toBase64(stream))

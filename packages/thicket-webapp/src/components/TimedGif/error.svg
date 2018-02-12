@@ -1,0 +1,26 @@
+<svg width="61" height="61" viewBox="0 0 61 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>close-circle</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-23785 -43861)">
+<g id="close-circle">
+<g id="Vector">
+<use xlink:href="#path0_fill" transform="translate(23785 43861)" fill="url(#paint0_linear)"/>
+</g>
+<g id="Vector">
+<use xlink:href="#path1_fill" transform="translate(23801.7 43877.7)" fill="url(#paint1_linear)"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(3.73517e-15 61 -61 3.73517e-15 61 -3.73517e-15)">
+<stop offset="0" stop-color="#2A7AFF"/>
+<stop offset="1" stop-color="#F7618B"/>
+</linearGradient>
+<linearGradient id="paint1_linear" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.69039e-15 27.5489 -27.6061 1.68689e-15 27.6061 -1.68689e-15)">
+<stop offset="0" stop-color="#2A7AFF"/>
+<stop offset="1" stop-color="#F7618B"/>
+</linearGradient>
+<path id="path0_fill" d="M 8.93298 8.93384C -2.97766 20.8445 -2.97766 40.1532 8.93298 52.0662C 20.8436 63.9791 40.1524 63.9768 52.0653 52.0662C 63.9782 40.1532 63.9782 20.8468 52.0653 8.93384C 40.1524 -2.97909 20.8459 -2.9768 8.93298 8.93384ZM 50.3376 50.3385C 39.3972 61.2789 21.5965 61.2789 10.6561 50.3385C -0.284322 39.3981 -0.284322 21.5973 10.6561 10.6569C 21.5965 -0.283464 39.3972 -0.283464 50.3376 10.6569C 61.278 21.5973 61.2757 39.3981 50.3376 50.3385Z"/>
+<path id="path1_fill" d="M 1.72538 -3.14251e-07L 9.42754e-07 1.72538L 12.0777 13.8031L 0.0572078 25.8236L 1.78259 27.5489L 13.8031 15.5285L 25.8236 27.5489L 27.5489 25.8236L 15.5285 13.8031L 27.6061 1.72538L 25.8808 -3.14251e-07L 13.8031 12.0777L 1.72538 -3.14251e-07Z"/>
+</defs>
+</svg>

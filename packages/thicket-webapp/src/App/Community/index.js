@@ -111,6 +111,7 @@ class Community extends Component {
     community.on('peer', this.fetchOnlinePeers)
     community.on('syncing', this.onSyncing)
     community.on('synced', this.onSynced)
+    community.on('update', this.fetchPublicationsMetadata)
     publications.on('update', this.fetchPublicationsMetadata)
     // fix scroll when coming from communities
     window.scrollTo(0, 0)
@@ -123,6 +124,7 @@ class Community extends Component {
     community.off('sync', this.fetchAll)
     community.off('update', this.fetchMetadata)
     community.off('peer', this.fetchOnlinePeers)
+    community.off('update', this.fetchPublicationsMetadata)
     publications.off('update', this.fetchPublicationsMetadata)
   }
 
