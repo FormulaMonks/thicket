@@ -11,6 +11,9 @@ const UsersImg = ({ className }) =>
     className={`onlinePeers-svg${className ? ` ${className}` : ''}`}
   />
 
+const Info = ({ className }) =>
+  <div className={`onlinePeers-info${className ? ` ${className}` : ''}`}>?</div>
+
 class OnlinePeers extends Component {
 
   state = { active: false }
@@ -32,19 +35,32 @@ class OnlinePeers extends Component {
     return <div className={`${className} onlinePeers onlinePeers--aligned-left`}>
       <div className="onlinePeers-count">
         <button className="onlinePeers-btn" onClick={() => this.setState({ active: !this.state.active })}>
-          {onlinePeers.length} <UsersImg />
+          {onlinePeers.length}
+          <UsersImg />
+          <Info />
         </button>
       </div>
       <div className={`onlinePeers-wrap${this.state.active ? ' onlinePeers-wrap--active' : ''}`}>
-        <h4 className="onlinePeers-title"><UsersImg className="onlinePeers-svg-inner" /> Devices Online</h4>
+        <div className="onlinePeers-title">
+          <div className="onlinePeers-title-inner">
+            <UsersImg className="onlinePeers-svg-inner" />
+            <h4>Devices Online</h4>
+          </div>
+          <Info className="onlinePeers-info-inner" />
+        </div>
         <ul className="onlinePeers-list">
           {onlinePeers.map((peer, index) => {
             const count = onlinePeersNicknameCount.get(peer)
             innerCount.set(peer, innerCount.get(peer) + 1)
-            return <li key={`online-peer-${peer}-${index}`} className="onlinePeers-item">
-              <UserName str={peer} bgColor={colors[index]} /> {index === 0
-                ? ' (you)'
-                : count > 1 ? `(${innerCount.get(peer)})` : ''}
+            return <li
+                key={`online-peer-${peer}-${index}`}
+                className="onlinePeers-item"
+              >
+                <UserName str={peer} bgColor={colors[index]} />
+                {index === 0
+                  ? ' (you)'
+                  : count > 1 ? `(${innerCount.get(peer)})` : ''
+                }
             </li>
           })}
         </ul>

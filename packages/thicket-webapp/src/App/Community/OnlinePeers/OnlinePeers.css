@@ -55,14 +55,26 @@
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border-bottom: 1px solid #677897;
-  padding-bottom: 0.5em;
-  padding-left: 0.5em;
+  padding: 0 0.5em;
+  background: transparent;
+}
+
+.onlinePeers-title-inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.onlinePeers-title-inner h4{
+  padding: 0;
+  margin: 0.75em 0;
 }
 
 .onlinePeers-list{
   list-style: none;
-  padding: 0 1em 1em;
+  padding: 1em;
   margin: 0;
   border-radius: 4px;
 }
@@ -78,6 +90,20 @@
 
 .onlinePeers-svg-inner{
   display: none;
+}
+
+.onlinePeers-info{
+  display: none;
+  border: 1px solid #677897;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.onlinePeers-info-inner{
+  display: flex;
 }
 
 /* desktop */
@@ -108,6 +134,7 @@
 
   .onlinePeers-title{
     text-align: left;
+    padding-top: 0.5em;
     padding-left: unset;
   }
 
@@ -120,6 +147,11 @@
   }
 
   .onlinePeers-list{
-    padding: 0;
+    padding: 1em 0.35em;
+  }
+
+  .onlinePeers-info{
+    display: flex;
+    border-color: #FFF;
   }
 }
