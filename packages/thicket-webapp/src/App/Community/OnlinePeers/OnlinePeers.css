@@ -41,7 +41,7 @@
 
 .onlinePeers-wrap::before{
   position: absolute;
-  left: 18px;
+  left: 12px;
   top: -7px;
   display: block;
   content: '';
