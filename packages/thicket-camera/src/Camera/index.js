@@ -6,8 +6,10 @@ import Progress from './Progress'
 import Loading from './Loading'
 import Review from './Review'
 import { GIF_DURATION, GIF_OPTIONS } from './settings'
+import changeSvg from './change.svg'
 
 const Wrap = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
@@ -22,21 +24,39 @@ const Vid = styled.div`
   overflow: hidden;
   line-height: 0;
 `
+const Change = styled.button`
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  z-index: 2;
+  border: none;
+  background: rgba(255,255,255,0.3);
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+`
+const ChangeImg = styled.img`
+  height: 40px;
+  display: block;
+`
 const videoStyles = {
   width: '100%',
   height: '100%',
   objectFit: 'cover',
 }
+const isMobile = /Mobi/.test(navigator.userAgent)
 
 // modes
 const STANDBY = 'awaiting further instruction'
 const SHOOTING = 'capturing video'
 const LOADING = 'processing gif'
 const REVIEW = 'review, possibly save gif'
+const USER_CAMERA = 'user'
+const ENVIRONMENT_CAMERA = 'environment'
 
 export default class Camera extends Component {
 
-  state = { stream: null, mode: STANDBY, gif: null }
+  state = { stream: null, mode: STANDBY, gif: null, camera: USER_CAMERA }
 
   componentDidMount() {
     this.startVideo()
@@ -53,6 +73,11 @@ export default class Camera extends Component {
     const { classNames = {} } = this.props
     const { cameraWrap = null, videoWrap = null, ...classes = {} } = classNames
     return <Wrap className={cameraWrap}>
+      {isMobile && mode === STANDBY &&
+        <Change onClick={this.onChangeCamera}>
+          <ChangeImg src={changeSvg} alt="Change camera" />
+        </Change>
+      }
       {(mode === STANDBY || mode === SHOOTING) &&
         <Vid key="video" className={videoWrap}>
           <video
@@ -110,8 +135,25 @@ export default class Camera extends Component {
     this.props.onSave(this.state.gif)
   }
 
+  onChangeCamera = () => {
+    this.setState(
+      {
+        camera: this.state.camera === USER_CAMERA
+          ? ENVIRONMENT_CAMERA
+          : USER_CAMERA
+      },
+      () => {
+        this.stopVideo()
+        this.startVideo()
+      }
+    )
+  }
+
   startVideo = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true })
+    const constraints = isMobile
+      ? { video: { facingMode: { exact: this.state.camera } } }
+      : { video: true }
+    const stream = await navigator.mediaDevices.getUserMedia(constraints)
     this.video.srcObject = stream
     await this.video.play()
     this.setState({ stream })
