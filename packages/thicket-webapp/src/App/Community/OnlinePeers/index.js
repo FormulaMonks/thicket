@@ -4,6 +4,13 @@ import usersSvg from './users.svg'
 import randomColor from 'randomcolor'
 import './OnlinePeers.css'
 
+const UsersImg = ({ className }) =>
+  <img
+    src={usersSvg}
+    alt="Online Peers"
+    className={`onlinePeers-svg${className ? ` ${className}` : ''}`}
+  />
+
 class OnlinePeers extends Component {
 
   state = { active: false }
@@ -25,11 +32,11 @@ class OnlinePeers extends Component {
     return <div className={`${className} onlinePeers onlinePeers--aligned-left`}>
       <div className="onlinePeers-count">
         <button className="onlinePeers-btn" onClick={() => this.setState({ active: !this.state.active })}>
-          {onlinePeers.length} <img src={usersSvg} alt="Online Peers" />
+          {onlinePeers.length} <UsersImg />
         </button>
       </div>
       <div className={`onlinePeers-wrap${this.state.active ? ' onlinePeers-wrap--active' : ''}`}>
-        <h4 className="onlinePeers-title">Devices Online</h4>
+        <h4 className="onlinePeers-title"><UsersImg className="onlinePeers-svg-inner" /> Devices Online</h4>
         <ul className="onlinePeers-list">
           {onlinePeers.map((peer, index) => {
             const count = onlinePeersNicknameCount.get(peer)
