@@ -1,0 +1,12 @@
+<svg width="11" height="18" viewBox="0 0 11 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>ion-ios-arrow-forward - Ionicons</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-27503 -45375)">
+<g id="ion-ios-arrow-forward - Ionicons">
+<use xlink:href="#path0_fill" transform="matrix(-1 -1.22465e-16 1.22465e-16 -1 27513.8 45393)" fill="#46569F"/>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 1.8L 1.8 0L 10.8 9L 1.8 18L 0 16.2L 7.14375 9L 0 1.8Z"/>
+</defs>
+</svg>
