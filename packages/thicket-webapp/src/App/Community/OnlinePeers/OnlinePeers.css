@@ -19,6 +19,7 @@
   align-items: center;
   outline: none;
   cursor: pointer;
+  padding: 0;
 }
 
 .onlinePeers-wrap{
