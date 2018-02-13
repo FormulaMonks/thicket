@@ -201,10 +201,11 @@ class Community extends Component {
         >
           <input
             className="community__invite"
+            ref={i => this.input = i}
             type="text"
             readOnly
             value={getCommunityInviteLink(c)}
-            onClick={e => onInviteHook(() => e.target.select())}
+            onClick={e => onInviteHook(() => this.input.setSelectionRange(0, 9999))}
           />
           <img
             src={shareSvg}
