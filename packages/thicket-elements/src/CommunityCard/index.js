@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
 import favorite from '../../images/favorite.svg'
 import placeholder from '../../images/placeholder.png'
@@ -43,13 +43,22 @@ const Card = styled.div`
   border-radius: 4px;
 `
 
-const Favorite = styled.img`
+const Leave = styled.button`
   position: absolute;
   top: 5px;
   right: 5px;
-  height: 2.5em;
-  width: 2.5em;
   z-index: 2;
+  border: none;
+  background: unset;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+`
+
+const Favorite = styled.img`
+  display: block;
+  height: 42px;
+  width: 42px;
 `
 
 const Meta = styled.div`
@@ -93,24 +102,32 @@ const Hover = styled.div`
   z-index: 1;
 `
 
-const CommunityCard = ({
-  title = '',
-  createdBy = '',
-  src = favorite,
-  usage = '',
-  ...rest
-}) => <Wrap>
-  <Card {...rest}>
-    <Favorite src={src} alt="" />
-    <Meta className="communityCard__meta">
-      <Title>{title}</Title>
-      <Extra className="communityCard__extra">
-        <CreatedBy>{createdBy}</CreatedBy>
-        <small>{usage}</small>
-      </Extra>
-    </Meta>
-    <Hover className="communityCard__hover" />
-  </Card>
-</Wrap>
+class CommunityCard extends Component {
+  render() {
+    const {
+    title = '',
+    createdBy = '',
+    src = favorite,
+    usage = '',
+    onLeave=()=>{},
+    ...rest
+    } = this.props
+  return <Wrap {...rest}>
+      <Card>
+        <Leave onClick={e => onLeave(e, title)}>
+          <Favorite src={src} alt="Leave Community" />
+        </Leave>
+        <Meta className="communityCard__meta">
+          <Title>{title}</Title>
+          <Extra className="communityCard__extra">
+            <CreatedBy>{createdBy}</CreatedBy>
+            <small>{usage}</small>
+          </Extra>
+        </Meta>
+        <Hover className="communityCard__hover" />
+      </Card>
+    </Wrap>
+  }
+}
 
 export default CommunityCard

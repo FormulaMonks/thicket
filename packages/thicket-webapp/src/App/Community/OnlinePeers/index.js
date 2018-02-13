@@ -3,6 +3,7 @@ import UserName from '../../../components/UserName'
 import usersSvg from './users.svg'
 import backSvg from './back.svg'
 import randomColor from 'randomcolor'
+import { isMobile } from '../../../utils/constants'
 import './OnlinePeers.css'
 
 const LIST = 'show online peers list'
@@ -15,9 +16,16 @@ const UsersImg = ({ className }) =>
     className={`onlinePeers-svg${className ? ` ${className}` : ''}`}
   />
 
-const Info = ({ className, onClick }) => <button
+const Info = ({
+  className='',
+  onClick=()=>{},
+  onOver=()=>{},
+  onOut=()=>{}
+}) => <button
     className={`onlinePeers-infoBtn${className ? ` ${className}` : ''}`}
     onClick={onClick}
+    onMouseOver={onOver}
+    onMouseOut={onOut}
   >
   ?
 </button>
@@ -60,7 +68,9 @@ class OnlinePeers extends Component {
           </div>
           <Info
             className="onlinePeers-infoBtnInner"
-            onClick={e => this.setState({ mode: mode === INFO ? null : INFO })}
+            onClick={e => isMobile && this.setState({ mode: this.state.mode === INFO ? null : INFO })}
+            onOver={() => !isMobile && this.setState({ mode: INFO })}
+            onOut={() => !isMobile && this.setState({ mode: null })}
           />
         </div>
         <ul className="onlinePeers-list">

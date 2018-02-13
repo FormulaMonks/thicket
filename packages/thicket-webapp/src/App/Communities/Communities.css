@@ -18,6 +18,11 @@
   margin-right: 0.5em;
 }
 
+.communities__new{
+  padding: 0.9em;
+  font-size: 0.7em;
+}
+
 .communities__list{
   list-style: none;
   padding: 0;
@@ -41,15 +46,6 @@
   overflow: hidden;
 }
 
-.communities__new{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #46569F;
-}
-
 .communities__message{
   color: #274058;
 }
@@ -70,6 +66,11 @@
 @media (min-width: 600px){
   .communities__count{
     display: inline-block;
+  }
+
+  .communities__new{
+    padding: 1em 3em;
+    font-size: 1em;
   }
 
   .communities__list{

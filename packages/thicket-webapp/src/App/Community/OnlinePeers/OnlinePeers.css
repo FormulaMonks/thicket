@@ -111,6 +111,8 @@
   font-style: inherit;
   font-size: 0.9em;
   color: inherit;
+  padding: 0;
+  margin: 0;
 }
 
 .onlinePeers-infoBtnInner{
@@ -183,7 +185,7 @@
 
   .onlinePeers-wrapInfo{
     position: absolute;
-    top: 54px;
+    top: 52px;
     left: unset;
     right: 0px;
   }
@@ -203,4 +205,9 @@
     border-color: #FFF;
     cursor: pointer;
   }
+
+  .onlinePeers-infoText{
+    padding: 1em;
+  }
+
 }

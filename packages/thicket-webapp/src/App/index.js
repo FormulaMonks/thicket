@@ -55,8 +55,9 @@ class App extends Component {
           <Route
             exact
             path="/communities"
-            render={() =>
+            render={props =>
               <Communities
+                {...props}
                 nickname={nickname}
                 blacklistedCommunities={this.props.blacklistedCommunities}
               />
