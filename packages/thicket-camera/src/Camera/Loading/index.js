@@ -4,6 +4,7 @@ import { Spinner } from 'thicket-elements'
 
 const Title = styled.p`
   font-size: 2em;
+  margin-bottom: 0;
 `
 
 const Loading = props => {

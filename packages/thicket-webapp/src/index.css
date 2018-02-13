@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
   background-color: inherit;
+  -webkit-overflow-scrolling: touch;
 }
 
 html, body, #root {
