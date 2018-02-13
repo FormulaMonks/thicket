@@ -63,3 +63,4 @@ export const COMMUNITY_NAMES = [
   'Kitchen sink',
 ]
 export const TIMEOUT = 120000
+export const isMobile = /Mobi/.test(navigator.userAgent)
