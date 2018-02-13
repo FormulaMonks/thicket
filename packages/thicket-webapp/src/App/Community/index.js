@@ -16,13 +16,13 @@ import NotFound from '../404'
 import NoContent from './NoContent'
 import Leave from '../../components/Leave'
 import shareSvg from './share.svg'
+import { isMobile } from '../../utils/constants'
 import './Community.css'
 
 const { user, communities } = store
 const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
 const LEAVE = 'user is displayed the confirm box to leave the community'
-const isItMobile = document.documentElement.clientWidth < 600
 
 const LeaveBtn = ({ ctx }) => <button
   className="community__leave"
@@ -154,7 +154,7 @@ class Community extends Component {
     }
 
     return [
-      ((isItMobile && !mode && match.isExact) || !isItMobile) && <div key="community" className="community">
+      ((isMobile && !mode && match.isExact) || !isMobile) && <div key="community" className="community">
         <Link to="/communities" className="community__back">
           <h3>
             <img
