@@ -26,12 +26,11 @@ const Vid = styled.div`
 `
 const Change = styled.button`
   position: absolute;
+  background: transparent;
   top: 1em;
   right: 1em;
   z-index: 2;
   border: none;
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
   padding: 0;
   margin: 0;
 `
@@ -73,11 +72,6 @@ export default class Camera extends Component {
     const { classNames = {} } = this.props
     const { cameraWrap = null, videoWrap = null, ...classes = {} } = classNames
     return <Wrap className={cameraWrap}>
-      {isMobile && mode === STANDBY &&
-        <Change onClick={this.onChangeCamera}>
-          <ChangeImg src={changeSvg} alt="Change camera" />
-        </Change>
-      }
       {(mode === STANDBY || mode === SHOOTING) &&
         <Vid key="video" className={videoWrap}>
           <video
@@ -87,6 +81,11 @@ export default class Camera extends Component {
             style={videoStyles}
           />
         </Vid>
+      }
+      {isMobile && mode === STANDBY &&
+        <Change onClick={this.onChangeCamera}>
+          <ChangeImg src={changeSvg} alt="Change camera" />
+        </Change>
       }
       {mode === STANDBY && <Controls classNames={classes} key="controls" onClick={this.capture} />}
       {mode === SHOOTING && <Progress classNames={classes} key="progress" />}
