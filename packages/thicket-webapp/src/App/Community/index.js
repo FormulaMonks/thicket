@@ -14,7 +14,7 @@ import randomColor from 'randomcolor'
 import { formatBytes } from '../../utils/sizeFormat'
 import NotFound from '../404'
 import NoContent from './NoContent'
-import Leave from './Leave'
+import Leave from '../../components/Leave'
 import shareSvg from './share.svg'
 import './Community.css'
 
