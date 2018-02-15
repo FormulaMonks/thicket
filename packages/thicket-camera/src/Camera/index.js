@@ -33,6 +33,8 @@ const Change = styled.button`
   border: none;
   padding: 0;
   margin: 0;
+  /* odd, without this the image is not rendered */
+  border:1px solid transparent;
 `
 const ChangeImg = styled.img`
   height: 40px;
