@@ -119,9 +119,13 @@ class Database extends EventEmitter {
           }
         })
         // updates to the publications (eg new publication)
-        y.share.publications.observe(async () => {
+        y.share.publications.observe(async ({ type, values }) => {
           if (!this._syncing) {
             this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
+          }
+          // async remove local blocks
+          if (type === 'delete') {
+            values.forEach(this._unlink)
           }
         })
         // updates to publications metadata (eg change publication caption)
