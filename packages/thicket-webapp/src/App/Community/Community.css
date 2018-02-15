@@ -91,9 +91,9 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.community__new{
+.community .community__new{
   grid-column: 6 / -1;
-  padding: 0.75em 2em !important;
+  padding: 0.75em 2em;
 }
 
 .community__invite-wrap{
