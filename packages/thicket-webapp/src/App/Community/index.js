@@ -26,7 +26,7 @@ const LEAVE = 'user is displayed the confirm box to leave the community'
 
 const LeaveBtn = ({ ctx }) => <button
   className="community__leave"
-  onClick={() => ctx.setState({ mode: LEAVE })}
+  onClick={() => ctx.safeSetState({ mode: LEAVE })}
 >
   <img
     src={leaveSvg}
@@ -162,7 +162,11 @@ class Community extends Component {
 
     return [
       ((isMobile && !mode && match.isExact) || !isMobile) && <div key="community" className="community">
-        <Link to="/communities" className="community__back">
+        <Link
+          ref={n => this.node = n}
+          to="/communities"
+          className="community__back"
+        >
           <h3>
             <img
               className="community__arrow"
@@ -283,13 +287,13 @@ class Community extends Component {
   fetchMetadata = async () => {
     const community = await communities.get(this.props.match.params.c)
     const { title, size } = await community.get()
-    this.setState({ title, size })
+    this.safeSetState({ title, size })
   }
 
   fetchPublications = async () => {
     const community = await communities.get(this.props.match.params.c)
     const list = await community.getAllPublications()
-    this.setState({ list })
+    this.safeSetState({ list })
     // side effect
     // size changed, and we only know the new size
     // after receiving the publications
@@ -303,7 +307,7 @@ class Community extends Component {
       const exists = this.state.list.find(i => i.id === item.id)
       return exists ? { ...exists, ...item } : item
     })
-    this.setState({ list: mergedList, loading: false }, this.fetchPublications)
+    this.safeSetState({ list: mergedList, loading: false }, this.fetchPublications)
   }
 
   fetchOnlinePeers = async () => {
@@ -315,19 +319,19 @@ class Community extends Component {
       luminosity: 'bright',
       seed: c,
     })
-    this.setState({ onlinePeers, colors })
+    this.safeSetState({ onlinePeers, colors })
   }
 
   onCreateGif = () => {
     const { onCreateGif=()=>{} } = this.props
     onCreateGif(true)
-    this.setState({ mode: CREATE })
+    this.safeSetState({ mode: CREATE })
   }
 
   onStopCreateGif = () => {
     const { onCreateGif=()=>{} } = this.props
     onCreateGif(false)
-    this.setState({ mode: null })
+    this.safeSetState({ mode: null })
   }
 
   onSave = async data => {
@@ -343,18 +347,24 @@ class Community extends Component {
   }
 
   onSyncing = () => {
-    this.setState({ syncing: true })
+    this.safeSetState({ syncing: true })
   }
 
   onSynced = async () => {
     this.fetchAll()
-    this.setState({ syncing: false })
+    this.safeSetState({ syncing: false })
   }
 
   onLeave = async () => {
     const { history, match } = this.props
     await communities.delete(match.params.c)
     history.replace('/communities')
+  }
+
+  safeSetState = (state, cb=()=>{}) => {
+    if (this.node) {
+      this.setState({ ...state }, cb)
+    }
   }
 
 }
