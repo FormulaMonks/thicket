@@ -1,11 +1,13 @@
 .leave{
   text-align: center;
   padding: 1em;
-  color: #102131;
+  color: #46569F;
 }
 
-.leave__title{
-  color: #46569F;
+.leave__wrap{
+  padding: 1em;
+  background: #F6F9FD;
+  border-radius: 4px;
 }
 
 .leave__community{
@@ -17,7 +19,7 @@
 }
 
 .leave__btns{
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .leave__btn{
@@ -26,7 +28,13 @@
 
 @media (min-width: 600px) {
   .leave{
-    max-width: 60%;
+    min-width: 500px;
+    width: 60%;
+    max-width: 650px;
+  }
+
+  .leave__wrap{
+    padding: 1em 3em;
   }
 
   .leave__btns{
