@@ -228,7 +228,7 @@
     grid-column: 6;
   }
 
-  .community__new{
+  .community .community__new{
     grid-column: 7;
   }
 
@@ -251,7 +251,7 @@
     padding-right: 1em;
   }
 
-  .community__new{
+  .community .community__new{
     justify-self: end;
   }
 
