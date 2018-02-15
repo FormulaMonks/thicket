@@ -12,7 +12,7 @@
   left:0;
   right: 0;
   z-index: 10;
-  padding: 0.3em;
+  padding: 0.5em 1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
