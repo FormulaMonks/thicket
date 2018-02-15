@@ -79,7 +79,7 @@ export default class Gif extends Component {
       <div className="gif__inner">
         {header}
         {(nickname || editable) && <div key="nickname">
-          <h3>GIF created by:</h3>
+          <h3 className="gif__subtitle">GIF created by:</h3>
           {editable
             ? <Editable
                 value={nickname}
@@ -88,7 +88,7 @@ export default class Gif extends Component {
             : <div>{nickname}</div>}
         </div>}
         {(caption || editable) && <div key="caption">
-          <h3>GIF caption:</h3>
+          <h3 className="gif__subtitle">GIF caption:</h3>
           {editable
             ? <Editable
                 value={caption}
