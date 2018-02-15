@@ -83,8 +83,14 @@ class Community extends Component {
   }
 
   async componentDidMount() {
-    const { c } = this.props.match.params
+    const { match, blacklistedCommunities=[] } = this.props
+    const { c } = match.params
     const { token = '', leave = false } = queryString.parse(window.location.search);
+    // if blacklisted no fetching data but let the user get the 404
+    if (blacklistedCommunities.includes(c)) {
+      this.setState({ loading: false })
+      return
+    }
     // leave & redirect
     if (leave) {
       this.onLeave()
