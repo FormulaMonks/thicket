@@ -95,7 +95,7 @@
     "build:module": "npm run clean && nwb build-react-component --copy-files",
     "clean": "nwb clean-module",
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js --copy-files",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "scripts/deploy.sh"
   },
