@@ -107,7 +107,7 @@
 .community__invite{
   position: relative;
   background: #FFF;
-  padding: 1em;
+  padding: 0.5em 1em;
   padding-left: 96px;
   width: 100%;
   cursor: pointer;
