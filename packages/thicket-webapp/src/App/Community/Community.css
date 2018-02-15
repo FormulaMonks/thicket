@@ -117,8 +117,6 @@
   font-family: initial;
   color: #274058;
   text-overflow: ellipsis;
-  /* odd fix for vertical align */
-  top: 1px;
 }
 
 .community__invite-wrap::after{
