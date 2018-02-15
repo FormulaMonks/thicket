@@ -53,7 +53,7 @@ export const COMMUNITY_NAMES = [
   'Rick & Morty’s',
   'Art museum',
   'This is what’s left of civilization',
-  'Holiday aramadillo',
+  'Holiday armadillo',
   'Down to earth GIFs',
   'Closing time',
   'New furniture',
