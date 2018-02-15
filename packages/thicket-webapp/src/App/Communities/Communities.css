@@ -68,7 +68,7 @@
     display: inline-block;
   }
 
-  .communities__new{
+  .communities .communities__new{
     padding: 1em 3em;
     font-size: 1em;
   }
