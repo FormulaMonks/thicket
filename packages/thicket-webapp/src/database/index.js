@@ -235,7 +235,7 @@ class Database extends EventEmitter {
     // async remove all local publications
     y.share.publications.toArray().forEach(this._unlink)
     // leave room
-    return y.destroy()
+    return y.close()
   }
 
   communityGet = async communityId => {
