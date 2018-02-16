@@ -119,14 +119,19 @@ class Community extends EventEmitter {
     this.publications = new Publications(communityId)
   }
 
-  delete = () => db.communityDelete(this.communityId)
+  delete = () => {
+    this.data = null
+    this.onlinePeers = []
+    this.pulications = []
+    return db.communityDelete(this.communityId)
+  }
 
   // passthrough method
   deletePublication = async id => {
     // side effect
     // when a GIF gets deleted we need to update the Community size
     const { src } = await this.publications.get(id)
-    this.data.size = this.publications.getSize() - src.length
+    this.data = { ...this.data, size: this.publications.getSize() - src.length }
     // delete
     return this.publications.delete(id)
   }
@@ -134,7 +139,7 @@ class Community extends EventEmitter {
   get = async () => {
     if (!this.data) {
       this.data = await db.communityGet(this.communityId)
-      this.data.size = this.publications.getSize()
+      this.data = { ...this.data, size: this.publications.getSize() }
     }
     return this.data
   }
@@ -143,7 +148,7 @@ class Community extends EventEmitter {
   // publications individual sizes
   getAllPublications = async () => {
     const list = await this.publications.getAll()
-    this.data.size = this.publications.getSize()
+    this.data = { ...this.data, size: this.publications.getSize() }
     return list
   }
 
@@ -160,7 +165,7 @@ class Community extends EventEmitter {
   postPublication = data => {
     // side effect
     // when a new gif is posted we calculate its size and add it to the Community size
-    this.data.size = this.publications.getSize() + data.src.length
+    this.data = { ...this.data, size: this.publications.getSize() + data.src.length }
     // post
     return this.publications.post(data)
   }
