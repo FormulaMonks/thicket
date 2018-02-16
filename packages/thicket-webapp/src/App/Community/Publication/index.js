@@ -31,7 +31,7 @@ class Publication extends Component {
     const { gif } = this.state
 
     if (!gif) {
-      return null
+      return <div ref={n => this.node = n}></div>
     }
 
     if (this.state.showDeleteConfimation) {
@@ -40,6 +40,7 @@ class Publication extends Component {
         onClose={() =>this.setState({ showDeleteConfimation: false })}
       >
         <Delete
+          ref={n => this.node = n}
           caption={gif.caption}
           onDelete={this.onDelete}
           onCancel={() => this.setState({ showDeleteConfimation: false })}
@@ -48,7 +49,12 @@ class Publication extends Component {
     }
 
     return [
-      <Link key="link" className="publication__link" to={`/c/${c}`}>
+      <Link
+        key="link"
+        ref={n => this.node = n}
+        className="publication__link"
+        to={`/c/${c}`}
+      >
         <h3><img src={backSvg} alt={`Back to ${title}`} /> <span className="publication__title">{title}</span></h3>
       </Link>,
       <Modal
@@ -79,7 +85,9 @@ class Publication extends Component {
     const { c, id } = this.props.match.params
     const { publications } = await communities.get(c)
     const gif = await publications.get(id)
-    this.setState({ gif })
+    if (this.node) {
+      this.setState({ gif })
+    }
   }
 
   onDelete = async () => {
