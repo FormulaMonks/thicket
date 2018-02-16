@@ -187,7 +187,7 @@
     position: absolute;
     top: 52px;
     left: unset;
-    right: 0px;
+    right: 1em;
   }
 
   .onlinePeers-infoBtnBack{

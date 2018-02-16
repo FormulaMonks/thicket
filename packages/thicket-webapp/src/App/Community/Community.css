@@ -236,7 +236,8 @@
 
   /* rest of styles */
   .community__onlinePeers{
-    min-width: 14em;
+    min-width: 13em;
+    padding-right: 1em;
   }
 
   .community__btns{
