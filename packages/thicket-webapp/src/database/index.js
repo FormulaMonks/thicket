@@ -63,7 +63,7 @@ const mapIPFSIdstoNicknames = async(node, y) => {
   const { id } = await node.id()
   const nickname = (y.share && y.share.nicknames && y.share.nicknames.get(id)) || ''
   const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
-    if (y.share.nicknames.get(c)) {
+    if (y.share && y.share.nicknames && y.share.nicknames.get(c)) {
       p.push(y.share.nicknames.get(c))
     }
     return p
@@ -113,8 +113,8 @@ class Database extends EventEmitter {
         const { id: peerId } = await node.id()
         const y = await Y(yConfig(node, peerId, communityId))
         // updates to the community metadata (eg change community title)
-        y.share.metadata.observe(({ value }) => {
-          if (value) {
+        y.share.metadata.observe(({ value, type }) => {
+          if (value && type !== 'delete') {
             if (!this._syncing) {
               this.emit(`update-${communityId}`, value)
             }
@@ -246,11 +246,11 @@ class Database extends EventEmitter {
 
   communityGet = async communityId => {
     const y = await this._initCommunity(communityId)
+    const metadata = (y.share && y.share.metadata && y.share.metadata.get(communityId)) || {}
     return {
       id: communityId,
       title: '',
-      size: 0,
-      ...y.share.metadata.get(communityId)
+      ...metadata,
     }
   }
 
