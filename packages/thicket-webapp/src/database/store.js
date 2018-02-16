@@ -31,13 +31,13 @@ class Publications extends EventEmitter {
       this.list = list
       this.emit('update')
     })
-    db.on(`update-${communityId}-publicationsMetadata`, data => {
-      if (!this.list.find(i => i.id === data.id)) {
-        this.list = [...this.list, data]
-      }
-      this.list = this.list
-        .map(p => p.id !== data.id ? p : { ...p, ...data })
-        .sort(sortPublications)
+    db.on(`update-${communityId}-publicationsMetadata`, list => {
+      // insert, update & delete
+      // we get the current list and merge with the data in cache
+      this.list = list.map(item => ({
+        ...this.list.find(i => i.id === item.id),
+        ...item
+      })).sort(sortPublications)
       this.emit('update')
     })
     db.on(`synced-${communityId}`, () => {
