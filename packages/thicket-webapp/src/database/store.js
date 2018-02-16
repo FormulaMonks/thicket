@@ -196,15 +196,17 @@ class EventEmitterCommunities extends EventEmitter {
 
     this.post = async id => {
       await ctx._initCommunities()
+      const newCommunity = new Community(id)
       state.userCommunities.add(id)
-      state.communities.set(id, new Community(id))
-      localForage.setItem('userCommunities', Array.from(state.userCommunities))
-      // side effect
-      // when a user joins a community we set the nickname information into the shared data
+      state.communities.set(id, newCommunity)
+      const communitiesArray = Array.from(state.userCommunities)
+      localForage.setItem('userCommunities', communitiesArray)
+      // side effects
+      // when a user creates/joins a community we set the nickname information into the shared data
       db.communityPutNicknames([id], state.user.nickname)
       //
-      this.emit('update', Array.from(state.userCommunities))
-      return state.communities.get(id)
+      this.emit('update', communitiesArray)
+      return newCommunity
     }
 
     // communities
