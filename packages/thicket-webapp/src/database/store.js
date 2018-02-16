@@ -1,8 +1,6 @@
 import EventEmitter from 'eventemitter3'
 import localForage from 'localforage'
-import db from './index.js'
-
-const sortPublications = (a, b) => b.createdAt - a.createdAt
+import db, { sortPublications } from './index.js'
 
 const state = {
   user: {
@@ -35,7 +33,7 @@ class Publications extends EventEmitter {
     })
     db.on(`update-${communityId}-publicationsMetadata`, data => {
       if (!this.list.find(i => i.id === data.id)) {
-        this.list = [...this.list, data].sort(sortPublications)
+        this.list = [...this.list, data]
       }
       this.list = this.list
         .map(p => p.id !== data.id ? p : { ...p, ...data })

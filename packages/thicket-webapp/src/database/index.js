@@ -10,6 +10,8 @@ import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
 import { DEFAULT_PUBLICATIONS, TIMEOUT } from '../utils/constants'
 
+export const sortPublications = (a, b) => b.createdAt - a.createdAt
+
 const ipfsConfig = {
   repo: 'thicket',
   EXPERIMENTAL: {
@@ -203,15 +205,15 @@ class Database extends EventEmitter {
     const y = await this._initCommunity(communityId)
     const data = y.share.publications.toArray()
     const publications = await Promise.all(data.map(async id => this.publicationsGet(communityId, id)))
-    return publications.sort((a, b) => b.createdAt - a.createdAt)
+    return publications.sort(sortPublications)
   }
 
   publicationsGetMetadata = async communityId => {
     const y = await this._initCommunity(communityId)
-    return y.share.publications.toArray().map(id => ({
-      id,
-      ...y.share.publicationsMetadata.get(id)
-    })).sort((a, b) => b.createdAt - a.createdAt)
+    return y.share.publications.toArray().map(id => {
+      const metadata = (y.share && y.share.publicationsMetadata && y.share.publicationsMetadata.get(id)) || {}
+      return { id, ...metadata }
+    }).sort(sortPublications)
   }
 
   publicationsPost = async (communityId, { src, ...data }) => {
