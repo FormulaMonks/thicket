@@ -92,7 +92,7 @@ const CreatedBy = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 75%;
+  max-width: 70%;
 `
 
 const Hover = styled.div`

@@ -21,8 +21,12 @@ export default class Progress extends Component {
 
   componentDidMount() {
     const interval = setInterval(() => {
-      this.setState({ value: this.state.value - 50 })
-      if (this.state.value < 0) {
+      if (this.node) {
+        this.setState({ value: this.state.value - 50 })
+        if (this.state.value < 0) {
+          clearInterval(interval)
+        }
+      } else {
         clearInterval(interval)
       }
     }, 50)
@@ -33,7 +37,13 @@ export default class Progress extends Component {
     const { progressLabel, ...classes } = this.props.classNames
     return [
       <ProgressBar classNames={classes} key="progress" percentage={ 1 - value / GIF_DURATION } />,
-      <Label className={progressLabel} key="label">Recording GIF</Label>,
+      <Label
+        key="label"
+        ref={n => this.node = n}
+        className={progressLabel}
+      >
+        Recording GIF
+      </Label>,
     ]
   }
 }

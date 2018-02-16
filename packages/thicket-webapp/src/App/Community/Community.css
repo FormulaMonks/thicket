@@ -91,9 +91,9 @@
   color: rgba(255, 255, 255, 0.6);
 }
 
-.community__new{
+.community .community__new{
   grid-column: 6 / -1;
-  padding: 0.75em 2em !important;
+  padding: 0.75em 2em;
 }
 
 .community__invite-wrap{
@@ -107,17 +107,16 @@
 .community__invite{
   position: relative;
   background: #FFF;
-  padding: 1em;
+  padding: 0.5em 1em;
   padding-left: 96px;
   width: 100%;
   cursor: pointer;
   border-radius: 4px;
   font-size: initial;
   font-weight: initial;
+  font-family: initial;
   color: #274058;
   text-overflow: ellipsis;
-  /* odd fix for vertical align */
-  top: 1px;
 }
 
 .community__invite-wrap::after{
@@ -229,7 +228,7 @@
     grid-column: 6;
   }
 
-  .community__new{
+  .community .community__new{
     grid-column: 7;
   }
 
@@ -252,7 +251,7 @@
     padding-right: 1em;
   }
 
-  .community__new{
+  .community .community__new{
     justify-self: end;
   }
 

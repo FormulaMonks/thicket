@@ -13,14 +13,14 @@ html, body, #root {
 html {
   background-color: #102131;
   color: white;
-  font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif !important;
   font-weight: 300;
   font-size: calc(1em + 0.5vw);
   line-height: 1.5;
 }
 
-button{
-  font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+button, input{
+  font-family: 'Open Sans',-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif !important;
 }
 
 body {

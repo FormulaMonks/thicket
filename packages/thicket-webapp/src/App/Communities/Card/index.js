@@ -11,7 +11,7 @@ class Card extends Component {
 
   async componentDidMount() {
     const community = await communities.get(this.props.communityId)
-    const { title, createdBy, size } = await community.get()
+    const { title, createdBy='Thicket', size } = await community.get()
     // this component can be unmounted before this occurs
     // using the node we avoid calling setState in an unmounted component
     if (this.node) {

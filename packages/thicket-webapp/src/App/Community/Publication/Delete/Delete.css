@@ -1,15 +1,17 @@
 .delete{
-  color: #102131;
   text-align: center;
-  padding: 2em;
-}
-
-.delete__title{
+  padding: 1em;
   color: #46569F;
 }
 
+.delete__wrap{
+  padding: 1em;
+  background: #F6F9FD;
+  border-radius: 4px;
+}
+
 .delete__btns{
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .delete__confirm{
@@ -25,6 +27,9 @@
 }
 
 @media (min-width: 600px) {
+  .delete__wrap{
+    padding: 1em 3em;
+  }
   .delete__btns{
     display: flex;
     justify-content: center;

@@ -56,7 +56,6 @@
     "gifshot": "0.4.5",
     "html-webpack-plugin": "2.29.0",
     "ipfs": "0.27.7",
-    "ipfs-pubsub-room": "^0.3.0",
     "jest": "20.0.4",
     "localforage": "^1.5.0",
     "object-assign": "4.1.1",
@@ -95,7 +94,7 @@
     "build:module": "npm run clean && nwb build-react-component --copy-files",
     "clean": "nwb clean-module",
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js --copy-files",
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "scripts/deploy.sh"
   },

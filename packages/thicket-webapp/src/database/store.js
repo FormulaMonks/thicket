@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3'
 import localForage from 'localforage'
-import db from './index.js'
+import db, { sortPublications } from './index.js'
 
 const state = {
   user: {
@@ -35,7 +35,9 @@ class Publications extends EventEmitter {
       if (!this.list.find(i => i.id === data.id)) {
         this.list = [...this.list, data]
       }
-      this.list = this.list.map(p => p.id !== data.id ? p : { ...p, ...data })
+      this.list = this.list
+        .map(p => p.id !== data.id ? p : { ...p, ...data })
+        .sort(sortPublications)
       this.emit('update')
     })
     db.on(`synced-${communityId}`, () => {
@@ -117,14 +119,19 @@ class Community extends EventEmitter {
     this.publications = new Publications(communityId)
   }
 
-  delete = () => db.communityDelete(this.communityId)
+  delete = () => {
+    this.data = null
+    this.onlinePeers = []
+    this.pulications = []
+    return db.communityDelete(this.communityId)
+  }
 
   // passthrough method
   deletePublication = async id => {
     // side effect
     // when a GIF gets deleted we need to update the Community size
     const { src } = await this.publications.get(id)
-    this.data.size = this.publications.getSize() - src.length
+    this.data = { ...this.data, size: this.publications.getSize() - src.length }
     // delete
     return this.publications.delete(id)
   }
@@ -132,7 +139,7 @@ class Community extends EventEmitter {
   get = async () => {
     if (!this.data) {
       this.data = await db.communityGet(this.communityId)
-      this.data.size = this.publications.getSize()
+      this.data = { ...this.data, size: this.publications.getSize() }
     }
     return this.data
   }
@@ -141,7 +148,7 @@ class Community extends EventEmitter {
   // publications individual sizes
   getAllPublications = async () => {
     const list = await this.publications.getAll()
-    this.data.size = this.publications.getSize()
+    this.data = { ...this.data, size: this.publications.getSize() }
     return list
   }
 
@@ -158,7 +165,7 @@ class Community extends EventEmitter {
   postPublication = data => {
     // side effect
     // when a new gif is posted we calculate its size and add it to the Community size
-    this.data.size = this.publications.getSize() + data.src.length
+    this.data = { ...this.data, size: this.publications.getSize() + data.src.length }
     // post
     return this.publications.post(data)
   }
@@ -194,15 +201,17 @@ class EventEmitterCommunities extends EventEmitter {
 
     this.post = async id => {
       await ctx._initCommunities()
+      const newCommunity = new Community(id)
       state.userCommunities.add(id)
-      state.communities.set(id, new Community(id))
-      localForage.setItem('userCommunities', Array.from(state.userCommunities))
-      // side effect
-      // when a user joins a community we set the nickname information into the shared data
+      state.communities.set(id, newCommunity)
+      const communitiesArray = Array.from(state.userCommunities)
+      localForage.setItem('userCommunities', communitiesArray)
+      // side effects
+      // when a user creates/joins a community we set the nickname information into the shared data
       db.communityPutNicknames([id], state.user.nickname)
       //
-      this.emit('update', Array.from(state.userCommunities))
-      return state.communities.get(id)
+      this.emit('update', communitiesArray)
+      return newCommunity
     }
 
     // communities

@@ -39,6 +39,11 @@
   flex-direction: column;
 }
 
+.gif__subtitle{
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
 .gif__inner .editable{
   max-height: 8em;
   overflow: auto;

@@ -15,10 +15,10 @@
 
 .communities__count{
   display: none;
-  margin-right: 0.5em;
+  margin-right: 1em;
 }
 
-.communities__new{
+.communities .communities__new{
   padding: 0.9em;
   font-size: 0.7em;
 }
@@ -35,6 +35,7 @@
 
 .communities__element{
   height: 15em;
+  overflow: hidden;
 }
 
 .communities__link{
@@ -68,8 +69,8 @@
     display: inline-block;
   }
 
-  .communities__new{
-    padding: 1em 3em;
+  .communities .communities__new{
+    padding: 0.9em 2em;
     font-size: 1em;
   }
 
