@@ -131,14 +131,11 @@ class Database extends EventEmitter {
           }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(({ value, type }) => {
-          if (type !== 'delete' && !this._syncing) {
-            const { id, ...data } = value
-            this.emit(`update-${communityId}-publicationsMetadata`, {
-              id,
-              ...y.share.publicationsMetadata.get(id),
-              ...data
-            })
+        y.share.publicationsMetadata.observe(({ value, type, name, ...rest }) => {
+          if (!this._syncing) {
+            const list = y.share.publicationsMetadata.keys()
+              .map(k => ({ ...y.share.publicationsMetadata.get(k) }))
+            this.emit(`update-${communityId}-publicationsMetadata`, list)
           }
         })
         // nicknames: IPFS node id <-> nickname
