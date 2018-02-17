@@ -257,6 +257,7 @@ class Community extends Component {
           className={`community__create${this.state.shooting ? ' community__create-onTop' : ''}`}
         >
           <CreateGif
+            ref={n => this.node = n}
             community={c}
             nickname={nickname}
             onSave={this.onSave}
