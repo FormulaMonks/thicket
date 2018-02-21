@@ -19,6 +19,9 @@
 }
 
 .community__back h3{
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
   display: flex;
   align-items: center;
 }
