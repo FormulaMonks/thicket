@@ -75,7 +75,7 @@
   display: none;
   font-family: inherit;
   font-weight: inherit;
-  color: #FFF;
+  color: rgba(255, 255, 255, 0.8);
   font-size: initial;
   margin-left: 0.5em;
 }
