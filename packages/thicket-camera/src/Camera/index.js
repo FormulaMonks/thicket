@@ -27,8 +27,8 @@ const Vid = styled.div`
 const Change = styled.button`
   position: absolute;
   background: transparent;
-  top: 1em;
-  right: 1em;
+  top: 2.5em;
+  right: 2em;
   z-index: 2;
   border: none;
   padding: 0;
