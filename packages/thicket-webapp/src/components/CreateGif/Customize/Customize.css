@@ -31,8 +31,14 @@
 }
 
 .customize__controls{
-  text-align: center;
+  margin: auto;
   margin-top: 2em;
+  width: 9em;
+}
+
+.customize__btn button,
+.customize__btn div{
+  width: 100%;
 }
 
 .customize__btn{
