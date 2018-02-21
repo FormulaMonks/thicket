@@ -105,19 +105,24 @@
   grid-row: 4;
   grid-column: 1 / -1;
   z-index: 0;
+  border-radius: 4px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
 }
 
 .community__invite{
-  position: relative;
   background: #FFF;
-  padding: 0.5em 1em;
-  padding-left: 96px;
+  padding: 0.7em 1em;
+  padding-left: 97px;
   width: 100%;
   cursor: pointer;
   border-radius: 4px;
   font-size: initial;
   color: #274058;
   text-overflow: ellipsis;
+  border: none;
+  margin: 0;
 }
 
 .community__invite-wrap::after{

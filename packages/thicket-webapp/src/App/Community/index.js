@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
-import { Button, Input, Spinner } from 'thicket-elements'
+import { Button, Input, Spinner, Styles } from 'thicket-elements'
 import Grid from './Grid'
 import CreateGif from '../../components/CreateGif'
 import Publication from './Publication'
@@ -20,6 +20,7 @@ import { isMobile } from '../../utils/constants'
 import './Community.css'
 
 const { user, communities } = store
+const { linearGradient } = Styles
 const CREATE = 'user is creating a gif'
 const UNINVITED = 'user has not been invited to the community or the community does not exist'
 const LEAVE = 'user is displayed the confirm box to leave the community'
@@ -209,6 +210,7 @@ class Community extends Component {
         <div
           className="community__invite-wrap"
           title="Share the link with friends so they can join the community. NOTE: Anyone with this link can join and contribute content. Only send to reliable users and do not post publically."
+          style={{ background: linearGradient }}
         >
           <input
             className="community__invite"
