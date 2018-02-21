@@ -42,7 +42,7 @@
   height: 12px;
   /* odd vertical align fix */
   position: relative;
-  top: 1.5px;
+  top: 1px;
 }
 
 .community__title{
@@ -177,6 +177,12 @@
 @media (min-width: 600px){
   .community{
     grid-template-columns: auto auto auto auto 1fr 1fr auto auto auto;
+  }
+
+  .community__back h3{
+    font-size: 1em;
+    color: #FFF;
+    text-transform: unset;
   }
 
   /* grid positioning */
