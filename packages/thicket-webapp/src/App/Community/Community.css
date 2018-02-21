@@ -19,6 +19,9 @@
 }
 
 .community__back h3{
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
   display: flex;
   align-items: center;
 }
@@ -39,7 +42,7 @@
   height: 12px;
   /* odd vertical align fix */
   position: relative;
-  top: 1.5px;
+  top: 1px;
 }
 
 .community__title{
@@ -72,7 +75,7 @@
   display: none;
   font-family: inherit;
   font-weight: inherit;
-  color: #FFF;
+  color: rgba(255, 255, 255, 0.8);
   font-size: initial;
   margin-left: 0.5em;
 }
@@ -102,19 +105,24 @@
   grid-row: 4;
   grid-column: 1 / -1;
   z-index: 0;
+  border-radius: 4px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
 }
 
 .community__invite{
-  position: relative;
   background: #FFF;
-  padding: 0.5em 1em;
-  padding-left: 96px;
+  padding: 0.7em 1em;
+  padding-left: 97px;
   width: 100%;
   cursor: pointer;
   border-radius: 4px;
   font-size: initial;
   color: #274058;
   text-overflow: ellipsis;
+  border: none;
+  margin: 0;
 }
 
 .community__invite-wrap::after{
@@ -169,6 +177,12 @@
 @media (min-width: 600px){
   .community{
     grid-template-columns: auto auto auto auto 1fr 1fr auto auto auto;
+  }
+
+  .community__back h3{
+    font-size: 1em;
+    color: #FFF;
+    text-transform: unset;
   }
 
   /* grid positioning */

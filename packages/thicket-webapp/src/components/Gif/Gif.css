@@ -47,6 +47,7 @@
 .gif__inner .editable{
   max-height: 8em;
   overflow: auto;
+  padding: .4em 0 .6em 0;
 }
 
 .gif__buttons{
