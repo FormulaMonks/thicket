@@ -16,7 +16,7 @@ class CreateGif extends Component {
     document.querySelector('body').style.overflow = 'hidden'
   }
 
-  componentWillUnMount() {
+  componentWillUnmount() {
     document.querySelector('body').style.overflow = 'auto'
   }
 

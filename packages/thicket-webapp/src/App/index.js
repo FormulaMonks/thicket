@@ -44,7 +44,7 @@ class App extends Component {
     }
 
     return <Router>
-      <div className="app app--with-fixed-header">
+      <div className="app">
         <header className="app__header">
           <Link to="/communities"><Logo /></Link>
           {this.props.header}

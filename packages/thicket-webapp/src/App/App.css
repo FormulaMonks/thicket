@@ -24,3 +24,15 @@
 .app__header a{
   background-color: unset;
 }
+
+@media (min-width: 600px) {
+  .app{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+  }
+
+  .app__header{
+    padding: 1em;
+  }
+}

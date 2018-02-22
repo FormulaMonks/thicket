@@ -32,6 +32,9 @@
 
 /* desktop */
 @media (min-width: 600px){
+  .profile{
+    height: 66.666666%;
+  }
   .profile__buttons{
     display: flex;
     justify-content: center;
