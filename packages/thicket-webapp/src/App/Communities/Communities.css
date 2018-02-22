@@ -36,7 +36,6 @@
 }
 
 .communities__element{
-  height: 15em;
   overflow: hidden;
 }
 
@@ -82,7 +81,7 @@
   }
 
   .communities__list{
-    grid-template-columns: repeat(auto-fill, 16em);
+    grid-template-columns: repeat(auto-fill, 20em);
   }
 
   .communities__form{

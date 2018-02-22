@@ -10,13 +10,14 @@ class Card extends Component {
   state = { title: '...', createdBy: '...', size: '' }
 
   async componentDidMount() {
+    this.fetch()
     const community = await communities.get(this.props.communityId)
-    const { title, createdBy='Thicket', size } = await community.get()
-    // this component can be unmounted before this occurs
-    // using the node we avoid calling setState in an unmounted component
-    if (this.node) {
-      this.setState({ title, createdBy: `Created by ${createdBy}`, size })
-    }
+    community.on('update', this.fetch)
+  }
+
+  async componentWillUnmount() {
+    const community = await communities.get(this.props.communityId)
+    community.off('update', this.fetch)
   }
 
   render() {
@@ -30,6 +31,17 @@ class Card extends Component {
       onLeave={this.props.onLeave}
     />
   }
+
+  fetch = async () => {
+    const community = await communities.get(this.props.communityId)
+    const { title, createdBy='Thicket' } = await community.get()
+    // this component can be unmounted before this occurs
+    // using the node we avoid calling setState in an unmounted component
+    if (this.node) {
+      this.setState({ title, createdBy: `Created by ${createdBy}`, size: community.publications.getSize() })
+    }
+  }
+
 }
 
 export default Card

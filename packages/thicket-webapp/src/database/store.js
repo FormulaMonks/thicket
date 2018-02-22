@@ -65,6 +65,7 @@ class Publications extends EventEmitter {
     if (!this._fetchedAll) {
       this.list = await db.publicationsGetAll(this.communityId)
       this._fetchedAll = true
+      this.emit('update')
     }
     return this.list
   }
@@ -117,6 +118,7 @@ class Community extends EventEmitter {
 
     // publications
     this.publications = new Publications(communityId)
+    this.publications.on('update', () => this.emit('update'))
   }
 
   delete = () => {
@@ -184,9 +186,8 @@ class EventEmitterCommunities extends EventEmitter {
       const community = await this.get(id)
       community.delete()
       state.userCommunities.delete(id)
-      const newArray = Array.from(state.userCommunities)
-      localForage.setItem('userCommunities', newArray)
-      this.emit('update', newArray)
+      localForage.setItem('userCommunities', Array.from(state.userCommunities))
+      this.emit('update')
     }
 
     this.getAll = async () => {
