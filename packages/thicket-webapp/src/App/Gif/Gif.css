@@ -21,6 +21,13 @@
 
 /* desktop */
 @media (min-width: 600px){
+  .individualGif{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .individualGif__wrap{
     margin: 0 auto;
   }

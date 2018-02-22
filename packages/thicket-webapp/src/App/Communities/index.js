@@ -31,6 +31,7 @@ class Communities extends Component {
 
     if (leaving) {
       return <Leave
+        ref={n => this.node = n}
         title={title}
         onLeave={() => this.onLeave(this.state.leaving)}
         onCancel={() => this.setState({ leaving: null })}
@@ -89,6 +90,7 @@ class Communities extends Component {
 
   onLeave = async communityId => {
     await communities.delete(communityId)
+    await this.fetch()
     this.setState({ leaving: null, title: '' })
   }
 }

@@ -15,7 +15,7 @@ const Wrap = styled.div`
   box-shadow: ${defaultBoxShadow};
   display: inline-block;
   border-radius: 4px;
-  padding: 1px;
+  padding: 2px;
   cursor: pointer;
 
   &:hover .communityCard__hover{
@@ -32,15 +32,18 @@ const Wrap = styled.div`
 
 const Card = styled.div`
   position: relative;
-  background-image: url(${placeholder});
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
   border-radius: 4px;
+`
+
+const Img = styled.img`
+  align-self: flex-start;
+  display: block;
+  width: 100%;
 `
 
 const Leave = styled.button`
@@ -63,12 +66,14 @@ const Favorite = styled.img`
 
 const Meta = styled.div`
   width: 100%;
-  background: #FFF;
+  height: 100%;
+  background: #F6F9FD;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   color: #46569F;
-  padding: 1rem;
+  padding: 1em;
+  margin-top: 2px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   z-index: 2;
@@ -78,7 +83,8 @@ const Title = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 16em;
+  margin: 0.5em 0;
+  font-weight: bold;
 `
 
 const Extra = styled.div`
@@ -86,6 +92,7 @@ const Extra = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.8em;
 `
 
 const CreatedBy = styled.div`
@@ -117,11 +124,12 @@ class CommunityCard extends Component {
         <Leave onClick={e => onLeave(e, title)}>
           <Favorite src={src} alt="Leave Community" />
         </Leave>
+        <Img src={placeholder} alt={title} />
         <Meta className="communityCard__meta">
           <Title>{title}</Title>
           <Extra className="communityCard__extra">
             <CreatedBy>{createdBy}</CreatedBy>
-            <small>{usage}</small>
+            <div>{usage}</div>
           </Extra>
         </Meta>
         <Hover className="communityCard__hover" />
