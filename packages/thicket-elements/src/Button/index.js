@@ -28,13 +28,13 @@ const Button = styled.button`
 const PrimaryButton = styled(Button)`
   background: ${linearGradient};
   color: white;
-  padding: 1em 3em;
+  padding: 1em 2em;
 `
 
 const SecondaryButton = styled(Button)`
   background-color: inherit;
   color: inherit;
-  padding: calc(1em - 1px) calc(3em - 1px);
+  padding: calc(1em - 1px) calc(2em - 1px);
 
   &:focus, &:hover, &:active {
     background: ${linearGradient};
