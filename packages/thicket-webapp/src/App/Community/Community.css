@@ -38,7 +38,6 @@
   display: none;
   transform: rotate(180deg);
   margin-left: 0.5em;
-  margin-right: 1em;
   height: 12px;
   /* odd vertical align fix */
   position: relative;
@@ -176,7 +175,7 @@
 /* desktop */
 @media (min-width: 600px){
   .community{
-    grid-template-columns: auto auto auto auto 1fr 1fr auto auto auto;
+    grid-template-columns: 235px minmax(200px, 300px) minmax(100px, 1fr) 90px 142px auto;
     grid-template-rows: auto auto 1fr;
     height: 100%;
   }
@@ -226,31 +225,36 @@
   }
 
   .community__btns{
-    grid-column: 3 / 6;
+    grid-column: 3;
   }
 
   .community__onlinePeers{
     grid-row: 1 / 4;
-    grid-column: 8;
-  }
-
-  .community__invite-wrap{
-    grid-column: 1 / 6;
-  }
-
-  .community__size{
     grid-column: 6;
   }
 
+  .community__invite-wrap{
+    grid-column: 1 / 3;
+  }
+
+  .community__size{
+    grid-column: 4;
+  }
+
   .community .community__new{
-    grid-column: 7;
+    grid-column: 5;
   }
 
   .community__content-wrap{
-    grid-column: 1 / 8;
+    grid-column: 1 / 6;
   }
 
   /* rest of styles */
+  .community__form{
+    width: 100%;
+    max-width: 300px;
+  }
+
   .community__onlinePeers{
     min-width: 13em;
     padding-right: 1em;
@@ -261,7 +265,7 @@
   }
 
   .community__btns{
-    justify-self: end;
+    justify-self: start;
     margin: 0;
   }
 
