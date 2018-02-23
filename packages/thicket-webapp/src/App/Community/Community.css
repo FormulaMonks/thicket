@@ -182,7 +182,7 @@
   }
 
   .community__back h3{
-    font-size: 1em;
+    font-size: 1.5em;
     color: #FFF;
     text-transform: unset;
   }
@@ -256,6 +256,10 @@
     padding-right: 1em;
   }
 
+  .community__invite-wrap{
+    margin: 0.5em 0;
+  }
+
   .community__btns{
     justify-self: end;
     margin: 0;
@@ -284,7 +288,7 @@
 
   .community__create{
     /* header height for desktop */
-    top: 50px;
+    top: 72px;
   }
 
   .community__create-onTop{
