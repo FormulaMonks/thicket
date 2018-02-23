@@ -40,8 +40,7 @@
 }
 
 .gif__subtitle{
-  padding-bottom: 0;
-  margin-bottom: 0;
+  margin: 0.5em 0 0 0;
 }
 
 .gif__inner .editable{
@@ -61,6 +60,46 @@
   cursor: pointer;
   border: none;
 }
+
+.gif__invite-wrap{
+  position: relative;
+  z-index: 0;
+  grid-row: 4;
+  grid-column: 1 / -1;
+  z-index: 0;
+  border-radius: 4px;
+  padding: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.gif__invite{
+  background: #FFF;
+  padding: 0.7em 1em;
+  padding-left: 2.5em;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: initial;
+  color: #274058;
+  text-overflow: ellipsis;
+  border: none;
+  margin: 0;
+}
+
+.gif__invite-img{
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  background: unset;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0.6em;
+}
+
 
 @media (min-width: 600px){
   .gif__wrap{

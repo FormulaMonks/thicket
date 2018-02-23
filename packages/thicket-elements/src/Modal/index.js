@@ -7,7 +7,7 @@ const Background = styled.div`
   /* mobile
    * encapsulating div with padding
    * */
-  padding: 1.375em;
+  padding: 1em;
 
   /* desktop
    * full sized transparent background

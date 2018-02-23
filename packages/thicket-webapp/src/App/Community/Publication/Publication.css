@@ -1,11 +1,15 @@
 .publication__link{
-  margin-left: 1.375em;
+  margin: 1em 1em 0 1em;
   display: flex;
   background: unset;
 }
 
 .publication__link h3{
-  margin-bottom: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .publication__title{
@@ -13,8 +17,20 @@
 }
 
 .publication__btns{
-  margin-top: 1em;
+  margin: 2em 2em 1em 2em;
   text-align: center;
+  color: #46569F;
+}
+
+.publication__btns button{
+  width: 100%;
+  height: 100%;
+}
+
+.publication__btns div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .publication__save{
@@ -30,5 +46,9 @@
     display: inline-block;
     background: unset;
     text-align: center;
+  }
+
+  .publication__btns{
+    margin: 2em;
   }
 }

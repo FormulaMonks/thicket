@@ -30,8 +30,10 @@ class IndividualGif extends Component {
           gif={gif}
           communityId={match.params.c}
           header={<div className="individualGif__header">
-            <h2 key="title">Welcome back!</h2>
-            <div key="message">Check out this awesome GIF!</div>
+            {newUser
+              ? <h2 key="title">Welcome to Thicket!</h2>
+              : <h2 key="title">Welcome back!</h2>}
+            <h3 key="message">Check out this awesome GIF!</h3>
           </div>}
         />
       </div>

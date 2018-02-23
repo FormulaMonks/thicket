@@ -118,7 +118,6 @@ class Community extends EventEmitter {
 
     // publications
     this.publications = new Publications(communityId)
-    this.publications.on('update', () => this.emit('update'))
   }
 
   delete = () => {

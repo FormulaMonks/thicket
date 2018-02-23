@@ -7,7 +7,7 @@ import backSvg from '../../../images/arrow-left.svg'
 import Delete from './Delete'
 import './Publication.css'
 
-const { user, communities } = store
+const { communities } = store
 
 class Publication extends Component {
 
@@ -107,7 +107,6 @@ class Publication extends Component {
     const { publications } = await communities.get(c)
     const { gif } = this.state
     await publications.put(id, gif)
-    await user.put({ nickname: gif.nickname })
     this.close()
   }
 

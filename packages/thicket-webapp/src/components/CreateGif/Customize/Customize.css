@@ -36,9 +36,15 @@
   width: 9em;
 }
 
-.customize__btn button,
-.customize__btn div{
+.customize__btn button{
   width: 100%;
+  height: 100%;
+}
+
+.customize__btn div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .customize__btn{

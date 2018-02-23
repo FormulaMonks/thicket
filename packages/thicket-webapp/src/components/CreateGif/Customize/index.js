@@ -20,7 +20,7 @@ class Customize extends Component {
           alt={this.state.caption}
         />
         <div className="customize__inner">
-          <h2>Save your GIF!</h2>
+          <h3>Save your GIF!</h3>
           <label className="customize__label">
             Change nickname? <span className="customize__span">(Optional)</span>
             <Input value={this.state.nickname} onChange={e => this.setState({ nickname: e.target.value })} />

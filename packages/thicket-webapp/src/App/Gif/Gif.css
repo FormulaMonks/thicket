@@ -4,13 +4,21 @@
   flex-direction: column;
 }
 
+.individualGif .gif__inner{
+  color: #274058;
+}
+
+.individualGif .gif__inner h2,
+.individualGif .gif__inner h3{
+  color: #46569F;
+}
+
 .individualGif__wrap{
   padding: 1em;
 }
 
 .individualGif__header{
   text-align: center;
-  margin-bottom: 0.5em;
 }
 
 .individualGif__message{
@@ -34,5 +42,9 @@
 
   .individualGif__wrap .gif__buttons{
     margin-bottom: 1em;
+  }
+
+  .individualGif .gif__body{
+    padding: 0 2em;
   }
 }
