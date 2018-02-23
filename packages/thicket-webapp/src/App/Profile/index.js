@@ -8,8 +8,8 @@ class Profile extends Component {
     return <div className="profile">
       <h2>Change your Thicket nickname</h2>
       <div>Thicket creates a default guest nickname for you as soon as you visit the web app. You can change your nickname below.</div>
-      <h3>You can update with your own nickname below.</h3>
       <form className="profile__form" onSubmit={this.onSubmit} ref={f => (this.form = f)}>
+        <h4>Change your Thicket nickname:</h4>
         <Input className="profile__input" name="nickname" defaultValue={this.props.nickname} />
         <div className="profile__buttons">
           <Button className="profile__save" type="submit">Save Changes</Button>
