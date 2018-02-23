@@ -36,7 +36,7 @@ class CameraAccess extends Component {
 
     return <div className="cameraAccess">
       <img src={cameraSvg} alt="Camera" />
-      <h3>Thicket is going to need to access your camera to begin creating GIFs.</h3>
+      <h2>Thicket is going to need to access your camera to begin creating GIFs.</h2>
       <Button onClick={this.requestAccess}>Enable Camera Access</Button>
     </div>
   }
