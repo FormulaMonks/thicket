@@ -17,6 +17,8 @@
 .communities__count{
   display: none;
   margin-right: 1em;
+  font-size: 1.3em;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .communities .communities__new{
