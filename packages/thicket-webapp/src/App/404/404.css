@@ -1,5 +1,5 @@
 .notFound{
-  padding: 1em;
+  padding: 2em 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,5 +8,11 @@
 }
 
 .notFound__msg{
-  margin-bottom: 1em;
+  margin-bottom: 2em;
+}
+
+@media (min-width: 600px) {
+  .notFound{
+    height: 66.666666%;
+  }
 }
