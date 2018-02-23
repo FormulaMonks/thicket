@@ -17,11 +17,18 @@
 .delete__btns{
   margin: 1.5em;
   margin-top: 2.5em;
+  color: #46569F;
 }
 
-.delete__btns div,
 .delete__btns button{
   width: 100%;
+  height: 100%;
+}
+
+.delete__btns div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .delete__confirm{

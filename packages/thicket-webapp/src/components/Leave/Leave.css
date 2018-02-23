@@ -25,11 +25,18 @@
 .leave__btns{
   margin: 0.5em;
   margin-top: 2.5em;
+  color: #46569F;
 }
 
-.leave__btns div,
 .leave__btns button{
   width: 100%;
+  height: 100%;
+}
+
+.leave__btns div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 

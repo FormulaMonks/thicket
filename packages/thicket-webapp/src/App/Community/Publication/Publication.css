@@ -17,8 +17,20 @@
 }
 
 .publication__btns{
-  margin-top: 1em;
+  margin: 2em 2em 1em 2em;
   text-align: center;
+  color: #46569F;
+}
+
+.publication__btns button{
+  width: 100%;
+  height: 100%;
+}
+
+.publication__btns div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .publication__save{
