@@ -79,78 +79,80 @@ export default class Gif extends Component {
       </div>
       <div className="gif__inner">
         {header}
-        {(nickname || editable) && <div key="nickname">
-          <h3 className="gif__subtitle">GIF created by:</h3>
-          {editable
-            ? <Editable
-                value={nickname}
-                onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })}
-              />
-            : <div>{nickname}</div>}
-        </div>}
-        {(caption || editable) && <div key="caption">
-          <h3 className="gif__subtitle">GIF caption:</h3>
-          {editable
-            ? <Editable
-                value={caption}
-                onChange={e => onChange({ ...gif, caption: e.currentTarget.value })}
-              />
-            : <div>{caption}</div>}
-        </div>}
-        {src && <div>
-          <h3>Save & Share GIF:</h3>
-          {isMobile
-          ? <div
-              className="gif__invite-wrap"
-              style={{ background: linearGradient }}
-            >
-              <input
-                className="gif__invite"
-                ref={i => this.input = i}
-                type="text"
-                readOnly
-                value={publicURL}
-                onClick={e => onShareHook(() => this.input.setSelectionRange(0, 9999))}
-              />
-              <img
-                src={shareSvg}
-                alt="Share this GIF"
-                className="gif__invite-img"
-              />
-            </div>
-          : <div className="gif__buttons">
-              <Download gif={gif} onShareHook={onShareHook} />
-              <Trigger active={sharing}>
+        <div key="body" className="gif__body">
+          {(nickname || editable) && <div key="nickname">
+            <h4 className="gif__subtitle">GIF created by:</h4>
+            {editable
+              ? <Editable
+                  value={nickname}
+                  onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })}
+                />
+              : <div>{nickname}</div>}
+          </div>}
+          {(caption || editable) && <div key="caption">
+            <h4 className="gif__subtitle">GIF caption:</h4>
+            {editable
+              ? <Editable
+                  value={caption}
+                  onChange={e => onChange({ ...gif, caption: e.currentTarget.value })}
+                />
+              : <div>{caption}</div>}
+          </div>}
+          {src && <div>
+            <h4>Save & Share GIF:</h4>
+            {isMobile
+            ? <div
+                className="gif__invite-wrap"
+                style={{ background: linearGradient }}
+              >
+                <input
+                  className="gif__invite"
+                  ref={i => this.input = i}
+                  type="text"
+                  readOnly
+                  value={publicURL}
+                  onClick={e => onShareHook(() => this.input.setSelectionRange(0, 9999))}
+                />
+                <img
+                  src={shareSvg}
+                  alt="Share this GIF"
+                  className="gif__invite-img"
+                />
+              </div>
+            : <div className="gif__buttons">
+                <Download gif={gif} onShareHook={onShareHook} />
+                <Trigger active={sharing}>
+                  <button
+                    className="gif__button"
+                    onClick={() => onShareHook(() => this.setState({ sharing: true }))}
+                  >
+                    <Icon src={shareSvg} />
+                  </button>
+                </Trigger>
+                {sharing && <ShareLink
+                  className="gif__share"
+                  title={"GIF Share Link"}
+                  body={"Share the link with friends so they view this GIF."}
+                  toCopy={publicURL}
+                  onBlur={() => this.setState({ sharing: false })}
+                />}
                 <button
                   className="gif__button"
-                  onClick={() => onShareHook(() => this.setState({ sharing: true }))}
+                  onClick={() => onShareHook(() => window.open(`https://www.facebook.com/sharer.php?u=${publicURL}`, '_blank'))}
                 >
-                  <Icon src={shareSvg} />
+                  <Icon src={facebookSvg} />
                 </button>
-              </Trigger>
-              {sharing && <ShareLink
-                className="gif__share"
-                title={"GIF Share Link"}
-                body={"Share the link with friends so they view this GIF."}
-                toCopy={publicURL}
-                onBlur={() => this.setState({ sharing: false })}
-              />}
-              <button
-                className="gif__button"
-                onClick={() => onShareHook(() => window.open(`https://www.facebook.com/sharer.php?u=${publicURL}`, '_blank'))}
-              >
-                <Icon src={facebookSvg} />
-              </button>
-              <button
-                className="gif__button"
-                onClick={() => onShareHook(() => window.open(`https://www.twitter.com/intent/tweet?url=${publicURL}`, '_blank'))}
-              >
-                <Icon src={twitterSvg} />
-              </button>
-            </div>
-          }
-        </div>}
-        {children}
+                <button
+                  className="gif__button"
+                  onClick={() => onShareHook(() => window.open(`https://www.twitter.com/intent/tweet?url=${publicURL}`, '_blank'))}
+                >
+                  <Icon src={twitterSvg} />
+                </button>
+              </div>
+            }
+          </div>}
+          {children}
+        </div>
       </div>
     </div>
   }
