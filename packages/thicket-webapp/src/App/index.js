@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch,
   Link,
@@ -16,6 +16,7 @@ import NotFound from './404'
 import Gif from './Gif'
 import { Spinner } from 'thicket-elements'
 import store from '../database/store'
+import './Theme.css'
 import './App.css'
 
 const { user } = store

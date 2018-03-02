@@ -296,7 +296,7 @@ class User extends EventEmitter {
       // as it would get all publications for all communities
       // and one by one would store all the files locally
       // and in memory (state cache keeps the data source for gifs)
-      publications.getAll()
+      //publications.getAll()
     }
   }
 

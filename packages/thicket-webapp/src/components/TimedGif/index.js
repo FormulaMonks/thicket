@@ -63,4 +63,3 @@ export default class TimedGif extends Component {
     ]
   }
 }
-
