@@ -172,9 +172,9 @@ class Database extends EventEmitter {
     const node = await this._initIPFS()
     const { value: { links } } = await node.dag.get(new CID(hash))
     // all blocks from this hash
-    links.forEach(link => node._ipldResolver.bs.delete(new CID(link.multihash)))
+    links.forEach(link => node._ipld.bs.delete(new CID(link.multihash)))
     // then the actual block for id
-    node._ipldResolver.bs.delete(new CID(hash))
+    node._ipld.bs.delete(new CID(hash))
   }
 
   publicationsDelete = async (communityId, id) => {
