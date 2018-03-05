@@ -188,6 +188,7 @@
     top: 52px;
     left: unset;
     right: 1em;
+    animation: fadeIn 0.3s;
   }
 
   .onlinePeers-infoBtnBack{
@@ -210,4 +211,8 @@
     padding: 1em;
   }
 
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
 }
