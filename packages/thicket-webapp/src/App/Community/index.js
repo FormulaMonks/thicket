@@ -203,7 +203,7 @@ class Community extends Component {
         </div>
         <Button
           onClick={this.onCreateGif}
-          className="community__new"
+          className={`community__new${list.length ? '' : '--empty'}`}
         >
           Create GIF
         </Button>
