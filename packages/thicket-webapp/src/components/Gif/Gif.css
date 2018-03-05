@@ -106,7 +106,7 @@
     margin: 0 auto;
     display: inline-grid;
     grid-template-columns: auto auto;
-    grid-column-gap: 0.5em;
+    grid-column-gap: 1em;
     justify-content: center;
     text-align: initial;
   }
