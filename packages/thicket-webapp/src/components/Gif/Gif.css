@@ -118,6 +118,8 @@
   .gif__img{
     width: auto;
     height: 100%;
+    object-fit: cover;
+    object-position: center center;
   }
 
   .gif__img--safari{
@@ -130,7 +132,7 @@
     overflow: auto;
   }
 
-  @media (min-height: 800px) {
+  @media (min-height: 600px) {
     .gif__img{
       min-height: 500px;
     }
@@ -138,14 +140,14 @@
     .gif__inner{
       max-height: 500px;
     }
+  }
 
-    @media (min-width: 1200px) {
-      .gif__img{
-        min-height: 600px;
-      }
-      .gif__inner{
-        max-height: 600px;
-      }
+  @media (min-height: 800px) and (min-width: 1100px) {
+    .gif__img{
+      min-height: 600px;
+    }
+    .gif__inner{
+      max-height: 600px;
     }
   }
 }
