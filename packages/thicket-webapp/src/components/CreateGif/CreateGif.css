@@ -1,3 +1,24 @@
+.createGif__back{
+  position: absolute;
+  top: 2em;
+  left: 1em;
+  z-index: 11;
+  border: none;
+  background: unset;
+  color: #FFF;
+  font-size: 1em;
+  font-family: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createGif__back img{
+  transform: rotate(180deg);
+  margin-right: 0.5em;
+}
+
 .createGif .createGif__wrap{
   background: rgba(16, 33, 49, 0.5);
 }
