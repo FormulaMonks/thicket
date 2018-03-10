@@ -53,7 +53,7 @@ class Title extends Component {
     const { title } = this.state
     return <form onSubmit={this.onSubmit} className="community__form">
       <Input
-        className={syncing ? 'community__form-syncing' : ''}
+        className={`community__name${syncing ? ' community__form-syncing' : ''}`}
         type="text"
         placeholder={syncing ? 'Syncing Community...' : 'Name this Community'}
         value={title}

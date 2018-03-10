@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Camera from 'thicket-camera'
 import Customize from './Customize'
 import CameraAccess from '../CameraAccess'
+import arrowSvg from './back.svg'
 import './CreateGif.css'
 
 const ACCESS = 'request access to the camera'
@@ -21,30 +22,37 @@ class CreateGif extends Component {
   }
 
   render() {
+    const { onCancel } = this.props
     const { mode } = this.state
     return [
       mode === ACCESS && <CameraAccess
         key="access"
         onGranted={() => this.setState({ mode: CAMERA })}
       />,
-      mode === CAMERA && <Camera
-        key="camera"
-        onSave={src => this.setState({ src, mode: CUSTOMIZE})}
-        classNames={{
-          cameraWrap: 'createGif',
-          controlsWrap: 'createGif__wrap',
-          controlsTitle: 'createGif__controlsTitle',
-          controlsButton: 'createGif__controlsButton',
-          progressBarWrap: 'createGif__progressBarWrap',
-          progressBarBar: 'createGif__progressBarBar',
-          progressLabel: 'createGif__progressLabel',
-          reviewWrap: 'createGif__reviewWrap',
-          reviewPreview: 'createGif__reviewPreview',
-          reviewControlsWrap: 'createGif__reviewControlsWrap',
-          reviewApprove: 'createGif__reviewApprove',
-        }}
-        onShooting={this.props.onShooting}
-      />,
+      mode === CAMERA && [
+        <button
+          onClick={onCancel}
+          className="createGif__back"><img src={arrowSvg} />Back
+        </button>,
+        <Camera
+          key="camera"
+          onSave={src => this.setState({ src, mode: CUSTOMIZE})}
+          classNames={{
+            cameraWrap: 'createGif',
+            controlsWrap: 'createGif__wrap',
+            controlsTitle: 'createGif__controlsTitle',
+            controlsButton: 'createGif__controlsButton',
+            progressBarWrap: 'createGif__progressBarWrap',
+            progressBarBar: 'createGif__progressBarBar',
+            progressLabel: 'createGif__progressLabel',
+            reviewWrap: 'createGif__reviewWrap',
+            reviewPreview: 'createGif__reviewPreview',
+            reviewControlsWrap: 'createGif__reviewControlsWrap',
+            reviewApprove: 'createGif__reviewApprove',
+          }}
+          onShooting={this.props.onShooting}
+        />,
+      ],
       mode === CUSTOMIZE && <Customize
         key="customizing"
         onSubmit={this.props.onSave}

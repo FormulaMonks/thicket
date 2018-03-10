@@ -6,7 +6,7 @@ export const DEFAULT_PUBLICATIONS = [
     nickname: 'Thicket',
   },
   {
-    hash: 'QmSPJAfNidu4ofwhApeRneYeqpoBoJURWHaopvBnEV6GGp',
+    hash: 'Qme8VSW1g34S3VUysPUiR2G5b5cvDmjxUkvdFRerzjhJjc',
     caption: 'Share Your Community',
     path: './onboarding-gifs/share-your-community.gif',
     nickname: 'Thicket',

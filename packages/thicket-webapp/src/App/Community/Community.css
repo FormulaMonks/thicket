@@ -177,7 +177,7 @@
 }
 
 /* desktop */
-@media (min-width: 600px){
+@media (min-width: 600px) {
   .community{
     grid-template-columns: 235px minmax(200px, 300px) minmax(100px, 1fr) 90px 142px auto;
     grid-template-rows: auto auto 1fr;
@@ -259,6 +259,12 @@
     max-width: 300px;
   }
 
+  .community__name{
+    padding: 0;
+    font-size: 1.5em;
+    color: #FFF;
+  }
+
   .community__onlinePeers{
     min-width: 13em;
     padding-right: 1em;
@@ -314,5 +320,4 @@
     justify-content: center;
     align-items: center;
   }
-
 }

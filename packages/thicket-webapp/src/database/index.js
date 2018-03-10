@@ -83,7 +83,6 @@ const getDataSrcFromURL = async path => new Promise(r => {
   request.send()
 })
 
-
 class Database extends EventEmitter {
   constructor() {
     super()
