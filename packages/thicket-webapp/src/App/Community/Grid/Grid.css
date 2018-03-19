@@ -80,7 +80,7 @@
 /* desktop */
 @media (min-width: 600px){
   .communityGrid{
-    grid-template-columns: repeat(auto-fill, 18em);
+    grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
     grid-column: 1 / 10;
     grid-row: 3;
     justify-content: flex-start;
