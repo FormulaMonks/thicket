@@ -1,7 +1,6 @@
 .createGif__back{
   position: absolute;
-  top: 2em;
-  left: 1em;
+  top: 1.6em;
   z-index: 11;
   border: none;
   background: unset;
@@ -16,7 +15,7 @@
 
 .createGif__back img{
   transform: rotate(180deg);
-  margin-right: 0.5em;
+  height: 2em;
 }
 
 .createGif .createGif__wrap{
@@ -111,5 +110,9 @@
 
   .createGif .createGif__reviewApprove{
     order: 1;
+  }
+
+  .createGif__back{
+    left: 1em;
   }
 }

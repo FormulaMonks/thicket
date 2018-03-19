@@ -240,6 +240,7 @@ class Community extends Component {
                   community={c}
                   list={list}
                   onNew={this.onCreateGif}
+                  history={this.props.history}
                 />
               : <NoContent
                   syncing={syncing}

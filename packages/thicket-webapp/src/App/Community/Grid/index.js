@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Styles } from 'thicket-elements'
 import prettydate from 'pretty-date'
 import TimedGif from '../../../components/TimedGif'
@@ -7,15 +6,17 @@ import './Grid.css'
 
 const { linearGradient } = Styles
 
-const Grid = ({ community, list }) => <ul className="communityGrid">
+const Grid = ({ community, list, history }) => <ul className="communityGrid">
   {list.map(({ id, src, caption, nickname, createdAt, ...rest }) =>
     <li key={id} className="communityGrid__element" style={{ background: linearGradient }}>
-      <Link to={`/c/${community}/${id}`} className="communityGrid__link">
         <div className="communityGrid__wrap">
           <TimedGif
+            onClick={() => history.push(`/c/${community}/${id}`)}
             src={src}
             alt={caption}
             className="communityGrid__img"
+            controlable={true}
+            autoPlay={true}
           />
         </div>
         <div className="communityGrid__meta">
@@ -25,7 +26,6 @@ const Grid = ({ community, list }) => <ul className="communityGrid">
             <div className="communityGrid__createdAt">{createdAt && prettydate.format(new Date(createdAt))}</div>
           </div>
         </div>
-      </Link>
     </li>
   )}
 </ul>

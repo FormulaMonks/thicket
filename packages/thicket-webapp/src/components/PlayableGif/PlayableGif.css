@@ -1,0 +1,80 @@
+.playableGif__link{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-indent: -9999px;
+  z-index: 1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: none;
+}
+
+.playableGif__link--active{
+  display: block;
+}
+
+.playableGif .gif_player{
+  display: block;
+  overflow: hidden;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.playableGif .gif_player img{
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  display: block;
+}
+
+.playableGif--paused .gif_player img{
+  filter: blur(2px);
+}
+
+.playableGif .gif_player .play_button{
+  display: none;
+}
+
+.playableGif .gif_player .play_button::after{
+  font-family: initial;
+  letter-spacing: 2px;
+  font-size: 1em;
+}
+
+.playableGif--paused .gif_player .play_button{
+  z-index: 1;
+  overflow: hidden;
+  padding: 14px;
+  top: 0;
+  left: 0;
+  font-family: inherit;
+  box-shadow: unset;
+  background: unset;
+  transition: none;
+  opacity: 1;
+  transform: translate(0, 0) scale(1) rotate(0deg);
+  border: none;
+  border-radius: 0;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: rgba(39, 64, 88, 0.7);
+  background-image: url('./ellipse.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playableGif--paused .gif_player .play_button:hover{
+  background-color: none;
+  border: none;
+}
