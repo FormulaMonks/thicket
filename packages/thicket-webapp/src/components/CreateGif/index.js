@@ -11,7 +11,7 @@ const CUSTOMIZE = 'add metadata to the gif (username and label)'
 
 class CreateGif extends Component {
 
-  state = { mode: ACCESS, src: null, caption: '', nickname: '' }
+  state = { mode: ACCESS, src: null, caption: '', nickname: '', showBack: true }
 
   componentDidMount() {
     document.querySelector('body').style.overflow = 'hidden'
@@ -23,16 +23,18 @@ class CreateGif extends Component {
 
   render() {
     const { onCancel } = this.props
-    const { mode } = this.state
+    const { mode, showBack } = this.state
     return [
       mode === ACCESS && <CameraAccess
         key="access"
         onGranted={() => this.setState({ mode: CAMERA })}
       />,
       mode === CAMERA && [
-        <button
+        showBack && <button
           onClick={onCancel}
-          className="createGif__back"><img alt="Back" src={arrowSvg} />Back
+          className="createGif__back"
+        >
+          <img alt="Back" src={arrowSvg} />
         </button>,
         <Camera
           key="camera"
@@ -50,7 +52,10 @@ class CreateGif extends Component {
             reviewControlsWrap: 'createGif__reviewControlsWrap',
             reviewApprove: 'createGif__reviewApprove',
           }}
-          onShooting={this.props.onShooting}
+          onShooting={() => {
+            this.setState({ showBack: false })
+            this.props.onShooting()
+          }}
         />,
       ],
       mode === CUSTOMIZE && <Customize
