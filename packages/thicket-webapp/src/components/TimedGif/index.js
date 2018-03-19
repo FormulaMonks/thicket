@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { PLACEHOLDER, TIMEOUT } from '../../utils/constants'
 import errorSvg from './error.svg'
 import { Spinner } from 'thicket-elements'
+import PlayableGif from '../PlayableGif'
 import './TimedGif.css'
 
 export default class TimedGif extends Component {
@@ -35,15 +36,31 @@ export default class TimedGif extends Component {
   }
 
   render() {
-    const { alt, className } = this.props
+    const {
+      alt,
+      className,
+      controlable,
+      autoPlay,
+      onClick=()=>{},
+    } = this.props
     const { loading, src } = this.state
     return [
-      <img
-        key="gif"
-        src={src ? src : PLACEHOLDER}
-        alt={alt}
-        className={className}
-      />,
+      src
+        ? <PlayableGif
+            key="playableGif"
+            src={src}
+            alt={alt}
+            className={className}
+            controlable={controlable}
+            autoPlay={autoPlay}
+            onClick={onClick}
+          />
+        : <img
+            key="placeholderGif"
+            src={PLACEHOLDER}
+            alt={alt}
+            className={className}
+          />,
       loading &&
         <div
           key="loading"

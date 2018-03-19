@@ -12,6 +12,10 @@
 .communityGrid__element{
   padding: 2px;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .communityGrid__link{
@@ -23,7 +27,6 @@
 
 .communityGrid__wrap{
   position: relative;
-  overflow: hidden;
 }
 
 .communityGrid__img{

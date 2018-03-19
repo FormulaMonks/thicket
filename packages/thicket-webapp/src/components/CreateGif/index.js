@@ -32,7 +32,7 @@ class CreateGif extends Component {
       mode === CAMERA && [
         <button
           onClick={onCancel}
-          className="createGif__back"><img src={arrowSvg} />Back
+          className="createGif__back"><img alt="Back" src={arrowSvg} />Back
         </button>,
         <Camera
           key="camera"
