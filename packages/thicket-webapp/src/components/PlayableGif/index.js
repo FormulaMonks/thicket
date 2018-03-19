@@ -40,7 +40,7 @@ export default class PlayableGif extends Component {
           className={className}
           autoplay={autoPlay}
           pauseRef={r => this.pause = r}
-          onChange={this.onChange}
+          onTogglePlay={this.onChange}
         />
         <button
           onClick={this.props.onClick}
