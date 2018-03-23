@@ -30,13 +30,22 @@ class CreateGif extends Component {
         onGranted={() => this.setState({ mode: CAMERA })}
       />,
       mode === CAMERA && [
-        showBack && <button
-          key="back"
-          onClick={onCancel}
-          className="createGif__back"
-        >
-          <img alt="Back" src={arrowSvg} />
-        </button>,
+        showBack && [
+          <button
+            key="back"
+            onClick={onCancel}
+            className="createGif__back"
+          >
+            <img alt="Back" src={arrowSvg} />
+          </button>,
+          <input
+            key="upload"
+            className="createGif__upload"
+            type="file"
+            onChange={this.onUpload}
+            ref={n => this.node = n}
+          />
+        ],
         <Camera
           key="camera"
           onSave={src => this.setState({ src, mode: CUSTOMIZE})}
@@ -68,6 +77,14 @@ class CreateGif extends Component {
         onCancel={this.props.onCancel}
       />,
     ]
+  }
+
+  onUpload = () => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.setState({ src: e.target.result, mode: CUSTOMIZE })
+    }
+    reader.readAsDataURL(this.node.files[0]);
   }
 
   reset = () => {

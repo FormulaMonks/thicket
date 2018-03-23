@@ -18,6 +18,15 @@
   height: 2em;
 }
 
+.createGif__upload{
+  position: absolute;
+  bottom: 1em;
+  left: 1em;
+  z-index: 11;
+  background: unset;
+  opacity: 0;
+}
+
 .createGif .createGif__wrap{
   background: rgba(16, 33, 49, 0.5);
 }
