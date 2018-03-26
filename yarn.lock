@@ -5525,7 +5525,7 @@ ipfs-unixfs@~0.1.14:
   dependencies:
     protons "^1.0.0"
 
-ipfs@^0.28.0:
+ipfs@^0.28.2:
   version "0.28.2"
   resolved "https://registry.yarnpkg.com/ipfs/-/ipfs-0.28.2.tgz#1e9806354fdeecd773ffa612c28953c9a1ac64a0"
   dependencies:
