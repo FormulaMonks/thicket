@@ -1,9 +1,5 @@
 import store, { initialState } from '../src/database/store'
 
-beforeEach(() => {
-  localStorage.clear()
-})
-
 describe('Store', () => {
   it('should expose user & communities interface', () => {
     expect(store.hasOwnProperty('user')).toBe(true)
@@ -40,6 +36,21 @@ describe('Store', () => {
       await communities.post(newId)
       const exists = await communities.has(newId)
       expect(exists).toBe(true)
+    })
+    it('should fetch the new community’s data', async () => {
+      const { communities } = store
+      const newId = 'new community id'
+      await communities.post(newId)
+      const {
+        communityId,
+        data,
+        onlinePeers,
+        publications: { list }
+      } = await communities.get(newId)
+      expect(communityId).toBe(newId)
+      expect(data).toBe(null)
+      expect(onlinePeers).toBe(null)
+      expect(list.length).toBe(0)
     })
   })
 })
