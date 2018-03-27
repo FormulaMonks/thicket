@@ -34,5 +34,12 @@ describe('Store', () => {
       const exists = await store.communities.has(nonExistentCommunityId)
       expect(exists).toBe(false)
     })
+    it('should add a new community', async () => {
+      const { communities } = store
+      const newId = 'new community id'
+      await communities.post(newId)
+      const exists = await communities.has(newId)
+      expect(exists).toBe(true)
+    })
   })
 })

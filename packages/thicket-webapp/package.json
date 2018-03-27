@@ -143,7 +143,10 @@
       "web.jsx",
       "jsx",
       "node"
-    ]
+    ],
+    "globals": {
+      "navigator": true
+    }
   },
   "babel": {
     "presets": [
