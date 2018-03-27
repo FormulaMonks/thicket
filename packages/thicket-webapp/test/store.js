@@ -29,5 +29,10 @@ describe('Store', () => {
       const communities = await store.communities.getAll()
       expect(communities.length).toBe(0)
     })
+    it('should return false when checking if the user has a non-existent community', async () => {
+      const nonExistentCommunityId = 'non existent community id'
+      const exists = await store.communities.has(nonExistentCommunityId)
+      expect(exists).toBe(false)
+    })
   })
 })
