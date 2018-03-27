@@ -31,6 +31,7 @@ class CreateGif extends Component {
       />,
       mode === CAMERA && [
         showBack && <button
+          key="back"
           onClick={onCancel}
           className="createGif__back"
         >
