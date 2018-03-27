@@ -2,13 +2,15 @@ import EventEmitter from 'eventemitter3'
 import localForage from 'localforage'
 import db, { sortPublications } from './index.js'
 
-const state = {
+export const initialState = {
   user: {
     nickname: `Guest${Math.floor(1 + Math.random() * 1000)}`,
   },
   userCommunities: new Set(),
   communities: new Map()
 }
+
+const state = { ...initialState }
 
 /*
  * This class will take care of requests for data
