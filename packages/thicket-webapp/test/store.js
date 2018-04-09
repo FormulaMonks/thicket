@@ -1,4 +1,5 @@
 import store, { initialState } from '../src/database/store'
+global.addEventListener = (str, cb) => cb()
 
 describe('Store', () => {
   it('should expose user & communities interface', () => {
