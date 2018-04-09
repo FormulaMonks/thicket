@@ -5459,7 +5459,7 @@ ipfs-multipart@~0.1.0:
     content "^3.0.0"
     dicer "^0.2.5"
 
-ipfs-pubsub-room@^1.1.2:
+ipfs-pubsub-room@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ipfs-pubsub-room/-/ipfs-pubsub-room-1.2.0.tgz#6444573780baf3a78addd67a36f6239090f7db7e"
   dependencies:
@@ -12383,13 +12383,13 @@ y-indexeddb@^8.1.9:
   version "8.1.9"
   resolved "https://registry.yarnpkg.com/y-indexeddb/-/y-indexeddb-8.1.9.tgz#0cb8ab72fc0e6a5345d3c628964659175b50c9c7"
 
-y-ipfs-connector@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/y-ipfs-connector/-/y-ipfs-connector-2.1.2.tgz#79d2bd3633c1e8c18676513fa688cc32457e81e8"
+y-ipfs-connector@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/y-ipfs-connector/-/y-ipfs-connector-2.2.0.tgz#a60953ac7a9bcb3d2dd05ce9564974cc295b1259"
   dependencies:
     async "^2.4.1"
     debug "^3.1.0"
-    ipfs-pubsub-room "^1.1.2"
+    ipfs-pubsub-room "^1.2.0"
     safe-buffer "^5.1.1"
 
 y-map@^10.1.3:
