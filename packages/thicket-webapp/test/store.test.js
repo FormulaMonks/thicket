@@ -1,8 +1,19 @@
+import rimraf from 'rimraf'
 import store, { initialState } from '../src/database/store'
-global.addEventListener = (str, cb) => cb()
+import db from '../src/database'
+
+beforeAll(done => {
+  rimraf('test/storage/*', () => {
+    db._initIPFS({
+      repo: `test/storage/repo-${Date.now()}`,
+    })
+    done()
+  })
+})
 
 describe('Store', () => {
   it('should expose user & communities interface', () => {
+    expect.assertions(2)
     expect(store.hasOwnProperty('user')).toBe(true)
     expect(store.hasOwnProperty('communities')).toBe(true)
   })
@@ -39,6 +50,7 @@ describe('Store', () => {
       expect(exists).toBe(true)
     })
     it('should fetch the new community’s data', async () => {
+      expect.assertions(4)
       const { communities } = store
       const newId = 'new community id'
       await communities.post(newId)

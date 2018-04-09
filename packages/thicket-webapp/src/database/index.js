@@ -88,14 +88,13 @@ class Database extends EventEmitter {
     super()
     this._ipfs = null
     this._communities = new Map()
-    this._initIPFS()
     this._syncing = false
   }
 
-  _initIPFS() {
+  _initIPFS(opts) {
     if (!this._ipfs) {
       this._ipfs = new Promise((resolve, reject) => {
-        const node = new IPFS(ipfsConfig)
+        const node = new IPFS({ ...ipfsConfig, ...opts })
         node.once('ready', () => resolve(node))
       })
     }
