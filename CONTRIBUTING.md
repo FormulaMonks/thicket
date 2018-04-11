@@ -6,7 +6,7 @@
 
 # Installation
 
-- Running `yarn bootstrap` in the project root directory will install and link everything you need for development.
+- Running `yarn` and then `yarn bootstrap` in the project root directory will install and link everything you need for development.
 
 # Webapp
 
