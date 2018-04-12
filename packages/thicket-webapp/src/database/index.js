@@ -2,10 +2,7 @@ import IPFS from 'ipfs'
 import CID from 'cids'
 import ImageDataConverter from '../utils/imageDataConverter'
 import Y from 'yjs'
-import yMemory from 'y-memory'
 import yIndexeddb from 'y-indexeddb'
-import yArray from 'y-array'
-import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
 import EventEmitter from 'eventemitter3'
 import { DEFAULT_PUBLICATIONS, TIMEOUT } from '../utils/constants'
@@ -26,22 +23,15 @@ const ipfsConfig = {
   },
 }
 
-const yConfig = (node, user_id, id) => ({
-  db: {
-    name: 'indexeddb'
-  },
+Y.extend(yIpfsConnector, yIndexeddb)
+const persistence = new Y.IndexedDB()
+const yConfig = (ipfs, id) => ({
   connector: {
     name: 'ipfs',
     room: `thicket:${id}`,
-    ipfs: node,
+    ipfs,
     syncMethod: 'syncAll',
   },
-  share: {
-    publications: 'Array',
-    publicationsMetadata: 'Map',
-    metadata: 'Map',
-    nicknames: 'Map',
-  }
 })
 
 const toBase64 = src =>
@@ -62,12 +52,13 @@ const timedSrcCat = async (node, id) => Promise.race([
 const mapIPFSIdstoNicknames = async(node, y) => {
   const { id } = await node.id()
   const nickname = (y.share && y.share.nicknames && y.share.nicknames.get(id)) || ''
-  const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
-    if (y.share && y.share.nicknames && y.share.nicknames.get(c)) {
-      p.push(y.share.nicknames.get(c))
-    }
-    return p
-  }, [])
+  //const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
+    //if (y.share && y.share.nicknames && y.share.nicknames.get(c)) {
+      //p.push(y.share.nicknames.get(c))
+    //}
+    //return p
+  //}, [])
+  const peers = []
   return [nickname, ...peers]
 }
 
@@ -109,8 +100,34 @@ class Database extends EventEmitter {
     if (!this._communities.has(communityId)) {
       const promise = new Promise(async resolve => {
         const node = await this._initIPFS()
-        const { id: peerId } = await node.id()
-        const y = await Y(yConfig(node, peerId, communityId))
+
+        const onSubscribed = () => {
+          console.log('on subscribed, connector exists')
+          y.connector.onUserEvent(async ({ action, ...rest }) => {
+            console.log('on User Event: ', action, rest)
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+            // syncing
+            if (action === 'userJoined') {
+              this._syncing = true
+              this.emit(`syncing-${communityId}`)
+              y.connector.whenSynced(() => {
+                setTimeout(() => {
+                  this._syncing = false
+                  this.emit(`synced-${communityId}`)
+                }, 1000)
+              })
+            }
+          })
+        }
+
+        const options = yConfig(node, communityId)
+        options.connector = { ...options.connector, onSubscribed }
+        const y = new Y(`thicket:${communityId}`, options, persistence)
+        y.share.publications = y.define('publications', Y.Array)
+        y.share.metadata = y.define('map', Y.Map)
+        y.share.publicationsMetadata = y.define('map', Y.Map)
+        y.share.nicknames = y.define('map', Y.Map)
+
         // updates to the community metadata (eg change community title)
         y.share.metadata.observe(({ value, type }) => {
           if (value && type !== 'delete') {
@@ -141,21 +158,6 @@ class Database extends EventEmitter {
         y.share.nicknames.observe(async () => {
           if (!this._syncing) {
             this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
-          }
-        })
-        // online peers
-        y.connector.onUserEvent(async ({ action }) => {
-          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
-          // syncing
-          if (action === 'userJoined') {
-            this._syncing = true
-            this.emit(`syncing-${communityId}`)
-            y.connector.whenSynced(() => {
-              setTimeout(() => {
-                this._syncing = false
-                this.emit(`synced-${communityId}`)
-              }, 1000)
-            })
           }
         })
 
@@ -280,7 +282,5 @@ class Database extends EventEmitter {
   }
 
 }
-
-Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
 
 export default new Database()

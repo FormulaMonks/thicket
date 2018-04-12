@@ -2933,7 +2933,7 @@ debug@2.6.8:
   dependencies:
     ms "2.0.0"
 
-debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.1, debug@^2.6.3, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9, debug@~2.6.4, debug@~2.6.6:
+debug@2.6.9, debug@^2.1.1, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.1, debug@^2.6.6, debug@^2.6.8, debug@^2.6.9, debug@~2.6.4, debug@~2.6.6:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
   dependencies:
@@ -12375,30 +12375,26 @@ xtend@~3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-3.0.0.tgz#5cce7407baf642cba7becda568111c493f59665a"
 
-y-array@^10.1.4:
-  version "10.1.4"
-  resolved "https://registry.yarnpkg.com/y-array/-/y-array-10.1.4.tgz#e131a5b030d6dcbca10268d4293ecf44bdae7b34"
+y-array@y-js/y-array:
+  version "11.0.0-5"
+  resolved "https://codeload.github.com/y-js/y-array/tar.gz/c4efe55209e1b9fffc00d793687ab023abb8e82d"
 
-y-indexeddb@^8.1.9:
-  version "8.1.9"
-  resolved "https://registry.yarnpkg.com/y-indexeddb/-/y-indexeddb-8.1.9.tgz#0cb8ab72fc0e6a5345d3c628964659175b50c9c7"
+y-indexeddb@y-js/y-indexeddb:
+  version "9.0.0-5"
+  resolved "https://codeload.github.com/y-js/y-indexeddb/tar.gz/bb778c459806ad2ec8ffc6606552f0e4bf8b9294"
 
-y-ipfs-connector@^2.2.0:
+y-ipfs-connector@AquiGorka/y-ipfs-connector#feature/update-to-work-with-latest-yjs-version:
   version "2.2.0"
-  resolved "https://registry.yarnpkg.com/y-ipfs-connector/-/y-ipfs-connector-2.2.0.tgz#a60953ac7a9bcb3d2dd05ce9564974cc295b1259"
+  resolved "https://codeload.github.com/AquiGorka/y-ipfs-connector/tar.gz/14320a713d730f970fb3773c635325530957db3a"
   dependencies:
     async "^2.4.1"
     debug "^3.1.0"
     ipfs-pubsub-room "^1.2.0"
     safe-buffer "^5.1.1"
 
-y-map@^10.1.3:
-  version "10.1.3"
-  resolved "https://registry.yarnpkg.com/y-map/-/y-map-10.1.3.tgz#a15802cedbac369e506b96f68def8f0a2e836196"
-
-y-memory@^8.0.9:
-  version "8.0.9"
-  resolved "https://registry.yarnpkg.com/y-memory/-/y-memory-8.0.9.tgz#551af9ca153bd344647663b91ebde59a6802b23b"
+y-map@y-js/y-map:
+  version "11.0.0-1"
+  resolved "https://codeload.github.com/y-js/y-map/tar.gz/4d6c1e05a9b953c9e0c3f226256372f90167c5cb"
 
 y18n@^3.2.1:
   version "3.2.1"
@@ -12522,11 +12518,11 @@ yeast@0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
-yjs@^12.3.3:
-  version "12.3.3"
-  resolved "https://registry.yarnpkg.com/yjs/-/yjs-12.3.3.tgz#7bec14d59afe166d68cc2b27413193c0e5ba724c"
+yjs@y-js/yjs:
+  version "13.0.0-55"
+  resolved "https://codeload.github.com/y-js/yjs/tar.gz/941a22b2574beda2c82c75a7924e77d011e31cdd"
   dependencies:
-    debug "^2.6.3"
+    debug "^2.6.8"
 
 zcash-bitcore-lib@^0.13.20-rc3:
   version "0.13.20-rc3"
