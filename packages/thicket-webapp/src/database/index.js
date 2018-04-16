@@ -7,7 +7,7 @@ import yIndexeddb from 'y-indexeddb'
 import yArray from 'y-array'
 import yMap from 'y-map'
 import yIpfsConnector from 'y-ipfs-connector'
-import EventEmitter from 'eventemitter3'
+import { EventEmitter } from 'events'
 import { DEFAULT_PUBLICATIONS, TIMEOUT } from '../utils/constants'
 
 export const sortPublications = (a, b) => b.createdAt - a.createdAt
@@ -88,14 +88,13 @@ class Database extends EventEmitter {
     super()
     this._ipfs = null
     this._communities = new Map()
-    this._initIPFS()
     this._syncing = false
   }
 
-  _initIPFS() {
+  _initIPFS(opts) {
     if (!this._ipfs) {
       this._ipfs = new Promise((resolve, reject) => {
-        const node = new IPFS(ipfsConfig)
+        const node = new IPFS({ ...ipfsConfig, ...opts })
         node.once('ready', () => resolve(node))
       })
     }
