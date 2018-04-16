@@ -15,7 +15,7 @@ yarn build
 
 ## Tests
 
-´´´sh
+```sh
 yarn test:server
 yarn test
 ```
