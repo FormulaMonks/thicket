@@ -6,6 +6,10 @@ beforeAll(done => {
   rimraf('test/storage/*', () => {
     db._initIPFS({
       repo: `test/storage/repo-${Date.now()}`,
+      config: {
+        Addresses: { Swarm: [] },
+        Bootstrap: []
+      }
     })
     done()
   })
