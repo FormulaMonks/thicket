@@ -32,4 +32,12 @@ describe('Community', async () => {
     expect(onlinePeers).toBe(null)
     expect(list.length).toBe(0)
   })
+
+  it('should update the community’s title', async () => {
+    const newTitle = 'New Title'
+    const community = await communities.get(COMMUNITY_ID)
+    await community.put({ title: newTitle })
+    const { data: { title } } = await communities.get(COMMUNITY_ID)
+    expect(title).toBe(newTitle)
+  })
 })

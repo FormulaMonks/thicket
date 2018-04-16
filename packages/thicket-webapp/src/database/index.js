@@ -32,7 +32,7 @@ const yConfig = (node, user_id, id) => ({
   },
   connector: {
     name: 'ipfs',
-    room: `thicket:${id}`,
+    room: `thicket-${id}`,
     ipfs: node,
     syncMethod: 'syncAll',
   },

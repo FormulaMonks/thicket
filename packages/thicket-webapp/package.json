@@ -108,6 +108,7 @@
   },
   "devDependencies": {
     "babel-jest": "^22.4.3",
+    "fake-indexeddb": "^2.0.4",
     "jest": "^22.4.3",
     "jest-localstorage-mock": "^2.2.0",
     "libp2p-websocket-star-rendezvous": "^0.2.3",
