@@ -22,4 +22,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # tests local storage
-test/storage/
+test/__storage__/
