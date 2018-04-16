@@ -66,10 +66,18 @@ describe('Store', () => {
         onlinePeers,
         publications: { list }
       } = await communities.get(newId)
+      exists = await store.communities.has(newId)
+      expect(exists).toBe(true)
       expect(communityId).toBe(newId)
       expect(data).toBe(null)
       expect(onlinePeers).toBe(null)
       expect(list.length).toBe(0)
+    })
+    it('should persist the community id from last test ', async () => {
+      expect.assertions(1)
+      const newId = 'new-community-id'
+      let exists = await store.communities.has(newId)
+      expect(exists).toBe(true)
     })
   })
 })
