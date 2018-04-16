@@ -24,7 +24,6 @@ describe('Communities', async () => {
     expect(exists).toBe(false)
   })
   it('should add a new community', async () => {
-    const { communities } = store
     const newId = 'new-community-id-' + Date.now()
     await communities.post(newId)
     const exists = await communities.has(newId)
@@ -32,7 +31,6 @@ describe('Communities', async () => {
   })
   it('should fetch the new community’s data', async () => {
     expect.assertions(6)
-    const { communities } = store
     const newId = 'new-community-id'
     let exists = await communities.has(newId)
     expect(exists).toBe(false)
