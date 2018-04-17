@@ -162,7 +162,9 @@ class Community extends EventEmitter {
     return this.onlinePeers
   }
 
-  post = data => db.communityPost(this.communityId, data)
+  post = async data => {
+    return await db.communityPost(this.communityId, data)
+  }
 
   // passthrough method
   postPublication = data => {
