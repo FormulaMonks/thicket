@@ -6,6 +6,8 @@ const TEST = 'communities'
 const mock = options(TEST)
 const { communities } = store
 
+jest.setTimeout(10000)
+
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
