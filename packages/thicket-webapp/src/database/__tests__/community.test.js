@@ -28,19 +28,17 @@ beforeAll(async done => {
 
 describe('Community', async () => {
 
-  it('should fetch the community’s data', async () => {
+  it('should fetch the community’s initial data', async () => {
     expect.assertions(5)
-    const {
-      communityId,
-      data,
-      onlinePeers,
-      publications: { list }
-    } = await communities.get(COMMUNITY_ID)
     const exists = await communities.has(COMMUNITY_ID)
+    const community = await communities.get(COMMUNITY_ID)
+    const { communityId } = community
+    const { title, size } = await community.get()
+    const list = await community.getAllPublications()
     expect(exists).toBe(true)
     expect(communityId).toBe(COMMUNITY_ID)
-    expect(data).toBe(null)
-    expect(onlinePeers).toBe(null)
+    expect(title).toBe('')
+    expect(size).toBe(0)
     expect(list.length).toBe(0)
   })
 
@@ -48,17 +46,11 @@ describe('Community', async () => {
     const newTitle = 'New Title'
     const community = await communities.get(COMMUNITY_ID)
     await community.put({ title: newTitle })
-    const { data: { title } } = await communities.get(COMMUNITY_ID)
+    const { title } = await community.get()
     expect(title).toBe(newTitle)
   })
 
-  it('should receive no publications on initial data', async () => {
-    const community = await communities.get(COMMUNITY_ID)
-    const list = await community.getAllPublications()
-    expect(list).toEqual([])
-  })
-
-  it('should receive initial online peers (only one, user itself)', async () => {
+  it('should receive correct initial online peers (only one, user itself)', async () => {
     const community = await communities.get(COMMUNITY_ID)
     const onlinePeers = await community.getOnlinePeers()
     const { nickname } = await store.user.get()
@@ -67,12 +59,46 @@ describe('Community', async () => {
 
   it('should post a new publication', async () => {
     expect.assertions(4)
+    const instant = Date.now()
     const community = await communities.get(COMMUNITY_ID)
     await community.postPublication(PUBLICATION)
-    const [ item ] = await community.getAllPublications()
-    expect(item.caption).toBe(CAPTION)
-    expect(item.id).toBe(PUBLICATION_HASH)
-    expect(item.createdBy).toBe(CREATED_BY)
-    expect(item.hasOwnProperty('createdAt')).toBe(true)
+    const [ { caption, id, createdBy, createdAt } ] = await community.getAllPublications()
+    expect(caption).toBe(CAPTION)
+    expect(id).toBe(PUBLICATION_HASH)
+    expect(createdBy).toBe(CREATED_BY)
+    expect(createdAt).toBeGreaterThanOrEqual(instant)
+  })
+
+  it('should increase the community’s size with the new publication', async done => {
+    expect.assertions(1)
+    const community = await communities.get(COMMUNITY_ID)
+    community.publications.once('update', async () => {
+      // doesn't get cached
+      const s = community.publications.getSize()
+      // community size gets updated only after getAllPublications (busts cache)
+      const list = await community.getAllPublications()
+      const { size } = await community.get()
+      expect(size).toBe(s)
+      done()
+    })
+    // can only get size after getting publication src
+    const p = await community.publications.get(PUBLICATION_HASH)
+  })
+
+  it('should delete a publication', async () => {
+    const community = await communities.get(COMMUNITY_ID)
+    await community.deletePublication(PUBLICATION_HASH)
+    const list = await community.getAllPublications()
+    expect(list).toEqual([])
+  })
+
+  it('should decrease the community’s size', async done => {
+    expect.assertions(2)
+    const community = await communities.get(COMMUNITY_ID)
+    const s = community.publications.getSize()
+    const { size } = await community.get()
+    expect(size).toBe(0)
+    expect(s).toBe(0)
+    done()
   })
 })

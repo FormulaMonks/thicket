@@ -171,8 +171,6 @@ class Database extends EventEmitter {
     const { value: { links } } = await node.dag.get(new CID(hash))
     // all blocks from this hash
     links.forEach(link => node._ipld.bs.delete(new CID(link.multihash)))
-    // then the actual block for id
-    node._ipld.bs.delete(new CID(hash))
   }
 
   publicationsDelete = async (communityId, id) => {

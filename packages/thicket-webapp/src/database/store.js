@@ -49,7 +49,9 @@ class Publications extends EventEmitter {
     })
   }
 
-  delete = id => db.publicationsDelete(this.communityId, id)
+  delete = async id => {
+    return await db.publicationsDelete(this.communityId, id)
+  }
 
   get = async id => {
     const cached = this.list.find(p => p.id === id)
@@ -122,11 +124,11 @@ class Community extends EventEmitter {
     this.publications = new Publications(communityId)
   }
 
-  delete = () => {
+  delete = async () => {
     this.data = null
     this.onlinePeers = []
     this.pulications = []
-    return db.communityDelete(this.communityId)
+    return await db.communityDelete(this.communityId)
   }
 
   // passthrough method
