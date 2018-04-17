@@ -1,4 +1,4 @@
-import EventEmitter from 'eventemitter3'
+import { EventEmitter } from 'events'
 import localForage from 'localforage'
 import db, { sortPublications } from './index.js'
 
@@ -49,7 +49,9 @@ class Publications extends EventEmitter {
     })
   }
 
-  delete = id => db.publicationsDelete(this.communityId, id)
+  delete = async id => {
+    return await db.publicationsDelete(this.communityId, id)
+  }
 
   get = async id => {
     const cached = this.list.find(p => p.id === id)
@@ -122,11 +124,11 @@ class Community extends EventEmitter {
     this.publications = new Publications(communityId)
   }
 
-  delete = () => {
+  delete = async () => {
     this.data = null
     this.onlinePeers = []
     this.pulications = []
-    return db.communityDelete(this.communityId)
+    return await db.communityDelete(this.communityId)
   }
 
   // passthrough method
@@ -162,7 +164,9 @@ class Community extends EventEmitter {
     return this.onlinePeers
   }
 
-  post = data => db.communityPost(this.communityId, data)
+  post = async data => {
+    return await db.communityPost(this.communityId, data)
+  }
 
   // passthrough method
   postPublication = data => {
