@@ -23,3 +23,5 @@ export const cleanup = async namespace => {
 export const getFileContents = promisify(fs.readFile)
 
 export const GIF_HASH = 'QmYWRS7rqok7zvFBmAm1JBbzPEAMdkkfxwfhfPNoX9vAuQ'
+
+export const GIF_SIZE = 1082

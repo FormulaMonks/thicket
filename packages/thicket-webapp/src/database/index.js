@@ -184,14 +184,15 @@ class Database extends EventEmitter {
     const y = await this._initCommunity(communityId)
     // onboarding gifs
     const exists = DEFAULT_PUBLICATIONS.find(p => p.hash === id)
+    const metadata = (y.share && y.share.publicationsMetadata && y.share.publicationsMetadata.get(id)) || {}
     if (exists) {
       const { hash, path, ...rest } = exists
-      return { id, ...y.share.publicationsMetadata.get(id), src: await getDataSrcFromURL(path), ...rest }
+      return { id, ...metadata, src: await getDataSrcFromURL(path), ...rest }
     }
     // ipfs
     const node = await this._initIPFS()
     const src = await timedSrcCat(node, id)
-    return { id, src, ...y.share.publicationsMetadata.get(id) }
+    return { id, src, ...metadata }
   }
 
   publicationsGetAll = async communityId => {
@@ -269,7 +270,7 @@ class Database extends EventEmitter {
       const y = await this._initCommunity(communityId)
       const node = await this._initIPFS()
       const { id } = await node.id()
-      const current = y.share.nicknames.get(id)
+      const current = y.share && y.share.nicknames && y.share.nicknames.get(id)
       if (data !== current) {
         y.share.nicknames.set(id, data)
       }
