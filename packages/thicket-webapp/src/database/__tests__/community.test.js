@@ -1,8 +1,11 @@
-import fs from 'fs'
-import { promisify } from 'util'
 import store from '../store'
 import db from '../'
-import { options, cleanup } from '../../../test/utils.js'
+import {
+  options,
+  cleanup,
+  getFileContents,
+  GIF_HASH as PUBLICATION_HASH,
+} from '../../../test/utils.js'
 
 const TEST = 'community'
 const mock = options(TEST)
@@ -11,8 +14,6 @@ const COMMUNITY_ID = 'community-id'
 const CREATED_BY = 'TEST'
 const CAPTION = 'I am a mock publication'
 const PUBLICATION = { createdBy: CREATED_BY, caption: CAPTION, src: '' }
-const PUBLICATION_HASH = 'QmYWRS7rqok7zvFBmAm1JBbzPEAMdkkfxwfhfPNoX9vAuQ'
-const getContents = promisify(fs.readFile)
 
 jest.setTimeout(10000)
 
@@ -21,8 +22,13 @@ beforeAll(async done => {
   await cleanup(TEST)
   await db._initIPFS(mock('crud'))
   await communities.post(COMMUNITY_ID)
-  const src = await getContents(__dirname + '/gif.gif')
+  const src = await getFileContents(__dirname + '/gif.gif')
   PUBLICATION.src = src.toString()
+  done()
+})
+
+afterAll(async done => {
+  await communities.delete(COMMUNITY_ID)
   done()
 })
 
