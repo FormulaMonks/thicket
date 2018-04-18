@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3'
 import localForage from 'localforage'
-import db, { sortPublications } from './index.js'
+import Database, { sortPublications } from './index.js'
 
 export const initialState = {
   user: {
@@ -9,8 +9,10 @@ export const initialState = {
   userCommunities: new Set(),
   communities: new Map()
 }
-
 const state = { ...initialState }
+
+let db
+let store
 
 /*
  * This class will take care of requests for data
@@ -328,16 +330,15 @@ class User extends EventEmitter {
 
 }
 
-let store
-
 export const createStore = opts => {
+  db = new Database(opts)
   const user = new User()
   store = { user, communities: user.communities }
   return store
 }
 
 export default new Proxy({}, {
-  get: function (target, method) {
+  get(target, method) {
     if (!store) {
       createStore()
     }

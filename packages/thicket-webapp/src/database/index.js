@@ -84,18 +84,19 @@ const getDataSrcFromURL = async path => new Promise(r => {
 })
 
 class Database extends EventEmitter {
-  constructor() {
+  constructor(opts) {
     super()
     this._ipfs = null
     this._communities = new Map()
     this._syncing = false
+    this._opts = opts
   }
 
-  _initIPFS(opts) {
+  _initIPFS() {
     if (!this._ipfs) {
-      this._ipfs = new Promise((resolve, reject) => {
-        const node = new IPFS({ ...ipfsConfig, ...opts })
-        node.once('ready', () => resolve(node))
+      this._ipfs = new Promise(r => {
+        const node = new IPFS({ ...ipfsConfig, ...this._opts })
+        node.once('ready', () => r(node))
       })
     }
     return this._ipfs
@@ -281,4 +282,4 @@ class Database extends EventEmitter {
 
 Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
 
-export default new Database()
+export default Database
