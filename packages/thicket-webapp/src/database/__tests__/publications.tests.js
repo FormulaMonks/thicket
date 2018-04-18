@@ -3,7 +3,7 @@ import db from '../'
 import {
   options,
   cleanup,
-  getFileContents,
+  getGIFSource,
   GIF_HASH as PUBLICATION_HASH,
   GIF_SIZE as PUBLICATION_SIZE,
 } from '../../../test/utils.js'
@@ -23,8 +23,7 @@ beforeAll(async done => {
   await cleanup(TEST)
   await db._initIPFS(mock('crud'))
   await communities.post(COMMUNITY_ID)
-  const src = await getFileContents(__dirname + '/gif.gif')
-  PUBLICATION.src = src.toString()
+  PUBLICATION.src = await getGIFSource()
   done()
 })
 
