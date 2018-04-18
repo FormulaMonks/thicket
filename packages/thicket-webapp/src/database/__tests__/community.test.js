@@ -1,5 +1,4 @@
-import store from '../store'
-import db from '../'
+import store, { createStore } from '../store'
 import {
   options,
   cleanup,
@@ -9,18 +8,20 @@ import {
 
 const TEST = 'community'
 const mock = options(TEST)
-const { communities } = store
 const COMMUNITY_ID = 'community-id'
 const CREATED_BY = 'TEST'
 const CAPTION = 'I am a mock publication'
 const PUBLICATION = { createdBy: CREATED_BY, caption: CAPTION, src: '' }
+
+let communities
 
 jest.setTimeout(10000)
 
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
-  await db._initIPFS(mock('crud'))
+  createStore(mock('crud'))
+  communities = store.communities
   await communities.post(COMMUNITY_ID)
   PUBLICATION.src = await getGIFSource()
   done()

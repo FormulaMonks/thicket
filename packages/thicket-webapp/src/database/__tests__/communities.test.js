@@ -1,17 +1,18 @@
-import store from '../store'
-import db from '../'
+import store, { createStore } from '../store'
 import { options, cleanup } from '../../../test/utils.js'
 
 const TEST = 'communities'
 const mock = options(TEST)
-const { communities } = store
+
+let communities
 
 jest.setTimeout(10000)
 
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
-  await db._initIPFS(mock('crud'))
+  createStore(mock('crud'))
+  communities = store.communities
   done()
 })
 
