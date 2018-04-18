@@ -18,7 +18,7 @@ describe('User', () => {
 
   it('should emit when user’s data changes', async () => {
     expect.assertions(1)
-    const newNickname = 'new nickname'
+    const newNickname = 'other new nickname'
     const { user } = store
     user.once('update', async () => {
       const { nickname } = await user.get()

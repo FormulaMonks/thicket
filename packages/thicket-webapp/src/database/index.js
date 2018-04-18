@@ -59,16 +59,15 @@ const timedSrcCat = async (node, id) => Promise.race([
   })
 ])
 
-const mapIPFSIdstoNicknames = async(node, y) => {
-  const { id } = await node.id()
-  const nickname = (y.share && y.share.nicknames && y.share.nicknames.get(id)) || ''
-  const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
-    if (y.share && y.share.nicknames && y.share.nicknames.get(c)) {
-      p.push(y.share.nicknames.get(c))
-    }
-    return p
-  }, [])
-  return [nickname, ...peers]
+const mapIPFSIdstoNicknames = async ({ share, connector: { roomEmitter } }) => {
+  return (share && share.nicknames)
+    ? roomEmitter.peers().reduce((p, c) => {
+      if (share.nicknames.get(c)) {
+        p.push(share.nicknames.get(c))
+      }
+      return p
+    }, [])
+    : []
 }
 
 const getDataSrcFromURL = async path => new Promise(r => {
@@ -140,12 +139,12 @@ class Database extends EventEmitter {
         // nicknames: IPFS node id <-> nickname
         y.share.nicknames.observe(async () => {
           if (!this._syncing) {
-            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           }
         })
         // online peers
         y.connector.onUserEvent(async ({ action }) => {
-          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           // syncing
           if (action === 'userJoined') {
             this._syncing = true
@@ -250,10 +249,8 @@ class Database extends EventEmitter {
   }
 
   communityGetOnlinePeers = async communityId => {
-    const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
-    const peers = await mapIPFSIdstoNicknames(node, y)
-    return peers
+    return await mapIPFSIdstoNicknames(y)
   }
 
   communityPost = async (communityId, data) => {
@@ -267,13 +264,15 @@ class Database extends EventEmitter {
   }
 
   communityPutNicknames = async (communities, data) => {
-    for (let communityId of communities) {
-      const y = await this._initCommunity(communityId)
-      const node = await this._initIPFS()
-      const { id } = await node.id()
-      const current = y.share && y.share.nicknames && y.share.nicknames.get(id)
-      if (data !== current) {
-        y.share.nicknames.set(id, data)
+    for (const communityId of communities) {
+      const { share } = await this._initCommunity(communityId)
+      if (share && share.nicknames) {
+        const node = await this._initIPFS()
+        const { id } = await node.id()
+        const current = share.nicknames.get(id)
+        if (data !== current) {
+          share.nicknames.set(id, data)
+        }
       }
     }
   }
