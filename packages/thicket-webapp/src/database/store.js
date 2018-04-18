@@ -328,12 +328,25 @@ class User extends EventEmitter {
 
 }
 
-const user = new User()
+let store
 
-const store = {
-  user,
-  // alias
-  communities: user.communities,
+export const createStore = opts => {
+  const user = new User()
+  store = { user, communities: user.communities }
+  return store
 }
 
-export default store
+export default new Proxy({}, {
+  get: function (target, method) {
+    if (!store) {
+      createStore()
+    }
+    return Reflect.get(store, method)
+  },
+  getOwnPropertyDescriptor(target, prop) {
+    if (!store) {
+      createStore()
+    }
+    return Reflect.getOwnPropertyDescriptor(store, prop)
+  }
+})
