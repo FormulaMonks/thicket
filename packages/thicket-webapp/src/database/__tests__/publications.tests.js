@@ -1,5 +1,3 @@
-import fs from 'fs'
-import { promisify } from 'util'
 import store from '../store'
 import db from '../'
 import {
@@ -132,8 +130,8 @@ describe('Publications', async () => {
     // to make sure there is nothing else there
     expect(Object.keys(rest).length).toBe(0)
   })
-  
-  it('should iemit an update when the publication’s caption and createdBy properties are updated', async done => {
+
+  it('should emit an update when the publication’s caption and createdBy properties are updated', async done => {
     expect.assertions(3)
     const { publications } = await communities.get(COMMUNITY_ID)
     const newNickname = 'Some other nickname'
@@ -154,5 +152,31 @@ describe('Publications', async () => {
       done()
     })
     await publications.put(PUBLICATION_HASH, { createdBy: newNickname, caption: newCaption })
+  })
+
+  it('should delete the publication', async () => {
+    const community = await communities.get(COMMUNITY_ID)
+    await community.deletePublication(PUBLICATION_HASH)
+    const list = await community.getAllPublications()
+    expect(list).toEqual([])
+  })
+
+  it('should update the publications size after a publication has been deleted', async () => {
+    const { publications } = await communities.get(COMMUNITY_ID)
+    const size = await publications.getSize()
+    expect(size).toBe(0)
+  })
+
+  it('should emit an update after a publication has been deleted', async done => {
+    expect.assertions(1)
+    const community = await communities.get(COMMUNITY_ID)
+    const { publications } = community
+    await community.postPublication(PUBLICATION)
+    publications.once('update', async () => {
+      const list = await community.getAllPublications()
+      expect(list).toEqual([])
+      done()
+    })
+    await community.deletePublication(PUBLICATION_HASH)
   })
 })
