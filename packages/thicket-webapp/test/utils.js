@@ -3,6 +3,7 @@ import fs from 'fs'
 import { promisify } from 'util'
 
 const relativePath = 'test/__storage__'
+const getFileContents = promisify(fs.readFile)
 
 export const options = namespace => test => ({
   repo: `${relativePath}/repo-${namespace}-${test}-${Date.now()}`,
@@ -20,7 +21,11 @@ export const cleanup = async namespace => {
   await rm(`${relativePath}/repo-${namespace}-*`, { glob: true })
 }
 
-export const getFileContents = promisify(fs.readFile)
+export const getGIFSource = (() => {
+  const p = getFileContents(`${__dirname}/gif.gif`)
+    .then(buffer => buffer.toString())
+  return () => p
+})()
 
 export const GIF_HASH = 'QmYWRS7rqok7zvFBmAm1JBbzPEAMdkkfxwfhfPNoX9vAuQ'
 
