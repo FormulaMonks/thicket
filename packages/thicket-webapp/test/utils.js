@@ -21,11 +21,10 @@ export const cleanup = async namespace => {
   await rm(`${relativePath}/repo-${namespace}-*`, { glob: true })
 }
 
-export const getGIFSource = (() => {
-  const p = getFileContents(`${__dirname}/gif.gif`)
-    .then(buffer => buffer.toString())
-  return () => p
-})()
+export const getGIFSource = async () => {
+  const buffer = await getFileContents(`${__dirname}/gif.gif`)
+  return buffer.toString()
+}
 
 export const GIF_HASH = 'QmYWRS7rqok7zvFBmAm1JBbzPEAMdkkfxwfhfPNoX9vAuQ'
 
