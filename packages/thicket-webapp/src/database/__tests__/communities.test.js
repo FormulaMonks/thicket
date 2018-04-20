@@ -1,4 +1,4 @@
-import store, { createStore } from '../store'
+import { createStore } from '../store'
 import { options, cleanup } from '../../../test/utils.js'
 
 const TEST = 'communities'
@@ -12,7 +12,7 @@ jest.setTimeout(10000)
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
-  createStore(mock('crud'))
+  const store = createStore(mock('crud'))
   communities = store.communities
   done()
 })

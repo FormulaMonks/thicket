@@ -1,4 +1,4 @@
-import store, { createStore } from '../store'
+import { createStore } from '../store'
 import {
   options,
   cleanup,
@@ -21,7 +21,7 @@ jest.setTimeout(10000)
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
-  createStore(mock('crud'))
+  const store = createStore(mock('crud'))
   communities = store.communities
   await communities.post(COMMUNITY_ID)
   PUBLICATION.src = await getGIFSource()

@@ -1,5 +1,9 @@
-import store, { initialState } from '../store'
-import db from '../'
+import { createStore, initialState } from '../store'
+import { options,  cleanup } from '../../../test/utils.js'
+
+const TEST = 'store'
+const mock = options(TEST)
+const store = createStore(mock('interface'))
 
 describe('Store', () => {
   it('should expose user & communities interface', () => {

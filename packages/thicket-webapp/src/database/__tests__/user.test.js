@@ -1,12 +1,15 @@
-import store, { initialState } from '../store'
+import { createStore, initialState } from '../store'
+import { options,  cleanup } from '../../../test/utils.js'
 
-const { user } = store
+const TEST = 'user'
+const mock = options(TEST)
+const { user } = createStore(mock('crud'))
 
 describe('User', () => {
 
   it('should return the initial state on the first fetch', async () => {
     const data = await user.get()
-    expect(data).toBe(initialState.user)
+    expect(data).toEqual(initialState.user)
   })
 
   it('should set the user’s nickname to the new value', async () => {
@@ -19,7 +22,6 @@ describe('User', () => {
   it('should emit when user’s data changes', async () => {
     expect.assertions(1)
     const newNickname = 'other new nickname'
-    const { user } = store
     user.once('update', async () => {
       const { nickname } = await user.get()
       expect(nickname).toBe(newNickname)

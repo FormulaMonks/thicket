@@ -1,4 +1,4 @@
-import store, { createStore } from '../store'
+import { createStore } from '../store'
 import {
   options,
   cleanup,
@@ -14,14 +14,16 @@ const CAPTION = 'I am a mock publication'
 const PUBLICATION = { createdBy: CREATED_BY, caption: CAPTION, src: '' }
 
 let communities
+let user
 
 jest.setTimeout(10000)
 
 beforeAll(async done => {
   // cleanup previous tests
   await cleanup(TEST)
-  createStore(mock('crud'))
+  const store = createStore(mock('crud'))
   communities = store.communities
+  user = store.user
   await communities.post(COMMUNITY_ID)
   PUBLICATION.src = await getGIFSource()
   done()
@@ -59,7 +61,7 @@ describe('Community', async () => {
   it('should receive correct initial online peers (only one, user itself)', async () => {
     const community = await communities.get(COMMUNITY_ID)
     const onlinePeers = await community.getOnlinePeers()
-    const { nickname } = await store.user.get()
+    const { nickname } = await user.get()
     expect(onlinePeers).toEqual([nickname])
   })
 
