@@ -26,7 +26,7 @@ const ipfsConfig = {
   },
 }
 
-const yConfig = (node, user_id, id) => ({
+const yConfig = (node, id) => ({
   db: {
     name: 'indexeddb'
   },
@@ -59,16 +59,15 @@ const timedSrcCat = async (node, id) => Promise.race([
   })
 ])
 
-const mapIPFSIdstoNicknames = async(node, y) => {
-  const { id } = await node.id()
-  const nickname = (y.share && y.share.nicknames && y.share.nicknames.get(id)) || ''
-  const peers = y.connector.roomEmitter.peers().reduce((p, c) => {
-    if (y.share && y.share.nicknames && y.share.nicknames.get(c)) {
-      p.push(y.share.nicknames.get(c))
-    }
-    return p
-  }, [])
-  return [nickname, ...peers]
+const mapIPFSIdstoNicknames = async ({ share, connector }) => {
+  return (share && share.nicknames)
+    ? Object.keys(connector.connections).reduce((p, c) => {
+      if (share.nicknames.get(c)) {
+        p.push(share.nicknames.get(c))
+      }
+      return p
+    }, [])
+    : []
 }
 
 const getDataSrcFromURL = async path => new Promise(r => {
@@ -84,32 +83,32 @@ const getDataSrcFromURL = async path => new Promise(r => {
 })
 
 class Database extends EventEmitter {
-  constructor() {
+  constructor(opts) {
     super()
     this._ipfs = null
     this._communities = new Map()
     this._syncing = false
+    this._opts = opts
   }
 
-  _initIPFS(opts) {
+  _initIPFS() {
     if (!this._ipfs) {
-      this._ipfs = new Promise((resolve, reject) => {
-        const node = new IPFS({ ...ipfsConfig, ...opts })
-        node.once('ready', () => resolve(node))
+      this._ipfs = new Promise(r => {
+        const node = new IPFS({ ...ipfsConfig, ...this._opts })
+        node.once('ready', () => r(node))
       })
     }
     return this._ipfs
   }
 
-  async _initCommunity(communityId) {
+  _initCommunity(communityId) {
     if (!communityId) {
       throw new Error('Please provide a Community Id')
     }
     if (!this._communities.has(communityId)) {
-      const promise = new Promise(async resolve => {
+      const promise = new Promise(async r => {
         const node = await this._initIPFS()
-        const { id: peerId } = await node.id()
-        const y = await Y(yConfig(node, peerId, communityId))
+        const y = await Y(yConfig(node, communityId))
         // updates to the community metadata (eg change community title)
         y.share.metadata.observe(({ value, type }) => {
           if (value && type !== 'delete') {
@@ -139,12 +138,12 @@ class Database extends EventEmitter {
         // nicknames: IPFS node id <-> nickname
         y.share.nicknames.observe(async () => {
           if (!this._syncing) {
-            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+            this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           }
         })
         // online peers
         y.connector.onUserEvent(async ({ action }) => {
-          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(node, y))
+          this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           // syncing
           if (action === 'userJoined') {
             this._syncing = true
@@ -158,7 +157,7 @@ class Database extends EventEmitter {
           }
         })
 
-        resolve(y)
+        r(y)
       })
       this._communities.set(communityId, promise)
     }
@@ -249,10 +248,8 @@ class Database extends EventEmitter {
   }
 
   communityGetOnlinePeers = async communityId => {
-    const node = await this._initIPFS()
     const y = await this._initCommunity(communityId)
-    const peers = await mapIPFSIdstoNicknames(node, y)
-    return peers
+    return await mapIPFSIdstoNicknames(y)
   }
 
   communityPost = async (communityId, data) => {
@@ -266,13 +263,15 @@ class Database extends EventEmitter {
   }
 
   communityPutNicknames = async (communities, data) => {
-    for (let communityId of communities) {
-      const y = await this._initCommunity(communityId)
-      const node = await this._initIPFS()
-      const { id } = await node.id()
-      const current = y.share && y.share.nicknames && y.share.nicknames.get(id)
-      if (data !== current) {
-        y.share.nicknames.set(id, data)
+    for (const communityId of communities) {
+      const { share } = await this._initCommunity(communityId)
+      if (share && share.nicknames) {
+        const node = await this._initIPFS()
+        const { id } = await node.id()
+        const current = share.nicknames.get(id)
+        if (data !== current) {
+          share.nicknames.set(id, data)
+        }
       }
     }
   }
@@ -281,4 +280,4 @@ class Database extends EventEmitter {
 
 Y.extend(yMemory, yArray, yMap, yIpfsConnector, yIndexeddb)
 
-export default new Database()
+export default Database
