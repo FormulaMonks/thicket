@@ -29,3 +29,10 @@ export const getGIFSource = async () => {
 export const GIF_HASH = 'QmYWRS7rqok7zvFBmAm1JBbzPEAMdkkfxwfhfPNoX9vAuQ'
 
 export const GIF_SIZE = 1082
+
+export const wrapUp = (cb, times) => () => {
+  times--
+  if (times < 1) {
+    cb()
+  }
+}

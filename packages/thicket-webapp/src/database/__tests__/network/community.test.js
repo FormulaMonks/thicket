@@ -3,6 +3,7 @@ import {
   options,
   cleanup,
   getGIFSource,
+  wrapUp,
   GIF_HASH as PUBLICATION_HASH,
   GIF_SIZE as PUBLICATION_SIZE,
 } from '../../../../test/utils.js'
@@ -15,12 +16,6 @@ const NICKNAME_2 = 'nickname-2'
 const CREATED_BY = 'Network Community Tests'
 const CAPTION = 'Thou shall not pass'
 const PUBLICATION = { createdBy: CREATED_BY, caption: CAPTION, src: '' }
-const wrapUp = (cb, times) => () => {
-  times--
-  if (times < 1) {
-    cb()
-  }
-}
 
 let store1
 let store2
