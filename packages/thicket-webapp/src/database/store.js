@@ -17,7 +17,11 @@ let store
  * */
 const createUser = db => {
 
-  const state = { ...initialState }
+  const state = {
+    user: { ...initialState.user },
+    userCommunities: new Set(),
+    communities: new Map(),
+  }
 
   /*
    * This class will take care of requests for data
@@ -337,21 +341,17 @@ const createUser = db => {
 
 export const createStore = opts => {
   const user = createUser(new Database(opts))
-  store = { user, communities: user.communities }
-  return store
+  return { user, communities: user.communities }
 }
 
+// BEWARE: if you call createStore more than once (in the same execution context)
+// and then try to use the store from the "singleton" call there are closure
+// mixups since the instances share store variable
 export default new Proxy({}, {
   get(target, method) {
     if (!store) {
-      createStore()
+      store = createStore()
     }
     return Reflect.get(store, method)
-  },
-  getOwnPropertyDescriptor(target, prop) {
-    if (!store) {
-      createStore()
-    }
-    return Reflect.getOwnPropertyDescriptor(store, prop)
   }
 })
