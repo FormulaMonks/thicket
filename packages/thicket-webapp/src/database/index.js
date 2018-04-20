@@ -59,9 +59,9 @@ const timedSrcCat = async (node, id) => Promise.race([
   })
 ])
 
-const mapIPFSIdstoNicknames = async ({ share, connector: { roomEmitter } }) => {
+const mapIPFSIdstoNicknames = async ({ share, connector }) => {
   return (share && share.nicknames)
-    ? roomEmitter.peers().reduce((p, c) => {
+    ? Object.keys(connector.connections).reduce((p, c) => {
       if (share.nicknames.get(c)) {
         p.push(share.nicknames.get(c))
       }
