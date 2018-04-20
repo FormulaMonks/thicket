@@ -26,7 +26,7 @@ const ipfsConfig = {
   },
 }
 
-const yConfig = (node, user_id, id) => ({
+const yConfig = (node, id) => ({
   db: {
     name: 'indexeddb'
   },
@@ -101,15 +101,14 @@ class Database extends EventEmitter {
     return this._ipfs
   }
 
-  async _initCommunity(communityId) {
+  _initCommunity(communityId) {
     if (!communityId) {
       throw new Error('Please provide a Community Id')
     }
     if (!this._communities.has(communityId)) {
-      const promise = new Promise(async resolve => {
+      const promise = new Promise(async r => {
         const node = await this._initIPFS()
-        const { id: peerId } = await node.id()
-        const y = await Y(yConfig(node, peerId, communityId))
+        const y = await Y(yConfig(node, communityId))
         // updates to the community metadata (eg change community title)
         y.share.metadata.observe(({ value, type }) => {
           if (value && type !== 'delete') {
@@ -158,7 +157,7 @@ class Database extends EventEmitter {
           }
         })
 
-        resolve(y)
+        r(y)
       })
       this._communities.set(communityId, promise)
     }
