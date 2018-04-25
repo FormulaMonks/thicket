@@ -174,9 +174,17 @@ class Database extends EventEmitter {
 
   publicationsDelete = async (communityId, id) => {
     const y = await this._initCommunity(communityId)
-    y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
+    const promise = new Promise(r => {
+      const once = () => {
+        y.share.publications.unobserve(once)
+        r()
+      }
+      y.share.publications.observe(once)
+    })
+    y.share.publications.delete(id)
     y.share.publicationsMetadata.delete(id)
     this._unlink(id)
+    return promise
   }
 
   publicationsGet = async (communityId, id) => {
