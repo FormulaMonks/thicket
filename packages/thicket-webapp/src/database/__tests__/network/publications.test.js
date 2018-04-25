@@ -22,7 +22,7 @@ let store2
 let store3
 let store4
 
-jest.setTimeout(45000)
+jest.setTimeout(30000)
 
 beforeAll(() => {
   return new Promise(async done => {
