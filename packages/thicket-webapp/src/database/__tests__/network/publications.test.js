@@ -33,22 +33,26 @@ beforeAll(() => {
     store2 = createStore(mock('store-2'))
     store3 = createStore(mock('store-3'))
     store4 = createStore(mock('store-4'))
-    // nicknames for better reference in tests
-    await store1.user.put({ nickname: 'N1'})
-    await store2.user.put({ nickname: 'N2'})
-    await store3.user.put({ nickname: 'N3'})
-    await store4.user.put({ nickname: 'N4'})
     // gif src
     PUBLICATION.src = await getGIFSource()
     // store 1 join/create community
     const community1 = await store1.communities.post(COMMUNITY_ID)
-    // wait 1 sec, if not, stores were not syncing
+    const promise1 = new Promise(r => {
+      community1.once('peer', () => {
+        community1.once('synced', r)
+      })
+    })
+    // wait some time, if not, stores do not sync
     await sleep(1000)
     // store 2 join community
     const community2 = await store2.communities.post(COMMUNITY_ID)
-    // wait for boths store to sync
-    await new Promise(r => community1.once('synced', r))
-    await new Promise(r => community2.once('synced', r))
+    const promise2 = new Promise(r => {
+      community2.once('peer', () => {
+        community2.once('synced', r)
+      })
+    })
+    // wait for boths stores to sync
+    await Promise.all([promise1, promise2])
 
     done()
   })
