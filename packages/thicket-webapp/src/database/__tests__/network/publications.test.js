@@ -169,43 +169,40 @@ test('join and sync community with publication with changes', async done => {
 })
 
 test('broadcast publication delete', async done => {
-  expect.assertions(12)
+  expect.assertions(16)
   const community1 = await store1.communities.get(COMMUNITY_ID)
   const list1 = await community1.getAllPublications()
+  const peers1 = await community1.getOnlinePeers()
   const community2 = await store2.communities.get(COMMUNITY_ID)
   const list2 = await community2.getAllPublications()
+  const peers2 = await community2.getOnlinePeers()
   const community3 = await store3.communities.get(COMMUNITY_ID)
   const list3 = await community3.getAllPublications()
+  const peers3 = await community3.getOnlinePeers()
   const community4 = await store4.communities.get(COMMUNITY_ID)
   const list4 = await community4.getAllPublications()
+  const peers4 = await community4.getOnlinePeers()
   const almostDone = wrapUp(done, 4)
-  const check = async (community, it) => {
+  const check = async (community, cb) => {
     const { publications } = community
     const size = await publications.getSize()
     const meta = await publications.getMetadata()
     const list = await community.getAllPublications()
     expect(size).toBe(0)
     expect(list).toEqual([])
+    cb()
   }
-  community1.publications.once('update', async () => {
-    await check(community1)
-    almostDone()
-  })
-  community2.publications.once('update', async () => {
-    await check(community2)
-    almostDone()
-  })
-  community3.publications.once('update', async () => {
-    await check(community3)
-    almostDone()
-  })
-  community4.publications.once('update', async () => {
-    await check(community4)
-    almostDone()
-  })
+  community1.publications.once('update', () => check(community1, almostDone))
+  community2.publications.once('update', () => check(community2, almostDone))
+  community3.publications.once('update', () => check(community3, almostDone))
+  community4.publications.once('update', () => check(community4, almostDone))
   expect(list1.length).toBe(1)
   expect(list2.length).toBe(1)
   expect(list3.length).toBe(1)
   expect(list4.length).toBe(1)
+  expect(peers1.length).toBe(4)
+  expect(peers2.length).toBe(4)
+  expect(peers3.length).toBe(4)
+  expect(peers4.length).toBe(4)
   await community3.deletePublication(PUBLICATION_HASH)
 })
