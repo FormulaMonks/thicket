@@ -24,38 +24,36 @@ let store4
 
 jest.setTimeout(30000)
 
-beforeAll(() => {
-  return new Promise(async done => {
-    // cleanup
-    await cleanup(TEST)
-    // stores
-    store1 = createStore(mock('store-1'))
-    store2 = createStore(mock('store-2'))
-    store3 = createStore(mock('store-3'))
-    store4 = createStore(mock('store-4'))
-    // gif src
-    PUBLICATION.src = await getGIFSource()
-    // store 1 join/create community
-    const community1 = await store1.communities.post(COMMUNITY_ID)
-    const promise1 = new Promise(r => {
-      community1.once('peer', () => {
-        community1.once('synced', r)
-      })
+beforeAll(async done => {
+  // cleanup
+  await cleanup(TEST)
+  // stores
+  store1 = createStore(mock('store-1'))
+  store2 = createStore(mock('store-2'))
+  store3 = createStore(mock('store-3'))
+  store4 = createStore(mock('store-4'))
+  // gif src
+  PUBLICATION.src = await getGIFSource()
+  // store 1 join/create community
+  const community1 = await store1.communities.post(COMMUNITY_ID)
+  const promise1 = new Promise(r => {
+    community1.once('peer', () => {
+      community1.once('synced', r)
     })
-    // wait some time, if not, stores do not sync
-    await sleep(1000)
-    // store 2 join community
-    const community2 = await store2.communities.post(COMMUNITY_ID)
-    const promise2 = new Promise(r => {
-      community2.once('peer', () => {
-        community2.once('synced', r)
-      })
-    })
-    // wait for boths stores to sync
-    await Promise.all([promise1, promise2])
-
-    done()
   })
+  // wait some time, if not, stores do not sync
+  await sleep(1000)
+  // store 2 join community
+  const community2 = await store2.communities.post(COMMUNITY_ID)
+  const promise2 = new Promise(r => {
+    community2.once('peer', () => {
+      community2.once('synced', r)
+    })
+  })
+  // wait for boths stores to sync
+  await Promise.all([promise1, promise2])
+
+  done()
 })
 
 test('publication post', async done => {

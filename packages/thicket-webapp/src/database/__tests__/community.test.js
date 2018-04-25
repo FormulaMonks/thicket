@@ -18,21 +18,19 @@ let user
 
 jest.setTimeout(10000)
 
-beforeAll(() => {
-  return new Promise(async done => {
-    // cleanup previous tests
-    await cleanup(TEST)
-    // store
-    const store = createStore(mock('crud'))
-    communities = store.communities
-    user = store.user
-    // community for tests
-    await communities.post(COMMUNITY_ID)
-    // gif src
-    PUBLICATION.src = await getGIFSource()
+beforeAll(async done => {
+  // cleanup previous tests
+  await cleanup(TEST)
+  // store
+  const store = createStore(mock('crud'))
+  communities = store.communities
+  user = store.user
+  // community for tests
+  await communities.post(COMMUNITY_ID)
+  // gif src
+  PUBLICATION.src = await getGIFSource()
 
-    done()
-  })
+  done()
 })
 
 test('fetch community’s initial data', async () => {

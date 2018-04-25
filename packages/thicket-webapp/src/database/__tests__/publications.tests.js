@@ -18,20 +18,18 @@ let communities
 
 jest.setTimeout(10000)
 
-beforeAll(() => {
-  return new Promise(async done => {
-    // cleanup previous tests
-    await cleanup(TEST)
-    // store
-    const store = createStore(mock('crud'))
-    communities = store.communities
-    // community
-    await communities.post(COMMUNITY_ID)
-    // gif src
-    PUBLICATION.src = await getGIFSource()
+beforeAll(async done => {
+  // cleanup previous tests
+  await cleanup(TEST)
+  // store
+  const store = createStore(mock('crud'))
+  communities = store.communities
+  // community
+  await communities.post(COMMUNITY_ID)
+  // gif src
+  PUBLICATION.src = await getGIFSource()
 
-    done()
-  })
+  done()
 })
 
  test('start out with no publications', async () => {
