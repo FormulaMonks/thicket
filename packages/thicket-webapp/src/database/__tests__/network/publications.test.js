@@ -59,7 +59,7 @@ beforeAll(() => {
 })
 
 test('publication post', async done => {
-  expect.assertions(12)
+  expect.assertions(14)
   const almostDone = wrapUp(done, 2)
   const instant = Date.now()
   const check = ({ id, caption, createdBy, src, createdAt, ...rest }, cb) => {
@@ -85,6 +85,10 @@ test('publication post', async done => {
     expect(list.length).toEqual(1)
     check(item, almostDone)
   })
+  const peers1 = await community1.getOnlinePeers()
+  const peers2 = await community2.getOnlinePeers()
+  expect(peers1.length).toBe(2)
+  expect(peers2.length).toBe(2)
   await community2.postPublication(PUBLICATION)
 })
 
