@@ -121,13 +121,19 @@ test('join and sync community with publication', async done => {
 })
 
 test('broadcast changes to the publication', async done => {
-  expect.assertions(4)
-  const almostDone = wrapUp(done, 2)
+  expect.assertions(6)
+  const almostDone = wrapUp(done, 3)
   const { publications: publications1 } = await store1.communities.get(COMMUNITY_ID)
   // on purpose setting the createdBy to the store2 user nickname, that's who orignally posted the publication no?
   const { nickname } = await store2.user.get()
   const { publications: publications2 } = await store2.communities.get(COMMUNITY_ID)
   const { publications: publications3 } = await store3.communities.get(COMMUNITY_ID)
+  publications1.once('update', async () => {
+    const { caption, createdBy } = await publications1.get(PUBLICATION_HASH)
+    expect(caption).toBe(NEW_CAPTION)
+    expect(createdBy).toBe(nickname)
+    almostDone()
+  })
   publications2.once('update', async () => {
     const { caption, createdBy } = await publications2.get(PUBLICATION_HASH)
     expect(caption).toBe(NEW_CAPTION)
