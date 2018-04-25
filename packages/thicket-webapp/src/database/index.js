@@ -37,7 +37,7 @@ const yConfig = (node, id) => ({
     syncMethod: 'syncAll',
   },
   share: {
-    publications: 'Array',
+    publications: 'Map',
     publicationsMetadata: 'Map',
     metadata: 'Map',
     nicknames: 'Map',
@@ -88,13 +88,13 @@ class Database extends EventEmitter {
     this._ipfs = null
     this._communities = new Map()
     this._syncing = false
-    this._opts = opts
+    this._opts = { ...ipfsConfig, ...opts }
   }
 
   _initIPFS() {
     if (!this._ipfs) {
       this._ipfs = new Promise(r => {
-        const node = new IPFS({ ...ipfsConfig, ...this._opts })
+        const node = new IPFS(this._opts)
         node.once('ready', () => r(node))
       })
     }
@@ -118,13 +118,13 @@ class Database extends EventEmitter {
           }
         })
         // updates to the publications (eg new publication)
-        y.share.publications.observe(async ({ type, values }) => {
+        y.share.publications.observe(async ({ type, name }) => {
           if (!this._syncing) {
             this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
           }
           // async remove local blocks
           if (type === 'delete') {
-            values.forEach(this._unlink)
+            this._unlink(name)
           }
         })
         // updates to publications metadata (eg change publication caption)
@@ -174,9 +174,17 @@ class Database extends EventEmitter {
 
   publicationsDelete = async (communityId, id) => {
     const y = await this._initCommunity(communityId)
-    y.share.publications.delete(y.share.publications.toArray().findIndex(p => p === id))
+    const promise = new Promise(r => {
+      const once = () => {
+        y.share.publications.unobserve(once)
+        r()
+      }
+      y.share.publications.observe(once)
+    })
+    y.share.publications.delete(id)
     y.share.publicationsMetadata.delete(id)
     this._unlink(id)
+    return promise
   }
 
   publicationsGet = async (communityId, id) => {
@@ -196,14 +204,16 @@ class Database extends EventEmitter {
 
   publicationsGetAll = async communityId => {
     const y = await this._initCommunity(communityId)
-    const data = y.share.publications.toArray()
-    const publications = await Promise.all(data.map(async id => this.publicationsGet(communityId, id)))
+    const data = y.share.publications.keys()
+    const publications = await Promise.all(data.map(async id =>
+      this.publicationsGet(communityId, id)))
     return publications.sort(sortPublications)
   }
 
   publicationsGetMetadata = async communityId => {
     const y = await this._initCommunity(communityId)
-    return y.share.publications.toArray().map(id => {
+    const data = y.share.publications.keys()
+    return data.map(id => {
       const metadata = (y.share && y.share.publicationsMetadata && y.share.publicationsMetadata.get(id)) || {}
       return { id, ...metadata }
     }).sort(sortPublications)
@@ -214,13 +224,13 @@ class Database extends EventEmitter {
     const res = await node.files.add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
     const id = res[0].hash
     const y = await this._initCommunity(communityId)
-    y.share.publications.push([id])
+    y.share.publications.set(id)
     y.share.publicationsMetadata.set(id, { id, ...data, createdAt: Date.now() })
   }
 
   publicationsPostByHash = async(communityId, { hash, ...data }) => {
     const y = await this._initCommunity(communityId)
-    y.share.publications.push([hash])
+    y.share.publications.set(hash)
     y.share.publicationsMetadata.set(hash, { id: hash, ...data, createdAt: Date.now() })
   }
 
@@ -232,7 +242,7 @@ class Database extends EventEmitter {
   communityDelete = async communityId => {
     const y = await this._initCommunity(communityId)
     // async remove all local publications
-    y.share.publications.toArray().forEach(this._unlink)
+    y.share.publications.keys().forEach(this._unlink)
     // leave room
     y.close()
   }

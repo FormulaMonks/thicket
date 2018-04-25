@@ -46,7 +46,7 @@ const createUser = db => {
       })
       db.on(`update-${communityId}-publicationsMetadata`, list => {
         // insert, update & delete
-        // we get the current list and merge with the data in cache
+        // we get the updated list and merge with the data in cache
         this.list = list.map(item => ({
           ...this.list.find(i => i.id === item.id),
           ...item
@@ -141,7 +141,7 @@ const createUser = db => {
     delete = async () => {
       this.data = null
       this.onlinePeers = []
-      this.pulications = []
+      this.publications = []
       return await db.communityDelete(this.communityId)
     }
 
