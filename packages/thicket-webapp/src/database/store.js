@@ -255,7 +255,7 @@ const createUser = db => {
     }
 
     // user
-    _initUser = async() => {
+    _initUser = async () => {
       if (!this._initUserPromise) {
         this._initUserPromise = new Promise(async resolve => {
           const local = await localForage.getItem('user')

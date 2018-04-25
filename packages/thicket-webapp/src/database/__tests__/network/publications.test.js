@@ -22,7 +22,7 @@ let store2
 let store3
 let store4
 
-jest.setTimeout(45000)
+jest.setTimeout(30000)
 
 beforeAll(() => {
   return new Promise(async done => {
@@ -33,29 +33,33 @@ beforeAll(() => {
     store2 = createStore(mock('store-2'))
     store3 = createStore(mock('store-3'))
     store4 = createStore(mock('store-4'))
-    // nicknames for better reference in tests
-    await store1.user.put({ nickname: 'N1'})
-    await store2.user.put({ nickname: 'N2'})
-    await store3.user.put({ nickname: 'N3'})
-    await store4.user.put({ nickname: 'N4'})
     // gif src
     PUBLICATION.src = await getGIFSource()
     // store 1 join/create community
     const community1 = await store1.communities.post(COMMUNITY_ID)
-    // wait 1 sec, if not, stores were not syncing
+    const promise1 = new Promise(r => {
+      community1.once('peer', () => {
+        community1.once('synced', r)
+      })
+    })
+    // wait some time, if not, stores do not sync
     await sleep(1000)
     // store 2 join community
     const community2 = await store2.communities.post(COMMUNITY_ID)
-    // wait for boths store to sync
-    await new Promise(r => community1.once('synced', r))
-    await new Promise(r => community2.once('synced', r))
+    const promise2 = new Promise(r => {
+      community2.once('peer', () => {
+        community2.once('synced', r)
+      })
+    })
+    // wait for boths stores to sync
+    await Promise.all([promise1, promise2])
 
     done()
   })
 })
 
 test('publication post', async done => {
-  expect.assertions(12)
+  expect.assertions(14)
   const almostDone = wrapUp(done, 2)
   const instant = Date.now()
   const check = ({ id, caption, createdBy, src, createdAt, ...rest }, cb) => {
@@ -81,6 +85,10 @@ test('publication post', async done => {
     expect(list.length).toEqual(1)
     check(item, almostDone)
   })
+  const peers1 = await community1.getOnlinePeers()
+  const peers2 = await community2.getOnlinePeers()
+  expect(peers1.length).toBe(2)
+  expect(peers2.length).toBe(2)
   await community2.postPublication(PUBLICATION)
 })
 
@@ -113,13 +121,19 @@ test('join and sync community with publication', async done => {
 })
 
 test('broadcast changes to the publication', async done => {
-  expect.assertions(4)
-  const almostDone = wrapUp(done, 2)
+  expect.assertions(6)
+  const almostDone = wrapUp(done, 3)
   const { publications: publications1 } = await store1.communities.get(COMMUNITY_ID)
   // on purpose setting the createdBy to the store2 user nickname, that's who orignally posted the publication no?
   const { nickname } = await store2.user.get()
   const { publications: publications2 } = await store2.communities.get(COMMUNITY_ID)
   const { publications: publications3 } = await store3.communities.get(COMMUNITY_ID)
+  publications1.once('update', async () => {
+    const { caption, createdBy } = await publications1.get(PUBLICATION_HASH)
+    expect(caption).toBe(NEW_CAPTION)
+    expect(createdBy).toBe(nickname)
+    almostDone()
+  })
   publications2.once('update', async () => {
     const { caption, createdBy } = await publications2.get(PUBLICATION_HASH)
     expect(caption).toBe(NEW_CAPTION)
@@ -155,43 +169,40 @@ test('join and sync community with publication with changes', async done => {
 })
 
 test('broadcast publication delete', async done => {
-  expect.assertions(12)
+  expect.assertions(16)
   const community1 = await store1.communities.get(COMMUNITY_ID)
   const list1 = await community1.getAllPublications()
+  const peers1 = await community1.getOnlinePeers()
   const community2 = await store2.communities.get(COMMUNITY_ID)
   const list2 = await community2.getAllPublications()
+  const peers2 = await community2.getOnlinePeers()
   const community3 = await store3.communities.get(COMMUNITY_ID)
   const list3 = await community3.getAllPublications()
+  const peers3 = await community3.getOnlinePeers()
   const community4 = await store4.communities.get(COMMUNITY_ID)
   const list4 = await community4.getAllPublications()
+  const peers4 = await community4.getOnlinePeers()
   const almostDone = wrapUp(done, 4)
-  const check = async (community, it) => {
+  const check = async (community, cb) => {
     const { publications } = community
     const size = await publications.getSize()
     const meta = await publications.getMetadata()
     const list = await community.getAllPublications()
     expect(size).toBe(0)
     expect(list).toEqual([])
+    cb()
   }
-  community1.publications.once('update', async () => {
-    await check(community1)
-    almostDone()
-  })
-  community2.publications.once('update', async () => {
-    await check(community2)
-    almostDone()
-  })
-  community3.publications.once('update', async () => {
-    await check(community3)
-    almostDone()
-  })
-  community4.publications.once('update', async () => {
-    await check(community4)
-    almostDone()
-  })
+  community1.publications.once('update', () => check(community1, almostDone))
+  community2.publications.once('update', () => check(community2, almostDone))
+  community3.publications.once('update', () => check(community3, almostDone))
+  community4.publications.once('update', () => check(community4, almostDone))
   expect(list1.length).toBe(1)
   expect(list2.length).toBe(1)
   expect(list3.length).toBe(1)
   expect(list4.length).toBe(1)
+  expect(peers1.length).toBe(4)
+  expect(peers2.length).toBe(4)
+  expect(peers3.length).toBe(4)
+  expect(peers4.length).toBe(4)
   await community3.deletePublication(PUBLICATION_HASH)
 })
