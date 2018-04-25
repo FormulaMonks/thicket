@@ -5,10 +5,8 @@ const TEST = 'store'
 const mock = options(TEST)
 const store = createStore(mock('interface'))
 
-describe('Store', () => {
-  it('should expose user & communities interface', () => {
-    expect.assertions(2)
-    expect(store.hasOwnProperty('user')).toBe(true)
-    expect(store.hasOwnProperty('communities')).toBe(true)
-  })
+test('expose user & communities interface', () => {
+  expect.assertions(2)
+  expect(store.hasOwnProperty('user')).toBe(true)
+  expect(store.hasOwnProperty('communities')).toBe(true)
 })
