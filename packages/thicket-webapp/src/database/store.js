@@ -141,7 +141,7 @@ const createUser = db => {
     delete = async () => {
       this.data = null
       this.onlinePeers = []
-      this.publications = []
+      this.publications = new Publications(this.communityId)
       return await db.communityDelete(this.communityId)
     }
 
