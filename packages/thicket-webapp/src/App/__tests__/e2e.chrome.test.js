@@ -78,3 +78,19 @@ test('no online peers', async () => {
   const count = await page.$$eval('[data-test="online-peers-item"]', items => items.length)
   expect(count).toBe(1)
 })
+
+test('change community title', async () => {
+  const newTitle = 'New Title'
+  await page.$eval('[data-test="community-name"]', input => input.value = '')
+  await page.type('[data-test="community-name"]', newTitle)
+  // could not make it work with form.submit
+  await page.keyboard.press('Enter')
+  // there is no feedback to user, so wait it out
+  await page.waitFor(1000)
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="community"]')
+  // no actual event to wait for, so wait it out
+  await page.waitFor(1000)
+  const title = await page.$eval('[data-test="community-name"]', e => e.value)
+  expect(title).toBe(newTitle)
+}, 10000)
