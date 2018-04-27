@@ -54,7 +54,13 @@ class Communities extends Component {
                 : ''
               }
             </div>
-            <Button className="communities__new" onClick={this.onCreateNew}>Create Community</Button>
+            <Button
+              data-test="communities-new"
+              className="communities__new"
+              onClick={this.onCreateNew}
+            >
+              Create Community
+            </Button>
           </div>
         </div>
         {data.length

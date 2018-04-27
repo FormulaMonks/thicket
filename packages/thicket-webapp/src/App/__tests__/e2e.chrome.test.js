@@ -45,3 +45,8 @@ test('change nickname', async () => {
   expect(wrapper).toMatch(newNickname)
   expect(initial).toBe(newNickname.substr(0, 1))
 })
+
+test('add a new community with top button', async () => {
+  await page.click('[data-test="communities-new"]')
+  await page.waitFor('[data-test="community"]')
+})
