@@ -6,9 +6,18 @@ import './Grid.css'
 
 const { linearGradient } = Styles
 
-const Grid = ({ community, list, history }) => <ul className="communityGrid">
-  {list.map(({ id, src, caption, nickname, createdAt, ...rest }) =>
-    <li key={id} className="communityGrid__element" style={{ background: linearGradient }}>
+const Grid = ({ community, list, history }) =>
+  <ul
+    data-test="community-grid"
+    className="communityGrid"
+  >
+    {list.map(({ id, src, caption, nickname, createdAt, ...rest }, index) =>
+      <li
+        key={`communityGrid-${id}-${index}`}
+        data-test="community-grid-element"
+        className="communityGrid__element"
+        style={{ background: linearGradient }}
+      >
         <div className="communityGrid__wrap">
           <TimedGif
             onClick={() => history.push(`/c/${community}/${id}`)}

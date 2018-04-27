@@ -94,3 +94,16 @@ test('change community title', async () => {
   const title = await page.$eval('[data-test="community-name"]', e => e.value)
   expect(title).toBe(newTitle)
 }, 10000)
+
+test('add publication', async () => {
+  await page.click('[data-test="community-empty-new"]')
+  await page.waitFor('[data-test="camera-btn-capture"]')
+  // video takes some time to start playing, not sure if there is an event triggered
+  await page.waitFor(2500)
+  await page.click('[data-test="camera-btn-capture"]')
+  await page.waitFor('[data-test="customize"]')
+  await page.click('[data-test="customize-submit"]')
+  await page.waitFor('[data-test="community-grid"]')
+  const count = await page.$$eval('[data-test="community-grid-element"]', items => items.length)
+  expect(count).toBe(1)
+}, 20000)
