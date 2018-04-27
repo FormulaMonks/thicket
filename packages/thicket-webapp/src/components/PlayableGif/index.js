@@ -44,6 +44,7 @@ export default class PlayableGif extends Component {
         />
         <button
           onClick={this.props.onClick}
+          data-test="playable-gif-link"
           className={`playableGif__link${isPlaying ? ' playableGif__link--active' : ''}`}
         >
           {alt}

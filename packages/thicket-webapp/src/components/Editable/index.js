@@ -11,11 +11,20 @@ class Editable extends Component {
     const { value, onChange } = this.props
 
     if (this.state.edit) {
-      return <Input onChange={onChange} value={value} />
+      return <Input
+        data-test="editable-input"
+        onChange={onChange}
+        value={value}
+      />
     }
 
     return <div className="editable">
-      {value}<img src={edit} alt="Edit" onClick={() => this.setState({ edit: true })} />
+      {value}<img
+        data-test="editable-edit"
+        src={edit}
+        alt="Edit"
+        onClick={() => this.setState({ edit: true })}
+      />
     </div>
   }
 }

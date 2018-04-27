@@ -107,3 +107,27 @@ test('add publication', async () => {
   const count = await page.$$eval('[data-test="community-grid-element"]', items => items.length)
   expect(count).toBe(1)
 }, 20000)
+
+test('change publication caption & author', async () => {
+  const newAuthor = 'New Author'
+  const newCaption = 'New Caption'
+  await page.waitFor('[data-test="playable-gif-link"]')
+  await page.click('[data-test="playable-gif-link"]')
+  await page.waitFor('[data-test="publication-modal"]')
+  await page.click('[data-test="gif-created-by"] [data-test="editable-edit"]')
+  await page.waitFor('[data-test="gif-created-by"] [data-test="editable-input"]')
+  await page.$eval('[data-test="gif-created-by"] [data-test="editable-input"]', input => input.value = '')
+  await page.type('[data-test="gif-created-by"] [data-test="editable-input"]', newAuthor)
+  await page.click('[data-test="gif-caption"] [data-test="editable-edit"]')
+  await page.waitFor('[data-test="gif-caption"] [data-test="editable-input"]')
+  await page.$eval('[data-test="gif-caption"] [data-test="editable-input"]', input => input.value = '')
+  await page.type('[data-test="gif-caption"] [data-test="editable-input"]', newCaption)
+  await page.click('[data-test="publication-save"]')
+  await page.waitFor(1000)
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="community-grid-element"]')
+  const nickname = await page.$eval('[data-test="community-grid-nickname"]', e => e.innerHTML)
+  const caption = await page.$eval('[data-test="community-grid-caption"]', e => e.innerHTML)
+  expect(nickname).toBe(newAuthor)
+  expect(caption).toBe(newCaption)
+})
