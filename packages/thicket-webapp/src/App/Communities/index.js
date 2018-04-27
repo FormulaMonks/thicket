@@ -38,7 +38,11 @@ class Communities extends Component {
       />
     }
 
-    return <div className="communities" ref={n => this.node = n}>
+    return <div
+      data-test="communities"
+      className="communities"
+      ref={n => this.node = n}
+    >
       <div className="communities__header">
           <h3 className="communities__title">Your communities</h3>
           <div className="communities__wrap">

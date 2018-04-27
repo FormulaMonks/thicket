@@ -20,3 +20,8 @@ afterAll(async () => {
   await page.close()
   await chrome.close()
 })
+
+test('/ route redirects to communities', async () => {
+  await page.goto(URL, { waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="communities"]')
+})
