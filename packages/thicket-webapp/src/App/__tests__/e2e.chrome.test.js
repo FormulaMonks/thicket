@@ -25,3 +25,7 @@ test('/ route redirects to communities', async () => {
   await page.goto(URL, { waitUntil: 'domcontentloaded' })
   await page.waitFor('[data-test="communities"]')
 })
+
+test('initial state has no communities', async () => {
+  await page.waitFor('[data-test="communities-empty"]')
+})
