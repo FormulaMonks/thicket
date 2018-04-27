@@ -26,6 +26,7 @@ const UNINVITED = 'user has not been invited to the community or the community d
 const LEAVE = 'user is displayed the confirm box to leave the community'
 
 const LeaveBtn = ({ ctx }) => <button
+  data-test="community-leave"
   className="community__leave"
   onClick={() => ctx.safeSetState({ mode: LEAVE })}
 >

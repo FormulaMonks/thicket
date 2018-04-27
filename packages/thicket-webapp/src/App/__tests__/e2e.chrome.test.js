@@ -141,3 +141,10 @@ test('delete publication', async () => {
   await page.click('[data-test="delete-confirm"]')
   await page.waitFor('[data-test="community-empty"]')
 })
+
+test('leave community (from community)', async () => {
+  await page.click('[data-test="community-leave"]')
+  await page.waitFor('[data-test="leave-btn"]')
+  await page.click('[data-test="leave-btn"]')
+  await page.waitFor('[data-test="communities"]')
+})
