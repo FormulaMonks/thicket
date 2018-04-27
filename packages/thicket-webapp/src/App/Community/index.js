@@ -162,7 +162,12 @@ class Community extends Component {
     }
 
     return [
-      ((isMobile && !mode && match.isExact) || !isMobile) && <div key="community" className="community">
+      ((isMobile && !mode && match.isExact) || !isMobile) &&
+      <div
+        key="community"
+        data-test="community"
+        className="community"
+      >
         <Link
           ref={n => this.node = n}
           to="/communities"

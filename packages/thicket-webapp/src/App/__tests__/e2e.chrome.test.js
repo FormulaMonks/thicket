@@ -66,3 +66,8 @@ test('leave the community (from communities)', async () => {
   await page.waitFor('[data-test="communities"]')
   await page.waitFor('[data-test="communities-empty"]')
 })
+
+test('add a new community with center button', async () => {
+  await page.click('[data-test="communities-empty-new"]')
+  await page.waitFor('[data-test="community"]')
+})
