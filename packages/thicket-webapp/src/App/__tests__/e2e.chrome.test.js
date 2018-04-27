@@ -29,3 +29,19 @@ test('/ route redirects to communities', async () => {
 test('initial state has no communities', async () => {
   await page.waitFor('[data-test="communities-empty"]')
 })
+
+test('change nickname', async () => {
+  const newNickname = 'Nickname'
+  await page.click('[data-test="profile-link"]')
+  await page.waitFor('[data-test="profile"]')
+  await page.$eval('[data-test="profile-input"]', input => input.value = '')
+  await page.type('[data-test="profile-input"]', newNickname)
+  await page.click('[data-test="profile-save"]')
+  await page.waitFor('[data-test="communities"]')
+  await page.reload({ waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="username-wrap"]')
+  const wrapper = await page.$eval('[data-test="username-wrap"]', e => e.innerHTML)
+  const initial = await page.$eval('[data-test="username-initial"]', e => e.innerHTML)
+  expect(wrapper).toMatch(newNickname)
+  expect(initial).toBe(newNickname.substr(0, 1))
+})
