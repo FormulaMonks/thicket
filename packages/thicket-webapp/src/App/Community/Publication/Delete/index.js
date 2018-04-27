@@ -20,6 +20,7 @@ export default class Delete extends Component {
           <b>NOTE:</b> this action cannot be undone.</div>
         <div className="delete__btns">
           <Button
+            data-test="delete-confirm"
             className="delete__confirm"
             onClick={onDelete}
           >

@@ -131,3 +131,13 @@ test('change publication caption & author', async () => {
   expect(nickname).toBe(newAuthor)
   expect(caption).toBe(newCaption)
 })
+
+test('delete publication', async () => {
+  await page.waitFor('[data-test="playable-gif-link"]')
+  await page.click('[data-test="playable-gif-link"]')
+  await page.waitFor('[data-test="publication-modal"]')
+  await page.click('[data-test="publication-delete"]')
+  await page.waitFor('[data-test="delete-confirm"]')
+  await page.click('[data-test="delete-confirm"]')
+  await page.waitFor('[data-test="community-empty"]')
+})

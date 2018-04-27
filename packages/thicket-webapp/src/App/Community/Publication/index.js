@@ -79,7 +79,14 @@ class Publication extends Component {
             >
               Save Changes
             </Button>
-            <Button secondary onClick={() => this.setState({ showDeleteConfimation: true })}>Delete GIF</Button>
+            <Button
+              secondary
+              data-test="publication-delete"
+              className="publication__delete"
+              onClick={() => this.setState({ showDeleteConfimation: true })}
+            >
+              Delete GIF
+            </Button>
           </div>
         </Gif>
       </Modal>,
