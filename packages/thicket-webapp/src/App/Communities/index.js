@@ -38,7 +38,11 @@ class Communities extends Component {
       />
     }
 
-    return <div className="communities" ref={n => this.node = n}>
+    return <div
+      data-test="communities"
+      className="communities"
+      ref={n => this.node = n}
+    >
       <div className="communities__header">
           <h3 className="communities__title">Your communities</h3>
           <div className="communities__wrap">
@@ -50,22 +54,37 @@ class Communities extends Component {
                 : ''
               }
             </div>
-            <Button className="communities__new" onClick={this.onCreateNew}>Create Community</Button>
+            <Button
+              data-test="communities-new"
+              className="communities__new"
+              onClick={this.onCreateNew}
+            >
+              Create Community
+            </Button>
           </div>
         </div>
         {data.length
-          ? <ul className="communities__list">
-              {data.map(communityId => <li key={communityId} className="communities__element">
-                <Link to={`/c/${communityId}`} className="communities__link">
-                  <Card
-                    communityId={communityId}
-                    onLeave={(e, title) => {
-                      e.preventDefault()
-                      this.setState({ leaving: communityId, title })
-                    }}
-                  />
-                </Link>
-              </li>)}
+          ? <ul
+              data-test="communities-list"
+              className="communities__list"
+            >
+              {data.map(communityId =>
+                <li
+                  key={communityId}
+                  data-test="communities-element"
+                  className="communities__element"
+                >
+                  <Link to={`/c/${communityId}`} className="communities__link">
+                    <Card
+                      communityId={communityId}
+                      onLeave={(e, title) => {
+                        e.preventDefault()
+                        this.setState({ leaving: communityId, title })
+                      }}
+                    />
+                  </Link>
+                </li>
+              )}
             </ul>
           : <NoContent onCreate={this.onCreateNew} />
         }

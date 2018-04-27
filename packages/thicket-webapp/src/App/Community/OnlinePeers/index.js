@@ -79,11 +79,17 @@ class OnlinePeers extends Component {
             innerCount.set(peer, innerCount.get(peer) + 1)
             return <li
                 key={`online-peer-${peer}-${index}`}
+                data-test="online-peers-item"
                 className="onlinePeers-item"
               >
                 <UserName str={peer} bgColor={colors[index]} />
                 {index === 0
-                  ? <span className="onlinePeers-you">(you)</span>
+                  ? <span
+                      data-test="online-peers-you"
+                      className="onlinePeers-you"
+                    >
+                      (you)
+                    </span>
                   : count > 1 ? `(${innerCount.get(peer)})` : ''
                 }
             </li>

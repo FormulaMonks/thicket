@@ -6,9 +6,18 @@ import './Grid.css'
 
 const { linearGradient } = Styles
 
-const Grid = ({ community, list, history }) => <ul className="communityGrid">
-  {list.map(({ id, src, caption, nickname, createdAt, ...rest }) =>
-    <li key={id} className="communityGrid__element" style={{ background: linearGradient }}>
+const Grid = ({ community, list, history }) =>
+  <ul
+    data-test="community-grid"
+    className="communityGrid"
+  >
+    {list.map(({ id, src, caption, nickname, createdAt, ...rest }, index) =>
+      <li
+        key={`communityGrid-${id}-${index}`}
+        data-test="community-grid-element"
+        className="communityGrid__element"
+        style={{ background: linearGradient }}
+      >
         <div className="communityGrid__wrap">
           <TimedGif
             onClick={() => history.push(`/c/${community}/${id}`)}
@@ -20,14 +29,24 @@ const Grid = ({ community, list, history }) => <ul className="communityGrid">
           />
         </div>
         <div className="communityGrid__meta">
-          <h3 className="communityGrid__caption">{caption}</h3>
+          <h3
+            data-test="community-grid-caption"
+            className="communityGrid__caption"
+          >
+            {caption}
+          </h3>
           <div className="communityGrid__metadata">
-            <div className="communityGrid__nickname">{nickname}</div>
+            <div
+              data-test="community-grid-nickname"
+              className="communityGrid__nickname"
+            >
+              {nickname}
+            </div>
             <div className="communityGrid__createdAt">{createdAt && prettydate.format(new Date(createdAt))}</div>
           </div>
         </div>
-    </li>
-  )}
-</ul>
+      </li>
+    )}
+  </ul>
 
 export default Grid

@@ -59,6 +59,7 @@ class Publication extends Component {
       </Link>,
       <Modal
         key="modal"
+        data-test="publication-modal"
         className="publication__modal"
         disableBodyScroll
         onClose={document.documentElement.clientWidth > 600 ? this.close : ()=>{} }
@@ -71,8 +72,21 @@ class Publication extends Component {
           onShareHook={this.props.onShareHook}
         >
           <div className="publication__btns">
-            <Button className="publication__save" onClick={this.onSave}>Save Changes</Button>
-            <Button secondary onClick={() => this.setState({ showDeleteConfimation: true })}>Delete GIF</Button>
+            <Button
+              data-test="publication-save"
+              className="publication__save"
+              onClick={this.onSave}
+            >
+              Save Changes
+            </Button>
+            <Button
+              secondary
+              data-test="publication-delete"
+              className="publication__delete"
+              onClick={() => this.setState({ showDeleteConfimation: true })}
+            >
+              Delete GIF
+            </Button>
           </div>
         </Gif>
       </Modal>,

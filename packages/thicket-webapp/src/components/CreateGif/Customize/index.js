@@ -13,7 +13,11 @@ class Customize extends Component {
 
   render() {
     return <Modal disableBodyScroll className="customize__modal">
-      <div className="customize" style={{ background: linearGradient }}>
+      <div
+        data-test="customize"
+        className="customize"
+        style={{ background: linearGradient }}
+      >
         <img
           className="customize__img"
           src={this.props.src}
@@ -35,6 +39,7 @@ class Customize extends Component {
           <div className="customize__controls">
             <div className="customize__btn">
               <Button
+                data-test="customize-submit"
                 className="customize__submit"
                 onClick={this.onSubmit}
               >

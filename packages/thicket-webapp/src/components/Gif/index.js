@@ -80,24 +80,34 @@ export default class Gif extends Component {
       <div className="gif__inner">
         {header}
         <div key="body" className="gif__body">
-          {(nickname || editable) && <div key="nickname">
-            <h4 className="gif__subtitle">GIF created by:</h4>
-            {editable
-              ? <Editable
-                  value={nickname}
-                  onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })}
-                />
-              : <div>{nickname}</div>}
-          </div>}
-          {(caption || editable) && <div key="caption">
-            <h4 className="gif__subtitle">GIF caption:</h4>
-            {editable
-              ? <Editable
-                  value={caption}
-                  onChange={e => onChange({ ...gif, caption: e.currentTarget.value })}
-                />
-              : <div>{caption}</div>}
-          </div>}
+          {(nickname || editable) &&
+            <div
+              key="nickname"
+              data-test="gif-created-by"
+            >
+              <h4 className="gif__subtitle">GIF created by:</h4>
+              {editable
+                ? <Editable
+                    value={nickname}
+                    onChange={e => onChange({ ...gif, nickname: e.currentTarget.value })}
+                  />
+                : <div>{nickname}</div>}
+            </div>
+          }
+          {(caption || editable) &&
+            <div
+              key="caption"
+              data-test="gif-caption"
+            >
+              <h4 className="gif__subtitle">GIF caption:</h4>
+              {editable
+                ? <Editable
+                    value={caption}
+                    onChange={e => onChange({ ...gif, caption: e.currentTarget.value })}
+                  />
+                : <div>{caption}</div>}
+            </div>
+          }
           {src && <div>
             <h4>Save & Share GIF:</h4>
             {isMobile

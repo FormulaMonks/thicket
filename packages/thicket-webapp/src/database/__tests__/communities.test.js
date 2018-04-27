@@ -9,16 +9,14 @@ let communities
 
 jest.setTimeout(10000)
 
-beforeAll(() => {
-  return new Promise(async done => {
-    // cleanup previous tests
-    await cleanup(TEST)
-    // store
-    const store = createStore(mock('crud'))
-    communities = store.communities
+beforeAll(async done => {
+  // cleanup previous tests
+  await cleanup(TEST)
+  // store
+  const store = createStore(mock('crud'))
+  communities = store.communities
 
-    done()
-  })
+  done()
 })
 
 test('zero communities on first fetch', async () => {

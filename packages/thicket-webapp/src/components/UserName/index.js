@@ -6,8 +6,12 @@ export default ({
   str,
   bgColor=randomColor({ seed: str, luminosity: 'dark' }),
   ...props
-}) => <div className="userName__wrap">
+}) => <div
+  data-test="username-wrap"
+  className="userName__wrap"
+>
   <span
+    data-test="username-initial"
     className="userName__initial"
     style={{ background: bgColor }}
     {...props}

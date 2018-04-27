@@ -20,18 +20,15 @@ let store2
 
 jest.setTimeout(15000)
 
-beforeAll(() => {
-  return new Promise(async done => {
-    // cleanup
-    await cleanup(TEST)
-    // stores
-    store1 = createStore(mock('store-1'))
-    store2 = createStore(mock('store-2'))
-    // gif src
-    PUBLICATION.src = await getGIFSource()
+beforeAll(async done => {
+  await cleanup(TEST)
+  // stores
+  store1 = createStore(mock('store-1'))
+  store2 = createStore(mock('store-2'))
+  // gif src
+  PUBLICATION.src = await getGIFSource()
 
-    done()
-  })
+  done()
 })
 
 test('connect two nodes to the same community', async done => {

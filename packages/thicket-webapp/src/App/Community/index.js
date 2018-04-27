@@ -26,6 +26,7 @@ const UNINVITED = 'user has not been invited to the community or the community d
 const LEAVE = 'user is displayed the confirm box to leave the community'
 
 const LeaveBtn = ({ ctx }) => <button
+  data-test="community-leave"
   className="community__leave"
   onClick={() => ctx.safeSetState({ mode: LEAVE })}
 >
@@ -53,6 +54,7 @@ class Title extends Component {
     const { title } = this.state
     return <form onSubmit={this.onSubmit} className="community__form">
       <Input
+        data-test="community-name"
         className={`community__name${syncing ? ' community__form-syncing' : ''}`}
         type="text"
         placeholder={syncing ? 'Syncing Community...' : 'Name this Community'}
@@ -162,7 +164,12 @@ class Community extends Component {
     }
 
     return [
-      ((isMobile && !mode && match.isExact) || !isMobile) && <div key="community" className="community">
+      ((isMobile && !mode && match.isExact) || !isMobile) &&
+      <div
+        key="community"
+        data-test="community"
+        className="community"
+      >
         <Link
           ref={n => this.node = n}
           to="/communities"

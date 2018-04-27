@@ -12,10 +12,18 @@ export default ({ onCreate, syncing }) => {
     </div>
   }
 
-  return <div className="communityNoContent">
+  return <div
+    data-test="community-empty"
+    className="communityNoContent"
+  >
     <img src={sadSvg} alt="Sad because there are no GIFs" />
     <h2>This Community doesn’t have content yet!</h2>
     <div className="communityNoContent__text">Create new GIFs to add to the Community or invite new or existing Thicket users to create and contribute GIFs.</div>
-    <Button onClick={onCreate}>Create GIF</Button>
+    <Button
+      data-test="community-empty-new"
+      onClick={onCreate}
+    >
+      Create GIF
+    </Button>
   </div>
 }

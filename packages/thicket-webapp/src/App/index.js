@@ -49,7 +49,12 @@ class App extends Component {
         <header className="app__header">
           <Link to="/communities"><Logo /></Link>
           {this.props.header}
-          <Link to="/profile"><UserProfile nickname={nickname} /></Link>
+          <Link
+            data-test="profile-link"
+            to="/profile"
+          >
+            <UserProfile nickname={nickname} />
+          </Link>
         </header>
         <Switch>
           <Route exact path="/profile" render={props => <Profile nickname={nickname} {...props} />} />
