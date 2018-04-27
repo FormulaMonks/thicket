@@ -71,3 +71,10 @@ test('add a new community with center button', async () => {
   await page.click('[data-test="communities-empty-new"]')
   await page.waitFor('[data-test="community"]')
 })
+
+test('no online peers', async () => {
+  await page.waitFor('[data-test="online-peers-item"]')
+  await page.waitFor('[data-test="online-peers-you"]')
+  const count = await page.$$eval('[data-test="online-peers-item"]', items => items.length)
+  expect(count).toBe(1)
+})
