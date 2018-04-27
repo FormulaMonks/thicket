@@ -121,7 +121,11 @@ class CommunityCard extends Component {
     } = this.props
   return <Wrap {...rest}>
       <Card>
-        <Leave onClick={e => onLeave(e, title)}>
+        <Leave
+          data-test="communities-leave"
+          className="communities__leave"
+          onClick={e => onLeave(e, title)}
+        >
           <Favorite src={src} alt="Leave Community" />
         </Leave>
         <Img src={placeholder} alt={title} />

@@ -59,3 +59,10 @@ test('list the newly posted community', async () => {
   const count = await page.$$eval('[data-test="communities-element"]', items => items.length)
   expect(count).toBe(1)
 })
+
+test('leave the community (from communities)', async () => {
+  await page.click('[data-test="communities-leave"]')
+  await page.click('[data-test="leave-btn"]')
+  await page.waitFor('[data-test="communities"]')
+  await page.waitFor('[data-test="communities-empty"]')
+})
