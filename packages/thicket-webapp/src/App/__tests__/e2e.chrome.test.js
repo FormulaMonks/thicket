@@ -3,6 +3,7 @@ import puppeteer from 'puppeteer'
 const PORT = process.env.PORT || 3000
 const URL = `http://localhost:${PORT}`
 const URL_COMMUNITIES = `${URL}/#/communities`
+const URL_404 = `${URL}/#/404`
 
 let chrome
 let page
@@ -147,4 +148,9 @@ test('leave community (from community)', async () => {
   await page.waitFor('[data-test="leave-btn"]')
   await page.click('[data-test="leave-btn"]')
   await page.waitFor('[data-test="communities"]')
+})
+
+test('404', async () => {
+  await page.goto(URL_404, { waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="not-found"]')
 })
