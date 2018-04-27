@@ -100,7 +100,8 @@
     "build": "node scripts/build.js --copy-files",
     "test:server": "rendezvous --host=127.0.0.1",
     "test": "jest --watch",
-    "deploy": "scripts/deploy.sh"
+    "deploy": "scripts/deploy.sh",
+    "wrtc:signaling": "star-signal --host=127.0.0.1"
   },
   "engines": {
     "node": ">=8.6.0",
@@ -112,6 +113,7 @@
     "fake-indexeddb": "^2.0.4",
     "jest": "^22.4.3",
     "jest-localstorage-mock": "^2.2.0",
+    "libp2p-webrtc-star": "^0.14.0",
     "libp2p-websocket-star-rendezvous": "^0.2.3",
     "nwb": "^0.20.0",
     "puppeteer": "^1.3.0",
