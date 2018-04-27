@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer'
 
 const PORT = process.env.PORT || 3000
 const URL = `http://localhost:${PORT}`
+const URL_COMMUNITIES = `${URL}/#/communities`
 
 let chrome
 let page
@@ -49,4 +50,12 @@ test('change nickname', async () => {
 test('add a new community with top button', async () => {
   await page.click('[data-test="communities-new"]')
   await page.waitFor('[data-test="community"]')
+})
+
+test('list the newly posted community', async () => {
+  await page.goto(URL_COMMUNITIES, { waitUntil: 'domcontentloaded' })
+  await page.waitFor('[data-test="communities"]')
+  await page.waitFor('[data-test="communities-list"]')
+  const count = await page.$$eval('[data-test="communities-element"]', items => items.length)
+  expect(count).toBe(1)
 })
