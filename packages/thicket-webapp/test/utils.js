@@ -8,11 +8,7 @@ const getFileContents = promisify(fs.readFile)
 export const options = namespace => test => ({
   repo: `${relativePath}/repo-${namespace}-${test}-${Date.now()}`,
   config: {
-    Addresses: {
-      Swarm: [
-        '/ip4/127.0.0.1/tcp/9090/ws/p2p-websocket-star',
-      ]
-    },
+    Addresses: { Swarm: [ '/ip4/127.0.0.1/tcp/9191/ws/p2p-websocket-star' ] },
     Bootstrap: []
   }
 })

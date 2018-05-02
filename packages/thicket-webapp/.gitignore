@@ -23,3 +23,4 @@ yarn-error.log*
 
 # tests local storage
 test/__storage__/
+test/__drivers__/
