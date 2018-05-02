@@ -98,10 +98,10 @@
     "clean": "nwb clean-module",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js --copy-files",
-    "test:server": "rendezvous --host=127.0.0.1",
     "test": "jest --watch",
     "deploy": "scripts/deploy.sh",
-    "wrtc:signaling": "star-signal --host=127.0.0.1"
+    "wsio": "rendezvous --host=127.0.0.1 --port=9191",
+    "wrtc": "star-signal --host=127.0.0.1"
   },
   "engines": {
     "node": ">=8.6.0",
@@ -125,7 +125,8 @@
       "<rootDir>/test/setup.js"
     ],
     "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)"
+      "<rootDir>/src/**/__tests__/*.test.js",
+      "<rootDir>/src/**/__tests__/**/*.test.js"
     ],
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest"
