@@ -25,6 +25,12 @@ yarn build
 Test results will vary depending on the swarm endpoint that was set.
 
 ```sh
-yarn test:server
+# start the local websocket-star-rendezvous server in one console (port 9191)
+yarn wsio
+
+# start the local webrtc-star singnaling server in another console (port 9090)
+yarn wrtc
+
+# run the all the tests
 yarn test
 ```
