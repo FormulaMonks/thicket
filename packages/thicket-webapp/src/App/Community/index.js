@@ -220,6 +220,7 @@ class Community extends Component {
           style={{ background: linearGradient }}
         >
           <input
+            data-test="community-invite-link"
             className="community__invite"
             ref={i => this.input = i}
             type="text"

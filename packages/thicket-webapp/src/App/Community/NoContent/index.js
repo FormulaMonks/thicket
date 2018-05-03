@@ -5,7 +5,10 @@ import './NoContent.css'
 
 export default ({ onCreate, syncing }) => {
   if (syncing) {
-    return <div className="communityNoContent">
+    return <div
+        data-test="community-empty-syncing"
+        className="communityNoContent"
+      >
       <Spinner />
       <h2>Syncing Community</h2>
       <div>Your community is syncing data between the browsers currently online. This may take a moment.</div>
