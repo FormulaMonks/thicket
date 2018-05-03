@@ -115,7 +115,7 @@ browsers.forEach(async browser => {
       }
       await page.waitFor('[data-test="camera-btn-capture"]')
       // video takes some time to start playing, not sure if there is an event triggered
-      await page.waitFor(2500)
+      await page.waitFor(100)
       await page.click('[data-test="camera-btn-capture"]')
       await page.waitFor('[data-test="customize"]')
       await page.click('[data-test="customize-submit"]')
