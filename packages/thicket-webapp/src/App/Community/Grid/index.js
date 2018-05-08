@@ -18,7 +18,10 @@ const Grid = ({ community, list, history }) =>
         className="communityGrid__element"
         style={{ background: linearGradient }}
       >
-        <div className="communityGrid__wrap">
+        <div
+          data-test={`community-grid-wrap-${index}`}
+          className="communityGrid__wrap"
+        >
           <TimedGif
             onClick={() => history.push(`/c/${community}/${id}`)}
             src={src}
@@ -28,7 +31,10 @@ const Grid = ({ community, list, history }) =>
             autoPlay={true}
           />
         </div>
-        <div className="communityGrid__meta">
+        <div
+          data-test={`community-grid-meta-${index}`}
+          className="communityGrid__meta"
+        >
           <h3
             data-test="community-grid-caption"
             className="communityGrid__caption"
