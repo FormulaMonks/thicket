@@ -209,6 +209,7 @@ class Community extends Component {
           }
         </div>
         <Button
+          data-test="community-new"
           onClick={this.onCreateGif}
           className={`community__new${list.length ? '' : '--empty'}`}
         >
