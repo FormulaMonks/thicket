@@ -230,8 +230,16 @@ class Database extends EventEmitter {
     const res = await node.files.add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
     const id = res[0].hash
     const y = await this._initCommunity(communityId)
+    const promise = new Promise(r => {
+      const once = () => {
+        y.share.publications.unobserve(once)
+        r()
+      }
+      y.share.publications.observe(once)
+    })
     y.share.publications.set(id)
     y.share.publicationsMetadata.set(id, { id, ...data, createdAt: Date.now() })
+    return promise
   }
 
   publicationsPostByHash = async(communityId, { hash, ...data }) => {
