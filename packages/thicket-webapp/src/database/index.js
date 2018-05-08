@@ -126,7 +126,12 @@ class Database extends EventEmitter {
         // updates to the publications (eg new publication)
         y.share.publications.observe(async ({ type, name }) => {
           if (!this._syncing) {
-            this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
+            const list = await this.publicationsGetAll(communityId)
+            const mapToMeta = list.map(publication => ({
+              ...y.share.publicationsMetadata.get(publication.id),
+              ...publication,
+            }))
+            this.emit(`update-${communityId}-publications`, mapToMeta)
           }
           // async remove local blocks
           if (type === 'delete') {

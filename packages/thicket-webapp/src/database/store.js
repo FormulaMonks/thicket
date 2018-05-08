@@ -41,7 +41,7 @@ const createUser = db => {
 
       // updates from db
       db.on(`update-${communityId}-publications`, list => {
-        this.list = list
+        this.list = list.sort(sortPublications)
         this.emit('update')
       })
       db.on(`update-${communityId}-publicationsMetadata`, list => {
