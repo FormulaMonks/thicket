@@ -142,6 +142,7 @@ browsers.forEach(async browser => {
       await page.waitFor('[data-test="community-grid-wrap-1"] [data-test="playable-gif-link"]')
       await page.click('[data-test="community-grid-wrap-1"] [data-test="playable-gif-link"]')
       await page.waitFor('[data-test="publication-modal"]')
+      await page.waitFor(1000)
       await page.click('[data-test="gif-created-by"] [data-test="editable-edit"]')
       await page.waitFor('[data-test="gif-created-by"] [data-test="editable-input"]')
       await page.$eval('[data-test="gif-created-by"] [data-test="editable-input"]', input => input.value = '')
