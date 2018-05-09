@@ -32,6 +32,7 @@ export default class PlayableGif extends Component {
       partialVisibility={true}
     >
       <div
+        data-test={`gif-${isPlaying ? 'playing' : 'paused'}`}
         className={`playableGif${isPlaying ? '' : ' playableGif--paused'}`}
       >
         <GifPlayer
