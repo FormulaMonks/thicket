@@ -115,8 +115,17 @@ class Database extends EventEmitter {
       const promise = new Promise(async r => {
         const node = await this._initIPFS()
         const y = await Y(yConfig(node, communityId))
+        const {
+          share: {
+            metadata,
+            publications,
+            publicationsMetadata,
+            nicknames,
+          },
+          connector,
+        } = y
         // updates to the community metadata (eg change community title)
-        y.share.metadata.observe(({ value, type }) => {
+        metadata.observe(({ value, type }) => {
           if (value && type !== 'delete') {
             if (!this._syncing) {
               this.emit(`update-${communityId}`, value)
@@ -124,9 +133,14 @@ class Database extends EventEmitter {
           }
         })
         // updates to the publications (eg new publication)
-        y.share.publications.observe(async ({ type, name }) => {
+        publications.observe(async ({ type, name }) => {
           if (!this._syncing) {
-            this.emit(`update-${communityId}-publications`, await this.publicationsGetAll(communityId))
+            const list = await this.publicationsGetAll(communityId)
+            const mapToMeta = list.map(publication => ({
+              ...y.share.publicationsMetadata.get(publication.id),
+              ...publication,
+            }))
+            this.emit(`update-${communityId}-publications`, mapToMeta)
           }
           // async remove local blocks
           if (type === 'delete') {
@@ -134,7 +148,7 @@ class Database extends EventEmitter {
           }
         })
         // updates to publications metadata (eg change publication caption)
-        y.share.publicationsMetadata.observe(() => {
+        publicationsMetadata.observe(() => {
           if (!this._syncing) {
             const list = y.share.publicationsMetadata.keys()
               .map(k => ({ ...y.share.publicationsMetadata.get(k) }))
@@ -142,19 +156,19 @@ class Database extends EventEmitter {
           }
         })
         // nicknames: IPFS node id <-> nickname
-        y.share.nicknames.observe(async () => {
+        nicknames.observe(async () => {
           if (!this._syncing) {
             this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           }
         })
         // online peers
-        y.connector.onUserEvent(async ({ action }) => {
+        connector.onUserEvent(async ({ action }) => {
           this.emit(`peer-${communityId}`, await mapIPFSIdstoNicknames(y))
           // syncing
           if (action === 'userJoined') {
             this._syncing = true
             this.emit(`syncing-${communityId}`)
-            y.connector.whenSynced(() => {
+            connector.whenSynced(() => {
               setTimeout(() => {
                 this._syncing = false
                 this.emit(`synced-${communityId}`)
@@ -230,8 +244,16 @@ class Database extends EventEmitter {
     const res = await node.files.add(Buffer.from(new ImageDataConverter(src).convertToTypedArray()))
     const id = res[0].hash
     const y = await this._initCommunity(communityId)
+    const promise = new Promise(r => {
+      const once = () => {
+        y.share.publications.unobserve(once)
+        r()
+      }
+      y.share.publications.observe(once)
+    })
     y.share.publications.set(id)
     y.share.publicationsMetadata.set(id, { id, ...data, createdAt: Date.now() })
+    return promise
   }
 
   publicationsPostByHash = async(communityId, { hash, ...data }) => {

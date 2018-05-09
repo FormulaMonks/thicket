@@ -27,11 +27,16 @@ class Customize extends Component {
           <h3>Save your GIF!</h3>
           <label className="customize__label">
             Change nickname? <span className="customize__span">(Optional)</span>
-            <Input value={this.state.nickname} onChange={e => this.setState({ nickname: e.target.value })} />
+            <Input
+              data-test="customize-nickname"
+              value={this.state.nickname}
+              onChange={e => this.setState({ nickname: e.target.value })}
+            />
           </label>
           <label className="customize__label">
             Give your GIF a caption:
             <Input
+              data-test="customize-caption"
               value={this.state.caption}
               onChange={e => this.setState({ caption: e.target.value })}
             />

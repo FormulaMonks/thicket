@@ -5,7 +5,7 @@ import { helper } from './utils'
 
 let driver
 
-const close = () => driver.close()
+export const close = () => driver.close()
 
 export default async () => {
   mixin(webdriver)

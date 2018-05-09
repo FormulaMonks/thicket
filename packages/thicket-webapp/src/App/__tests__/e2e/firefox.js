@@ -14,6 +14,7 @@ export default async () => {
     opts.headless()
   }
   opts.setPreference('media.navigator.permission.disabled', true)
+  opts.setPreference('media.navigator.streams.fake', true)
 
   driver = await new webdriver.Builder()
     .forBrowser('firefox')

@@ -7,7 +7,10 @@ export const close = () => driver.close()
 export default async () => {
   driver = await puppeteer.launch({
     headless: process.env.HEADLESS !== 'false',
-    args: ['--use-fake-ui-for-media-stream']
+    args: [
+      '--use-fake-ui-for-media-stream',
+      '--use-fake-device-for-media-stream'
+    ]
   })
   const page = await driver.newPage()
   // set dimensions to full browser screen with experimental feature:

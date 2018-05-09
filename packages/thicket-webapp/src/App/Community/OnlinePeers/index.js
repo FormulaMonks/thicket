@@ -73,7 +73,10 @@ class OnlinePeers extends Component {
             onOut={() => !isMobile && this.setState({ mode: null })}
           />
         </div>
-        <ul className="onlinePeers-list">
+        <ul
+          data-test="online-peers-list"
+          className="onlinePeers-list"
+        >
           {onlinePeers.map((peer, index) => {
             const count = onlinePeersNicknameCount.get(peer)
             innerCount.set(peer, innerCount.get(peer) + 1)

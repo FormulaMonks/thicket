@@ -209,6 +209,7 @@ class Community extends Component {
           }
         </div>
         <Button
+          data-test="community-new"
           onClick={this.onCreateGif}
           className={`community__new${list.length ? '' : '--empty'}`}
         >
@@ -220,6 +221,7 @@ class Community extends Component {
           style={{ background: linearGradient }}
         >
           <input
+            data-test="community-invite-link"
             className="community__invite"
             ref={i => this.input = i}
             type="text"

@@ -1,6 +1,14 @@
 import getChrome, { close as closeChrome } from './chrome'
 import getFirefox, { close as closeFirefox } from './firefox'
 import getSafari, { close as closeSafari } from './safari'
+import {
+  addPublication,
+  changeProfileNickname,
+  changePublicationMeta,
+  checkPublicationMeta,
+  clickOnPublicationByIndex,
+  deletePublication,
+} from './utils'
 
 const PORT = process.env.PORT || 3000
 const URL = `http://localhost:${PORT}`
@@ -10,6 +18,8 @@ const BROWSERS = ['chrome', 'firefox', 'safari']
 const browsers = process.env.BROWSER && BROWSERS.includes(process.env.BROWSER)
   ? [process.env.BROWSER]
   : BROWSERS
+const newNickname = 'Nickname'
+const customCaption = 'Custom Caption'
 
 browsers.forEach(async browser => {
   describe(`Browser: ${browser}`, () => {
@@ -41,13 +51,9 @@ browsers.forEach(async browser => {
       await page.waitFor('[data-test="communities-empty"]')
     })
 
-    test('change nickname', async () => {
-      const newNickname = 'Nickname'
-      await page.click('[data-test="profile-link"]')
-      await page.waitFor('[data-test="profile"]')
-      await page.$eval('[data-test="profile-input"]', input => input.value = '')
-      await page.type('[data-test="profile-input"]', newNickname)
-      await page.click('[data-test="profile-save"]')
+    test('change profile nickname', async () => {
+      await changeProfileNickname({ page, newNickname})
+      await page.goto(URL_COMMUNITIES, { waitUntil: 'domcontentloaded' })
       await page.waitFor('[data-test="communities"]')
       await page.reload({ waitUntil: 'domcontentloaded' })
       await page.waitFor('[data-test="username-wrap"]')
@@ -104,57 +110,46 @@ browsers.forEach(async browser => {
       expect(title).toBe(newTitle)
     }, 10000)
 
-    test('add publication', async () => {
+    test('add publication without customization', async () => {
+      expect.assertions(3)
       await page.click('[data-test="community-empty-new"]')
-      // TODO
-      // figure out how to enable webcam by defult
-      if (browser === 'safari') {
-        await page.waitFor(100)
-        await page.waitFor('.cameraAccess')
-        await page.click('.cameraAccess button')
-      }
-      await page.waitFor('[data-test="camera-btn-capture"]')
-      // video takes some time to start playing, not sure if there is an event triggered
-      await page.waitFor(2500)
-      await page.click('[data-test="camera-btn-capture"]')
-      await page.waitFor('[data-test="customize"]')
-      await page.click('[data-test="customize-submit"]')
-      await page.waitFor('[data-test="community-grid"]')
+      addPublication({ page, browser })
+      await page.waitFor('[data-test="community-grid-wrap-0"]')
       const count = await page.$$eval('[data-test="community-grid-element"]', items => items.length)
       expect(count).toBe(1)
+      await checkPublicationMeta({ page, index: 0, caption: '', nickname: newNickname })
     }, 20000)
 
-    test('change publication caption & author', async () => {
-      const newAuthor = 'New Author'
+    test('add a second publication with custom caption', async () => {
+      expect.assertions(3)
+      await page.click('[data-test="community-new"]')
+      addPublication({ page, caption: customCaption })
+      await page.waitFor('[data-test="community-grid-wrap-1"]')
+      const count = await page.$$eval('[data-test="community-grid-element"]', items => items.length)
+      expect(count).toBe(2)
+      // publications are sorted by creation date
+      // newer publications always get lower numbers
+      await checkPublicationMeta({ page, index: 0, caption: customCaption, nickname: newNickname })
+    }, 20000)
+
+    test('change publication’s caption & nickname', async () => {
+      expect.assertions(2)
+      const newNick = 'New Nick'
       const newCaption = 'New Caption'
-      await page.waitFor('[data-test="playable-gif-link"]')
-      await page.click('[data-test="playable-gif-link"]')
-      await page.waitFor('[data-test="publication-modal"]')
-      await page.click('[data-test="gif-created-by"] [data-test="editable-edit"]')
-      await page.waitFor('[data-test="gif-created-by"] [data-test="editable-input"]')
-      await page.$eval('[data-test="gif-created-by"] [data-test="editable-input"]', input => input.value = '')
-      await page.type('[data-test="gif-created-by"] [data-test="editable-input"]', newAuthor)
-      await page.click('[data-test="gif-caption"] [data-test="editable-edit"]')
-      await page.waitFor('[data-test="gif-caption"] [data-test="editable-input"]')
-      await page.$eval('[data-test="gif-caption"] [data-test="editable-input"]', input => input.value = '')
-      await page.type('[data-test="gif-caption"] [data-test="editable-input"]', newCaption)
-      await page.click('[data-test="publication-save"]')
+      await clickOnPublicationByIndex({ page, index: 1 })
+      await changePublicationMeta({ page, nickname: newNick, caption: newCaption })
       await page.waitFor(1000)
       await page.reload({ waitUntil: 'domcontentloaded' })
-      await page.waitFor('[data-test="community-grid-element"]')
-      const nickname = await page.$eval('[data-test="community-grid-nickname"]', e => e.innerHTML)
-      const caption = await page.$eval('[data-test="community-grid-caption"]', e => e.innerHTML)
-      expect(nickname).toBe(newAuthor)
-      expect(caption).toBe(newCaption)
+      await page.waitFor('[data-test="community-grid-wrap-1"]')
+      await checkPublicationMeta({ page, index: 1, caption: newCaption, nickname: newNick })
     }, 10000)
 
-    test('delete publication', async () => {
-      await page.waitFor('[data-test="playable-gif-link"]')
-      await page.click('[data-test="playable-gif-link"]')
-      await page.waitFor('[data-test="publication-modal"]')
-      await page.click('[data-test="publication-delete"]')
-      await page.waitFor('[data-test="delete-confirm"]')
-      await page.click('[data-test="delete-confirm"]')
+    test('delete all publications', async () => {
+      let number = 2
+      while(number > 0) {
+        await deletePublication({ page, index: number - 1 })
+        number--
+      }
       await page.waitFor('[data-test="community-empty"]')
     })
 
