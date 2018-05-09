@@ -1,7 +1,14 @@
 import getChrome, { close as closeChrome } from './chrome'
 import getFirefox, { close as closeFirefox } from './firefox'
 import getSafari, { close as closeSafari } from './safari'
-import { addPublication, checkPublicationMeta } from './utils'
+import {
+  addPublication,
+  changeProfileNickname,
+  changePublicationMeta,
+  checkPublicationMeta,
+  clickOnPublicationByIndex,
+  deletePublication,
+} from './utils'
 
 const PORT = process.env.PORT || 3000
 const URL = `http://localhost:${PORT}`
@@ -13,14 +20,6 @@ const browsers = process.env.BROWSER && BROWSERS.includes(process.env.BROWSER)
   : BROWSERS
 const newNickname = 'Nickname'
 const customCaption = 'Custom Caption'
-const deletePublication = async ({ page, index }) => {
-  await page.waitFor(`[data-test="community-grid-wrap-${index}"] [data-test="playable-gif-link"]`)
-  await page.click(`[data-test="community-grid-wrap-${index}"] [data-test="playable-gif-link"]`)
-  await page.waitFor('[data-test="publication-modal"]')
-  await page.click('[data-test="publication-delete"]')
-  await page.waitFor('[data-test="delete-confirm"]')
-  await page.click('[data-test="delete-confirm"]')
-}
 
 browsers.forEach(async browser => {
   describe(`Browser: ${browser}`, () => {
@@ -52,12 +51,9 @@ browsers.forEach(async browser => {
       await page.waitFor('[data-test="communities-empty"]')
     })
 
-    test('change nickname', async () => {
-      await page.click('[data-test="profile-link"]')
-      await page.waitFor('[data-test="profile"]')
-      await page.$eval('[data-test="profile-input"]', input => input.value = '')
-      await page.type('[data-test="profile-input"]', newNickname)
-      await page.click('[data-test="profile-save"]')
+    test('change profile nickname', async () => {
+      await changeProfileNickname({ page, newNickname})
+      await page.goto(URL_COMMUNITIES, { waitUntil: 'domcontentloaded' })
       await page.waitFor('[data-test="communities"]')
       await page.reload({ waitUntil: 'domcontentloaded' })
       await page.waitFor('[data-test="username-wrap"]')
@@ -131,27 +127,17 @@ browsers.forEach(async browser => {
       await page.waitFor('[data-test="community-grid-wrap-1"]')
       const count = await page.$$eval('[data-test="community-grid-element"]', items => items.length)
       expect(count).toBe(2)
-      // newer publications always get lower numbers
       // publications are sorted by creation date
+      // newer publications always get lower numbers
       await checkPublicationMeta({ page, index: 0, caption: customCaption, nickname: newNickname })
     }, 20000)
 
-    test('change publication caption & nick', async () => {
+    test('change publication’s caption & nickname', async () => {
+      expect.assertions(2)
       const newNick = 'New Nick'
       const newCaption = 'New Caption'
-      await page.waitFor('[data-test="community-grid-wrap-1"] [data-test="playable-gif-link"]')
-      await page.click('[data-test="community-grid-wrap-1"] [data-test="playable-gif-link"]')
-      await page.waitFor('[data-test="publication-modal"]')
-      await page.waitFor(1000)
-      await page.click('[data-test="gif-created-by"] [data-test="editable-edit"]')
-      await page.waitFor('[data-test="gif-created-by"] [data-test="editable-input"]')
-      await page.$eval('[data-test="gif-created-by"] [data-test="editable-input"]', input => input.value = '')
-      await page.type('[data-test="gif-created-by"] [data-test="editable-input"]', newNick)
-      await page.click('[data-test="gif-caption"] [data-test="editable-edit"]')
-      await page.waitFor('[data-test="gif-caption"] [data-test="editable-input"]')
-      await page.$eval('[data-test="gif-caption"] [data-test="editable-input"]', input => input.value = '')
-      await page.type('[data-test="gif-caption"] [data-test="editable-input"]', newCaption)
-      await page.click('[data-test="publication-save"]')
+      await clickOnPublicationByIndex({ page, index: 1 })
+      await changePublicationMeta({ page, nickname: newNick, caption: newCaption })
       await page.waitFor(1000)
       await page.reload({ waitUntil: 'domcontentloaded' })
       await page.waitFor('[data-test="community-grid-wrap-1"]')
