@@ -1,6 +1,6 @@
 # Prerequisites
 
-[Node.js](http://nodejs.org/) >= v4 must be installed.
+[Node.js](http://nodejs.org/) >= v4 and <= v9 must be installed.
 
 [Yarn](https://yarnpkg.com/en/docs/install) >= v1 must be installed.
 
