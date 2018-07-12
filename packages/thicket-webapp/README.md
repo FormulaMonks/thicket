@@ -10,7 +10,11 @@ By setting the corresponding `env` var the IPFS instance will connect to the def
 - `WRTC_IPFS` - will use IPFS’s [`webrtc-star-signal`](https://wrtc-star.discovery.libp2p.io) server. Default value if no value is set.
 
 ```sh
+# to be sure have nodejs 8
+#goto root project
+cd ../../
 yarn
+yarn bootstrap
 yarn start
 ```
 
