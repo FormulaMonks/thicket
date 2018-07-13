@@ -15,6 +15,8 @@ By setting the corresponding `env` var the IPFS instance will connect to the def
 cd ../../
 yarn
 yarn bootstrap
+# goto packages/thicket-webapp
+cd ./packages/thicket-webapp/
 yarn start
 ```
 
