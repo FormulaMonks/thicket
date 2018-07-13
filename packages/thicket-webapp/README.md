@@ -10,7 +10,12 @@ By setting the corresponding `env` var the IPFS instance will connect to the def
 - `WRTC_IPFS` - will use IPFS’s [`webrtc-star-signal`](https://wrtc-star.discovery.libp2p.io) server. Default value if no value is set.
 
 ```sh
+# please make sure you have bootstrapped all the packages successfully
+# from repo root (cd ../../) run:
 yarn
+yarn bootstrap
+
+# then in packages/thicket-webapp (cd packages/thicket-webapp) run:
 yarn start
 ```
 
